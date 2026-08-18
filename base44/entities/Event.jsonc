@@ -1,0 +1,100 @@
+{
+  "name": "Event",
+  "type": "object",
+  "properties": {
+    "title_fa": {
+      "type": "string",
+      "title": "\u0639\u0646\u0648\u0627\u0646 (\u0641\u0627\u0631\u0633\u06cc)"
+    },
+    "title_en": {
+      "type": "string",
+      "title": "Title (English)"
+    },
+    "description_fa": {
+      "type": "string",
+      "title": "\u062a\u0648\u0636\u06cc\u062d\u0627\u062a (\u0641\u0627\u0631\u0633\u06cc)",
+      "format": "text"
+    },
+    "description_en": {
+      "type": "string",
+      "title": "Description (English)",
+      "format": "text"
+    },
+    "banner_image": {
+      "type": "string",
+      "title": "Banner Image URL"
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Event Date & Time"
+    },
+    "registration_deadline": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Registration Deadline"
+    },
+    "capacity": {
+      "type": "integer",
+      "title": "Capacity"
+    },
+    "venue_fa": {
+      "type": "string",
+      "title": "\u0645\u06a9\u0627\u0646 (\u0641\u0627\u0631\u0633\u06cc)"
+    },
+    "venue_en": {
+      "type": "string",
+      "title": "Venue (English)"
+    },
+    "map_url": {
+      "type": "string",
+      "title": "Google Map URL"
+    },
+    "organizer_fa": {
+      "type": "string",
+      "title": "\u0628\u0631\u06af\u0632\u0627\u0631\u06a9\u0646\u0646\u062f\u0647 (\u0641\u0627\u0631\u0633\u06cc)"
+    },
+    "organizer_en": {
+      "type": "string",
+      "title": "Organizer (English)"
+    },
+    "registration_url": {
+      "type": "string",
+      "title": "Registration URL"
+    },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "enum": [
+        "upcoming",
+        "completed",
+        "cancelled"
+      ],
+      "default": "upcoming"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category",
+      "enum": [
+        "academic",
+        "cultural",
+        "sports",
+        "ceremony",
+        "workshop"
+      ],
+      "default": "cultural"
+    },
+    "slug_fa": {
+      "type": "string",
+      "title": "Slug (FA)"
+    },
+    "slug_en": {
+      "type": "string",
+      "title": "Slug (EN)"
+    }
+  },
+  "required": [
+    "title_fa",
+    "event_date"
+  ]
+}

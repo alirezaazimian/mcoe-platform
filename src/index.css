@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* MCOE Institutional Color Protocol */
+    --background: 38 45% 97%;          /* #FBF6EE Warm Cream */
+    --foreground: 0 0% 13%;          /* #222222 */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
+    --primary: 230 100% 17%;          /* #001858 Deep Navy */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 230 100% 27%;        /* #002699 Deep Blue */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 38 91% 55%;            /* #F5A623 Sunlight Accent */
+    --accent-foreground: 0 0% 13%;
+    --destructive: 0 80% 63%;        /* #EB5757 */
+    --destructive-foreground: 0 0% 100%;
+    --success: 145 63% 42%;         /* #27AE60 */
+    --warning: 28 87% 62%;           /* #F2994A */
+    --border: 0 0% 92%;              /* #EAEAEA */
+    --input: 0 0% 92%;
+    --ring: 230 100% 17%;
+    --radius: 0.625rem;
+    --font-heading: 'Vazirmatn', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Vazirmatn', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Vazirmatn', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 230 100% 14%;
+  }
+
+  .dark {
+    --background: 213 50% 8%;
+    --foreground: 0 0% 96%;
+    --card: 213 45% 11%;
+    --card-foreground: 0 0% 96%;
+    --popover: 213 45% 11%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 230 100% 35%;
+    --primary-foreground: 213 50% 8%;
+    --secondary: 230 100% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 213 30% 18%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 38 91% 55%;
+    --accent-foreground: 0 0% 13%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 145 50% 45%;
+    --warning: 28 80% 58%;
+    --border: 213 30% 20%;
+    --input: 213 30% 20%;
+    --ring: 230 100% 35%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  [dir="rtl"] {
+    font-family: 'Vazirmatn', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  [dir="ltr"] {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-out both;
+  }
+
+  .scroll-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .institutional-shadow {
+    box-shadow: 0 1px 2px rgba(0, 24, 88, 0.04), 0 8px 24px rgba(0, 24, 88, 0.06);
+  }
+
+  .institutional-shadow-lg {
+    box-shadow: 0 4px 8px rgba(0, 24, 88, 0.05), 0 24px 48px rgba(0, 24, 88, 0.10);
+  }
+
+  .hover-elevate {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hover-elevate:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 4px 8px rgba(0, 24, 88, 0.05), 0 24px 48px rgba(0, 24, 88, 0.12);
+  }
+
+  .gentle-zoom {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gentle-zoom:hover {
+    transform: scale(1.05);
+  }
+
+  .container-institutional {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  /* Minimal pastel glass + inner-neumorphism (no color) hover for main
+     nav items — a subtle pressed-in tint that reads as a soft highlight. */
+  .nav-hover {
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  .nav-hover:hover,
+  .nav-hover.is-active {
+    background-color: rgba(255, 252, 245, 0.5);
+    box-shadow: inset 2px 2px 5px rgba(150, 120, 80, 0.12), inset -2px -2px 5px rgba(255, 252, 245, 0.75);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+  }
+  .nav-hover.is-active:hover {
+    background-color: rgba(255, 252, 245, 0.65);
+    box-shadow: inset 3px 3px 6px rgba(150, 120, 80, 0.16), inset -3px -3px 6px rgba(255, 252, 245, 0.8);
+  }
+
+  /* Middle (medium-depth) neumorphism for buttons — soft extruded look on
+     the light institutional background, with a pressed-in active state. */
+  /* Inner (inset) middle neumorphism for buttons across the site.
+     Spec: blur 30px, X/Y 18px, color #D1D9E6 @ 100% opacity. */
+  /* Smooth drop (extruded) neumorphism on a warm cream surface — buttons
+     read as soft pastel raised elements. Warm-tinted shadows (no cold grey). */
+  .neumorphic-btn {
+    box-shadow: 5px 5px 10px rgba(150, 120, 80, 0.18), -5px -5px 10px rgba(255, 252, 245, 0.9);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  }
+  .neumorphic-btn:hover {
+    box-shadow: 7px 7px 14px rgba(150, 120, 80, 0.22), -7px -7px 14px rgba(255, 252, 245, 0.95);
+  }
+  .neumorphic-btn:active {
+    transform: translateY(1px);
+    box-shadow: inset 4px 4px 8px rgba(150, 120, 80, 0.2), inset -4px -4px 8px rgba(255, 252, 245, 0.85);
+  }
+
+  /* Smooth drop neumorphism tuned for the dark Call-to-Action surface —
+     deep shadow below, soft light highlight above. */
+  .neumorphic-cta {
+    box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.45), -6px -6px 14px rgba(255, 255, 255, 0.08);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  }
+  .neumorphic-cta:hover {
+    box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.5), -8px -8px 18px rgba(255, 255, 255, 0.12);
+  }
+  .neumorphic-cta:active {
+    transform: translateY(1px);
+    box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.4), inset -4px -4px 10px rgba(255, 255, 255, 0.06);
+  }
+
+  /* Heavy neumorphism hover for header submenu items — deep extruded
+     shadow on hover with a pressed-in active state. */
+  .neumorphic-submenu {
+    transition: box-shadow 0.25s ease, transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+  }
+  .neumorphic-submenu:hover {
+    box-shadow: 8px 8px 16px rgba(0, 24, 88, 0.25), -8px -8px 16px rgba(255, 255, 255, 0.85);
+    transform: translateY(-1px);
+  }
+  .neumorphic-submenu:active {
+    box-shadow: inset 5px 5px 10px rgba(0, 24, 88, 0.28), inset -5px -5px 10px rgba(255, 255, 255, 0.55);
+    transform: translateY(0);
+  }
+
+  /* Deep neumorphism for the language switcher pill — strongly extruded
+     outer shell with a pressed-in active segment. */
+  .neumorphic-switch {
+    box-shadow: 7px 7px 16px rgba(0, 24, 88, 0.28), -7px -7px 16px rgba(255, 255, 255, 0.9);
+    transition: box-shadow 0.3s ease;
+  }
+  .neumorphic-switch:hover {
+    box-shadow: 6px 6px 14px rgba(0, 24, 88, 0.32), -6px -6px 14px rgba(255, 255, 255, 0.8);
+  }
+  .neumorphic-switch-segment {
+    transition: box-shadow 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+  }
+  .neumorphic-switch-segment.is-active {
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.35), inset -4px -4px 8px rgba(255, 255, 255, 0.18);
+  }
+
+  /* Inner (inset) middle neumorphism for the language switcher pill —
+     pressed-in resting shell; the active segment stays inset too. */
+  /* Smooth drop (extruded) neumorphism for the language switcher pill — warm
+     raised shell matching the cream site background. */
+  .neumorphic-switch-inner {
+    background-color: #F5EEE0;
+    box-shadow: 5px 5px 10px rgba(150, 120, 80, 0.18), -5px -5px 10px rgba(255, 252, 245, 0.9);
+    transition: box-shadow 0.3s ease;
+  }
+  .neumorphic-switch-inner:hover {
+    box-shadow: 7px 7px 14px rgba(150, 120, 80, 0.22), -7px -7px 14px rgba(255, 252, 245, 0.95);
+  }
+
+  /* Inner (inset) middle neumorphism for footer social icons on the dark
+     primary surface — pressed-in resting state, extruded on hover. */
+  /* Smooth inner (inset) neumorphism with no color — neutral pressed-in
+     shell on the warm cream surface, translucent for a glassy feel. */
+  .neumorphic-inset {
+    background-color: rgba(255, 252, 245, 0.55);
+    box-shadow: inset 4px 4px 8px rgba(150, 120, 80, 0.18), inset -4px -4px 8px rgba(255, 252, 245, 0.9);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  }
+  .neumorphic-inset:hover {
+    box-shadow: inset 5px 5px 10px rgba(150, 120, 80, 0.22), inset -5px -5px 10px rgba(255, 252, 245, 0.95);
+    transform: translateY(-1px);
+  }
+
+  /* Smooth inner (inset) neumorphism with no color — glassy pressed-in shell
+     on the dark primary footer surface, translucent, no brand color tints. */
+  .neumorphic-inset-dark {
+    background-color: rgba(255, 255, 255, 0.06);
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.45), inset -3px -3px 6px rgba(255, 255, 255, 0.08);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  }
+  .neumorphic-inset-dark:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.5), inset -4px -4px 8px rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .neumorphic-social {
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.45), inset -3px -3px 6px rgba(255, 255, 255, 0.08);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  .neumorphic-social:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4), -5px -5px 12px rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+  .neumorphic-social:active {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.55), inset -5px -5px 10px rgba(255, 255, 255, 0.06);
+  }
+
+  @media (min-width: 1024px) {
+    .container-institutional {
+      padding-inline: 2.5rem;
+    }
+  }
+}

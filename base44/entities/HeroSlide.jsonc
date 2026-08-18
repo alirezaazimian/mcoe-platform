@@ -1,0 +1,46 @@
+{
+  "name": "HeroSlide",
+  "type": "object",
+  "properties": {
+    "title_fa": {
+      "type": "string",
+      "title": "\u0639\u0646\u0648\u0627\u0646 (\u0641\u0627\u0631\u0633\u06cc)"
+    },
+    "title_en": {
+      "type": "string",
+      "title": "Title (English)"
+    },
+    "caption_fa": {
+      "type": "string",
+      "title": "\u0632\u06cc\u0631\u0639\u0646\u0648\u0627\u0646 (\u0641\u0627\u0631\u0633\u06cc)",
+      "format": "text"
+    },
+    "caption_en": {
+      "type": "string",
+      "title": "Caption (English)",
+      "format": "text"
+    },
+    "image_url": {
+      "type": "string",
+      "title": "Image URL",
+      "format": "url"
+    },
+    "link_url": {
+      "type": "string",
+      "title": "Link URL"
+    },
+    "sort_order": {
+      "type": "integer",
+      "title": "Sort Order",
+      "default": 0
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Active",
+      "default": true
+    }
+  },
+  "required": [
+    "image_url"
+  ]
+}

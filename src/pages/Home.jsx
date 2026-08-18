@@ -1,0 +1,28 @@
+import React from 'react';
+import Hero from '@/components/home/Hero';
+import AboutSection from '@/components/home/AboutSection';
+import EducationLevels from '@/components/home/EducationLevels';
+import Statistics from '@/components/home/Statistics';
+import NewsSection from '@/components/home/NewsSection';
+import ArticlesSection from '@/components/home/ArticlesSection';
+import EventsSection from '@/components/home/EventsSection';
+import Gallery from '@/components/home/Gallery';
+import Partners from '@/components/home/Partners';
+import CallToAction from '@/components/home/CallToAction';
+
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <AboutSection />
+      <EducationLevels />
+      <Statistics />
+      <NewsSection />
+      <ArticlesSection />
+      <EventsSection />
+      <Gallery />
+      <Partners />
+      <CallToAction />
+    </>
+  );
+}
