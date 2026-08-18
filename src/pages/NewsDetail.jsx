@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 import ArticleLayout from '@/components/ui/ArticleLayout';
 
 export default function NewsDetail() {
@@ -11,15 +11,36 @@ export default function NewsDetail() {
 
   useEffect(() => {
     setLoading(true);
-    base44.entities.News.get(id)
-      .then(async (data) => {
-        setItem(data);
-        const all = await base44.entities.News.filter({ status: 'published' }, '-publish_date', 10);
-        setRelated(all.filter(r => r.id !== id).slice(0, 3));
-      })
-      .catch(() => setItem(null))
-      .finally(() => setLoading(false));
-  }, [id]);
+
+  djangoApi.news
+    .get(id)
+    .then(async (data) => {
+      setItem(data);
+
+      const allNews = await djangoApi.news.list();
+
+      const relatedItems = allNews
+        .filter(
+          (newsItem) =>
+            String(newsItem.id) !== String(id)
+        )
+        .slice(0, 3);
+
+      setRelated(relatedItems);
+    })
+    .catch((error) => {
+      console.error(
+        'Failed to load news detail:',
+        error
+      );
+
+      setItem(null);
+      setRelated([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, [id]);
 
   return <ArticleLayout item={item} type="news" related={related} loading={loading} />;
 }

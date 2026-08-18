@@ -3,7 +3,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
 import { NewsCard } from '@/components/ui/ContentCards';
 import NewsFilters from '@/components/news/NewsFilters';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 
 export default function News() {
   const { t, isRTL } = useLanguage();
@@ -12,12 +12,22 @@ export default function News() {
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeTag, setActiveTag] = useState(null);
 
-  useEffect(() => {
-    base44.entities.News.filter({ status: 'published' }, '-publish_date', 50)
-      .then(setItems)
-      .catch(() => setItems([]))
-      .finally(() => setLoading(false));
-  }, []);
+useEffect(() => {
+  setLoading(true);
+
+  djangoApi.news
+    .list()
+    .then((data) => {
+      setItems(data);
+    })
+    .catch((error) => {
+      console.error('Failed to load news:', error);
+      setItems([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, []);
 
   const filtered = items.filter((item) => {
     if (activeCategory && item.category !== activeCategory) return false;

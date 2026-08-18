@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import WorkingGroup, WorkingGroupMember
+from .models import News, WorkingGroup, WorkingGroupMember
 
 
 class WorkingGroupSerializer(serializers.ModelSerializer):
@@ -45,4 +45,32 @@ class WorkingGroupMemberSerializer(serializers.ModelSerializer):
             'linkedin_url',
             'group_slug',
             'sort_order',
+        ]
+
+class NewsSerializer(serializers.ModelSerializer):
+    created_date = serializers.DateTimeField(
+        source="created_at",
+        read_only=True,
+    )
+
+    class Meta:
+        model = News
+        fields = [
+            "id",
+            "title_fa",
+            "title_en",
+            "summary_fa",
+            "summary_en",
+            "body_fa",
+            "body_en",
+            "featured_image",
+            "category",
+            "tags",
+            "author_name",
+            "status",
+            "publish_date",
+            "slug_fa",
+            "slug_en",
+            "is_featured",
+            "created_date",
         ]

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import WorkingGroup, WorkingGroupMember
+from .models import News, WorkingGroup, WorkingGroupMember
 
 
 class WorkingGroupMemberInline(admin.TabularInline):
@@ -60,3 +60,37 @@ class WorkingGroupMemberAdmin(admin.ModelAdmin):
     list_editable = (
         'sort_order',
     )
+
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = (
+        'title_fa',
+        'category',
+        'status',
+        'publish_date',
+        'is_featured',
+        'updated_at',
+    )
+
+    list_filter = (
+        'status',
+        'category',
+        'is_featured',
+        'publish_date',
+    )
+
+    search_fields = (
+        'title_fa',
+        'title_en',
+        'summary_fa',
+        'summary_en',
+        'author_name',
+    )
+
+    list_editable = (
+        'status',
+        'is_featured',
+    )
+
+    date_hierarchy = 'publish_date'

@@ -1,7 +1,8 @@
 from rest_framework import viewsets
 
-from .models import WorkingGroup, WorkingGroupMember
+from .models import News, WorkingGroup, WorkingGroupMember
 from .serializers import (
+    NewsSerializer,
     WorkingGroupSerializer,
     WorkingGroupMemberSerializer,
 )
@@ -23,5 +24,24 @@ class WorkingGroupMemberViewSet(viewsets.ReadOnlyModelViewSet):
 
         if group_slug:
             queryset = queryset.filter(group__slug=group_slug)
+
+        return queryset
+
+class NewsViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = NewsSerializer
+
+    def get_queryset(self):
+        queryset = News.objects.filter(
+            status=News.Status.PUBLISHED
+        ).order_by("-publish_date", "-id")
+
+        category = self.request.query_params.get("category")
+        featured = self.request.query_params.get("featured")
+
+        if category:
+            queryset = queryset.filter(category=category)
+
+        if featured == "true":
+            queryset = queryset.filter(is_featured=True)
 
         return queryset

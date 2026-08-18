@@ -30,7 +30,9 @@ export const djangoApi = {
     },
 
     get(slug) {
-      return request(`/working-groups/${encodeURIComponent(slug)}/`);
+      return request(
+        `/working-groups/${encodeURIComponent(slug)}/`
+      );
     },
   },
 
@@ -38,6 +40,18 @@ export const djangoApi = {
     listByGroup(groupSlug) {
       return request(
         `/working-group-members/?group_slug=${encodeURIComponent(groupSlug)}`
+      );
+    },
+  },
+
+  news: {
+    list() {
+      return request('/news/');
+    },
+
+    get(id) {
+      return request(
+        `/news/${encodeURIComponent(id)}/`
       );
     },
   },

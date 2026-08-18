@@ -1,6 +1,10 @@
 from rest_framework.routers import DefaultRouter
 
-from .views import WorkingGroupViewSet, WorkingGroupMemberViewSet
+from .views import (
+    NewsViewSet,
+    WorkingGroupMemberViewSet,
+    WorkingGroupViewSet,
+)
 
 
 router = DefaultRouter()
@@ -15,6 +19,12 @@ router.register(
     "working-group-members",
     WorkingGroupMemberViewSet,
     basename="working-group-member",
+)
+
+router.register(
+    "news",
+    NewsViewSet,
+    basename="news",
 )
 
 
