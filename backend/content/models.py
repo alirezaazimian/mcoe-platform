@@ -260,3 +260,128 @@ class News(models.Model):
 
     def __str__(self):
         return self.title_fa
+
+class Article(models.Model):
+    class Category(models.TextChoices):
+        EDUCATION = "education", "آموزش"
+        PARENTING = "parenting", "فرزندپروری"
+        PEDAGOGY = "pedagogy", "روش‌های آموزشی"
+        PSYCHOLOGY = "psychology", "روان‌شناسی"
+        GENERAL = "general", "عمومی"
+
+    class Status(models.TextChoices):
+        DRAFT = "draft", "پیش‌نویس"
+        PENDING_REVIEW = "pending_review", "در انتظار بررسی"
+        APPROVED = "approved", "تأیید شده"
+        PUBLISHED = "published", "منتشر شده"
+        ARCHIVED = "archived", "آرشیو شده"
+
+    title_fa = models.CharField(
+        max_length=300,
+        verbose_name="عنوان فارسی",
+    )
+
+    title_en = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name="عنوان انگلیسی",
+    )
+
+    summary_fa = models.TextField(
+        blank=True,
+        verbose_name="خلاصه فارسی",
+    )
+
+    summary_en = models.TextField(
+        blank=True,
+        verbose_name="خلاصه انگلیسی",
+    )
+
+    body_fa = models.TextField(
+        blank=True,
+        verbose_name="متن فارسی",
+    )
+
+    body_en = models.TextField(
+        blank=True,
+        verbose_name="متن انگلیسی",
+    )
+
+    featured_image = models.ImageField(
+        upload_to="articles/%Y/%m/",
+        blank=True,
+        null=True,
+        verbose_name="تصویر شاخص",
+    )
+
+    category = models.CharField(
+        max_length=30,
+        choices=Category.choices,
+        default=Category.GENERAL,
+        verbose_name="دسته‌بندی",
+    )
+
+    tags = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="برچسب‌ها",
+        help_text="مثال: ['آموزش', 'دانش‌آموز', 'مدرسه']",
+    )
+
+    author_name = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name="نام نویسنده",
+    )
+
+    reading_time_min = models.PositiveIntegerField(
+        default=5,
+        verbose_name="زمان مطالعه به دقیقه",
+    )
+
+    status = models.CharField(
+        max_length=30,
+        choices=Status.choices,
+        default=Status.DRAFT,
+        verbose_name="وضعیت",
+    )
+
+    publish_date = models.DateField(
+        blank=True,
+        null=True,
+        verbose_name="تاریخ انتشار",
+    )
+
+    slug_fa = models.SlugField(
+        max_length=300,
+        blank=True,
+        allow_unicode=True,
+        verbose_name="Slug فارسی",
+    )
+
+    slug_en = models.SlugField(
+        max_length=300,
+        blank=True,
+        verbose_name="Slug انگلیسی",
+    )
+
+    is_featured = models.BooleanField(
+        default=False,
+        verbose_name="مقاله ویژه",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["-publish_date", "-id"]
+        verbose_name = "مقاله"
+        verbose_name_plural = "مقالات"
+
+    def __str__(self):
+        return self.title_fa

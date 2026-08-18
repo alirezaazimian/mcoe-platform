@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from .models import News, WorkingGroup, WorkingGroupMember
+from .models import (
+    Article,
+    News,
+    WorkingGroup,
+    WorkingGroupMember,
+)
 
 
 class WorkingGroupMemberInline(admin.TabularInline):
@@ -11,25 +16,25 @@ class WorkingGroupMemberInline(admin.TabularInline):
 @admin.register(WorkingGroup)
 class WorkingGroupAdmin(admin.ModelAdmin):
     list_display = (
-        'name_fa',
-        'name_en',
-        'slug',
-        'sort_order',
-        'updated_at',
+        "name_fa",
+        "name_en",
+        "slug",
+        "sort_order",
+        "updated_at",
     )
 
     list_editable = (
-        'sort_order',
+        "sort_order",
     )
 
     search_fields = (
-        'name_fa',
-        'name_en',
-        'slug',
+        "name_fa",
+        "name_en",
+        "slug",
     )
 
     prepopulated_fields = {
-        'slug': ('name_en',),
+        "slug": ("name_en",),
     }
 
     inlines = [
@@ -40,57 +45,93 @@ class WorkingGroupAdmin(admin.ModelAdmin):
 @admin.register(WorkingGroupMember)
 class WorkingGroupMemberAdmin(admin.ModelAdmin):
     list_display = (
-        'name_fa',
-        'group',
-        'role_fa',
-        'sort_order',
+        "name_fa",
+        "group",
+        "role_fa",
+        "sort_order",
     )
 
     list_filter = (
-        'group',
+        "group",
     )
 
     search_fields = (
-        'name_fa',
-        'name_en',
-        'role_fa',
-        'role_en',
+        "name_fa",
+        "name_en",
+        "role_fa",
+        "role_en",
     )
 
     list_editable = (
-        'sort_order',
+        "sort_order",
     )
 
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = (
-        'title_fa',
-        'category',
-        'status',
-        'publish_date',
-        'is_featured',
-        'updated_at',
+        "title_fa",
+        "category",
+        "status",
+        "publish_date",
+        "is_featured",
+        "updated_at",
     )
 
     list_filter = (
-        'status',
-        'category',
-        'is_featured',
-        'publish_date',
+        "status",
+        "category",
+        "is_featured",
+        "publish_date",
     )
 
     search_fields = (
-        'title_fa',
-        'title_en',
-        'summary_fa',
-        'summary_en',
-        'author_name',
+        "title_fa",
+        "title_en",
+        "summary_fa",
+        "summary_en",
+        "author_name",
     )
 
     list_editable = (
-        'status',
-        'is_featured',
+        "status",
+        "is_featured",
     )
 
-    date_hierarchy = 'publish_date'
+    date_hierarchy = "publish_date"
+
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = (
+        "title_fa",
+        "category",
+        "author_name",
+        "status",
+        "publish_date",
+        "reading_time_min",
+        "is_featured",
+        "updated_at",
+    )
+
+    list_filter = (
+        "status",
+        "category",
+        "is_featured",
+        "publish_date",
+    )
+
+    search_fields = (
+        "title_fa",
+        "title_en",
+        "summary_fa",
+        "summary_en",
+        "author_name",
+    )
+
+    list_editable = (
+        "status",
+        "is_featured",
+    )
+
+    date_hierarchy = "publish_date"

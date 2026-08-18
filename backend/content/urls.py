@@ -1,6 +1,7 @@
 from rest_framework.routers import DefaultRouter
 
 from .views import (
+    ArticleViewSet,
     NewsViewSet,
     WorkingGroupMemberViewSet,
     WorkingGroupViewSet,
@@ -27,5 +28,11 @@ router.register(
     basename="news",
 )
 
+
+router.register(
+    "articles",
+    ArticleViewSet,
+    basename="article",
+)
 
 urlpatterns = router.urls
