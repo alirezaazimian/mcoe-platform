@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 import ReactMarkdown from 'react-markdown';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
@@ -19,12 +19,17 @@ export default function WorkingGroupDetail() {
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   useEffect(() => {
-    setLoading(true);
-    base44.entities.WorkingGroup.filter({ slug })
-      .then((data) => setGroup(data[0] || null))
-      .catch(() => setGroup(null))
-      .finally(() => setLoading(false));
-  }, [slug]);
+  setLoading(true);
+
+  djangoApi.workingGroups
+    .get(slug)
+    .then(setGroup)
+    .catch((error) => {
+      console.error('Failed to load working group:', error);
+      setGroup(null);
+    })
+    .finally(() => setLoading(false));
+}, [slug]);
 
   if (loading) {
     return (

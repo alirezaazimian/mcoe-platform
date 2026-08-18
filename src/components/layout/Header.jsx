@@ -5,7 +5,7 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { Menu, X, Search, ChevronDown, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Image } from '@/components/ui/image';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 
 export default function Header() {
   const { t, isRTL } = useLanguage();
@@ -20,18 +20,27 @@ export default function Header() {
   const [workingGroups, setWorkingGroups] = useState([]);
 
   useEffect(() => {
-    let mounted = true;
-    base44.entities.WorkingGroup.list('sort_order', 50)
-      .then((groups) => {
-        if (!mounted) return;
-        const sorted = [...(groups || [])].sort(
-          (a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0)
-        );
-        setWorkingGroups(sorted);
-      })
-      .catch(() => {});
-    return () => { mounted = false; };
-  }, []);
+  let mounted = true;
+
+  djangoApi.workingGroups
+    .list()
+    .then((groups) => {
+      if (!mounted) return;
+
+      const sorted = [...(groups || [])].sort(
+        (a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0)
+      );
+
+      setWorkingGroups(sorted);
+    })
+    .catch((error) => {
+      console.error('Failed to load header working groups:', error);
+    });
+
+  return () => {
+    mounted = false;
+  };
+}, []);
 
   const handleSearch = (e) => {
     e.preventDefault();

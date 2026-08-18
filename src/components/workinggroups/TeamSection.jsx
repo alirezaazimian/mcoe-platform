@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 import { Image } from '@/components/ui/image';
 import Reveal from '@/components/ui/Reveal';
 import { Linkedin, UserRound } from 'lucide-react';
@@ -11,12 +11,17 @@ export default function TeamSection({ groupSlug }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    base44.entities.WorkingGroupMember.filter({ group_slug: groupSlug }, 'sort_order')
-      .then((data) => setMembers(data))
-      .catch(() => setMembers([]))
-      .finally(() => setLoading(false));
-  }, [groupSlug]);
+  setLoading(true);
+
+  djangoApi.workingGroupMembers
+    .listByGroup(groupSlug)
+    .then(setMembers)
+    .catch((error) => {
+      console.error('Failed to load working group members:', error);
+      setMembers([]);
+    })
+    .finally(() => setLoading(false));
+}, [groupSlug]);
 
   if (loading) {
     return (

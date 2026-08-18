@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 import Reveal from '@/components/ui/Reveal';
 import { Image } from '@/components/ui/image';
 import { Globe, Palette, Sparkles, PenTool, Cpu, Atom, BookOpen, Calculator, Activity, Brain, ArrowRight, ArrowLeft, Users } from 'lucide-react';
@@ -15,11 +15,15 @@ export default function WorkingGroups() {
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   useEffect(() => {
-    base44.entities.WorkingGroup.list('sort_order', 50)
-      .then(setGroups)
-      .catch(() => setGroups([]))
-      .finally(() => setLoading(false));
-  }, []);
+  djangoApi.workingGroups
+    .list()
+    .then(setGroups)
+    .catch((error) => {
+      console.error('Failed to load working groups:', error);
+      setGroups([]);
+    })
+    .finally(() => setLoading(false));
+}, []);
 
   return (
     <>
