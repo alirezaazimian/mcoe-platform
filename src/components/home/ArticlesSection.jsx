@@ -3,7 +3,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import { ArticleCard } from '@/components/ui/ContentCards';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 
 export default function ArticlesSection() {
   const { t, isRTL } = useLanguage();
@@ -11,11 +11,25 @@ export default function ArticlesSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    base44.entities.Article.filter({ status: 'published' }, '-publish_date', 3)
-      .then(setItems)
-      .catch(() => setItems([]))
-      .finally(() => setLoading(false));
-  }, []);
+  setLoading(true);
+
+  djangoApi.articles
+    .list()
+    .then((data) => {
+      setItems(data.slice(0, 3));
+    })
+    .catch((error) => {
+      console.error(
+        'Failed to load home articles:',
+        error
+      );
+
+      setItems([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, []);
 
   return (
     <section className="py-20 lg:py-30 bg-muted/30">

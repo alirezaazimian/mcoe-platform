@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
 import { ArticleCard } from '@/components/ui/ContentCards';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 
 export default function Articles() {
   const { t, isRTL } = useLanguage();
@@ -10,11 +10,21 @@ export default function Articles() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    base44.entities.Article.filter({ status: 'published' }, '-publish_date', 50)
-      .then(setItems)
-      .catch(() => setItems([]))
-      .finally(() => setLoading(false));
-  }, []);
+  setLoading(true);
+
+  djangoApi.articles
+    .list()
+    .then((data) => {
+      setItems(data);
+    })
+    .catch((error) => {
+      console.error('Failed to load articles:', error);
+      setItems([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, []);
 
   return (
     <>

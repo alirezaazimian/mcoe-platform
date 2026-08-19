@@ -55,4 +55,16 @@ export const djangoApi = {
       );
     },
   },
+
+  articles: {
+    list() {
+      return request('/articles/');
+    },
+
+    get(id) {
+      return request(
+        `/articles/${encodeURIComponent(id)}/`
+      );
+    },
+  },
 };
