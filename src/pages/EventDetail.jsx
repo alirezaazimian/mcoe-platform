@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import ReactMarkdown from 'react-markdown';
@@ -16,16 +16,37 @@ export default function EventDetail() {
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   useEffect(() => {
-    setLoading(true);
-    base44.entities.Event.get(id)
-      .then(async (data) => {
-        setItem(data);
-        const all = await base44.entities.Event.filter({}, 'event_date', 10);
-        setRelated(all.filter(r => r.id !== id).slice(0, 3));
-      })
-      .catch(() => setItem(null))
-      .finally(() => setLoading(false));
-  }, [id]);
+  setLoading(true);
+
+  djangoApi.events
+    .get(id)
+    .then(async (data) => {
+      setItem(data);
+
+      const allEvents = await djangoApi.events.list();
+
+      const relatedEvents = allEvents
+        .filter(
+          (event) =>
+            String(event.id) !== String(id)
+        )
+        .slice(0, 3);
+
+      setRelated(relatedEvents);
+    })
+    .catch((error) => {
+      console.error(
+        'Failed to load event detail:',
+        error
+      );
+
+      setItem(null);
+      setRelated([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, [id]);
 
   if (loading) {
     return (

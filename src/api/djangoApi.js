@@ -1,6 +1,6 @@
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
-
+  import.meta.env.VITE_API_BASE_URL ||
+  'http://127.0.0.1:8000/api';
 
 async function request(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
@@ -21,7 +21,6 @@ async function request(endpoint, options = {}) {
 
   return response.json();
 }
-
 
 export const djangoApi = {
   workingGroups: {
@@ -50,9 +49,7 @@ export const djangoApi = {
     },
 
     get(id) {
-      return request(
-        `/news/${encodeURIComponent(id)}/`
-      );
+      return request(`/news/${encodeURIComponent(id)}/`);
     },
   },
 
@@ -62,9 +59,22 @@ export const djangoApi = {
     },
 
     get(id) {
-      return request(
-        `/articles/${encodeURIComponent(id)}/`
-      );
+      return request(`/articles/${encodeURIComponent(id)}/`);
+    },
+  },
+
+  events: {
+    list(status = 'all') {
+      const query =
+        status && status !== 'all'
+          ? `?status=${encodeURIComponent(status)}`
+          : '';
+
+      return request(`/events/${query}`);
+    },
+
+    get(id) {
+      return request(`/events/${encodeURIComponent(id)}/`);
     },
   },
 };

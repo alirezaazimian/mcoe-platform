@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
 import { EventCard } from '@/components/ui/ContentCards';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 import { cn } from '@/lib/utils';
 
 export default function Events() {
@@ -12,11 +12,21 @@ export default function Events() {
   const [filter, setFilter] = useState('upcoming');
 
   useEffect(() => {
-    base44.entities.Event.filter(filter === 'all' ? {} : { status: filter }, 'event_date', 50)
-      .then(setItems)
-      .catch(() => setItems([]))
-      .finally(() => setLoading(false));
-  }, [filter]);
+  setLoading(true);
+
+  djangoApi.events
+    .list(filter)
+    .then((data) => {
+      setItems(data);
+    })
+    .catch((error) => {
+      console.error('Failed to load events:', error);
+      setItems([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, [filter]);
 
   const filters = [
     { key: 'upcoming', label: isRTL ? 'در پیش‌رو' : 'Upcoming' },

@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
 import { Search as SearchIcon, FileText, Newspaper, CalendarDays } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 
 export default function Search() {
   const { language, isRTL, t } = useLanguage();
@@ -22,9 +22,9 @@ export default function Search() {
     }
     setLoading(true);
     Promise.all([
-      base44.entities.Article.filter({ status: 'published' }, '-publish_date', 100).catch(() => []),
-      base44.entities.News.filter({ status: 'published' }, '-publish_date', 100).catch(() => []),
-      base44.entities.Event.list('event_date', 100).catch(() => []),
+      djangoApi.articles.list().catch(() => []),
+      djangoApi.News.list().catch(() => []),
+      djangoApi.events.list().catch(() => []),
     ])
       .then(([articles, news, events]) => {
         if (cancelled) return;
