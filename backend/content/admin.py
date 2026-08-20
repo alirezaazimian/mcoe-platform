@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import (
     Article,
+    Event,
     News,
     WorkingGroup,
     WorkingGroupMember,
@@ -135,3 +136,37 @@ class ArticleAdmin(admin.ModelAdmin):
     )
 
     date_hierarchy = "publish_date"
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = (
+        "title_fa",
+        "category",
+        "status",
+        "event_date",
+        "capacity",
+        "updated_at",
+    )
+
+    list_filter = (
+        "status",
+        "category",
+        "event_date",
+    )
+
+    search_fields = (
+        "title_fa",
+        "title_en",
+        "description_fa",
+        "description_en",
+        "venue_fa",
+        "venue_en",
+        "organizer_fa",
+        "organizer_en",
+    )
+
+    list_editable = (
+        "status",
+    )
+
+    date_hierarchy = "event_date"

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Article, News, WorkingGroup, WorkingGroupMember
+from .models import Event, Article, News, WorkingGroup, WorkingGroupMember
 
 
 class WorkingGroupSerializer(serializers.ModelSerializer):
@@ -102,5 +102,35 @@ class ArticleSerializer(serializers.ModelSerializer):
             "slug_fa",
             "slug_en",
             "is_featured",
+            "created_date",
+        ]
+
+
+class EventSerializer(serializers.ModelSerializer):
+    created_date = serializers.DateTimeField(
+        source="created_at",
+        read_only=True,
+    )
+
+    class Meta:
+        model = Event
+        fields = [
+            "id",
+            "title_fa",
+            "title_en",
+            "description_fa",
+            "description_en",
+            "banner_image",
+            "category",
+            "event_date",
+            "venue_fa",
+            "venue_en",
+            "organizer_fa",
+            "organizer_en",
+            "capacity",
+            "registration_deadline",
+            "registration_url",
+            "map_url",
+            "status",
             "created_date",
         ]

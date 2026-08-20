@@ -2,6 +2,7 @@ from rest_framework.routers import DefaultRouter
 
 from .views import (
     ArticleViewSet,
+    EventViewSet,
     NewsViewSet,
     WorkingGroupMemberViewSet,
     WorkingGroupViewSet,
@@ -33,6 +34,13 @@ router.register(
     "articles",
     ArticleViewSet,
     basename="article",
+)
+
+
+router.register(
+    "events",
+    EventViewSet,
+    basename="event",
 )
 
 urlpatterns = router.urls

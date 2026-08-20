@@ -385,3 +385,116 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title_fa
+
+
+class Event(models.Model):
+    class Status(models.TextChoices):
+        UPCOMING = "upcoming", "در پیش‌رو"
+        COMPLETED = "completed", "برگزار شده"
+
+    title_fa = models.CharField(
+        max_length=300,
+        verbose_name="عنوان فارسی",
+    )
+
+    title_en = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name="عنوان انگلیسی",
+    )
+
+    description_fa = models.TextField(
+        blank=True,
+        verbose_name="توضیحات فارسی",
+    )
+
+    description_en = models.TextField(
+        blank=True,
+        verbose_name="توضیحات انگلیسی",
+    )
+
+    banner_image = models.ImageField(
+        upload_to="events/%Y/%m/",
+        blank=True,
+        null=True,
+        verbose_name="تصویر رویداد",
+    )
+
+    category = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="دسته‌بندی",
+    )
+
+    event_date = models.DateTimeField(
+        verbose_name="تاریخ و ساعت رویداد",
+    )
+
+    venue_fa = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name="محل برگزاری فارسی",
+    )
+
+    venue_en = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name="محل برگزاری انگلیسی",
+    )
+
+    organizer_fa = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name="برگزارکننده فارسی",
+    )
+
+    organizer_en = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name="برگزارکننده انگلیسی",
+    )
+
+    capacity = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        verbose_name="ظرفیت",
+    )
+
+    registration_deadline = models.DateTimeField(
+        blank=True,
+        null=True,
+        verbose_name="مهلت ثبت‌نام",
+    )
+
+    registration_url = models.URLField(
+        blank=True,
+        verbose_name="لینک ثبت‌نام",
+    )
+
+    map_url = models.URLField(
+        blank=True,
+        verbose_name="لینک نقشه",
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.UPCOMING,
+        verbose_name="وضعیت",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["event_date"]
+        verbose_name = "رویداد"
+        verbose_name_plural = "رویدادها"
+
+    def __str__(self):
+        return self.title_fa

@@ -1,11 +1,18 @@
 from rest_framework import viewsets
 
-from .models import Article, News, WorkingGroup, WorkingGroupMember
+from .models import (
+    Article,
+    Event,
+    News,
+    WorkingGroup,
+    WorkingGroupMember,
+)
 from .serializers import (
     ArticleSerializer,
+    EventSerializer,
     NewsSerializer,
-    WorkingGroupSerializer,
     WorkingGroupMemberSerializer,
+    WorkingGroupSerializer,
 )
 
 
@@ -63,5 +70,22 @@ class ArticleViewSet(viewsets.ReadOnlyModelViewSet):
 
         if featured == "true":
             queryset = queryset.filter(is_featured=True)
+
+        return queryset
+
+class EventViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = EventSerializer
+
+    def get_queryset(self):
+        queryset = Event.objects.all().order_by("event_date")
+
+        status = self.request.query_params.get("status")
+        category = self.request.query_params.get("category")
+
+        if status:
+            queryset = queryset.filter(status=status)
+
+        if category:
+            queryset = queryset.filter(category=category)
 
         return queryset
