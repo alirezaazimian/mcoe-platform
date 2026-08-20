@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 import { Image } from '@/components/ui/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -15,11 +15,19 @@ export default function HeroSlider() {
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    base44.entities.HeroSlide.filter({ is_active: true }, 'sort_order')
-      .then((data) => setSlides(data || []))
-      .catch(() => setSlides([]))
-      .finally(() => setLoading(false));
-  }, []);
+  djangoApi.heroSlides
+    .list()
+    .then((data) => {
+      setSlides(data || []);
+    })
+    .catch((error) => {
+      console.error('Failed to load hero slides:', error);
+      setSlides([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, []);
 
   const count = slides.length;
   const go = useCallback(
@@ -28,16 +36,19 @@ export default function HeroSlider() {
   );
 
   useEffect(() => {
-    if (paused || count <= 1) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % count), AUTOPLAY_MS);
-    return () => clearInterval(id);
-  }, [paused, count]);
-
-  if (loading) {
-    return (
-      <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-3xl overflow-hidden glass neumorphic-inset bg-muted animate-pulse" />
-    );
-  }
+  djangoApi.heroSlides
+    .list()
+    .then((data) => {
+      setSlides(data || []);
+    })
+    .catch((error) => {
+      console.error('Failed to load hero slides:', error);
+      setSlides([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, []);
 
   if (!count) {
     return (
@@ -70,11 +81,15 @@ export default function HeroSlider() {
           className="absolute inset-0"
         >
           <Image
-            src={slides[index].image_url}
-            alt=""
-            className="w-full h-full"
-            fittingType="fill"
-          />
+             src={slides[index].image_url}
+             alt={
+               isRTL
+                 ? slides[index].alt_fa || ''
+                 : slides[index].alt_en || ''
+  }
+              className="w-full h-full"
+              fittingType="fill"
+            />
         </motion.div>
       </AnimatePresence>
 

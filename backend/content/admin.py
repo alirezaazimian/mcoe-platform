@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import (
     Article,
     Event,
+    HeroSlide,
     News,
     WorkingGroup,
     WorkingGroupMember,
@@ -170,3 +171,27 @@ class EventAdmin(admin.ModelAdmin):
     )
 
     date_hierarchy = "event_date"
+
+
+@admin.register(HeroSlide)
+class HeroSlideAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "is_active",
+        "sort_order",
+        "updated_at",
+    )
+
+    list_filter = (
+        "is_active",
+    )
+
+    list_editable = (
+        "is_active",
+        "sort_order",
+    )
+
+    ordering = (
+        "sort_order",
+        "id",
+    )

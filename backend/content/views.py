@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from .models import (
     Article,
     Event,
+    HeroSlide,
     News,
     WorkingGroup,
     WorkingGroupMember,
@@ -10,6 +11,7 @@ from .models import (
 from .serializers import (
     ArticleSerializer,
     EventSerializer,
+    HeroSlideSerializer,
     NewsSerializer,
     WorkingGroupMemberSerializer,
     WorkingGroupSerializer,
@@ -89,3 +91,16 @@ class EventViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(category=category)
 
         return queryset
+
+
+class HeroSlideViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = HeroSlideSerializer
+
+    def get_queryset(self):
+        return HeroSlide.objects.filter(
+            is_active=True
+        ).order_by(
+            "sort_order",
+            "id",
+        )
+

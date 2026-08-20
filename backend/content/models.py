@@ -498,3 +498,48 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title_fa
+
+
+class HeroSlide(models.Model):
+    image = models.ImageField(
+        upload_to="hero-slides/%Y/%m/",
+        verbose_name="تصویر اسلاید",
+    )
+
+    alt_fa = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="متن جایگزین فارسی",
+    )
+
+    alt_en = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="متن جایگزین انگلیسی",
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="فعال",
+    )
+
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name="ترتیب نمایش",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "اسلاید صفحه اصلی"
+        verbose_name_plural = "اسلایدهای صفحه اصلی"
+
+    def __str__(self):
+        return f"Hero Slide #{self.id or 'new'}"

@@ -77,4 +77,10 @@ export const djangoApi = {
       return request(`/events/${encodeURIComponent(id)}/`);
     },
   },
+
+  heroSlides: {
+    list() {
+      return request('/hero-slides/');
+    },
+  },
 };

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Event, Article, News, WorkingGroup, WorkingGroupMember
+from .models import HeroSlide, Event, Article, News, WorkingGroup, WorkingGroupMember
 
 
 class WorkingGroupSerializer(serializers.ModelSerializer):
@@ -133,4 +133,21 @@ class EventSerializer(serializers.ModelSerializer):
             "map_url",
             "status",
             "created_date",
+        ]
+
+class HeroSlideSerializer(serializers.ModelSerializer):
+    image_url = serializers.ImageField(
+        source="image",
+        read_only=True,
+    )
+
+    class Meta:
+        model = HeroSlide
+        fields = [
+            "id",
+            "image_url",
+            "alt_fa",
+            "alt_en",
+            "is_active",
+            "sort_order",
         ]

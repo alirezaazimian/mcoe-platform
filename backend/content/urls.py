@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     ArticleViewSet,
     EventViewSet,
+    HeroSlideViewSet,
     NewsViewSet,
     WorkingGroupMemberViewSet,
     WorkingGroupViewSet,
@@ -41,6 +42,12 @@ router.register(
     "events",
     EventViewSet,
     basename="event",
+)
+
+router.register(
+    "hero-slides",
+    HeroSlideViewSet,
+    basename="hero-slide",
 )
 
 urlpatterns = router.urls
