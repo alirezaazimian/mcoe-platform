@@ -189,7 +189,6 @@ export const AuthProvider = ({
         checkUserAuth,
 
         // Temporary compatibility
-        // with the old Base44 App.jsx.
         isLoadingPublicSettings: false,
         authError: null,
         appPublicSettings: null,
