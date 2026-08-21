@@ -28,6 +28,7 @@ import EventDetail from '@/pages/EventDetail';
 import Collaborate from '@/pages/Collaborate';
 import Search from '@/pages/Search';
 import Login from '@/pages/Login';
+import Register from '@/pages/Register';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -54,6 +55,10 @@ const AuthenticatedApp = () => {
       <Route 
         path="/login" 
         element={<Login />}
+         />
+      <Route
+        path="/register"
+        element={<Register />}
          />
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
