@@ -27,6 +27,7 @@ import Events from '@/pages/Events';
 import EventDetail from '@/pages/EventDetail';
 import Collaborate from '@/pages/Collaborate';
 import Search from '@/pages/Search';
+import Login from '@/pages/Login';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -50,6 +51,10 @@ const AuthenticatedApp = () => {
 
   return (
     <Routes>
+      <Route 
+        path="/login" 
+        element={<Login />}
+         />
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
