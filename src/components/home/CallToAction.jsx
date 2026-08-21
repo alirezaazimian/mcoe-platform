@@ -4,7 +4,7 @@ import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import { motion } from 'framer-motion';
 
-const CTA_IMG = 'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/7a95f3af1_IMG_7095.jpg';
+const CTA_IMG = '/media/site/7a95f3af1_IMG_7095.jpg';
 
 export default function CallToAction() {
   const { t, isRTL } = useLanguage();

@@ -17,10 +17,10 @@ const BLOCK_COLORS = [
 ];
 
 const SPACES = [
-  'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/d641eceeb_generated_8663238f.png',
-  'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/fc1ec2660_generated_c31ef5f8.png',
-  'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/762d5af46_generated_2f7e8049.png',
-  'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/79b290cdc_generated_d244f2b5.png',
+  '/media/site/d641eceeb_generated_8663238f.jpg',
+  '/media/site/fc1ec2660_generated_c31ef5f8.jpg',
+  '/media/site/762d5af46_generated_2f7e8049.jpg',
+  '/media/site/79b290cdc_generated_d244f2b5.jpg',
 ];
 
 export default function EducationalSpace() {

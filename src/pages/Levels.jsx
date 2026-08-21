@@ -5,10 +5,10 @@ import Reveal from '@/components/ui/Reveal';
 import { GraduationCap, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const IMAGES = {
-  kindergarten: 'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/fc1ec2660_generated_c31ef5f8.png',
-  elementary1: 'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/762d5af46_generated_2f7e8049.png',
-  elementary2: 'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/762d5af46_generated_2f7e8049.png',
-  middleSchool: 'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/79b290cdc_generated_d244f2b5.png',
+  kindergarten: '/media/site/fc1ec2660_generated_c31ef5f8.jpg',
+  elementary1: '/media/site/762d5af46_generated_2f7e8049.jpg',
+  elementary2: '/media/site/762d5af46_generated_2f7e8049.jpg',
+  middleSchool: '/media/site/79b290cdc_generated_d244f2b5.jpg',
 };
 
 export default function Levels() {

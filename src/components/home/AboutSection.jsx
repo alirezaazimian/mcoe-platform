@@ -4,7 +4,7 @@ import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import { Target, Eye, Heart } from 'lucide-react';
 
-const ABOUT_IMG = 'https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/af4db7d64_6.jpg';
+const ABOUT_IMG = '/media/site/af4db7d64_6.jpg';
 
 export default function AboutSection() {
   const { t, isRTL } = useLanguage();

@@ -44,7 +44,7 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start text-center sm:text-start gap-3 mb-5">
               <Image
-                src="https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/3cc1bf827_BlackandWhiteElegantInitialsLogo1.png"
+                src="/media/site/3cc1bf827_BlackandWhiteElegantInitialsLogo1.png"
                 alt={isRTL ? 'موسسه آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}
                 className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg shrink-0"
                 fittingType="fill"
@@ -142,7 +142,7 @@ export default function Footer() {
               aria-label={isRTL ? 'نماد اعتماد الکترونیکی' : 'Enamad Trust Seal'}
             >
               <img
-                src="https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/b20ede19d_Untitleddesign.png"
+                src="/media/site/b20ede19d_Untitleddesign.png"
                 alt={isRTL ? 'نماد اعتماد الکترونیکی' : 'Enamad Trust Seal'}
                 className="w-[150px] h-[150px] object-contain [mix-blend-mode:screen]"
               />

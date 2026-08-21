@@ -137,7 +137,7 @@ export default function Header() {
             <Link to="/" className="flex items-center gap-1.5 shrink-0">
               <div className="relative">
                 <Image
-                  src="https://media.base44.com/images/public/6a75e3f43c273d956fec49a7/3cc1bf827_BlackandWhiteElegantInitialsLogo1.png"
+                  src="/media/site/3cc1bf827_BlackandWhiteElegantInitialsLogo1.png"
                   alt={isRTL ? 'موسسه آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}
                   className="w-16 h-16 rounded-lg"
                   fittingType="fill"
