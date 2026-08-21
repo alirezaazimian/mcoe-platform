@@ -73,7 +73,7 @@ async function getErrorMessage(response) {
       }
     }
   } catch {
-    // Ignore JSON parsing errors.
+    // Ignore invalid JSON responses.
   }
 
   return `Request failed with status ${response.status}`;
@@ -178,30 +178,44 @@ async function authRequest(
 }
 
 
+async function publicRequest(
+  endpoint,
+  body
+) {
+  const response = await fetch(
+    `${API_BASE_URL}${endpoint}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    }
+  );
+
+  if (!response.ok) {
+    const message =
+      await getErrorMessage(response);
+
+    const error = new Error(message);
+    error.status = response.status;
+
+    throw error;
+  }
+
+  return response.json();
+}
+
+
 export const authApi = {
   async login(email, password) {
-    const response = await fetch(
-      `${API_BASE_URL}/auth/login/`,
+    const data = await publicRequest(
+      '/auth/login/',
       {
-        method: 'POST',
-        headers: {
-          'Content-Type':
-            'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        email,
+        password,
       }
     );
-
-    if (!response.ok) {
-      throw new Error(
-        await getErrorMessage(response)
-      );
-    }
-
-    const data = await response.json();
 
     setTokens(
       data.access,
@@ -217,30 +231,15 @@ export const authApi = {
     password,
     confirmPassword
   ) {
-    const response = await fetch(
-      `${API_BASE_URL}/auth/register/`,
+    const data = await publicRequest(
+      '/auth/register/',
       {
-        method: 'POST',
-        headers: {
-          'Content-Type':
-            'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          confirm_password:
-            confirmPassword,
-        }),
+        email,
+        password,
+        confirm_password:
+          confirmPassword,
       }
     );
-
-    if (!response.ok) {
-      throw new Error(
-        await getErrorMessage(response)
-      );
-    }
-
-    const data = await response.json();
 
     setTokens(
       data.access,
@@ -248,6 +247,36 @@ export const authApi = {
     );
 
     return data;
+  },
+
+
+  requestPasswordReset(email) {
+    return publicRequest(
+      '/auth/password-reset/',
+      {
+        email,
+      }
+    );
+  },
+
+
+  confirmPasswordReset(
+    uid,
+    token,
+    newPassword,
+    confirmPassword
+  ) {
+    return publicRequest(
+      '/auth/password-reset/confirm/',
+      {
+        uid,
+        token,
+        new_password:
+          newPassword,
+        confirm_password:
+          confirmPassword,
+      }
+    );
   },
 
 

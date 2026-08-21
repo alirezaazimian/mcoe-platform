@@ -1,3 +1,5 @@
+import ForgotPassword from '@/pages/ForgotPassword';
+import ResetPassword from '@/pages/ResetPassword';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -52,6 +54,16 @@ const AuthenticatedApp = () => {
 
   return (
     <Routes>
+      <Route
+        path="/forgot-password"
+        element={<ForgotPassword />}
+      />
+
+      <Route
+         path="/reset-password"
+         element={<ResetPassword />}
+      />
+
       <Route 
         path="/login" 
         element={<Login />}
