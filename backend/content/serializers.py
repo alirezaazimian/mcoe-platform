@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import HeroSlide, Event, Article, News, WorkingGroup, WorkingGroupMember
+from .models import HeroSlide, CollaborationRequest, Event, Article, News, WorkingGroup, WorkingGroupMember
 
 
 class WorkingGroupSerializer(serializers.ModelSerializer):
@@ -151,3 +151,47 @@ class HeroSlideSerializer(serializers.ModelSerializer):
             "is_active",
             "sort_order",
         ]
+
+
+class CollaborationRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CollaborationRequest
+        fields = [
+            "id",
+            "full_name",
+            "email",
+            "phone",
+            "expertise_area",
+            "resume",
+            "message",
+        ]
+
+        read_only_fields = [
+            "id",
+        ]
+
+    def validate_resume(self, file):
+        if not file:
+            return file
+
+        allowed_extensions = {
+            "pdf",
+            "doc",
+            "docx",
+        }
+
+        extension = file.name.rsplit(".", 1)[-1].lower()
+
+        if extension not in allowed_extensions:
+            raise serializers.ValidationError(
+                "Only PDF, DOC and DOCX files are allowed."
+            )
+
+        max_size = 5 * 1024 * 1024
+
+        if file.size > max_size:
+            raise serializers.ValidationError(
+                "Resume file must be smaller than 5 MB."
+            )
+
+        return file

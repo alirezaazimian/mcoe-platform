@@ -1,57 +1,96 @@
 import { useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
-import { base44 } from '@/api/base44Client';
+import { djangoApi } from '@/api/djangoApi';
 import Reveal from '@/components/ui/Reveal';
 import { Mail, Phone, Briefcase, MessageSquare, User, Send, CheckCircle2, Info, Upload, FileText, X, AlertCircle } from 'lucide-react';
 
 export default function Collaborate() {
   const { t, isRTL } = useLanguage();
-  const [form, setForm] = useState({ full_name: '', email: '', phone: '', expertise_area: '', resume_url: '', message: '' });
+  const [form, setForm] = useState({
+  full_name: '',
+  email: '',
+  phone: '',
+  expertise_area: '',
+  message: '',
+});
+
+  const [resumeFile, setResumeFile] = useState(null);
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
   const [resumeName, setResumeName] = useState('');
-  const [resumeUploading, setResumeUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleResumeUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setResumeUploading(true);
-    setUploadError('');
-    try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
-      setForm((f) => ({ ...f, resume_url: file_url }));
-      setResumeName(file.name);
-    } catch {
-      setForm((f) => ({ ...f, resume_url: '' }));
-      setResumeName('');
-      setUploadError(isRTL ? 'بارگذاری فایل ناموفق بود. لطفاً مجدد تلاش کنید.' : 'File upload failed. Please try again.');
-    } finally {
-      setResumeUploading(false);
-    }
-  };
+  const handleResumeUpload = (e) => {
+  const file = e.target.files?.[0];
+
+  if (!file) return;
+
+  setResumeFile(file);
+  setResumeName(file.name);
+  setUploadError('');
+};
 
   const clearResume = () => {
-    setForm((f) => ({ ...f, resume_url: '' }));
-    setResumeName('');
-    setUploadError('');
-  };
+  setResumeFile(null);
+  setResumeName('');
+  setUploadError('');
+};
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus('submitting');
-    try {
-      await base44.entities.CollaborationRequest.create(form);
-      setStatus('success');
-      setForm({ full_name: '', email: '', phone: '', expertise_area: '', resume_url: '', message: '' });
-      setResumeName('');
-      setTimeout(() => setStatus('idle'), 5000);
-    } catch {
-      setStatus('error');
-      setTimeout(() => setStatus('idle'), 5000);
+  e.preventDefault();
+  setStatus('submitting');
+
+  try {
+    const formData = new FormData();
+
+    formData.append('full_name', form.full_name);
+    formData.append('email', form.email);
+    formData.append('phone', form.phone);
+    formData.append(
+      'expertise_area',
+      form.expertise_area
+    );
+    formData.append('message', form.message);
+
+    if (resumeFile) {
+      formData.append('resume', resumeFile);
     }
-  };
+
+    await djangoApi.collaborationRequests.create(
+      formData
+    );
+
+    setStatus('success');
+
+    setForm({
+      full_name: '',
+      email: '',
+      phone: '',
+      expertise_area: '',
+      message: '',
+    });
+
+    setResumeFile(null);
+    setResumeName('');
+    setUploadError('');
+
+    setTimeout(() => {
+      setStatus('idle');
+    }, 5000);
+  } catch (error) {
+    console.error(
+      'Failed to submit collaboration request:',
+      error
+    );
+
+    setStatus('error');
+
+    setTimeout(() => {
+      setStatus('idle');
+    }, 5000);
+  }
+};
 
   const toFa = (s) => s.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[+d]);
   const phones = ['021 2209 7446', '021 2208 4949', '021 2236 5647', '021 2236 5648'];
@@ -177,14 +216,13 @@ export default function Collaborate() {
                       </>
                     ) : (
                       <label className="flex-1 cursor-pointer text-sm text-muted-foreground hover:text-primary transition-colors">
-                        {resumeUploading
-                          ? (isRTL ? 'در حال بارگذاری…' : 'Uploading…')
-                          : (isRTL ? 'بارگذاری فایل رزومه (PDF)' : 'Upload resume file (PDF)')}
+                        {isRTL
+                          ? 'انتخاب فایل رزومه (PDF, DOC, DOCX)'
+                          : 'Select resume file (PDF, DOC, DOCX)'}
                         <input
                           type="file"
                           accept=".pdf,.doc,.docx"
                           onChange={handleResumeUpload}
-                          disabled={resumeUploading}
                           className="hidden"
                         />
                       </label>
@@ -232,7 +270,7 @@ export default function Collaborate() {
 
                 <button
                   type="submit"
-                  disabled={status === 'submitting' || resumeUploading}
+                  disabled={status === 'submitting'}
                   className="neumorphic-btn w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground rounded-xl py-3.5 text-sm font-semibold hover:bg-primary/90 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {status === 'submitting' ? (

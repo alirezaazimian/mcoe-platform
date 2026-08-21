@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import (
     Article,
+    CollaborationRequest,
     Event,
     HeroSlide,
     News,
@@ -195,3 +196,39 @@ class HeroSlideAdmin(admin.ModelAdmin):
         "sort_order",
         "id",
     )
+
+
+@admin.register(CollaborationRequest)
+class CollaborationRequestAdmin(admin.ModelAdmin):
+    list_display = (
+        "full_name",
+        "expertise_area",
+        "phone",
+        "status",
+        "created_at",
+    )
+
+    list_filter = (
+        "status",
+        "expertise_area",
+        "created_at",
+    )
+
+    search_fields = (
+        "full_name",
+        "email",
+        "phone",
+        "expertise_area",
+        "message",
+    )
+
+    list_editable = (
+        "status",
+    )
+
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
+
+    date_hierarchy = "created_at"

@@ -1,7 +1,8 @@
-from rest_framework import viewsets
+from rest_framework import generics, parsers, viewsets
 
 from .models import (
     Article,
+    CollaborationRequest,
     Event,
     HeroSlide,
     News,
@@ -10,6 +11,7 @@ from .models import (
 )
 from .serializers import (
     ArticleSerializer,
+    CollaborationRequestSerializer,
     EventSerializer,
     HeroSlideSerializer,
     NewsSerializer,
@@ -103,4 +105,14 @@ class HeroSlideViewSet(viewsets.ReadOnlyModelViewSet):
             "sort_order",
             "id",
         )
+
+
+class CollaborationRequestCreateView(generics.CreateAPIView):
+    queryset = CollaborationRequest.objects.all()
+    serializer_class = CollaborationRequestSerializer
+
+    parser_classes = [
+        parsers.MultiPartParser,
+        parsers.FormParser,
+    ]
 

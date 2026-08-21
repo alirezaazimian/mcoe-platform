@@ -2,6 +2,7 @@ from rest_framework.routers import DefaultRouter
 
 from .views import (
     ArticleViewSet,
+    CollaborationRequestCreateView,
     EventViewSet,
     HeroSlideViewSet,
     NewsViewSet,
@@ -50,4 +51,14 @@ router.register(
     basename="hero-slide",
 )
 
-urlpatterns = router.urls
+from django.urls import path
+
+urlpatterns = [
+    path(
+        "collaboration-requests/",
+        CollaborationRequestCreateView.as_view(),
+        name="collaboration-request-create",
+    ),
+]
+
+urlpatterns += router.urls

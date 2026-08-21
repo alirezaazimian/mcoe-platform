@@ -543,3 +543,70 @@ class HeroSlide(models.Model):
 
     def __str__(self):
         return f"Hero Slide #{self.id or 'new'}"
+
+
+class CollaborationRequest(models.Model):
+    class Status(models.TextChoices):
+        NEW = "new", "جدید"
+        REVIEWING = "reviewing", "در حال بررسی"
+        CONTACTED = "contacted", "تماس گرفته شده"
+        ACCEPTED = "accepted", "پذیرفته شده"
+        REJECTED = "rejected", "رد شده"
+
+    full_name = models.CharField(
+        max_length=200,
+        verbose_name="نام و نام خانوادگی",
+    )
+
+    email = models.EmailField(
+        verbose_name="ایمیل",
+    )
+
+    phone = models.CharField(
+        max_length=30,
+        verbose_name="شماره تماس",
+    )
+
+    expertise_area = models.CharField(
+        max_length=200,
+        verbose_name="حوزه تخصص",
+    )
+
+    resume = models.FileField(
+        upload_to="collaboration-resumes/%Y/%m/",
+        blank=True,
+        null=True,
+        verbose_name="رزومه",
+    )
+
+    message = models.TextField(
+        verbose_name="پیام",
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.NEW,
+        verbose_name="وضعیت",
+    )
+
+    admin_notes = models.TextField(
+        blank=True,
+        verbose_name="یادداشت مدیریت",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "درخواست همکاری"
+        verbose_name_plural = "درخواست‌های همکاری"
+
+    def __str__(self):
+        return f"{self.full_name} - {self.expertise_area}"

@@ -5,12 +5,18 @@ const API_BASE_URL =
 async function request(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
 
+  const isFormData = options.body instanceof FormData;
+
+  const headers = {
+    ...(isFormData
+      ? {}
+      : { 'Content-Type': 'application/json' }),
+    ...options.headers,
+  };
+
   const response = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
     ...options,
+    headers,
   });
 
   if (!response.ok) {
@@ -81,6 +87,15 @@ export const djangoApi = {
   heroSlides: {
     list() {
       return request('/hero-slides/');
+    },
+  },
+
+  collaborationRequests: {
+    create(formData) {
+      return request('/collaboration-requests/', {
+        method: 'POST',
+        body: formData,
+      });
     },
   },
 };
