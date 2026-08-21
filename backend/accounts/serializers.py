@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
+
 User = get_user_model()
 
 
@@ -28,10 +29,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 class RegisterSerializer(serializers.Serializer):
     email = serializers.EmailField()
+
     password = serializers.CharField(
         write_only=True,
         min_length=8,
     )
+
     confirm_password = serializers.CharField(
         write_only=True,
     )
@@ -39,7 +42,9 @@ class RegisterSerializer(serializers.Serializer):
     def validate_email(self, value):
         email = value.strip().lower()
 
-        if User.objects.filter(email__iexact=email).exists():
+        if User.objects.filter(
+            email__iexact=email
+        ).exists():
             raise serializers.ValidationError(
                 "An account with this email already exists."
             )
@@ -53,7 +58,8 @@ class RegisterSerializer(serializers.Serializer):
         if password != confirm_password:
             raise serializers.ValidationError(
                 {
-                    "confirm_password": "Passwords do not match."
+                    "confirm_password":
+                        "Passwords do not match."
                 }
             )
 
@@ -76,6 +82,7 @@ class RegisterSerializer(serializers.Serializer):
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
+
     password = serializers.CharField(
         write_only=True,
     )
@@ -85,11 +92,15 @@ class LoginSerializer(serializers.Serializer):
         password = attrs["password"]
 
         try:
-            user = User.objects.get(email__iexact=email)
+            user = User.objects.get(
+                email__iexact=email
+            )
+
         except User.DoesNotExist:
             raise serializers.ValidationError(
                 "Invalid email or password."
             )
+
         except User.MultipleObjectsReturned:
             raise serializers.ValidationError(
                 "Unable to authenticate this account."
@@ -111,5 +122,42 @@ class LoginSerializer(serializers.Serializer):
             )
 
         attrs["user"] = user
+
+        return attrs
+
+
+class PasswordResetRequestSerializer(
+    serializers.Serializer
+):
+    email = serializers.EmailField()
+
+
+class PasswordResetConfirmSerializer(
+    serializers.Serializer
+):
+    uid = serializers.CharField()
+
+    token = serializers.CharField()
+
+    new_password = serializers.CharField(
+        write_only=True,
+        min_length=8,
+    )
+
+    confirm_password = serializers.CharField(
+        write_only=True,
+    )
+
+    def validate(self, attrs):
+        if (
+            attrs["new_password"]
+            != attrs["confirm_password"]
+        ):
+            raise serializers.ValidationError(
+                {
+                    "confirm_password":
+                        "Passwords do not match."
+                }
+            )
 
         return attrs
