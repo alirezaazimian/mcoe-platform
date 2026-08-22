@@ -3,7 +3,9 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-
+import ElementaryFirstCyclePage from '@/pages/ElementaryFirstCyclePage';
+import ElementarySecondCyclePage from '@/pages/ElementarySecondCyclePage';
+import MiddleSchoolFirstCyclePage from '@/pages/MiddleSchoolFirstCyclePage';
 import { QueryClientProvider } from '@tanstack/react-query';
 import KindergartenDreamPage from '@/pages/KindergartenDreamPage';
 
@@ -94,6 +96,21 @@ function AppRoutes() {
         <Route
           path="/levels/kindergarten"
           element={<KindergartenDreamPage />}
+        />
+
+        <Route
+          path="/levels/elementary1"
+          element={<ElementaryFirstCyclePage />}
+        />
+
+        <Route
+           path="/levels/elementary2"
+         element={<ElementarySecondCyclePage />}
+        />
+
+        <Route
+          path="/levels/middleSchool"
+          element={<MiddleSchoolFirstCyclePage />}
         />
 
         <Route

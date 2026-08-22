@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -61,6 +62,31 @@ const shadows = {
 
   inset:
     'inset 6px 6px 12px rgba(0,24,88,0.13), inset -6px -6px 12px rgba(255,255,255,0.75)',
+};
+
+
+const floatAnim = {
+  animate: {
+    y: [0, -10, 0],
+    rotate: [0, 2, 0],
+  },
+  transition: {
+    duration: 6,
+    repeat: Infinity,
+    ease: 'easeInOut',
+  },
+};
+
+const floatAnimAlt = {
+  animate: {
+    y: [0, 8, 0],
+    rotate: [0, -2, 0],
+  },
+  transition: {
+    duration: 7,
+    repeat: Infinity,
+    ease: 'easeInOut',
+  },
 };
 
 
@@ -358,7 +384,7 @@ export default function KindergartenDreamPage() {
 
 
         {/* Sunlight shape */}
-        <div
+        <motion.div
           aria-hidden="true"
           className="
             absolute
@@ -376,14 +402,16 @@ export default function KindergartenDreamPage() {
             background: COLORS.sunlight,
             boxShadow: shadows.yellow,
           }}
-        >
+          animate={floatAnim.animate}
+          transition={floatAnim.transition}
+         >
           <Sun
             className="w-9 h-9"
             style={{
               color: COLORS.navy,
             }}
           />
-        </div>
+        </motion.div>
 
 
         {/* tiny decorative circles */}
@@ -783,7 +811,7 @@ export default function KindergartenDreamPage() {
 
 
                 {/* floating block 1 */}
-                <div
+                <motion.div
                   className="
                     absolute
                     z-20
@@ -800,8 +828,10 @@ export default function KindergartenDreamPage() {
                     items-center
                     justify-center
                     gap-2
-                  "
-                  style={{
+                 "
+                 animate={floatAnim.animate}
+                transition={{ ...floatAnim.transition, delay: 0.4 }}
+                style={{
                     background:
                       COLORS.sunlight,
                     color:
@@ -817,37 +847,36 @@ export default function KindergartenDreamPage() {
                       ? 'خلق کردن'
                       : 'Create'}
                   </span>
-                </div>
+                 </motion.div>
 
 
                 {/* floating block 2 */}
-                <div
-                  className="
-                    absolute
-                    z-20
-                    bottom-[3%]
-                    -start-[3%]
-                    w-28
-                    h-32
-                    sm:w-36
-                    sm:h-40
-                    rounded-[45%_55%_42%_58%]
-                    rotate-[-8deg]
-                    flex
-                    flex-col
-                    items-center
-                    justify-center
-                    gap-3
-                  "
-                  style={{
-                    background:
-                      COLORS.paleBlue,
-                    color:
-                      COLORS.navy,
-                    boxShadow:
-                      shadows.soft,
-                  }}
-                >
+                <motion.div
+  className="
+    absolute
+    z-20
+    bottom-[3%]
+    -start-[3%]
+    w-28
+    h-32
+    sm:w-36
+    sm:h-40
+    rounded-[45%_55%_42%_58%]
+    rotate-[-8deg]
+    flex
+    flex-col
+    items-center
+    justify-center
+    gap-3
+  "
+  animate={floatAnimAlt.animate}
+  transition={{ ...floatAnimAlt.transition, delay: 0.2 }}
+  style={{
+    background: COLORS.paleBlue,
+    color: COLORS.navy,
+    boxShadow: shadows.soft,
+  }}
+>
                   <Blocks className="w-8 h-8" />
 
                   <span className="text-sm font-black">
@@ -855,28 +884,35 @@ export default function KindergartenDreamPage() {
                       ? 'بازی کردن'
                       : 'Play'}
                   </span>
-                </div>
+                </motion.div>
 
 
                 {/* mini sun sphere */}
-                <div
-                  aria-hidden="true"
-                  className="
-                    absolute
-                    z-30
-                    top-[48%]
-                    -end-3
-                    w-14
-                    h-14
-                    rounded-full
-                  "
-                  style={{
-                    background:
-                      COLORS.sunlight,
-                    boxShadow:
-                      shadows.yellow,
-                  }}
-                />
+<motion.div
+  aria-hidden="true"
+  className="
+    absolute
+    z-30
+    top-[48%]
+    -end-3
+    w-14
+    h-14
+    rounded-full
+  "
+  animate={{
+    y: [0, -8, 0],
+    scale: [1, 1.04, 1],
+  }}
+  transition={{
+    duration: 5.5,
+    repeat: Infinity,
+    ease: 'easeInOut',
+  }}
+  style={{
+    background: COLORS.sunlight,
+    boxShadow: shadows.yellow,
+  }}
+/>
 
               </div>
             </Reveal>
@@ -1150,8 +1186,7 @@ export default function KindergartenDreamPage() {
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="container-institutional">
           <Reveal>
-            <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-center">
-              
+            <div className="grid lg:grid-cols-[0.78fr_1.22fr] gap-12 lg:gap-16 items-center">              
               {/* Text side */}
               <div>
                 <div
@@ -1211,111 +1246,192 @@ export default function KindergartenDreamPage() {
                 </div>
               </div>
 
-              {/* Slider side */}
-              <div className="relative">
-                <div
-                  className="relative rounded-[3rem] p-4 sm:p-5"
-                  style={{
-                    background: COLORS.creamSoft,
-                    boxShadow: shadows.cream,
-                  }}
-                >
-                  <div className="relative overflow-hidden rounded-[2.4rem] aspect-[4/5] sm:aspect-[16/13]">
-                    <img
-                      src={slides[activeSlide].image}
-                      alt={slides[activeSlide].title}
-                      className="w-full h-full object-cover transition-all duration-700"
-                    />
+             {/* Slider side */}
+<div className="relative lg:min-h-[680px] flex items-center">
+  {/* decorative floating blob behind slider */}
+  <motion.div
+    aria-hidden="true"
+    className="
+      absolute
+      -top-10
+      -end-8
+      w-36
+      h-36
+      lg:w-44
+      lg:h-44
+      rounded-[38%_62%_45%_55%]
+      z-0
+    "
+    style={{
+      background: COLORS.paleBlue,
+      boxShadow: shadows.soft,
+    }}
+    animate={{
+      y: [0, -10, 0],
+      rotate: [0, 5, 0],
+    }}
+    transition={{
+      duration: 7,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    }}
+  />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#001858]/55 via-[#001858]/15 to-transparent" />
+  <motion.div
+    aria-hidden="true"
+    className="
+      absolute
+      -bottom-8
+      -start-6
+      w-24
+      h-24
+      lg:w-28
+      lg:h-28
+      rounded-full
+      z-0
+    "
+    style={{
+      background: COLORS.sunlight,
+      boxShadow: shadows.yellow,
+    }}
+    animate={{
+      y: [0, 10, 0],
+      scale: [1, 1.05, 1],
+    }}
+    transition={{
+      duration: 6.5,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    }}
+  />
 
-                    {/* tag */}
-                    <div
-                      className="absolute top-5 start-5 px-4 py-2 rounded-2xl text-xs sm:text-sm font-black"
-                      style={{
-                        background: COLORS.sunlight,
-                        color: '#fff',
-                        boxShadow: '10px 12px 22px rgba(216,76,87,.22), -6px -6px 16px rgba(255,255,255,.35)',
-                      }}
-                    >
-                      {slides[activeSlide].tag}
-                    </div>
+  <div
+    className="relative z-10 w-full rounded-[3.2rem] p-4 sm:p-5 lg:p-6"
+    style={{
+      background: COLORS.creamSoft,
+      boxShadow: shadows.cream,
+    }}
+  >
+    <div className="relative overflow-hidden rounded-[2.6rem] aspect-[4/5] sm:aspect-[16/11] lg:aspect-[16/10]">
+      {/* image transition */}
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={slides[activeSlide].image}
+          src={slides[activeSlide].image}
+          alt={slides[activeSlide].title}
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ opacity: 0, scale: 1.07 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.98 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        />
+      </AnimatePresence>
 
-                    {/* caption */}
-                    <div
-                      className="absolute bottom-5 start-5 end-5 rounded-[1.7rem] px-5 py-5"
-                      style={{
-                        background: 'rgba(251,246,238,.92)',
-                        color: COLORS.navy,
-                        boxShadow: shadows.soft,
-                      }}
-                    >
-                      <h3 className="text-lg sm:text-xl font-black">
-                        {slides[activeSlide].title}
-                      </h3>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#001858]/55 via-[#001858]/15 to-transparent" />
 
-                      <p className="mt-3 text-sm sm:text-base leading-7 text-[#4D4D4D]">
-                        {slides[activeSlide].text}
-                      </p>
-                    </div>
+      {/* tag */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`tag-${activeSlide}`}
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.35 }}
+          className="absolute top-5 start-5 px-4 py-2 rounded-2xl text-xs sm:text-sm font-black"
+          style={{
+            background: COLORS.sunlight,
+            color: COLORS.navy,
+            boxShadow:
+              '10px 12px 22px rgba(245,166,35,.24), -6px -6px 16px rgba(255,255,255,.35)',
+          }}
+        >
+          {slides[activeSlide].tag}
+        </motion.div>
+      </AnimatePresence>
 
-                    {/* arrows */}
-                    <button
-                      type="button"
-                      onClick={prevSlide}
-                      className="absolute top-1/2 -translate-y-1/2 start-4 w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-105"
-                      style={{
-                        background: 'rgba(251,246,238,.92)',
-                        color: COLORS.navy,
-                        boxShadow: shadows.soft,
-                      }}
-                      aria-label={isRTL ? 'اسلاید قبلی' : 'Previous slide'}
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
+      {/* caption */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`caption-${activeSlide}`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.45, delay: 0.05 }}
+          className="absolute bottom-5 start-5 end-5 rounded-[1.8rem] px-5 py-5 sm:px-6 sm:py-6"
+          style={{
+            background: 'rgba(251,246,238,.92)',
+            color: COLORS.navy,
+            boxShadow: shadows.soft,
+          }}
+        >
+          <h3 className="text-lg sm:text-xl lg:text-2xl font-black">
+            {slides[activeSlide].title}
+          </h3>
 
-                    <button
-                      type="button"
-                      onClick={nextSlide}
-                      className="absolute top-1/2 -translate-y-1/2 end-4 w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-105"
-                      style={{
-                        background: 'rgba(251,246,238,.92)',
-                        color: COLORS.navy,
-                        boxShadow: shadows.soft,
-                      }}
-                      aria-label={isRTL ? 'اسلاید بعدی' : 'Next slide'}
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
+          <p className="mt-3 text-sm sm:text-base leading-7 text-[#4D4D4D] max-w-2xl">
+            {slides[activeSlide].text}
+          </p>
+        </motion.div>
+      </AnimatePresence>
 
-                {/* dots */}
-                <div className="flex items-center justify-center gap-3 mt-6">
-                  {slides.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => goToSlide(index)}
-                      className="transition-all duration-300 rounded-full"
-                      style={{
-                        width: index === activeSlide ? '34px' : '12px',
-                        height: '12px',
-                        background:
-                          index === activeSlide
-                            ? COLORS.sunlight
-                            : COLORS.navySoft,
-                        boxShadow:
-                          index === activeSlide
-                            ? '8px 10px 18px rgba(216,76,87,.22)'
-                            : 'none',
-                      }}
-                      aria-label={`${isRTL ? 'اسلاید' : 'Slide'} ${index + 1}`}
-                    />
-                  ))}
-                </div>
+      {/* arrows */}
+      <button
+        type="button"
+        onClick={prevSlide}
+        className="absolute top-1/2 -translate-y-1/2 start-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105"
+        style={{
+          background: 'rgba(251,246,238,.92)',
+          color: COLORS.navy,
+          boxShadow: shadows.soft,
+        }}
+        aria-label={isRTL ? 'اسلاید قبلی' : 'Previous slide'}
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+
+      <button
+        type="button"
+        onClick={nextSlide}
+        className="absolute top-1/2 -translate-y-1/2 end-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105"
+        style={{
+          background: 'rgba(251,246,238,.92)',
+          color: COLORS.navy,
+          boxShadow: shadows.soft,
+        }}
+        aria-label={isRTL ? 'اسلاید بعدی' : 'Next slide'}
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+    </div>
+  </div>
+
+  {/* dots */}
+  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3 mt-6 z-20">
+    {slides.map((_, index) => (
+      <button
+        key={index}
+        type="button"
+        onClick={() => goToSlide(index)}
+        className="transition-all duration-300 rounded-full"
+        style={{
+          width: index === activeSlide ? '36px' : '12px',
+          height: '12px',
+          background:
+            index === activeSlide
+              ? COLORS.sunlight
+              : COLORS.navySoft,
+          boxShadow:
+            index === activeSlide
+              ? '8px 10px 18px rgba(245,166,35,.24)'
+              : 'none',
+        }}
+        aria-label={`${isRTL ? 'اسلاید' : 'Slide'} ${index + 1}`}
+      />
+    ))}
+  </div>
+</div>
+
               </div>
-            </div>
           </Reveal>
         </div>
       </section>
