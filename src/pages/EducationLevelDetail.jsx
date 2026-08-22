@@ -82,10 +82,13 @@ const LEVEL_DATA = {
 export default function EducationLevelDetail() {
   const { id } = useParams();
   const { isRTL, t } = useLanguage();
+
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
   const lang = isRTL ? 'fa' : 'en';
   const data = LEVEL_DATA[id]?.[lang] || LEVEL_DATA[id]?.fa;
   const img = IMAGES[id];
+
+
 
   if (!data) {
     return (

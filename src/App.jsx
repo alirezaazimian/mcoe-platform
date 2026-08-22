@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import { QueryClientProvider } from '@tanstack/react-query';
+import KindergartenDreamPage from '@/pages/KindergartenDreamPage';
 
 import { Toaster } from '@/components/ui/toaster';
 import Layout from '@/components/layout/Layout';
@@ -88,6 +89,11 @@ function AppRoutes() {
         <Route
           path="/levels"
           element={<Levels />}
+        />
+
+        <Route
+          path="/levels/kindergarten"
+          element={<KindergartenDreamPage />}
         />
 
         <Route
