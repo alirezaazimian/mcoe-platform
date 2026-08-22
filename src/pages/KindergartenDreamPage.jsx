@@ -912,25 +912,22 @@ export default function KindergartenDreamPage() {
                   inline-flex
                   items-center
                   gap-2
-                  px-4
-                  py-2
-                  rounded-2xl
-                  text-sm
-                  font-black
-                "
-                style={{
-                  background:
-                    COLORS.paleBlue2,
-                  color:
-                    COLORS.navy,
-                  boxShadow:
-                    shadows.soft,
-                }}
-              >
-                <BookOpen className="w-4 h-4" />
+                 px-4
+                 py-2
+                 rounded-2xl
+                 text-sm
+                 font-black
+             "
+             style={{
+               background: COLORS.sunlight,
+               color: COLORS.navy,
+               boxShadow: shadows.yellow,
+             }}
+        >
+             <BookOpen className="w-4 h-4" />
 
-                {content.storyEyebrow}
-              </div>
+             {content.storyEyebrow}
+           </div>
 
 
               <h2
