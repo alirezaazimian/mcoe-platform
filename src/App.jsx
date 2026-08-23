@@ -24,7 +24,6 @@ import About from '@/pages/About';
 import ComplexHistory from '@/pages/ComplexHistory';
 import EducationalSpace from '@/pages/EducationalSpace';
 import Levels from '@/pages/Levels';
-import EducationLevelDetail from '@/pages/EducationLevelDetail';
 import WorkingGroups from '@/pages/WorkingGroups';
 import WorkingGroupDetail from '@/pages/WorkingGroupDetail';
 import StudentAssociations from '@/pages/StudentAssociations';
@@ -113,10 +112,6 @@ function AppRoutes() {
           element={<MiddleSchoolFirstCyclePage />}
         />
 
-        <Route
-          path="/levels/:id"
-          element={<EducationLevelDetail />}
-        />
 
         <Route
           path="/working-groups"
