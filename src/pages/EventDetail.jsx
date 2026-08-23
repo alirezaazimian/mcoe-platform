@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
 import { djangoApi } from '@/api/djangoApi';
 import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/AppButton';
 import ReactMarkdown from 'react-markdown';
 import { Calendar, MapPin, Users, Clock, ArrowRight, ArrowLeft, ExternalLink } from 'lucide-react';
 

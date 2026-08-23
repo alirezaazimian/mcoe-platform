@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/AppButton';
 import { NewsCard } from '@/components/ui/ContentCards';
 import { djangoApi } from '@/api/djangoApi';
 

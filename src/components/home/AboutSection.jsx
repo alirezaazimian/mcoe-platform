@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/AppButton';
 import { Target, Eye, Heart } from 'lucide-react';
 
 const ABOUT_IMG = '/media/site/af4db7d64_6.jpg';

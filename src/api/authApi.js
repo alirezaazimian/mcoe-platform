@@ -2,6 +2,20 @@ const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
   'http://127.0.0.1:8000/api';
 
+ /**
+ * Creates an Error carrying the HTTP response status.
+ *
+ * @param {string} message
+ * @param {number} status
+ * @returns {Error & { status: number }}
+ */
+function createHttpError(message, status) {
+  return Object.assign(
+    new Error(message),
+    { status }
+  );
+}
+
 const ACCESS_TOKEN_KEY = 'mcoe_access_token';
 const REFRESH_TOKEN_KEY = 'mcoe_refresh_token';
 
@@ -164,10 +178,10 @@ async function authRequest(
     const message =
       await getErrorMessage(response);
 
-    const error = new Error(message);
-    error.status = response.status;
-
-    throw error;
+    throw createHttpError(
+          message,
+            response.status
+    );
   }
 
   if (response.status === 204) {
@@ -197,10 +211,10 @@ async function publicRequest(
     const message =
       await getErrorMessage(response);
 
-    const error = new Error(message);
-    error.status = response.status;
-
-    throw error;
+    throw createHttpError(
+         message,
+         response.status
+    );
   }
 
   return response.json();

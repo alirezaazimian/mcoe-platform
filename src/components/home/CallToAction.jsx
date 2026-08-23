@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/AppButton';
 import { motion } from 'framer-motion';
 
 const CTA_IMG = '/media/site/7a95f3af1_IMG_7095.jpg';

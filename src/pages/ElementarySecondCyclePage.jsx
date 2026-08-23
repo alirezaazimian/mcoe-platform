@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/AppButton';
 import { useLanguage } from '@/lib/LanguageContext';
 
 

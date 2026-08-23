@@ -4,7 +4,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 import { djangoApi } from '@/api/djangoApi';
 import ReactMarkdown from 'react-markdown';
 import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/AppButton';
 import TeamSection from '@/components/workinggroups/TeamSection';
 import { Image } from '@/components/ui/image';
 import { Globe, Palette, Sparkles, PenTool, Cpu, Atom, BookOpen, Calculator, Activity, Brain, ArrowRight, ArrowLeft, Users } from 'lucide-react';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { motion } from 'framer-motion';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/AppButton';
 import HeroSlider from '@/components/home/HeroSlider';
 import { Sparkles } from 'lucide-react';
 
