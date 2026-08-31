@@ -29,7 +29,6 @@ dist-ssr
 
 .env
 .vite
-base44/.app.jsonc
 
 # Django / Python
 backend/.venv/
