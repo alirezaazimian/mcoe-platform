@@ -4,23 +4,33 @@ import {
   Routes,
 } from 'react-router-dom';
 
-import { QueryClientProvider } from '@tanstack/react-query';
+import {
+  QueryClientProvider,
+} from '@tanstack/react-query';
 
 import ElementaryFirstCyclePage from '@/pages/ElementaryFirstCyclePage';
 import ElementarySecondCyclePage from '@/pages/ElementarySecondCyclePage';
 import MiddleSchoolFirstCyclePage from '@/pages/MiddleSchoolFirstCyclePage';
 import KindergartenDreamPage from '@/pages/KindergartenDreamPage';
 
-import { Toaster } from '@/components/ui/toaster';
+import {
+  Toaster,
+} from '@/components/ui/toaster';
 import Layout from '@/components/layout/Layout';
 import ScrollToTop from '@/components/ScrollToTop';
 
 import DashboardGuard from '@/components/dashboard/DashboardGuard';
 import SchoolLayout from '@/components/dashboard/SchoolLayout';
 
-import { AuthProvider } from '@/lib/AuthContext';
-import { LanguageProvider } from '@/lib/LanguageContext';
-import { queryClientInstance } from '@/lib/query-client';
+import {
+  AuthProvider,
+} from '@/lib/AuthContext';
+import {
+  LanguageProvider,
+} from '@/lib/LanguageContext';
+import {
+  queryClientInstance,
+} from '@/lib/query-client';
 
 import PageNotFound from '@/lib/PageNotFound';
 
@@ -48,6 +58,8 @@ import ResetPassword from '@/pages/ResetPassword';
 
 import AdminDashboard from '@/pages/dashboard/AdminDashboard';
 import DashboardModulePlaceholder from '@/pages/dashboard/DashboardModulePlaceholder';
+import WorkgroupsAdmin from '@/pages/dashboard/WorkgroupsAdmin';
+
 
 function AppRoutes() {
   return (
@@ -72,64 +84,94 @@ function AppRoutes() {
         element={<ResetPassword />}
       />
 
-      <Route element={<DashboardGuard />}>
+
+      <Route
+        element={
+          <DashboardGuard />
+        }
+      >
         <Route
           path="/dashboard"
-          element={<SchoolLayout />}
+          element={
+            <SchoolLayout />
+          }
         >
           <Route
             index
-            element={<AdminDashboard />}
+            element={
+              <AdminDashboard />
+            }
           />
 
           <Route
             path="workgroups"
-            element={<DashboardModulePlaceholder />}
+            element={
+              <WorkgroupsAdmin />
+            }
           />
 
           <Route
             path="articles"
-            element={<DashboardModulePlaceholder />}
+            element={
+              <DashboardModulePlaceholder />
+            }
           />
 
           <Route
             path="news"
-            element={<DashboardModulePlaceholder />}
+            element={
+              <DashboardModulePlaceholder />
+            }
           />
 
           <Route
             path="events"
-            element={<DashboardModulePlaceholder />}
+            element={
+              <DashboardModulePlaceholder />
+            }
           />
 
           <Route
             path="teachers"
-            element={<DashboardModulePlaceholder />}
+            element={
+              <DashboardModulePlaceholder />
+            }
           />
 
           <Route
             path="students"
-            element={<DashboardModulePlaceholder />}
+            element={
+              <DashboardModulePlaceholder />
+            }
           />
 
           <Route
             path="online-classes"
-            element={<DashboardModulePlaceholder />}
+            element={
+              <DashboardModulePlaceholder />
+            }
           />
 
           <Route
             path="sms"
-            element={<DashboardModulePlaceholder />}
+            element={
+              <DashboardModulePlaceholder />
+            }
           />
 
           <Route
             path="site-content"
-            element={<DashboardModulePlaceholder />}
+            element={
+              <DashboardModulePlaceholder />
+            }
           />
         </Route>
       </Route>
 
-      <Route element={<Layout />}>
+
+      <Route
+        element={<Layout />}
+      >
         <Route
           path="/"
           element={<Home />}
@@ -142,12 +184,16 @@ function AppRoutes() {
 
         <Route
           path="/history"
-          element={<ComplexHistory />}
+          element={
+            <ComplexHistory />
+          }
         />
 
         <Route
           path="/educational-space"
-          element={<EducationalSpace />}
+          element={
+            <EducationalSpace />
+          }
         />
 
         <Route
@@ -157,37 +203,51 @@ function AppRoutes() {
 
         <Route
           path="/levels/kindergarten"
-          element={<KindergartenDreamPage />}
+          element={
+            <KindergartenDreamPage />
+          }
         />
 
         <Route
           path="/levels/elementary1"
-          element={<ElementaryFirstCyclePage />}
+          element={
+            <ElementaryFirstCyclePage />
+          }
         />
 
         <Route
           path="/levels/elementary2"
-          element={<ElementarySecondCyclePage />}
+          element={
+            <ElementarySecondCyclePage />
+          }
         />
 
         <Route
           path="/levels/middleSchool"
-          element={<MiddleSchoolFirstCyclePage />}
+          element={
+            <MiddleSchoolFirstCyclePage />
+          }
         />
 
         <Route
           path="/working-groups"
-          element={<WorkingGroups />}
+          element={
+            <WorkingGroups />
+          }
         />
 
         <Route
           path="/working-groups/:slug"
-          element={<WorkingGroupDetail />}
+          element={
+            <WorkingGroupDetail />
+          }
         />
 
         <Route
           path="/associations"
-          element={<StudentAssociations />}
+          element={
+            <StudentAssociations />
+          }
         />
 
         <Route
@@ -197,7 +257,9 @@ function AppRoutes() {
 
         <Route
           path="/articles/:id"
-          element={<ArticleDetail />}
+          element={
+            <ArticleDetail />
+          }
         />
 
         <Route
@@ -231,20 +293,26 @@ function AppRoutes() {
         />
       </Route>
 
+
       <Route
         path="*"
-        element={<PageNotFound />}
+        element={
+          <PageNotFound />
+        }
       />
     </Routes>
   );
 }
+
 
 function App() {
   return (
     <AuthProvider>
       <LanguageProvider>
         <QueryClientProvider
-          client={queryClientInstance}
+          client={
+            queryClientInstance
+          }
         >
           <Router>
             <ScrollToTop />
@@ -257,5 +325,6 @@ function App() {
     </AuthProvider>
   );
 }
+
 
 export default App;

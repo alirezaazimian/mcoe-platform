@@ -1,7 +1,6 @@
 /*
  * MCOE School Administration UI
- * Adapted from the correct Base44 admin-panel export.
- * All styles are scoped under .mcoe-admin-shell.
+ * Scoped under .mcoe-admin-shell.
  */
 
 .mcoe-admin-shell {
@@ -113,12 +112,23 @@
   color: #f1f1f0;
 }
 
+.mcoe-admin-shell button:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
 .mcoe-admin-dashboard-grid {
   display: grid;
   grid-template-columns:
     minmax(0, 1.3fr)
     minmax(0, 1fr);
   gap: 18px;
+}
+
+.mcoe-admin-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
 }
 
 .mcoe-admin-mobile-nav {
@@ -165,6 +175,12 @@
 
 @media (max-width: 900px) {
   .mcoe-admin-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .mcoe-admin-form-grid {
     grid-template-columns: 1fr;
   }
 }
