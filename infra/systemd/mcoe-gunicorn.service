@@ -1,0 +1,38 @@
+[Unit]
+Description=MCOE Django Gunicorn Service
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+
+User=mcoe
+Group=www-data
+
+WorkingDirectory=/srv/mcoe/current/backend
+
+EnvironmentFile=/srv/mcoe/shared/backend.env
+
+RuntimeDirectory=mcoe
+RuntimeDirectoryMode=0750
+
+ExecStart=/srv/mcoe/current/backend/.venv/bin/gunicorn \
+    --workers 2 \
+    --bind unix:/run/mcoe/gunicorn.sock \
+    --umask 007 \
+    --timeout 60 \
+    --access-logfile - \
+    --error-logfile - \
+    config.wsgi:application
+
+Restart=on-failure
+RestartSec=5
+
+PrivateTmp=true
+NoNewPrivileges=true
+
+KillSignal=SIGQUIT
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
