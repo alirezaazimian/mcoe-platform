@@ -103,6 +103,8 @@ export default function EntityManager({
   defaultValues,
   api,
   getUpdateKey,
+  prepareRecordForForm = null,
+  preparePayload = null,
 }) {
   const {
     t,
@@ -141,7 +143,7 @@ export default function EntityManager({
 
 
   const {
-    data: records = [],
+    data: queryData,
     isLoading,
     error: loadError,
   } = useQuery({
@@ -150,31 +152,57 @@ export default function EntityManager({
   });
 
 
+  const records =
+    Array.isArray(queryData)
+      ? queryData
+      : [];
+
+
   const refresh = () =>
     queryClient.invalidateQueries({
       queryKey,
     });
 
 
-  const saveMutation =
-    useMutation({
-      mutationFn: async ({
+  /**
+   * @param {{
+   *   currentRecord: any,
+   *   payload: any
+   * }} variables
+   */
+  const saveRecord =
+    async (variables) => {
+      const {
         currentRecord,
         payload,
-      }) => {
-        if (currentRecord) {
-          return api.update(
-            getUpdateKey(
-              currentRecord
-            ),
-            payload
-          );
-        }
+      } = variables;
 
-        return api.create(
-          payload
+      const finalPayload =
+        preparePayload
+          ? preparePayload(
+              payload,
+              currentRecord
+            )
+          : payload;
+
+      if (currentRecord) {
+        return api.update(
+          getUpdateKey(
+            currentRecord
+          ),
+          finalPayload
         );
-      },
+      }
+
+      return api.create(
+        finalPayload
+      );
+    };
+
+
+  const saveMutation =
+    useMutation({
+      mutationFn: saveRecord,
 
       onSuccess: async () => {
         await refresh();
@@ -194,12 +222,20 @@ export default function EntityManager({
     });
 
 
+  /**
+   * @param {any} record
+   */
+  const deleteRecord =
+    (record) =>
+      api.remove(
+        getUpdateKey(record)
+      );
+
+
   const deleteMutation =
     useMutation({
-      mutationFn: (record) =>
-        api.remove(
-          getUpdateKey(record)
-        ),
+      mutationFn:
+        deleteRecord,
 
       onSuccess: refresh,
 
@@ -256,9 +292,16 @@ export default function EntityManager({
   ) => {
     setEditing(record);
 
+    const prepared =
+      prepareRecordForForm
+        ? prepareRecordForForm(
+            record
+          )
+        : record;
+
     setForm({
       ...defaultValues,
-      ...record,
+      ...prepared,
     });
 
     setFormError('');
@@ -392,6 +435,47 @@ export default function EntityManager({
     }
 
     if (
+      column.type ===
+      'boolean'
+    ) {
+      return (
+        <span
+          className={
+            value
+              ? 'mcoe-admin-badge mcoe-admin-badge-on'
+              : 'mcoe-admin-badge'
+          }
+        >
+          {value
+            ? '✓'
+            : '—'}
+        </span>
+      );
+    }
+
+    if (
+      column.options
+    ) {
+      const option =
+        column.options.find(
+          (item) =>
+            item.value === value
+        );
+
+      if (option) {
+        return (
+          <span
+            className="mcoe-admin-badge"
+          >
+            {t(
+              option.labelKey
+            )}
+          </span>
+        );
+      }
+    }
+
+    if (
       value === null ||
       value === undefined ||
       value === ''
@@ -426,15 +510,11 @@ export default function EntityManager({
   ) => {
     const value =
       form[field.key] ??
-      (
-        field.type ===
-        'number'
-          ? ''
-          : ''
-      );
+      '';
 
     const label =
       t(field.labelKey);
+
 
     if (
       field.type ===
@@ -449,7 +529,9 @@ export default function EntityManager({
         >
           <textarea
             value={value}
-            rows={4}
+            rows={
+              field.rows || 4
+            }
             onChange={(
               event
             ) =>
@@ -465,6 +547,87 @@ export default function EntityManager({
             }}
             placeholder={label}
           />
+        </FieldWrap>
+      );
+    }
+
+
+    if (
+      field.type ===
+      'select'
+    ) {
+      return (
+        <FieldWrap
+          label={label}
+          required={
+            field.required
+          }
+        >
+          <select
+            value={value}
+            onChange={(
+              event
+            ) =>
+              setField(
+                field.key,
+                event.target.value
+              )
+            }
+            style={fieldStyle}
+          >
+            {field.options.map(
+              (option) => (
+                <option
+                  key={
+                    option.value
+                  }
+                  value={
+                    option.value
+                  }
+                >
+                  {t(
+                    option.labelKey
+                  )}
+                </option>
+              )
+            )}
+          </select>
+        </FieldWrap>
+      );
+    }
+
+
+    if (
+      field.type ===
+      'checkbox'
+    ) {
+      return (
+        <FieldWrap
+          label={label}
+          required={false}
+        >
+          <label
+            className="mcoe-admin-checkbox"
+          >
+            <input
+              type="checkbox"
+              checked={
+                Boolean(value)
+              }
+              onChange={(
+                event
+              ) =>
+                setField(
+                  field.key,
+                  event.target.checked
+                )
+              }
+            />
+
+            <span>
+              {label}
+            </span>
+          </label>
         </FieldWrap>
       );
     }
@@ -564,7 +727,16 @@ export default function EntityManager({
             field.type ===
             'number'
               ? 'number'
-              : 'text'
+              : field.type ===
+                  'date'
+                ? 'date'
+                : field.type ===
+                    'datetime'
+                  ? 'datetime-local'
+                  : field.type ===
+                      'url'
+                    ? 'url'
+                    : 'text'
           }
           value={value}
           onChange={(
@@ -952,13 +1124,7 @@ export default function EntityManager({
 
 
           <div
-            className="md:hidden"
-            style={{
-              display: 'flex',
-              flexDirection:
-                'column',
-              gap: 10,
-            }}
+            className="md:hidden mcoe-admin-mobile-cards"
           >
             {filtered.map(
               (record) => (
@@ -974,7 +1140,7 @@ export default function EntityManager({
                   }}
                 >
                   {columns
-                    .slice(0, 3)
+                    .slice(0, 4)
                     .map(
                       (
                         column
@@ -1097,6 +1263,7 @@ export default function EntityManager({
             ? t('edit')
             : t('addNew')
         }
+        maxWidth={880}
       >
         {formError && (
           <div

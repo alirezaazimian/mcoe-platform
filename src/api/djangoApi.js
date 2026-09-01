@@ -11,6 +11,13 @@ const API_BASE_URL =
   'http://127.0.0.1:8000/api';
 
 
+/**
+ * @typedef {RequestInit & {
+ *   auth?: boolean
+ * }} ApiRequestOptions
+ */
+
+
 function createApiError(
   message,
   status
@@ -115,6 +122,11 @@ async function refreshAdminAccessToken() {
 }
 
 
+/**
+ * @param {string} endpoint
+ * @param {ApiRequestOptions} [options]
+ * @param {boolean} [allowRefresh]
+ */
 async function request(
   endpoint,
   options = {},
@@ -132,23 +144,32 @@ async function request(
     fetchOptions.body instanceof
     FormData;
 
-  const headers = {
-    ...(isFormData
-      ? {}
-      : {
-          'Content-Type':
-            'application/json',
-        }),
-    ...fetchOptions.headers,
-  };
+  const headers =
+    new Headers(
+      fetchOptions.headers || {}
+    );
+
+  if (
+    !isFormData &&
+    !headers.has(
+      'Content-Type'
+    )
+  ) {
+    headers.set(
+      'Content-Type',
+      'application/json'
+    );
+  }
 
   if (auth) {
     const access =
       getAccessToken();
 
     if (access) {
-      headers.Authorization =
-        `Bearer ${access}`;
+      headers.set(
+        'Authorization',
+        `Bearer ${access}`
+      );
     }
   }
 
@@ -192,6 +213,101 @@ async function request(
   }
 
   return response.json();
+}
+
+
+function normalizeTags(
+  value
+) {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) =>
+        String(item).trim()
+      )
+      .filter(Boolean);
+  }
+
+  if (
+    typeof value === 'string'
+  ) {
+    return value
+      .split(',')
+      .map((item) =>
+        item.trim()
+      )
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+
+function makeBody(
+  payload,
+  fileKey,
+  normalize
+) {
+  const normalized =
+    normalize(payload);
+
+  const file =
+    payload[fileKey];
+
+  const hasNewFile =
+    typeof File !==
+      'undefined' &&
+    file instanceof File;
+
+  if (!hasNewFile) {
+    return JSON.stringify(
+      normalized
+    );
+  }
+
+  const formData =
+    new FormData();
+
+  Object.entries(
+    normalized
+  ).forEach(
+    ([key, value]) => {
+      if (
+        value === null ||
+        value === undefined
+      ) {
+        return;
+      }
+
+      if (
+        Array.isArray(value) ||
+        (
+          typeof value ===
+          'object'
+        )
+      ) {
+        formData.append(
+          key,
+          JSON.stringify(
+            value
+          )
+        );
+
+        return;
+      }
+
+      formData.append(
+        key,
+        String(value)
+      );
+    }
+  );
+
+  formData.append(
+    fileKey,
+    file
+  );
+
+  return formData;
 }
 
 
@@ -248,6 +364,138 @@ function workingGroupFormData(
   }
 
   return formData;
+}
+
+
+function normalizeArticle(
+  payload
+) {
+  return {
+    title_fa:
+      payload.title_fa || '',
+    title_en:
+      payload.title_en || '',
+    summary_fa:
+      payload.summary_fa || '',
+    summary_en:
+      payload.summary_en || '',
+    body_fa:
+      payload.body_fa || '',
+    body_en:
+      payload.body_en || '',
+    category:
+      payload.category || 'general',
+    tags:
+      normalizeTags(
+        payload.tags
+      ),
+    author_name:
+      payload.author_name || '',
+    reading_time_min:
+      Number(
+        payload.reading_time_min ||
+        0
+      ),
+    status:
+      payload.status || 'draft',
+    publish_date:
+      payload.publish_date || null,
+    slug_fa:
+      payload.slug_fa || '',
+    slug_en:
+      payload.slug_en || '',
+    is_featured:
+      Boolean(
+        payload.is_featured
+      ),
+  };
+}
+
+
+function normalizeNews(
+  payload
+) {
+  return {
+    title_fa:
+      payload.title_fa || '',
+    title_en:
+      payload.title_en || '',
+    summary_fa:
+      payload.summary_fa || '',
+    summary_en:
+      payload.summary_en || '',
+    body_fa:
+      payload.body_fa || '',
+    body_en:
+      payload.body_en || '',
+    category:
+      payload.category || 'general',
+    tags:
+      normalizeTags(
+        payload.tags
+      ),
+    author_name:
+      payload.author_name || '',
+    status:
+      payload.status || 'draft',
+    publish_date:
+      payload.publish_date || null,
+    slug_fa:
+      payload.slug_fa || '',
+    slug_en:
+      payload.slug_en || '',
+    is_featured:
+      Boolean(
+        payload.is_featured
+      ),
+  };
+}
+
+
+function normalizeEvent(
+  payload
+) {
+  const capacity =
+    payload.capacity === '' ||
+    payload.capacity === null ||
+    payload.capacity === undefined
+      ? null
+      : Number(
+          payload.capacity
+        );
+
+  return {
+    title_fa:
+      payload.title_fa || '',
+    title_en:
+      payload.title_en || '',
+    description_fa:
+      payload.description_fa || '',
+    description_en:
+      payload.description_en || '',
+    category:
+      payload.category || '',
+    event_date:
+      payload.event_date || '',
+    venue_fa:
+      payload.venue_fa || '',
+    venue_en:
+      payload.venue_en || '',
+    organizer_fa:
+      payload.organizer_fa || '',
+    organizer_en:
+      payload.organizer_en || '',
+    capacity,
+    registration_deadline:
+      payload.registration_deadline ||
+      null,
+    registration_url:
+      payload.registration_url || '',
+    map_url:
+      payload.map_url || '',
+    status:
+      payload.status || 'upcoming',
+  };
 }
 
 
@@ -322,13 +570,66 @@ export const djangoApi = {
 
   news: {
     list() {
-      return request('/news/');
+      return request(
+        '/news/'
+      );
     },
 
     get(id) {
       return request(
         `/news/` +
         `${encodeURIComponent(id)}/`
+      );
+    },
+
+    adminList() {
+      return request(
+        '/news/?admin=true',
+        {
+          auth: true,
+        }
+      );
+    },
+
+    create(payload) {
+      return request(
+        '/news/',
+        {
+          method: 'POST',
+          body: makeBody(
+            payload,
+            'featured_image',
+            normalizeNews
+          ),
+          auth: true,
+        }
+      );
+    },
+
+    update(id, payload) {
+      return request(
+        `/news/` +
+        `${encodeURIComponent(id)}/`,
+        {
+          method: 'PATCH',
+          body: makeBody(
+            payload,
+            'featured_image',
+            normalizeNews
+          ),
+          auth: true,
+        }
+      );
+    },
+
+    remove(id) {
+      return request(
+        `/news/` +
+        `${encodeURIComponent(id)}/`,
+        {
+          method: 'DELETE',
+          auth: true,
+        }
       );
     },
   },
@@ -344,6 +645,57 @@ export const djangoApi = {
       return request(
         `/articles/` +
         `${encodeURIComponent(id)}/`
+      );
+    },
+
+    adminList() {
+      return request(
+        '/articles/?admin=true',
+        {
+          auth: true,
+        }
+      );
+    },
+
+    create(payload) {
+      return request(
+        '/articles/',
+        {
+          method: 'POST',
+          body: makeBody(
+            payload,
+            'featured_image',
+            normalizeArticle
+          ),
+          auth: true,
+        }
+      );
+    },
+
+    update(id, payload) {
+      return request(
+        `/articles/` +
+        `${encodeURIComponent(id)}/`,
+        {
+          method: 'PATCH',
+          body: makeBody(
+            payload,
+            'featured_image',
+            normalizeArticle
+          ),
+          auth: true,
+        }
+      );
+    },
+
+    remove(id) {
+      return request(
+        `/articles/` +
+        `${encodeURIComponent(id)}/`,
+        {
+          method: 'DELETE',
+          auth: true,
+        }
       );
     },
   },
@@ -365,6 +717,57 @@ export const djangoApi = {
       return request(
         `/events/` +
         `${encodeURIComponent(id)}/`
+      );
+    },
+
+    adminList() {
+      return request(
+        '/events/',
+        {
+          auth: true,
+        }
+      );
+    },
+
+    create(payload) {
+      return request(
+        '/events/',
+        {
+          method: 'POST',
+          body: makeBody(
+            payload,
+            'banner_image',
+            normalizeEvent
+          ),
+          auth: true,
+        }
+      );
+    },
+
+    update(id, payload) {
+      return request(
+        `/events/` +
+        `${encodeURIComponent(id)}/`,
+        {
+          method: 'PATCH',
+          body: makeBody(
+            payload,
+            'banner_image',
+            normalizeEvent
+          ),
+          auth: true,
+        }
+      );
+    },
+
+    remove(id) {
+      return request(
+        `/events/` +
+        `${encodeURIComponent(id)}/`,
+        {
+          method: 'DELETE',
+          auth: true,
+        }
       );
     },
   },

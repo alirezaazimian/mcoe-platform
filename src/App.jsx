@@ -57,7 +57,10 @@ import ForgotPassword from '@/pages/ForgotPassword';
 import ResetPassword from '@/pages/ResetPassword';
 
 import AdminDashboard from '@/pages/dashboard/AdminDashboard';
+import ArticlesAdmin from '@/pages/dashboard/ArticlesAdmin';
 import DashboardModulePlaceholder from '@/pages/dashboard/DashboardModulePlaceholder';
+import EventsAdmin from '@/pages/dashboard/EventsAdmin';
+import NewsAdmin from '@/pages/dashboard/NewsAdmin';
 import WorkgroupsAdmin from '@/pages/dashboard/WorkgroupsAdmin';
 
 
@@ -113,21 +116,21 @@ function AppRoutes() {
           <Route
             path="articles"
             element={
-              <DashboardModulePlaceholder />
+              <ArticlesAdmin />
             }
           />
 
           <Route
             path="news"
             element={
-              <DashboardModulePlaceholder />
+              <NewsAdmin />
             }
           />
 
           <Route
             path="events"
             element={
-              <DashboardModulePlaceholder />
+              <EventsAdmin />
             }
           />
 

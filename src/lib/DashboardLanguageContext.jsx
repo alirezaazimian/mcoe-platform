@@ -104,9 +104,9 @@ const translations = {
   },
   modulePending: {
     en:
-      'This module will be connected to the Django API in the next migration step.',
+      'This module will be connected to the Django API in the next backend expansion.',
     fa:
-      'این بخش در مرحله بعدی مهاجرت به API جنگو متصل می‌شود.',
+      'این بخش در توسعه بعدی بک‌اند به API جنگو متصل می‌شود.',
   },
 
   addNew: {
@@ -138,8 +138,8 @@ const translations = {
     fa: 'عملیات',
   },
   confirmDelete: {
-    en: 'Delete this workgroup?',
-    fa: 'این گروه کاری حذف شود؟',
+    en: 'Delete this record?',
+    fa: 'این رکورد حذف شود؟',
   },
   requestFailed: {
     en: 'The request could not be completed.',
@@ -190,15 +190,207 @@ const translations = {
     en: 'Replace image',
     fa: 'تغییر تصویر',
   },
-  currentImage: {
-    en: 'Current image',
-    fa: 'تصویر فعلی',
-  },
+
   workgroupsIntro: {
     en:
       'Manage the workgroups displayed on the public MCOE website.',
     fa:
       'گروه‌های کاری نمایش‌داده‌شده در وب‌سایت MCOE را مدیریت کنید.',
+  },
+  articlesIntro: {
+    en:
+      'Manage drafts and published articles for the public MCOE website.',
+    fa:
+      'پیش‌نویس‌ها و مقالات منتشرشده وب‌سایت MCOE را مدیریت کنید.',
+  },
+  newsIntro: {
+    en:
+      'Manage drafts, announcements and published news for MCOE.',
+    fa:
+      'پیش‌نویس‌ها، اطلاعیه‌ها و اخبار منتشرشده MCOE را مدیریت کنید.',
+  },
+  eventsIntro: {
+    en:
+      'Manage upcoming and completed school events.',
+    fa:
+      'رویدادهای پیش رو و برگزارشده مدرسه را مدیریت کنید.',
+  },
+
+  titleFa: {
+    en: 'Persian Title',
+    fa: 'عنوان فارسی',
+  },
+  titleEn: {
+    en: 'English Title',
+    fa: 'عنوان انگلیسی',
+  },
+  summaryFa: {
+    en: 'Persian Summary',
+    fa: 'خلاصه فارسی',
+  },
+  summaryEn: {
+    en: 'English Summary',
+    fa: 'خلاصه انگلیسی',
+  },
+  bodyFa: {
+    en: 'Persian Body',
+    fa: 'متن فارسی',
+  },
+  bodyEn: {
+    en: 'English Body',
+    fa: 'متن انگلیسی',
+  },
+  featuredImage: {
+    en: 'Featured Image',
+    fa: 'تصویر شاخص',
+  },
+  category: {
+    en: 'Category',
+    fa: 'دسته‌بندی',
+  },
+  tags: {
+    en: 'Tags',
+    fa: 'برچسب‌ها',
+  },
+  authorName: {
+    en: 'Author',
+    fa: 'نام نویسنده',
+  },
+  readingTime: {
+    en: 'Reading Time (min)',
+    fa: 'زمان مطالعه (دقیقه)',
+  },
+  status: {
+    en: 'Status',
+    fa: 'وضعیت',
+  },
+  publishDate: {
+    en: 'Publish Date',
+    fa: 'تاریخ انتشار',
+  },
+  slugFa: {
+    en: 'Persian Slug',
+    fa: 'Slug فارسی',
+  },
+  slugEn: {
+    en: 'English Slug',
+    fa: 'Slug انگلیسی',
+  },
+  featured: {
+    en: 'Featured',
+    fa: 'ویژه',
+  },
+
+  categoryEducation: {
+    en: 'Education',
+    fa: 'آموزش',
+  },
+  categoryParenting: {
+    en: 'Parenting',
+    fa: 'فرزندپروری',
+  },
+  categoryPedagogy: {
+    en: 'Pedagogy',
+    fa: 'روش‌های آموزشی',
+  },
+  categoryPsychology: {
+    en: 'Psychology',
+    fa: 'روان‌شناسی',
+  },
+  categoryGeneral: {
+    en: 'General',
+    fa: 'عمومی',
+  },
+
+  newsCategoryGeneral: {
+    en: 'General',
+    fa: 'عمومی',
+  },
+  newsCategoryAnnouncement: {
+    en: 'Announcement',
+    fa: 'اطلاعیه',
+  },
+  newsCategoryEvent: {
+    en: 'Event',
+    fa: 'رویداد',
+  },
+  newsCategoryAcademic: {
+    en: 'Academic',
+    fa: 'آموزشی',
+  },
+  newsCategoryCultural: {
+    en: 'Cultural',
+    fa: 'فرهنگی',
+  },
+
+  statusDraft: {
+    en: 'Draft',
+    fa: 'پیش‌نویس',
+  },
+  statusPendingReview: {
+    en: 'Pending Review',
+    fa: 'در انتظار بررسی',
+  },
+  statusApproved: {
+    en: 'Approved',
+    fa: 'تأیید شده',
+  },
+  statusPublished: {
+    en: 'Published',
+    fa: 'منتشر شده',
+  },
+  statusArchived: {
+    en: 'Archived',
+    fa: 'آرشیو شده',
+  },
+
+  eventStatusUpcoming: {
+    en: 'Upcoming',
+    fa: 'در پیش‌رو',
+  },
+  eventStatusCompleted: {
+    en: 'Completed',
+    fa: 'برگزار شده',
+  },
+  eventDate: {
+    en: 'Event Date & Time',
+    fa: 'تاریخ و ساعت رویداد',
+  },
+  registrationDeadline: {
+    en: 'Registration Deadline',
+    fa: 'مهلت ثبت‌نام',
+  },
+  venueFa: {
+    en: 'Persian Venue',
+    fa: 'محل برگزاری فارسی',
+  },
+  venueEn: {
+    en: 'English Venue',
+    fa: 'محل برگزاری انگلیسی',
+  },
+  organizerFa: {
+    en: 'Persian Organizer',
+    fa: 'برگزارکننده فارسی',
+  },
+  organizerEn: {
+    en: 'English Organizer',
+    fa: 'برگزارکننده انگلیسی',
+  },
+  capacity: {
+    en: 'Capacity',
+    fa: 'ظرفیت',
+  },
+  registrationUrl: {
+    en: 'Registration URL',
+    fa: 'لینک ثبت‌نام',
+  },
+  mapUrl: {
+    en: 'Map URL',
+    fa: 'لینک نقشه',
+  },
+  eventImage: {
+    en: 'Event Image',
+    fa: 'تصویر رویداد',
   },
 };
 

@@ -6,10 +6,10 @@ from rest_framework.permissions import (
 
 class PublicReadAdminWritePermission(BasePermission):
     """
-    Public visitors may read content.
+    Public users may read content.
 
     Create, update, partial update, and delete operations
-    are restricted to authenticated Django staff users.
+    require an authenticated Django staff user.
     """
 
     def has_permission(self, request, view):

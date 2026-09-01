@@ -131,6 +131,51 @@
   gap: 14px;
 }
 
+.mcoe-admin-mobile-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mcoe-admin-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #e6e1dc;
+  box-shadow: var(--shadow-in-sm);
+  color: #625d58;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mcoe-admin-badge-on {
+  color: #080c66;
+}
+
+.mcoe-admin-checkbox {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #ebe7e2;
+  box-shadow: var(--shadow-in-sm);
+  color: #3a3a3a;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mcoe-admin-checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: #080c66;
+}
+
 .mcoe-admin-mobile-nav {
   position: sticky;
   bottom: 0;
