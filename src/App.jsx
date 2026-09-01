@@ -3,15 +3,20 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
+
+import { QueryClientProvider } from '@tanstack/react-query';
+
 import ElementaryFirstCyclePage from '@/pages/ElementaryFirstCyclePage';
 import ElementarySecondCyclePage from '@/pages/ElementarySecondCyclePage';
 import MiddleSchoolFirstCyclePage from '@/pages/MiddleSchoolFirstCyclePage';
-import { QueryClientProvider } from '@tanstack/react-query';
 import KindergartenDreamPage from '@/pages/KindergartenDreamPage';
 
 import { Toaster } from '@/components/ui/toaster';
 import Layout from '@/components/layout/Layout';
 import ScrollToTop from '@/components/ScrollToTop';
+
+import DashboardGuard from '@/components/dashboard/DashboardGuard';
+import SchoolLayout from '@/components/dashboard/SchoolLayout';
 
 import { AuthProvider } from '@/lib/AuthContext';
 import { LanguageProvider } from '@/lib/LanguageContext';
@@ -41,6 +46,8 @@ import Register from '@/pages/Register';
 import ForgotPassword from '@/pages/ForgotPassword';
 import ResetPassword from '@/pages/ResetPassword';
 
+import AdminDashboard from '@/pages/dashboard/AdminDashboard';
+import DashboardModulePlaceholder from '@/pages/dashboard/DashboardModulePlaceholder';
 
 function AppRoutes() {
   return (
@@ -65,6 +72,62 @@ function AppRoutes() {
         element={<ResetPassword />}
       />
 
+      <Route element={<DashboardGuard />}>
+        <Route
+          path="/dashboard"
+          element={<SchoolLayout />}
+        >
+          <Route
+            index
+            element={<AdminDashboard />}
+          />
+
+          <Route
+            path="workgroups"
+            element={<DashboardModulePlaceholder />}
+          />
+
+          <Route
+            path="articles"
+            element={<DashboardModulePlaceholder />}
+          />
+
+          <Route
+            path="news"
+            element={<DashboardModulePlaceholder />}
+          />
+
+          <Route
+            path="events"
+            element={<DashboardModulePlaceholder />}
+          />
+
+          <Route
+            path="teachers"
+            element={<DashboardModulePlaceholder />}
+          />
+
+          <Route
+            path="students"
+            element={<DashboardModulePlaceholder />}
+          />
+
+          <Route
+            path="online-classes"
+            element={<DashboardModulePlaceholder />}
+          />
+
+          <Route
+            path="sms"
+            element={<DashboardModulePlaceholder />}
+          />
+
+          <Route
+            path="site-content"
+            element={<DashboardModulePlaceholder />}
+          />
+        </Route>
+      </Route>
 
       <Route element={<Layout />}>
         <Route
@@ -103,15 +166,14 @@ function AppRoutes() {
         />
 
         <Route
-           path="/levels/elementary2"
-         element={<ElementarySecondCyclePage />}
+          path="/levels/elementary2"
+          element={<ElementarySecondCyclePage />}
         />
 
         <Route
           path="/levels/middleSchool"
           element={<MiddleSchoolFirstCyclePage />}
         />
-
 
         <Route
           path="/working-groups"
@@ -169,7 +231,6 @@ function AppRoutes() {
         />
       </Route>
 
-
       <Route
         path="*"
         element={<PageNotFound />}
@@ -177,7 +238,6 @@ function AppRoutes() {
     </Routes>
   );
 }
-
 
 function App() {
   return (
@@ -197,6 +257,5 @@ function App() {
     </AuthProvider>
   );
 }
-
 
 export default App;
