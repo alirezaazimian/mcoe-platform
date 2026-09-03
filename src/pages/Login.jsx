@@ -44,12 +44,14 @@ export default function Login() {
 
     try {
       await login(
-        email,
-        password
-      );
+  email,
+  password
+);
 
-      window.location.href =
-        returnTo;
+window.location.href =
+  returnTo === "/"
+    ? "/dashboard"
+    : returnTo;
     } catch (err) {
       setError(
         err.message ||
