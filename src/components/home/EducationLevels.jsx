@@ -46,7 +46,7 @@ export default function EducationLevels() {
     <section className="py-20 lg:py-30 bg-muted/30">
       <div className="container-institutional">
         <Reveal className="text-center max-w-2xl mx-auto mb-14">
-          <span className="text-xs font-semibold text-secondary tracking-widest uppercase mb-3 block">
+          <span className="text-xs font-semibold text-[#806B8C] tracking-widest uppercase mb-3 block">
             {isRTL ? 'مسیر آموزشی' : 'Educational Path'}
           </span>
 

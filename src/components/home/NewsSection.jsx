@@ -36,7 +36,7 @@ export default function NewsSection() {
       <div className="container-institutional">
         <Reveal className="flex items-end justify-between mb-10 gap-4">
           <div>
-            <span className="text-xs font-semibold text-secondary tracking-widest uppercase mb-2 block">{isRTL ? 'اخبار' : 'News'}</span>
+            <span className="text-xs font-semibold text-[#806B8C] tracking-widest uppercase mb-2 block">{isRTL ? 'اخبار' : 'News'}</span>
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">{t('common.latestNews')}</h2>
           </div>
           <Button to="/news" variant="ghost" size="sm" icon={false}>{t('common.viewAll')}</Button>

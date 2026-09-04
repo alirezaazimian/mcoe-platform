@@ -36,7 +36,7 @@ export default function EventsSection() {
       <div className="container-institutional">
         <Reveal className="flex items-end justify-between mb-10 gap-4">
           <div>
-            <span className="text-xs font-semibold text-secondary tracking-widest uppercase mb-2 block">{isRTL ? 'رویدادها' : 'Events'}</span>
+            <span className="text-xs font-semibold text-[#C98224] tracking-widest uppercase mb-2 block">{isRTL ? 'رویدادها' : 'Events'}</span>
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">{t('common.upcomingEvents')}</h2>
           </div>
           <Button to="/events" variant="ghost" size="sm" icon={false}>{t('common.viewAll')}</Button>

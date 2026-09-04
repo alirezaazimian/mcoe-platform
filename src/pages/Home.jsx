@@ -8,7 +8,6 @@ import ArticlesSection from '@/components/home/ArticlesSection';
 import EventsSection from '@/components/home/EventsSection';
 import Gallery from '@/components/home/Gallery';
 import Partners from '@/components/home/Partners';
-import CallToAction from '@/components/home/CallToAction';
 
 
 export default function Home() {
@@ -22,7 +21,6 @@ export default function Home() {
       <EventsSection />
       <Gallery />
       <Partners />
-      <CallToAction />
     </>
   );
 }

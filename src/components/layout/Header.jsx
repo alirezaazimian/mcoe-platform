@@ -138,14 +138,14 @@ export default function Header() {
               <div className="relative">
                 <Image
                   src="/media/site/3cc1bf827_BlackandWhiteElegantInitialsLogo1.png"
-                  alt={isRTL ? 'موسسه آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}
+                  alt={isRTL ? 'مجتمع آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}
                   className="w-16 h-16 rounded-lg"
                   fittingType="fill"
                 />
               </div>
               <div className="hidden sm:block leading-tight">
-                <div className="font-bold text-foreground text-sm">{isRTL ? 'موسسه آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}</div>
-                <div className="text-[10px] text-muted-foreground tracking-wide uppercase">{isRTL ? 'مجتمع آموزشی حضرت معصومه (س)' : 'Hazrat Masoumeh (S) Educational Complex'}</div>
+                <div className="font-bold text-foreground text-sm">{isRTL ? 'مجتمع آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}</div>
+                <div className="text-[10px] text-muted-foreground tracking-wide uppercase">{isRTL ? 'آموزش . رشد . آینده' : 'Hazrat Masoumeh (S) Educational Complex'}</div>
               </div>
             </Link>
 

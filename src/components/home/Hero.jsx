@@ -37,7 +37,7 @@ export default function Hero() {
       className="relative overflow-hidden"
       style={{
         background:
-          'linear-gradient(135deg, #FCF9F4 0%, #F8F4F8 48%, #EFF3F9 100%)',
+          'linear-gradient(135deg, #FCF9F4 0%, #F8F4F8 38%, #EEF2FA 72%, #FFF7E8 100%)',
       }}
     >
       {/* soft ambient shapes */}
@@ -118,7 +118,11 @@ export default function Hero() {
                 mb-7
               "
             >
-              <span className="w-9 h-px bg-[#AE91B7]" />
+              <span className="flex items-center gap-1">
+                <span className="w-4 h-px bg-[#AE91B7]" />
+                <span className="w-2 h-px bg-[#002699]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F5A623]" />
+              </span>
 
               <span
                 className="
@@ -157,7 +161,7 @@ export default function Hero() {
                 font-bold
                 leading-[1.25]
                 tracking-[-0.02em]
-                text-[#14213D]
+                text-[#001858]
               "
             >
               {t('hero.title')}
