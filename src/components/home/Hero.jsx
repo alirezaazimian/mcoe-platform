@@ -15,43 +15,23 @@ export default function Hero() {
       en: '30+',
       faLabel: 'سال تجربه',
       enLabel: 'Years of experience',
-      accent: '#F5A623',
     },
     {
       fa: '۸۰۰۰+',
       en: '8000+',
       faLabel: 'دانش‌آموز',
       enLabel: 'Students',
-      accent: '#002699',
     },
     {
       fa: '۴',
       en: '4',
       faLabel: 'مقطع آموزشی',
       enLabel: 'Educational levels',
-      accent: '#001858',
     },
   ];
 
   return (
     <section className="relative overflow-hidden bg-[#FBF6EE]">
-      {/* Background atmosphere */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-56 -end-48 w-[42rem] h-[42rem] rounded-full bg-[#DCE5FF] opacity-55 blur-3xl"
-      />
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-56 -start-48 w-[40rem] h-[40rem] rounded-full bg-[#FFE8B5] opacity-45 blur-3xl"
-      />
-
-      {/* Purple kept only as a tiny signature */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-[24%] start-[47%] w-36 h-36 rounded-full bg-[#D8CFE2] opacity-30 blur-3xl"
-      />
-
       <div className="container-institutional relative z-10">
         <div className="grid lg:grid-cols-12 items-center gap-12 lg:gap-16 min-h-[78vh] py-14 lg:py-20">
 
@@ -133,11 +113,6 @@ export default function Hero() {
                   key={i}
                   className="relative overflow-hidden rounded-2xl border border-white/90 bg-[#FFF9F1]/90 px-3 sm:px-4 py-4 shadow-[8px_10px_24px_rgba(80,65,45,0.07),-6px_-6px_18px_rgba(255,255,255,0.9)]"
                 >
-                  <div
-                    className="absolute top-0 inset-x-0 h-[3px]"
-                    style={{ background: stat.accent }}
-                  />
-
                   <div className="text-xl sm:text-2xl font-bold text-[#001858]">
                     {isRTL ? stat.fa : stat.en}
                   </div>
