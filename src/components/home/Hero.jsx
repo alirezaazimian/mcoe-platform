@@ -6,7 +6,6 @@ import { useLanguage } from '@/lib/LanguageContext';
 import Button from '@/components/ui/AppButton';
 import HeroSlider from '@/components/home/HeroSlider';
 
-
 export default function Hero() {
   const { t, isRTL } = useLanguage();
 
@@ -16,218 +15,98 @@ export default function Hero() {
       en: '30+',
       faLabel: 'سال تجربه',
       enLabel: 'Years of experience',
+      accent: '#F5A623',
     },
     {
       fa: '۸۰۰۰+',
       en: '8000+',
       faLabel: 'دانش‌آموز',
       enLabel: 'Students',
+      accent: '#002699',
     },
     {
       fa: '۴',
       en: '4',
       faLabel: 'مقطع آموزشی',
       enLabel: 'Educational levels',
+      accent: '#001858',
     },
   ];
 
-
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{
-        background:
-          'linear-gradient(135deg, #FCF9F4 0%, #F8F4F8 38%, #EEF2FA 72%, #FFF7E8 100%)',
-      }}
-    >
-      {/* soft ambient shapes */}
+    <section className="relative overflow-hidden bg-[#FBF6EE]">
+      {/* Background atmosphere */}
       <div
-        className="
-          pointer-events-none
-          absolute
-          -top-40
-          -end-32
-          w-[32rem]
-          h-[32rem]
-          rounded-full
-          bg-[#DDD5E8]/45
-          blur-3xl
-        "
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-56 -end-48 w-[42rem] h-[42rem] rounded-full bg-[#DCE5FF] opacity-55 blur-3xl"
       />
 
       <div
-        className="
-          pointer-events-none
-          absolute
-          -bottom-48
-          -start-40
-          w-[34rem]
-          h-[34rem]
-          rounded-full
-          bg-[#E8D9BF]/35
-          blur-3xl
-        "
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-56 -start-48 w-[40rem] h-[40rem] rounded-full bg-[#FFE8B5] opacity-45 blur-3xl"
       />
 
+      {/* Purple kept only as a tiny signature */}
       <div
-        className="
-          pointer-events-none
-          absolute
-          top-[20%]
-          start-[46%]
-          w-48
-          h-48
-          rounded-full
-          bg-white/70
-          blur-3xl
-        "
+        aria-hidden="true"
+        className="pointer-events-none absolute top-[24%] start-[47%] w-36 h-36 rounded-full bg-[#D8CFE2] opacity-30 blur-3xl"
       />
-
 
       <div className="container-institutional relative z-10">
-        <div
-          className="
-            grid
-            lg:grid-cols-12
-            items-center
-            gap-12
-            lg:gap-16
-            min-h-[78vh]
-            py-14
-            lg:py-20
-          "
-        >
-          {/* Copy */}
+        <div className="grid lg:grid-cols-12 items-center gap-12 lg:gap-16 min-h-[78vh] py-14 lg:py-20">
+
+          {/* Text side */}
           <div className="lg:col-span-5 order-2 lg:order-1">
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 14,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.6,
-              }}
-              className="
-                inline-flex
-                items-center
-                gap-3
-                mb-7
-              "
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-3 mb-7"
             >
-              <span className="flex items-center gap-1">
-                <span className="w-4 h-px bg-[#AE91B7]" />
-                <span className="w-2 h-px bg-[#002699]" />
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F5A623]" />
+              <span className="flex items-center gap-1.5">
+                <span className="w-6 h-[2px] rounded-full bg-[#001858]" />
+                <span className="w-3 h-[2px] rounded-full bg-[#002699]" />
+                <span className="w-2 h-2 rounded-full bg-[#F5A623]" />
               </span>
 
-              <span
-                className="
-                  text-xs
-                  sm:text-sm
-                  font-semibold
-                  tracking-wide
-                  text-[#75637E]
-                "
-              >
+              <span className="text-xs sm:text-sm font-semibold tracking-wide text-[#596486]">
                 {isRTL
                   ? 'فضایی برای یادگیری، رشد و شکوفایی'
                   : 'A place to learn, grow and flourish'}
               </span>
             </motion.div>
 
-
             <motion.h1
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.7,
-                delay: 0.08,
-              }}
-              className="
-                max-w-xl
-                text-[2.15rem]
-                sm:text-5xl
-                lg:text-[3.45rem]
-                font-bold
-                leading-[1.25]
-                tracking-[-0.02em]
-                text-[#001858]
-              "
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.08 }}
+              className="max-w-xl text-[2.15rem] sm:text-5xl lg:text-[3.45rem] font-bold leading-[1.25] tracking-[-0.02em] text-[#001858]"
             >
               {t('hero.title')}
             </motion.h1>
 
-
             <motion.p
-              initial={{
-                opacity: 0,
-                y: 18,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.7,
-                delay: 0.16,
-              }}
-              className="
-                max-w-lg
-                mt-6
-                text-sm
-                sm:text-base
-                leading-8
-                text-[#66616A]
-              "
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.16 }}
+              className="max-w-lg mt-6 text-sm sm:text-base leading-8 text-[#5E5B5F]"
             >
               {isRTL
                 ? 'محیطی پویا، امن و الهام‌بخش برای پرورش دانش، خلاقیت و اعتمادبه‌نفس نسل آینده.'
                 : 'A thoughtful, inspiring and safe environment where knowledge, creativity and confidence can grow together.'}
             </motion.p>
 
-
+            {/* CTAs */}
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 18,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.7,
-                delay: 0.24,
-              }}
-              className="
-                flex
-                flex-wrap
-                items-center
-                gap-3
-                mt-8
-              "
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.24 }}
+              className="flex flex-wrap items-center gap-3 mt-8"
             >
               <Button
                 href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
                 size="lg"
-                className="
-                  bg-[#14213D]
-                  text-white
-                  border-[#14213D]
-                  hover:bg-[#263658]
-                  hover:text-white
-                  shadow-[0_12px_30px_rgba(20,33,61,0.16)]
-                "
+                className="bg-[#001858] text-white border-[#001858] hover:bg-[#002699] hover:text-white shadow-[0_14px_32px_rgba(0,24,88,0.20)]"
               >
                 {t('hero.register')}
               </Button>
@@ -236,84 +115,42 @@ export default function Hero() {
                 to="/collaborate"
                 variant="outline"
                 size="lg"
-                className="
-                  bg-white/60
-                  border-[#D7CFDC]
-                  text-[#14213D]
-                  backdrop-blur-sm
-                  hover:bg-white
-                "
+                className="bg-[#FFF5DF] border-[#F5A623]/50 text-[#001858] hover:bg-[#F5A623] hover:border-[#F5A623] hover:text-[#001858]"
               >
                 {t('hero.collaborate')}
               </Button>
             </motion.div>
 
-
             {/* Metrics */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.36,
-              }}
-              className="
-                grid
-                grid-cols-3
-                gap-2
-                sm:gap-3
-                mt-11
-                max-w-lg
-              "
+              transition={{ duration: 0.8, delay: 0.36 }}
+              className="grid grid-cols-3 gap-2 sm:gap-3 mt-11 max-w-lg"
             >
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="
-                    rounded-2xl
-                    border
-                    border-white/80
-                    bg-white/45
-                    backdrop-blur-md
-                    px-3
-                    sm:px-4
-                    py-4
-                    shadow-[0_10px_35px_rgba(59,49,67,0.055)]
-                  "
+                  className="relative overflow-hidden rounded-2xl border border-white/90 bg-[#FFF9F1]/90 px-3 sm:px-4 py-4 shadow-[8px_10px_24px_rgba(80,65,45,0.07),-6px_-6px_18px_rgba(255,255,255,0.9)]"
                 >
                   <div
-                    className="
-                      text-xl
-                      sm:text-2xl
-                      font-bold
-                      text-[#14213D]
-                    "
-                  >
-                    {isRTL
-                      ? stat.fa
-                      : stat.en}
+                    className="absolute top-0 inset-x-0 h-[3px]"
+                    style={{ background: stat.accent }}
+                  />
+
+                  <div className="text-xl sm:text-2xl font-bold text-[#001858]">
+                    {isRTL ? stat.fa : stat.en}
                   </div>
 
-                  <div
-                    className="
-                      mt-1
-                      text-[10px]
-                      sm:text-xs
-                      leading-5
-                      text-[#7B7580]
-                    "
-                  >
-                    {isRTL
-                      ? stat.faLabel
-                      : stat.enLabel}
+                  <div className="mt-1 text-[10px] sm:text-xs leading-5 text-[#68656A]">
+                    {isRTL ? stat.faLabel : stat.enLabel}
                   </div>
                 </div>
               ))}
             </motion.div>
           </div>
 
-
-          {/* Visual composition */}
+          {/* Visual side */}
           <motion.div
             initial={{
               opacity: 0,
@@ -328,130 +165,80 @@ export default function Hero() {
               delay: 0.12,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="
-              relative
-              lg:col-span-7
-              order-1
-              lg:order-2
-              px-2
-              sm:px-6
-              lg:px-0
-            "
+            className="relative lg:col-span-7 order-1 lg:order-2 px-2 sm:px-6 lg:px-0 py-10"
           >
-            {/* rear lavender layer */}
+            {/* Main navy / blue clay plate */}
             <div
-              className="
-                absolute
-                top-8
-                -end-3
-                sm:-end-5
-                w-[85%]
-                h-[82%]
-                rounded-[3rem]
-                bg-[#DCD5E7]
-                rotate-[3deg]
-              "
+              aria-hidden="true"
+              className="absolute top-[2%] end-[1%] w-[90%] h-[84%] rounded-[3.8rem] rotate-[3deg]"
+              style={{
+                background:
+                  'linear-gradient(145deg, #002699 0%, #001858 82%)',
+                boxShadow:
+                  '22px 26px 55px rgba(0,24,88,0.22), inset 6px 6px 16px rgba(255,255,255,0.08), inset -9px -9px 20px rgba(0,0,0,0.10)',
+              }}
             />
 
-            {/* rear champagne layer */}
+            {/* Warm orange secondary plate */}
             <div
-              className="
-                absolute
-                bottom-4
-                -start-2
-                w-[72%]
-                h-[72%]
-                rounded-[3rem]
-                bg-[#E8DCC9]
-                -rotate-[3deg]
-                opacity-85
-              "
+              aria-hidden="true"
+              className="absolute bottom-[1%] start-[1%] w-[60%] h-[58%] rounded-[3.3rem] -rotate-[4deg] bg-[#F5A623]"
+              style={{
+                boxShadow:
+                  '14px 18px 34px rgba(168,109,18,0.16), inset 4px 4px 12px rgba(255,255,255,0.18)',
+              }}
             />
 
+            {/* Small lavender signature */}
+            <div
+              aria-hidden="true"
+              className="absolute top-[3%] start-[6%] w-20 h-20 lg:w-24 lg:h-24 rounded-[2rem] bg-[#C9BDD4] rotate-[-9deg] opacity-75"
+            />
 
-            <div className="relative z-10">
+            {/* Slider surface */}
+            <div className="relative z-10 rounded-[3.2rem] p-2 sm:p-3 bg-[#FFF9F1]/95 shadow-[12px_16px_38px_rgba(55,44,30,0.12),-8px_-8px_24px_rgba(255,255,255,0.9)]">
               <HeroSlider />
             </div>
 
-
-            {/* Floating top note */}
+            {/* Orange floating note */}
             <motion.div
               animate={{
                 y: [0, -6, 0],
               }}
               transition={{
-                duration: 5,
+                duration: 5.5,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className={`
-                absolute
-                z-20
-                top-2
-                ${isRTL ? '-right-2' : '-left-2'}
-                sm:top-8
-                sm:${isRTL ? '-right-5' : '-left-5'}
-                hidden
-                sm:flex
-                items-center
-                gap-3
-                rounded-2xl
-                bg-white/85
-                backdrop-blur-xl
-                border
-                border-white
-                px-4
-                py-3
-                shadow-[0_14px_36px_rgba(68,55,78,0.12)]
-              `}
+              className="absolute z-20 top-3 start-[15%] hidden sm:flex items-center gap-2 rounded-2xl px-4 py-2.5 bg-[#F5A623] text-[#001858] text-xs font-bold shadow-[8px_10px_22px_rgba(168,109,18,0.18)]"
             >
-              <div
-                className="
-                  w-9
-                  h-9
-                  rounded-xl
-                  bg-[#EEE9F3]
-                  text-[#806B8C]
-                  flex
-                  items-center
-                  justify-center
-                "
-              >
-                <Sparkles className="w-4 h-4" />
-              </div>
+              <Sparkles className="w-4 h-4" />
 
-              <div>
-                <div className="text-xs font-bold text-[#14213D]">
-                  {isRTL
-                    ? 'رشد با اعتماد'
-                    : 'Grow with confidence'}
-                </div>
-
-                <div className="text-[10px] mt-0.5 text-[#807986]">
-                  {isRTL
-                    ? 'آموزش • خلاقیت • آینده'
-                    : 'Learning • Creativity • Future'}
-                </div>
-              </div>
+              <span>
+                {isRTL
+                  ? 'آموزش . رشد . آینده'
+                  : 'Learn · Grow · Future'}
+              </span>
             </motion.div>
 
+            {/* Blue decorative dot */}
+            <motion.div
+              aria-hidden="true"
+              animate={{
+                y: [0, 7, 0],
+              }}
+              transition={{
+                duration: 4.8,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              className="absolute z-20 bottom-[10%] end-[2%] hidden lg:block w-8 h-8 rounded-full bg-[#002699] shadow-[0_8px_18px_rgba(0,38,153,0.25)]"
+            />
 
-            {/* small accent */}
+            {/* Orange decorative dot */}
             <div
-              className="
-                absolute
-                z-20
-                -bottom-3
-                end-8
-                w-16
-                h-16
-                rounded-[1.4rem]
-                bg-[#C8BCD3]
-                opacity-80
-                rotate-12
-                hidden
-                lg:block
-              "
+              aria-hidden="true"
+              className="absolute z-20 top-[25%] -end-1 hidden lg:block w-4 h-4 rounded-full bg-[#F5A623] shadow-[0_6px_16px_rgba(245,166,35,0.28)]"
             />
           </motion.div>
         </div>

@@ -12,7 +12,12 @@ import Partners from '@/components/home/Partners';
 
 export default function Home() {
   return (
-    <>
+    <div
+      className="
+        bg-[#FBF6EE]
+        [&>section]:!bg-[#FBF6EE]
+      "
+    >
       <Hero />
       <AboutSection />
       <EducationLevels />
@@ -21,6 +26,6 @@ export default function Home() {
       <EventsSection />
       <Gallery />
       <Partners />
-    </>
+    </div>
   );
 }
