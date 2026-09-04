@@ -106,15 +106,15 @@ export default function Header() {
   return (
     <>
       {/* Top utility bar */}
-      <div className="hidden xl:block bg-primary text-primary-foreground/90 text-xs">
+      <div className="hidden xl:block bg-background text-primary/75 text-xs border-b border-primary/10 shadow-[0_8px_22px_rgba(0,24,88,0.11),inset_0_1px_0_rgba(255,255,255,0.92),inset_0_-1px_0_rgba(0,24,88,0.07)]">
         <div className="container-institutional flex items-center justify-between h-9">
           <div className="flex items-center gap-5">
-            <a href="mailto:school@mcoe.ir" className="hover:text-white transition-colors">school@mcoe.ir</a>
+            <a href="mailto:school@mcoe.ir" className="hover:text-primary transition-colors">school@mcoe.ir</a>
             <span className="opacity-60">|</span>
             <span className="opacity-80">{t('footer.address')}</span>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://lms.mcoe.ir" className="hover:text-white transition-colors font-medium flex items-center gap-1.5">
+            <a href="https://lms.mcoe.ir" className="hover:text-primary transition-colors font-medium flex items-center gap-1.5">
               <GraduationCap className="w-3.5 h-3.5" />
               {t('common.login')}
             </a>
