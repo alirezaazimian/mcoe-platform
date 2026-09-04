@@ -37,46 +37,61 @@ export default function Hero() {
         <div
           className="
             grid
-            min-h-[72vh]
             items-center
-            gap-12
-            py-14
+            gap-10
+            py-10
+            sm:py-12
+            lg:min-h-[72vh]
             lg:grid-cols-12
             lg:gap-16
-            lg:py-18
+            lg:py-20
           "
         >
 
           {/* Content */}
-          <div className="order-2 lg:order-1 lg:col-span-5">
+          <div
+            className="
+              order-1
+              text-center
+              lg:order-1
+              lg:col-span-5
+              lg:text-start
+            "
+          >
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
+              {/* Eyebrow */}
               <div
                 className="
-                  mb-6
+                  mb-5
                   flex
                   items-center
+                  justify-center
                   gap-3
+                  lg:mb-6
+                  lg:justify-start
                 "
               >
                 <span
                   className="
                     h-[3px]
-                    w-8
+                    w-7
                     rounded-full
                     bg-[#F5A623]
+                    lg:w-8
                   "
                 />
 
                 <span
                   className="
-                    text-xs
+                    text-[11px]
                     font-semibold
                     tracking-wide
                     text-[#001858]/60
+                    sm:text-xs
                   "
                 >
                   {isRTL
@@ -86,15 +101,19 @@ export default function Hero() {
               </div>
 
 
+              {/* Title */}
               <h1
                 className="
-                  max-w-xl
-                  text-[2.15rem]
+                  mx-auto
+                  max-w-[22rem]
+                  text-[2rem]
                   font-bold
-                  leading-[1.3]
+                  leading-[1.35]
                   tracking-[-0.02em]
                   text-[#001858]
-                  sm:text-5xl
+                  sm:max-w-xl
+                  sm:text-[2.65rem]
+                  lg:mx-0
                   lg:text-[3.35rem]
                 "
               >
@@ -102,14 +121,20 @@ export default function Hero() {
               </h1>
 
 
+              {/* Description */}
               <p
                 className="
-                  mt-6
-                  max-w-lg
+                  mx-auto
+                  mt-5
+                  max-w-[22rem]
                   text-sm
-                  leading-8
+                  leading-7
                   text-[#66616A]
+                  sm:max-w-lg
                   sm:text-base
+                  sm:leading-8
+                  lg:mx-0
+                  lg:mt-6
                 "
               >
                 {isRTL
@@ -121,23 +146,31 @@ export default function Hero() {
               {/* Actions */}
               <div
                 className="
-                  mt-8
-                  flex
-                  flex-wrap
-                  items-center
+                  mx-auto
+                  mt-7
+                  grid
+                  max-w-[22rem]
+                  grid-cols-2
                   gap-3
+                  lg:mx-0
+                  lg:mt-8
+                  lg:flex
+                  lg:max-w-none
+                  lg:flex-wrap
                 "
               >
                 <Button
                   href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
                   size="lg"
                   className="
+                    w-full
                     border-[#001858]
                     bg-[#001858]
                     text-white
                     shadow-[0_10px_22px_rgba(0,24,88,0.14)]
                     hover:bg-[#002699]
                     hover:text-white
+                    lg:w-auto
                   "
                 >
                   {t('hero.register')}
@@ -148,12 +181,14 @@ export default function Hero() {
                   variant="outline"
                   size="lg"
                   className="
+                    w-full
                     border-[#F5A623]/40
                     bg-[#FFF7E8]
                     text-[#001858]
                     hover:border-[#F5A623]/70
                     hover:bg-[#FFE8B5]
                     hover:text-[#001858]
+                    lg:w-auto
                   "
                 >
                   {t('hero.collaborate')}
@@ -161,23 +196,31 @@ export default function Hero() {
               </div>
 
 
-              {/* Minimal statistics */}
+              {/* Statistics */}
               <div
                 className="
-                  mt-10
+                  mx-auto
+                  mt-8
                   flex
-                  max-w-lg
+                  max-w-[22rem]
                   items-start
+                  lg:mx-0
+                  lg:mt-10
+                  lg:max-w-lg
                 "
               >
                 {stats.map((stat, index) => (
                   <React.Fragment key={index}>
                     <div
                       className="
+                        min-w-0
                         flex-1
-                        px-3
+                        px-2
+                        text-center
                         first:ps-0
                         last:pe-0
+                        sm:px-3
+                        lg:text-start
                       "
                     >
                       <div
@@ -196,10 +239,11 @@ export default function Hero() {
                       <div
                         className="
                           mt-1
-                          text-[10px]
-                          leading-5
+                          text-[9px]
+                          leading-4
                           text-[#66616A]
                           sm:text-xs
+                          sm:leading-5
                         "
                       >
                         {isRTL
@@ -212,9 +256,11 @@ export default function Hero() {
                       <div
                         className="
                           mt-1
-                          h-10
+                          h-9
                           w-px
+                          shrink-0
                           bg-[#001858]/10
+                          sm:h-10
                         "
                       />
                     )}
@@ -229,39 +275,51 @@ export default function Hero() {
           <motion.div
             initial={{
               opacity: 0,
-              x: isRTL ? -18 : 18,
+              y: 16,
             }}
             animate={{
               opacity: 1,
-              x: 0,
+              y: 0,
             }}
             transition={{
-              duration: 0.65,
+              duration: 0.6,
               delay: 0.08,
               ease: [0.16, 1, 0.3, 1],
             }}
             className="
               relative
-              order-1
-              px-2
-              py-6
-              sm:px-6
+              order-2
+              mx-auto
+              w-full
+              max-w-[390px]
+              px-3
+              pb-3
+              pt-1
+              sm:max-w-[520px]
               lg:order-2
               lg:col-span-7
+              lg:max-w-none
               lg:px-0
+              lg:py-6
             "
           >
-            {/* Single restrained brand plate */}
+
+            {/* Navy plate */}
             <div
               aria-hidden="true"
               className="
                 absolute
-                end-[2%]
-                top-[3%]
-                h-[88%]
+                end-[3%]
+                top-[2%]
+                h-[91%]
                 w-[92%]
-                rotate-[1.5deg]
-                rounded-[3rem]
+                rounded-[2rem]
+                lg:end-[2%]
+                lg:top-[3%]
+                lg:h-[88%]
+                lg:w-[92%]
+                lg:rotate-[1.5deg]
+                lg:rounded-[3rem]
               "
               style={{
                 background:
@@ -272,19 +330,27 @@ export default function Hero() {
             />
 
 
-            {/* One orange accent only */}
+            {/* Orange accent */}
             <div
               aria-hidden="true"
               className="
                 absolute
-                bottom-[3%]
-                start-[2%]
+                bottom-0
+                start-[1%]
                 z-[1]
-                h-24
-                w-24
-                rounded-[1.8rem]
+                h-14
+                w-14
+                rounded-[1.2rem]
                 bg-[#F5A623]
-                shadow-[8px_10px_22px_rgba(245,166,35,0.16)]
+                shadow-[6px_8px_18px_rgba(245,166,35,0.16)]
+                sm:h-20
+                sm:w-20
+                sm:rounded-[1.5rem]
+                lg:bottom-[3%]
+                lg:start-[2%]
+                lg:h-24
+                lg:w-24
+                lg:rounded-[1.8rem]
               "
             />
 
@@ -295,15 +361,20 @@ export default function Hero() {
                 relative
                 z-10
                 overflow-hidden
-                rounded-[2.6rem]
+                rounded-[1.8rem]
                 bg-[#FFF9F1]
-                p-2
-                shadow-[10px_14px_30px_rgba(55,44,30,0.10)]
+                p-1.5
+                shadow-[8px_10px_24px_rgba(55,44,30,0.10)]
+                sm:rounded-[2.2rem]
+                sm:p-2
+                lg:rounded-[2.6rem]
+                lg:shadow-[10px_14px_30px_rgba(55,44,30,0.10)]
               "
             >
               <HeroSlider />
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>
