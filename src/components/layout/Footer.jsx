@@ -45,13 +45,13 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start text-center sm:text-start gap-3 mb-5">
               <Image
                 src="/media/site/3cc1bf827_BlackandWhiteElegantInitialsLogo1.png"
-                alt={isRTL ? 'موسسه آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}
+                alt={isRTL ? 'مجتمع آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}
                 className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg shrink-0"
                 fittingType="fill"
               />
               <div className="flex flex-col justify-center">
-                <div className="font-bold text-white text-sm sm:text-base leading-tight">{isRTL ? 'موسسه آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}</div>
-                <div className="text-xs text-primary-foreground/60 mt-1">{isRTL ? 'مجتمع آموزشی حضرت معصومه (س)' : 'Hazrat Masoumeh (S) Educational Complex'}</div>
+                <div className="font-bold text-white text-sm sm:text-base leading-tight">{isRTL ? 'مجتمع آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}</div>
+                <div className="text-xs text-primary-foreground/60 mt-1">{isRTL ? 'آموزش . رشد . آینده' : 'Hazrat Masoumeh (S) Educational Complex'}</div>
               </div>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed max-w-sm mx-auto sm:mx-0 text-center sm:text-start">
