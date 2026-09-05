@@ -42,13 +42,13 @@ const COLORS = {
 
 const SHADOWS = {
   paper:
-    '0 20px 55px rgba(44, 35, 24, 0.10)',
+    'inset 8px 8px 18px rgba(80, 65, 45, 0.09), inset -8px -8px 18px rgba(255, 255, 255, 0.94), 0 1px 0 rgba(255,255,255,0.50)',
 
   lifted:
-    '0 18px 35px rgba(0, 24, 88, 0.13)',
+    'inset 9px 9px 20px rgba(0, 14, 58, 0.30), inset -8px -8px 18px rgba(74, 105, 198, 0.18), 0 1px 0 rgba(255,255,255,0.08)',
 
   yellow:
-    '0 14px 30px rgba(245, 166, 35, 0.18)',
+    'inset 8px 8px 18px rgba(168, 109, 18, 0.18), inset -8px -8px 18px rgba(255, 226, 166, 0.42), 0 1px 0 rgba(255,255,255,0.28)',
 };
 
 
@@ -153,17 +153,6 @@ export default function ElementaryFirstCyclePage() {
       <section className="relative min-h-[92vh] overflow-hidden">
 
         {/* notebook-grid background */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-[0.11]"
-          style={{
-            backgroundImage: `
-              linear-gradient(${COLORS.blue} 1px, transparent 1px),
-              linear-gradient(90deg, ${COLORS.blue} 1px, transparent 1px)
-            `,
-            backgroundSize: '52px 52px',
-          }}
-        />
 
 
         {/* vertical notebook margin */}

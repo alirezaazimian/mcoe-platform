@@ -539,3 +539,694 @@
     transition: none;
   }
 }
+
+/* HOME INNER CLAY START */
+
+.home-inner-clay {
+  --home-clay-cream:
+    inset 9px 9px 20px rgba(80, 65, 45, 0.10),
+    inset -9px -9px 20px rgba(255, 255, 255, 0.94),
+    0 1px 0 rgba(255, 255, 255, 0.55);
+
+  --home-clay-soft:
+    inset 6px 6px 14px rgba(80, 65, 45, 0.08),
+    inset -6px -6px 14px rgba(255, 255, 255, 0.90),
+    0 1px 0 rgba(255, 255, 255, 0.45);
+
+  --home-clay-pressed:
+    inset 11px 11px 23px rgba(80, 65, 45, 0.12),
+    inset -9px -9px 20px rgba(255, 255, 255, 0.88),
+    0 1px 0 rgba(255, 255, 255, 0.42);
+
+  --home-clay-dark:
+    inset 9px 9px 20px rgba(0, 11, 48, 0.38),
+    inset -8px -8px 18px rgba(70, 104, 194, 0.20),
+    0 1px 0 rgba(255, 255, 255, 0.08);
+
+  --home-clay-blue:
+    inset 8px 8px 18px rgba(0, 19, 75, 0.28),
+    inset -7px -7px 17px rgba(80, 112, 212, 0.20),
+    0 1px 0 rgba(255, 255, 255, 0.09);
+
+  --home-clay-orange:
+    inset 8px 8px 18px rgba(164, 103, 12, 0.22),
+    inset -8px -8px 18px rgba(255, 223, 150, 0.42),
+    0 1px 0 rgba(255, 255, 255, 0.26);
+
+  --home-clay-orange-soft:
+    inset 7px 7px 16px rgba(173, 112, 21, 0.12),
+    inset -7px -7px 16px rgba(255, 255, 255, 0.78),
+    0 1px 0 rgba(255, 255, 255, 0.38);
+
+  --home-image-inset:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 9px 9px 22px rgba(0, 24, 88, 0.16),
+    inset -7px -7px 18px rgba(255, 255, 255, 0.12);
+}
+
+
+/* -----------------------------------------------
+   Cards / panels
+   ----------------------------------------------- */
+
+.home-inner-clay .institutional-shadow,
+.home-inner-clay .institutional-shadow-lg,
+.home-inner-clay .neumorphic-inset,
+.home-inner-clay .hover-elevate {
+  box-shadow: var(--home-clay-cream) !important;
+}
+
+
+/* Existing hover movement stays intact.
+   Only its shadow becomes inner. */
+
+.home-inner-clay .hover-elevate:hover {
+  box-shadow: var(--home-clay-pressed) !important;
+}
+
+
+/* Card surfaces */
+
+.home-inner-clay [class~="bg-card"][class*="rounded"],
+.home-inner-clay [class~="bg-background"][class*="rounded"],
+.home-inner-clay [class~="bg-white"][class*="rounded"],
+.home-inner-clay [class~="bg-white/60"][class*="rounded"],
+.home-inner-clay [class~="bg-white/45"][class*="rounded"],
+.home-inner-clay [class~="bg-[#FFF9F1]"][class*="rounded"] {
+  box-shadow: var(--home-clay-cream) !important;
+}
+
+
+/* Pale / muted surfaces */
+
+.home-inner-clay [class~="bg-muted"][class*="rounded"],
+.home-inner-clay [class~="bg-muted/30"][class*="rounded"],
+.home-inner-clay [class~="bg-muted/40"][class*="rounded"],
+.home-inner-clay [class~="bg-[#FFF7E8]"][class*="rounded"],
+.home-inner-clay [class~="bg-[#FFE8B5]"][class*="rounded"] {
+  box-shadow: var(--home-clay-soft) !important;
+}
+
+
+/* -----------------------------------------------
+   Buttons, pills and small controls
+   ----------------------------------------------- */
+
+.home-inner-clay button[class*="rounded"],
+.home-inner-clay
+  a[class*="rounded"]:not(.hover-elevate):not(.neumorphic-inset) {
+  box-shadow: var(--home-clay-soft) !important;
+}
+
+
+/* Navy */
+
+.home-inner-clay [class~="bg-primary"],
+.home-inner-clay [class~="bg-[#001858]"] {
+  box-shadow: var(--home-clay-dark) !important;
+}
+
+
+/* Deep blue */
+
+.home-inner-clay [class~="bg-secondary"],
+.home-inner-clay [class~="bg-[#002699]"] {
+  box-shadow: var(--home-clay-blue) !important;
+}
+
+
+/* Orange */
+
+.home-inner-clay [class~="bg-accent"],
+.home-inner-clay [class~="bg-[#F5A623]"] {
+  box-shadow: var(--home-clay-orange) !important;
+}
+
+
+/* Soft orange */
+
+.home-inner-clay [class~="bg-[#FFF7E8]"],
+.home-inner-clay [class~="bg-[#FFE8B5]"] {
+  box-shadow: var(--home-clay-orange-soft) !important;
+}
+
+
+/* -----------------------------------------------
+   Existing Tailwind arbitrary outer shadows
+   inside Home
+   ----------------------------------------------- */
+
+.home-inner-clay [class*="shadow-["] {
+  box-shadow: var(--home-clay-cream) !important;
+}
+
+
+/* Restore correct clay material for colored objects */
+
+.home-inner-clay
+  [class~="bg-[#001858]"][class*="shadow-["] {
+  box-shadow: var(--home-clay-dark) !important;
+}
+
+.home-inner-clay
+  [class~="bg-[#002699]"][class*="shadow-["] {
+  box-shadow: var(--home-clay-blue) !important;
+}
+
+.home-inner-clay
+  [class~="bg-[#F5A623]"][class*="shadow-["] {
+  box-shadow: var(--home-clay-orange) !important;
+}
+
+
+/* -----------------------------------------------
+   Hero gradient plate
+   ----------------------------------------------- */
+
+.home-inner-clay [style*="linear-gradient"][style*="box-shadow"] {
+  box-shadow: var(--home-clay-dark) !important;
+}
+
+
+/* -----------------------------------------------
+   Images
+   Educational levels, news, articles,
+   events and gallery
+   ----------------------------------------------- */
+
+.home-inner-clay
+  [class*="aspect-"][class*="overflow-hidden"] {
+  position: relative;
+  isolation: isolate;
+}
+
+
+/* inset shadow over image while keeping image,
+   text and hover zoom intact */
+
+.home-inner-clay
+  [class*="aspect-"][class*="overflow-hidden"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: var(--home-image-inset);
+}
+
+
+/* Gallery items */
+
+.home-inner-clay
+  .group.relative.overflow-hidden[class*="rounded"] {
+  box-shadow: var(--home-clay-cream) !important;
+}
+
+
+/* -----------------------------------------------
+   Level / content cards
+   ----------------------------------------------- */
+
+.home-inner-clay
+  a.group.block.glass.neumorphic-inset {
+  box-shadow: var(--home-clay-cream) !important;
+}
+
+.home-inner-clay
+  a.group.block.glass.neumorphic-inset:hover {
+  box-shadow: var(--home-clay-pressed) !important;
+}
+
+
+/* -----------------------------------------------
+   Loading / empty-state panels
+   ----------------------------------------------- */
+
+.home-inner-clay
+  .animate-pulse[class*="rounded"] {
+  box-shadow: var(--home-clay-soft) !important;
+}
+
+.home-inner-clay
+  [class*="text-center"][class*="rounded"][class*="bg-"] {
+  box-shadow: var(--home-clay-soft) !important;
+}
+
+
+/* -----------------------------------------------
+   Inner-clay interaction
+   Preserve colors / scale / translate.
+   Add only tactile depth.
+   ----------------------------------------------- */
+
+.home-inner-clay
+  button[class*="rounded"]:active,
+.home-inner-clay
+  a[class*="rounded"]:active {
+  box-shadow:
+    inset 12px 12px 24px rgba(80, 65, 45, 0.13),
+    inset -8px -8px 18px rgba(255, 255, 255, 0.72)
+    !important;
+}
+
+
+/* Dark active state */
+
+.home-inner-clay
+  [class~="bg-primary"]:active,
+.home-inner-clay
+  [class~="bg-[#001858]"]:active,
+.home-inner-clay
+  [class~="bg-[#002699]"]:active {
+  box-shadow:
+    inset 12px 12px 24px rgba(0, 10, 45, 0.45),
+    inset -7px -7px 17px rgba(75, 108, 196, 0.16)
+    !important;
+}
+
+
+/* Orange active state */
+
+.home-inner-clay
+  [class~="bg-accent"]:active,
+.home-inner-clay
+  [class~="bg-[#F5A623]"]:active {
+  box-shadow:
+    inset 11px 11px 22px rgba(150, 91, 8, 0.27),
+    inset -7px -7px 16px rgba(255, 224, 154, 0.32)
+    !important;
+}
+
+
+/* -----------------------------------------------
+   Mobile: shallower clay depth.
+   Deep shadows on small screens look absurdly
+   heavy, because apparently physics scales badly.
+   ----------------------------------------------- */
+
+@media (max-width: 640px) {
+  .home-inner-clay {
+    --home-clay-cream:
+      inset 6px 6px 14px rgba(80, 65, 45, 0.09),
+      inset -6px -6px 14px rgba(255, 255, 255, 0.92),
+      0 1px 0 rgba(255, 255, 255, 0.45);
+
+    --home-clay-soft:
+      inset 5px 5px 11px rgba(80, 65, 45, 0.07),
+      inset -5px -5px 11px rgba(255, 255, 255, 0.88);
+
+    --home-clay-pressed:
+      inset 8px 8px 16px rgba(80, 65, 45, 0.11),
+      inset -6px -6px 14px rgba(255, 255, 255, 0.82);
+
+    --home-clay-dark:
+      inset 7px 7px 15px rgba(0, 11, 48, 0.38),
+      inset -6px -6px 14px rgba(70, 104, 194, 0.18);
+
+    --home-clay-blue:
+      inset 7px 7px 15px rgba(0, 19, 75, 0.26),
+      inset -6px -6px 14px rgba(80, 112, 212, 0.18);
+
+    --home-clay-orange:
+      inset 6px 6px 14px rgba(164, 103, 12, 0.20),
+      inset -6px -6px 14px rgba(255, 223, 150, 0.36);
+
+    --home-image-inset:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+      inset 6px 6px 15px rgba(0, 24, 88, 0.14),
+      inset -5px -5px 12px rgba(255, 255, 255, 0.10);
+  }
+}
+
+/* HOME INNER CLAY END */
+
+/* GLOBAL INNER CLAY BUTTONS START */
+
+/*
+ * MCOE GLOBAL BUTTON LANGUAGE
+ *
+ * Primary:
+ *   Home Hero "Pre-registration"
+ *
+ * Secondary:
+ *   Home Hero "Collaborate with us"
+ *
+ * This block intentionally does NOT modify:
+ *   transform
+ *   scale
+ *   translate
+ *   transition duration
+ *   animation
+ *   border-radius
+ *   dimensions
+ */
+
+
+/* ==================================================
+   TOKENS
+   ================================================== */
+
+:root {
+  --mcoe-btn-navy: #001858;
+  --mcoe-btn-blue: #002699;
+
+  --mcoe-btn-orange: #F5A623;
+  --mcoe-btn-orange-soft: #FFF7E8;
+  --mcoe-btn-orange-hover: #FFE8B5;
+
+  --mcoe-btn-white: #FFFFFF;
+
+
+  /* Primary navy inner clay */
+
+  --mcoe-btn-primary-shadow:
+    inset 7px 7px 16px rgba(0, 8, 40, 0.42),
+    inset -6px -6px 15px rgba(61, 92, 180, 0.20),
+    inset 0 0 0 1px rgba(255,255,255,0.08);
+
+
+  --mcoe-btn-primary-hover-shadow:
+    inset 7px 7px 16px rgba(151, 91, 8, 0.22),
+    inset -6px -6px 15px rgba(255, 228, 166, 0.46),
+    inset 0 0 0 1px rgba(255,255,255,0.16);
+
+
+  --mcoe-btn-primary-active-shadow:
+    inset 10px 10px 20px rgba(140, 81, 5, 0.30),
+    inset -7px -7px 16px rgba(255, 228, 166, 0.34),
+    inset 0 0 0 1px rgba(255,255,255,0.12);
+
+
+  /* Secondary cream/orange inner clay */
+
+  --mcoe-btn-secondary-shadow:
+    inset 6px 6px 14px rgba(142, 96, 26, 0.10),
+    inset -6px -6px 14px rgba(255,255,255,0.86),
+    inset 0 0 0 1px rgba(245,166,35,0.18);
+
+
+  --mcoe-btn-secondary-hover-shadow:
+    inset 7px 7px 16px rgba(151, 91, 8, 0.18),
+    inset -7px -7px 16px rgba(255, 239, 198, 0.58),
+    inset 0 0 0 1px rgba(245,166,35,0.28);
+
+
+  --mcoe-btn-secondary-active-shadow:
+    inset 9px 9px 18px rgba(151, 91, 8, 0.24),
+    inset -6px -6px 14px rgba(255, 231, 170, 0.42),
+    inset 0 0 0 1px rgba(245,166,35,0.30);
+}
+
+
+/* ==================================================
+   PRIMARY BUTTONS
+   Equivalent to Home Hero "Pre-registration"
+   ================================================== */
+
+main button:not([data-variant="outline"]):not([data-variant="ghost"]),
+.neumorphic-btn,
+[data-button-variant="default"],
+[data-button-variant="primary"] {
+
+  background-color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  border-color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  color:
+    var(--mcoe-btn-white)
+    !important;
+
+  box-shadow:
+    var(--mcoe-btn-primary-shadow)
+    !important;
+}
+
+
+/* Existing AppButton/link primary buttons */
+
+a.neumorphic-btn,
+a.neumorphic-cta:not(.mcoe-secondary-button),
+a[class*="bg-primary"][class*="rounded"],
+a[class*="bg-[#001858]"][class*="rounded"] {
+
+  background-color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  border-color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  color:
+    var(--mcoe-btn-white)
+    !important;
+
+  box-shadow:
+    var(--mcoe-btn-primary-shadow)
+    !important;
+}
+
+
+/* Primary hover */
+
+main button:not(:disabled):not([data-variant="outline"]):not([data-variant="ghost"]):hover,
+.neumorphic-btn:not(:disabled):hover,
+[data-button-variant="default"]:not(:disabled):hover,
+[data-button-variant="primary"]:not(:disabled):hover,
+
+a.neumorphic-btn:hover,
+a.neumorphic-cta:not(.mcoe-secondary-button):hover,
+a[class*="bg-primary"][class*="rounded"]:hover,
+a[class*="bg-[#001858]"][class*="rounded"]:hover {
+
+  background-color:
+    var(--mcoe-btn-orange)
+    !important;
+
+  border-color:
+    var(--mcoe-btn-orange)
+    !important;
+
+  color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  box-shadow:
+    var(--mcoe-btn-primary-hover-shadow)
+    !important;
+}
+
+
+/* Primary active */
+
+main button:not(:disabled):not([data-variant="outline"]):not([data-variant="ghost"]):active,
+.neumorphic-btn:not(:disabled):active,
+[data-button-variant="default"]:not(:disabled):active,
+[data-button-variant="primary"]:not(:disabled):active,
+
+a.neumorphic-btn:active,
+a.neumorphic-cta:not(.mcoe-secondary-button):active,
+a[class*="bg-primary"][class*="rounded"]:active,
+a[class*="bg-[#001858]"][class*="rounded"]:active {
+
+  background-color:
+    var(--mcoe-btn-orange)
+    !important;
+
+  border-color:
+    var(--mcoe-btn-orange)
+    !important;
+
+  color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  box-shadow:
+    var(--mcoe-btn-primary-active-shadow)
+    !important;
+}
+
+
+/* ==================================================
+   SECONDARY BUTTONS
+   Equivalent to Home Hero "Collaborate with us"
+   ================================================== */
+
+main button[data-variant="outline"],
+main button[data-variant="ghost"],
+
+[data-button-variant="outline"],
+[data-button-variant="ghost"],
+
+.mcoe-secondary-button {
+
+  background-color:
+    var(--mcoe-btn-orange-soft)
+    !important;
+
+  border-color:
+    rgba(245,166,35,0.40)
+    !important;
+
+  color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  box-shadow:
+    var(--mcoe-btn-secondary-shadow)
+    !important;
+}
+
+
+/* Common Tailwind secondary / outline buttons */
+
+a[class*="border"][class*="bg-transparent"][class*="rounded"],
+a[class*="border"][class*="bg-[#FFF7E8]"][class*="rounded"] {
+
+  background-color:
+    var(--mcoe-btn-orange-soft)
+    !important;
+
+  border-color:
+    rgba(245,166,35,0.40)
+    !important;
+
+  color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  box-shadow:
+    var(--mcoe-btn-secondary-shadow)
+    !important;
+}
+
+
+/* Secondary hover */
+
+main button[data-variant="outline"]:not(:disabled):hover,
+main button[data-variant="ghost"]:not(:disabled):hover,
+
+[data-button-variant="outline"]:not(:disabled):hover,
+[data-button-variant="ghost"]:not(:disabled):hover,
+
+.mcoe-secondary-button:hover,
+
+a[class*="border"][class*="bg-transparent"][class*="rounded"]:hover,
+a[class*="border"][class*="bg-[#FFF7E8]"][class*="rounded"]:hover {
+
+  background-color:
+    var(--mcoe-btn-orange-hover)
+    !important;
+
+  border-color:
+    rgba(245,166,35,0.70)
+    !important;
+
+  color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  box-shadow:
+    var(--mcoe-btn-secondary-hover-shadow)
+    !important;
+}
+
+
+/* Secondary active */
+
+main button[data-variant="outline"]:not(:disabled):active,
+main button[data-variant="ghost"]:not(:disabled):active,
+
+[data-button-variant="outline"]:not(:disabled):active,
+[data-button-variant="ghost"]:not(:disabled):active,
+
+.mcoe-secondary-button:active,
+
+a[class*="border"][class*="bg-transparent"][class*="rounded"]:active,
+a[class*="border"][class*="bg-[#FFF7E8]"][class*="rounded"]:active {
+
+  background-color:
+    var(--mcoe-btn-orange-hover)
+    !important;
+
+  border-color:
+    var(--mcoe-btn-orange)
+    !important;
+
+  color:
+    var(--mcoe-btn-navy)
+    !important;
+
+  box-shadow:
+    var(--mcoe-btn-secondary-active-shadow)
+    !important;
+}
+
+
+/* ==================================================
+   ICONS
+   Follow text color
+   ================================================== */
+
+button svg,
+a.neumorphic-btn svg,
+a.neumorphic-cta svg,
+.mcoe-secondary-button svg {
+
+  color:
+    currentColor;
+
+  stroke:
+    currentColor;
+}
+
+
+/* ==================================================
+   DISABLED
+   Keep state recognizable
+   ================================================== */
+
+main button:disabled,
+[data-button-variant]:disabled {
+
+  opacity:
+    0.55;
+
+  cursor:
+    not-allowed;
+
+  box-shadow:
+    inset 4px 4px 10px rgba(0,24,88,0.12),
+    inset -4px -4px 10px rgba(255,255,255,0.12)
+    !important;
+}
+
+
+/* ==================================================
+   MOBILE
+   Shallower depth only.
+   Colors and behavior remain identical.
+   ================================================== */
+
+@media (max-width: 640px) {
+
+  main button,
+  .neumorphic-btn,
+  .neumorphic-cta {
+
+    --mcoe-btn-primary-shadow:
+      inset 5px 5px 12px rgba(0,8,40,0.38),
+      inset -5px -5px 12px rgba(61,92,180,0.17);
+
+    --mcoe-btn-secondary-shadow:
+      inset 5px 5px 11px rgba(142,96,26,0.09),
+      inset -5px -5px 11px rgba(255,255,255,0.80);
+  }
+}
+
+/* GLOBAL INNER CLAY BUTTONS END */

@@ -49,19 +49,19 @@ const COLORS = {
 
 const shadows = {
   cream:
-    '18px 18px 38px rgba(80, 65, 45, 0.12), -14px -14px 30px rgba(255, 255, 255, 0.95), inset 1px 1px 2px rgba(255,255,255,0.9)',
+    'inset 9px 9px 20px rgba(80, 65, 45, 0.10), inset -9px -9px 20px rgba(255, 255, 255, 0.94), 0 1px 0 rgba(255,255,255,0.55)',
 
   blue:
-    '16px 18px 32px rgba(0, 24, 88, 0.24), -10px -10px 24px rgba(255,255,255,0.45), inset 2px 2px 3px rgba(255,255,255,0.22)',
+    'inset 9px 9px 20px rgba(0, 14, 58, 0.30), inset -8px -8px 18px rgba(74, 105, 198, 0.18), 0 1px 0 rgba(255,255,255,0.08)',
 
   soft:
-    '10px 12px 25px rgba(60, 48, 32, 0.12), -9px -9px 22px rgba(255,255,255,0.94)',
+    'inset 7px 7px 16px rgba(80, 65, 45, 0.09), inset -7px -7px 16px rgba(255, 255, 255, 0.90), 0 1px 0 rgba(255,255,255,0.45)',
 
   yellow:
-    '12px 14px 26px rgba(168, 109, 18, 0.18), -8px -8px 20px rgba(255,255,255,0.75)',
+    'inset 8px 8px 18px rgba(168, 109, 18, 0.18), inset -8px -8px 18px rgba(255, 226, 166, 0.42), 0 1px 0 rgba(255,255,255,0.28)',
 
   inset:
-    'inset 6px 6px 12px rgba(0,24,88,0.13), inset -6px -6px 12px rgba(255,255,255,0.75)',
+    'inset 10px 10px 22px rgba(0, 24, 88, 0.16), inset -10px -10px 22px rgba(255, 255, 255, 0.72)',
 };
 
 

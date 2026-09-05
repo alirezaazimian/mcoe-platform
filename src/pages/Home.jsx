@@ -13,7 +13,7 @@ import Partners from '@/components/home/Partners';
 export default function Home() {
   return (
     <div
-      className="
+      className="home-inner-clay
         bg-[#FBF6EE]
         [&>section]:!bg-[#FBF6EE]
       "

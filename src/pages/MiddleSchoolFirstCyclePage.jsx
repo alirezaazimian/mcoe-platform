@@ -42,13 +42,13 @@ const COLORS = {
 
 const SHADOWS = {
   image:
-    '0 28px 70px rgba(0,24,88,.18)',
+    'inset 9px 9px 20px rgba(0, 24, 88, 0.12), inset -7px -7px 18px rgba(255, 255, 255, 0.18), 0 1px 0 rgba(255,255,255,0.12)',
 
   soft:
-    '0 18px 42px rgba(42,34,24,.08)',
+    'inset 7px 7px 16px rgba(80, 65, 45, 0.09), inset -7px -7px 16px rgba(255, 255, 255, 0.90), 0 1px 0 rgba(255,255,255,0.45)',
 
   yellow:
-    '0 14px 28px rgba(245,166,35,.18)',
+    'inset 8px 8px 18px rgba(168, 109, 18, 0.18), inset -8px -8px 18px rgba(255, 226, 166, 0.42), 0 1px 0 rgba(255,255,255,0.28)',
 };
 
 
