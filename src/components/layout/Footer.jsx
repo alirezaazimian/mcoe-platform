@@ -1,8 +1,8 @@
+import McoeLogo from '@/components/ui/McoeLogo';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
 import { Mail, MapPin, Phone, Send, Instagram, Linkedin, ArrowUp } from 'lucide-react';
-import { Image } from '@/components/ui/image';
 
 export default function Footer() {
   const { t, isRTL } = useLanguage();
@@ -43,11 +43,9 @@ export default function Footer() {
           {/* About */}
           <div className="lg:col-span-4">
             <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start text-center sm:text-start gap-3 mb-5">
-              <Image
-                src="/media/site/3cc1bf827_BlackandWhiteElegantInitialsLogo1.png"
+              <McoeLogo
                 alt={isRTL ? 'مجتمع آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}
-                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg shrink-0"
-                fittingType="fill"
+                className="h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14"
               />
               <div className="flex flex-col justify-center">
                 <div className="font-bold text-white text-sm sm:text-base leading-tight">{isRTL ? 'مجتمع آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}</div>

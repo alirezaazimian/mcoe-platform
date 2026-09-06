@@ -1,3 +1,4 @@
+import McoeLogo from '@/components/ui/McoeLogo';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -327,20 +328,11 @@ export default function Login() {
                   w-[76px]
                   items-center
                   justify-center
-                  rounded-2xl
-                  bg-[#FFF9F1]
-                  p-2
-                  shadow-[8px_10px_22px_rgba(80,65,45,0.09),-7px_-7px_18px_rgba(255,255,255,0.95)]
                 "
               >
-                <img
-                  src="/media/site/3cc1bf827_BlackandWhiteElegantInitialsLogo1.png"
+                <McoeLogo
                   alt={copy.school}
-                  className="
-                    h-full
-                    w-full
-                    object-contain
-                  "
+                  className="h-[68px] w-[68px]"
                 />
               </Link>
 

@@ -1,10 +1,10 @@
+import McoeLogo from '@/components/ui/McoeLogo';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { Menu, X, Search, ChevronDown, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Image } from '@/components/ui/image';
 import { djangoApi } from '@/api/djangoApi';
 
 export default function Header() {
@@ -136,11 +136,9 @@ export default function Header() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-1.5 shrink-0">
               <div className="relative">
-                <Image
-                  src="/media/site/3cc1bf827_BlackandWhiteElegantInitialsLogo1.png"
+                <McoeLogo
                   alt={isRTL ? 'مجتمع آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}
-                  className="w-16 h-16 rounded-lg"
-                  fittingType="fill"
+                  className="h-10 w-10"
                 />
               </div>
               <div className="hidden sm:block leading-tight">
