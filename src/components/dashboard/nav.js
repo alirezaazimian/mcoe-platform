@@ -3,6 +3,7 @@ import {
   FileText,
   Globe,
   GraduationCap,
+  Images,
   LayoutDashboard,
   MessageSquare,
   Newspaper,
@@ -36,6 +37,11 @@ export const DASHBOARD_NAV_ITEMS = [
     path: '/dashboard/events',
     key: 'events',
     icon: CalendarDays,
+  },
+  {
+    path: '/dashboard/hero-slides',
+    key: 'heroSlides',
+    icon: Images,
   },
   {
     path: '/dashboard/teachers',

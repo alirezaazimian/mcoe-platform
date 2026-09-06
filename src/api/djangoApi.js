@@ -499,6 +499,27 @@ function normalizeEvent(
 }
 
 
+function normalizeHeroSlide(
+  payload
+) {
+  return {
+    alt_fa:
+      payload.alt_fa || '',
+    alt_en:
+      payload.alt_en || '',
+    is_active:
+      Boolean(
+        payload.is_active
+      ),
+    sort_order:
+      Number(
+        payload.sort_order ||
+        0
+      ),
+  };
+}
+
+
 export const djangoApi = {
   workingGroups: {
     list() {
@@ -776,6 +797,57 @@ export const djangoApi = {
     list() {
       return request(
         '/hero-slides/'
+      );
+    },
+
+    adminList() {
+      return request(
+        '/hero-slides/?admin=true',
+        {
+          auth: true,
+        }
+      );
+    },
+
+    create(payload) {
+      return request(
+        '/hero-slides/',
+        {
+          method: 'POST',
+          body: makeBody(
+            payload,
+            'image',
+            normalizeHeroSlide
+          ),
+          auth: true,
+        }
+      );
+    },
+
+    update(id, payload) {
+      return request(
+        `/hero-slides/` +
+        `${encodeURIComponent(id)}/`,
+        {
+          method: 'PATCH',
+          body: makeBody(
+            payload,
+            'image',
+            normalizeHeroSlide
+          ),
+          auth: true,
+        }
+      );
+    },
+
+    remove(id) {
+      return request(
+        `/hero-slides/` +
+        `${encodeURIComponent(id)}/`,
+        {
+          method: 'DELETE',
+          auth: true,
+        }
       );
     },
   },

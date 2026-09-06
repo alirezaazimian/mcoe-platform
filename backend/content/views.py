@@ -248,16 +248,35 @@ class EventViewSet(
 
 
 class HeroSlideViewSet(
-    viewsets.ReadOnlyModelViewSet
+    viewsets.ModelViewSet
 ):
     serializer_class = HeroSlideSerializer
 
+    permission_classes = [
+        PublicReadAdminWritePermission
+    ]
+
+    parser_classes = CONTENT_PARSERS
+
     def get_queryset(self):
-        return HeroSlide.objects.filter(
-            is_active=True
-        ).order_by(
+        queryset = HeroSlide.objects.all().order_by(
             "sort_order",
             "id",
+        )
+
+        user = self.request.user
+
+        is_staff_request = bool(
+            user
+            and user.is_authenticated
+            and user.is_staff
+        )
+
+        if is_staff_request:
+            return queryset
+
+        return queryset.filter(
+            is_active=True
         )
 
 

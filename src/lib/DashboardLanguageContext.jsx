@@ -28,6 +28,10 @@ const translations = {
     en: 'Events',
     fa: 'رویدادها',
   },
+  heroSlides: {
+    en: 'Hero Slides',
+    fa: 'اسلایدهای صفحه اصلی',
+  },
   teachers: {
     en: 'Teachers',
     fa: 'معلمان',
@@ -214,6 +218,29 @@ const translations = {
       'Manage upcoming and completed school events.',
     fa:
       'رویدادهای پیش رو و برگزارشده مدرسه را مدیریت کنید.',
+  },
+  heroSlidesIntro: {
+    en:
+      'Upload, order and publish the images displayed in the home page hero slider.',
+    fa:
+      'تصاویر اسلایدر ابتدای صفحه اصلی را بارگذاری، مرتب و منتشر کنید.',
+  },
+
+  altFa: {
+    en: 'Persian Alternative Text',
+    fa: 'متن جایگزین فارسی',
+  },
+  altEn: {
+    en: 'English Alternative Text',
+    fa: 'متن جایگزین انگلیسی',
+  },
+  alternativeText: {
+    en: 'Alternative Text',
+    fa: 'متن جایگزین',
+  },
+  active: {
+    en: 'Active',
+    fa: 'فعال',
   },
 
   titleFa: {

@@ -136,6 +136,11 @@ class EventSerializer(serializers.ModelSerializer):
         ]
 
 class HeroSlideSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(
+        write_only=True,
+        required=True,
+    )
+
     image_url = serializers.ImageField(
         source="image",
         read_only=True,
@@ -145,12 +150,23 @@ class HeroSlideSerializer(serializers.ModelSerializer):
         model = HeroSlide
         fields = [
             "id",
+            "image",
             "image_url",
             "alt_fa",
             "alt_en",
             "is_active",
             "sort_order",
         ]
+
+    def validate_image(self, image):
+        max_size = 10 * 1024 * 1024
+
+        if image.size > max_size:
+            raise serializers.ValidationError(
+                "Image must be smaller than 10 MB."
+            )
+
+        return image
 
 
 class CollaborationRequestSerializer(serializers.ModelSerializer):

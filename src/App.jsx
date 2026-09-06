@@ -60,6 +60,7 @@ import AdminDashboard from '@/pages/dashboard/AdminDashboard';
 import ArticlesAdmin from '@/pages/dashboard/ArticlesAdmin';
 import DashboardModulePlaceholder from '@/pages/dashboard/DashboardModulePlaceholder';
 import EventsAdmin from '@/pages/dashboard/EventsAdmin';
+import HeroSlidesAdmin from '@/pages/dashboard/HeroSlidesAdmin';
 import NewsAdmin from '@/pages/dashboard/NewsAdmin';
 import WorkgroupsAdmin from '@/pages/dashboard/WorkgroupsAdmin';
 
@@ -131,6 +132,13 @@ function AppRoutes() {
             path="events"
             element={
               <EventsAdmin />
+            }
+          />
+
+          <Route
+            path="hero-slides"
+            element={
+              <HeroSlidesAdmin />
             }
           />
 
