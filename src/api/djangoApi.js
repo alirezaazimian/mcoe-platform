@@ -323,6 +323,12 @@ function workingGroupFormData(
     'slug',
     'description_fa',
     'description_en',
+    'summary_fa',
+    'summary_en',
+    'objectives_fa',
+    'objectives_en',
+    'programs_fa',
+    'programs_en',
     'icon',
   ];
 
@@ -520,6 +526,290 @@ function normalizeHeroSlide(
 }
 
 
+function normalizeFields(
+  payload,
+  {
+    text = [],
+    numbers = [],
+    booleans = [],
+  }
+) {
+  const normalized = {};
+
+  text.forEach((key) => {
+    normalized[key] =
+      payload[key] || '';
+  });
+
+  numbers.forEach((key) => {
+    normalized[key] = Number(
+      payload[key] || 0
+    );
+  });
+
+  booleans.forEach((key) => {
+    normalized[key] = Boolean(
+      payload[key]
+    );
+  });
+
+  return normalized;
+}
+
+
+function makeCrudApi(
+  endpoint,
+  {
+    fileKey = null,
+    normalize = (payload) => payload,
+    lookup = 'id',
+  } = {}
+) {
+  const bodyFor = (payload) =>
+    fileKey
+      ? makeBody(
+          payload,
+          fileKey,
+          normalize
+        )
+      : JSON.stringify(
+          normalize(payload)
+        );
+
+  return {
+    list(query = '') {
+      return request(
+        `/${endpoint}/` +
+        (query ? `?${query}` : '')
+      );
+    },
+
+    adminList(query = '') {
+      return request(
+        `/${endpoint}/` +
+        (query ? `?${query}` : ''),
+        { auth: true }
+      );
+    },
+
+    get(value) {
+      return request(
+        `/${endpoint}/` +
+        `${encodeURIComponent(value)}/`
+      );
+    },
+
+    create(payload) {
+      return request(
+        `/${endpoint}/`,
+        {
+          method: 'POST',
+          body: bodyFor(payload),
+          auth: true,
+        }
+      );
+    },
+
+    update(value, payload) {
+      return request(
+        `/${endpoint}/` +
+        `${encodeURIComponent(value)}/`,
+        {
+          method: 'PATCH',
+          body: bodyFor(payload),
+          auth: true,
+        }
+      );
+    },
+
+    remove(value) {
+      return request(
+        `/${endpoint}/` +
+        `${encodeURIComponent(value)}/`,
+        {
+          method: 'DELETE',
+          auth: true,
+        }
+      );
+    },
+
+    lookup,
+  };
+}
+
+
+const normalizeWorkingGroupMember =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'group_slug',
+        'name_fa',
+        'name_en',
+        'role_fa',
+        'role_en',
+        'summary_fa',
+        'summary_en',
+        'bio_fa',
+        'bio_en',
+        'education_fa',
+        'education_en',
+        'experience_fa',
+        'experience_en',
+        'expertise_fa',
+        'expertise_en',
+        'email',
+        'linkedin_url',
+      ],
+      numbers: ['sort_order'],
+    }
+  );
+
+
+const normalizeEducationLevel =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'slug',
+        'title_fa',
+        'title_en',
+        'description_fa',
+        'description_en',
+        'age_label_fa',
+        'age_label_en',
+      ],
+      numbers: ['sort_order'],
+      booleans: ['is_active'],
+    }
+  );
+
+
+const normalizePartner =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'name_fa',
+        'name_en',
+        'url',
+        'icon',
+      ],
+      numbers: ['sort_order'],
+      booleans: ['is_active'],
+    }
+  );
+
+
+const normalizeSiteImage =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'section',
+        'alt_fa',
+        'alt_en',
+        'caption_fa',
+        'caption_en',
+      ],
+      numbers: ['sort_order'],
+      booleans: ['is_active'],
+    }
+  );
+
+
+const normalizeFacility =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'name_fa',
+        'name_en',
+        'description_fa',
+        'description_en',
+        'icon',
+      ],
+      numbers: ['sort_order'],
+      booleans: ['is_active'],
+    }
+  );
+
+
+const normalizeSiteSection =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'key',
+        'title_fa',
+        'title_en',
+        'subtitle_fa',
+        'subtitle_en',
+        'body_fa',
+        'body_en',
+      ],
+    }
+  );
+
+
+const workingGroupMembersApi =
+  makeCrudApi(
+    'working-group-members',
+    {
+      fileKey: 'photo',
+      normalize:
+        normalizeWorkingGroupMember,
+    }
+  );
+
+
+const educationLevelsApi =
+  makeCrudApi(
+    'education-levels',
+    {
+      fileKey: 'image',
+      normalize:
+        normalizeEducationLevel,
+      lookup: 'slug',
+    }
+  );
+
+
+const partnersApi = makeCrudApi(
+  'partners',
+  {
+    fileKey: 'image',
+    normalize: normalizePartner,
+  }
+);
+
+
+const siteImagesApi = makeCrudApi(
+  'site-images',
+  {
+    fileKey: 'image',
+    normalize: normalizeSiteImage,
+  }
+);
+
+
+const facilitiesApi = makeCrudApi(
+  'facilities',
+  {
+    normalize: normalizeFacility,
+  }
+);
+
+
+const siteSectionsApi = makeCrudApi(
+  'site-sections',
+  {
+    normalize: normalizeSiteSection,
+    lookup: 'key',
+  }
+);
+
+
 export const djangoApi = {
   workingGroups: {
     list() {
@@ -580,14 +870,33 @@ export const djangoApi = {
   },
 
   workingGroupMembers: {
+    ...workingGroupMembersApi,
+
     listByGroup(groupSlug) {
-      return request(
-        `/working-group-members/` +
-        `?group_slug=` +
+      return workingGroupMembersApi.list(
+        `group_slug=` +
         `${encodeURIComponent(groupSlug)}`
       );
     },
   },
+
+  educationLevels: educationLevelsApi,
+
+  partners: partnersApi,
+
+  siteImages: {
+    ...siteImagesApi,
+
+    listBySection(section) {
+      return siteImagesApi.list(
+        `section=${encodeURIComponent(section)}`
+      );
+    },
+  },
+
+  facilities: facilitiesApi,
+
+  siteSections: siteSectionsApi,
 
   news: {
     list() {

@@ -1,51 +1,126 @@
 import React from 'react';
-import { useLanguage } from '@/lib/LanguageContext';
-import Reveal from '@/components/ui/Reveal';
-import { Image } from '@/components/ui/image';
 import { Camera } from 'lucide-react';
 
-const GALLERY_IMAGES = [
-  '/media/site/d641eceeb_generated_8663238f.jpg',
-  '/media/site/fc1ec2660_generated_c31ef5f8.jpg',
-  '/media/site/762d5af46_generated_2f7e8049.jpg',
-  '/media/site/79b290cdc_generated_d244f2b5.jpg',
-  '/media/site/debb31be3_generated_a5d84b23.jpg',
-];
+import { djangoApi } from '@/api/djangoApi';
+import Reveal from '@/components/ui/Reveal';
+import { Image } from '@/components/ui/image';
+import {
+  usePublicContent,
+  useSiteSection,
+} from '@/hooks/useSiteContent';
+import { useLanguage } from '@/lib/LanguageContext';
+
 
 export default function Gallery() {
-  const { t, isRTL } = useLanguage();
+  const {
+    language,
+    isRTL,
+  } = useLanguage();
+  const locale = language === 'en'
+    ? 'en'
+    : 'fa';
+  const {
+    data,
+    isLoading,
+  } = usePublicContent(
+    'home-gallery',
+    () =>
+      djangoApi.siteImages.listBySection(
+        'home_gallery'
+      )
+  );
+  const { data: section } =
+    useSiteSection('home-gallery');
+  const images = Array.isArray(data)
+    ? data.filter((item) => item.image)
+    : [];
+  const title =
+    section?.[`title_${locale}`] ||
+    (isRTL
+      ? 'نگاهی به مجتمع'
+      : 'A Glimpse of Our Campus');
+  const eyebrow =
+    section?.[`subtitle_${locale}`] ||
+    (isRTL ? 'گالری' : 'Gallery');
 
   return (
-    <section className="py-20 lg:py-30 bg-background">
+    <section className="bg-[#FBF6EE] py-20 lg:py-28">
       <div className="container-institutional">
-        <Reveal className="text-center max-w-2xl mx-auto mb-14">
-          <span className="text-xs font-semibold text-secondary tracking-widest uppercase mb-3 block flex items-center justify-center gap-2">
-            <Camera className="w-4 h-4" />{isRTL ? 'گالری' : 'Gallery'}
+        <Reveal className="mx-auto mb-14 max-w-2xl text-center">
+          <span className="mb-3 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#002699]">
+            <Camera className="h-4 w-4" />
+            {eyebrow}
           </span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">{isRTL ? 'نگاهی به مجتمع' : 'A Glimpse of Our Campus'}</h2>
+          <h2 className="text-balance text-3xl font-bold text-[#001858] lg:text-4xl">
+            {title}
+          </h2>
         </Reveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 lg:gap-3">
-          {GALLERY_IMAGES.map((img, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <figure
-                className={`group relative overflow-hidden rounded-xl bg-muted cursor-pointer ${
-                  i === 0 ? 'col-span-2 row-span-2 aspect-square md:aspect-[2/2]' : 'aspect-square'
+        {isLoading ? (
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4" aria-busy="true">
+            {[...Array(5)].map((_, index) => (
+              <div
+                key={index}
+                className={`animate-pulse rounded-2xl bg-[#EFE7DA] ${
+                  index === 0
+                    ? 'col-span-2 row-span-2 aspect-square'
+                    : 'aspect-square'
                 }`}
-              >
-                <Image
-                  src={img}
-                  alt={`Gallery ${i + 1}`}
-                  className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                />
-                {/* Minimal hover overlay — thin gradient line slides up from bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-t from-primary/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-                {/* Subtle dark veil on hover */}
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500" />
-              </figure>
-            </Reveal>
-          ))}
-        </div>
+              />
+            ))}
+          </div>
+        ) : images.length ? (
+          <div className="grid grid-cols-2 gap-2.5 md:grid-cols-4 lg:gap-3.5">
+            {images.map((item, index) => {
+              const alt =
+                item[`alt_${locale}`] ||
+                item.alt_fa ||
+                title;
+              const caption =
+                item[`caption_${locale}`] ||
+                item.caption_fa;
+
+              return (
+                <Reveal
+                  key={item.id}
+                  delay={index * 0.045}
+                  className={
+                    index === 0
+                      ? 'col-span-2 row-span-2'
+                      : ''
+                  }
+                >
+                  <figure
+                    className={`group relative overflow-hidden rounded-2xl bg-[#EFE7DA] ${
+                      index === 0
+                        ? 'aspect-square'
+                        : 'aspect-square'
+                    }`}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={alt}
+                      className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                      fittingType="fill"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#001858]/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    {caption && (
+                      <figcaption className="absolute inset-x-4 bottom-4 z-20 translate-y-2 text-xs font-semibold leading-6 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                        {caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                </Reveal>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="home-clay-card rounded-2xl px-6 py-12 text-center text-sm text-[#001858]/55">
+            {isRTL
+              ? 'تصاویر گالری به‌زودی از پنل مدیریت افزوده می‌شوند.'
+              : 'Gallery images will be added from the administration panel.'}
+          </div>
+        )}
       </div>
     </section>
   );

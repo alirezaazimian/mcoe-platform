@@ -195,11 +195,192 @@ const translations = {
     fa: 'تغییر تصویر',
   },
 
+  workgroupDetails: {
+    en: 'Workgroup Content',
+    fa: 'محتوای کارگروه‌ها',
+  },
+  workgroupMembers: {
+    en: 'Workgroup Members',
+    fa: 'اعضای کارگروه‌ها',
+  },
+  workgroup: {
+    en: 'Workgroup',
+    fa: 'کارگروه',
+  },
+  chooseWorkgroup: {
+    en: 'Choose a workgroup',
+    fa: 'انتخاب کارگروه',
+  },
+  roleFa: {
+    en: 'Persian Role',
+    fa: 'سمت فارسی',
+  },
+  roleEn: {
+    en: 'English Role',
+    fa: 'سمت انگلیسی',
+  },
+  photo: {
+    en: 'Portrait',
+    fa: 'عکس عضو',
+  },
+  email: {
+    en: 'Email',
+    fa: 'ایمیل',
+  },
+  linkedinUrl: {
+    en: 'LinkedIn URL',
+    fa: 'لینک LinkedIn',
+  },
+  bioFa: {
+    en: 'Persian Biography',
+    fa: 'معرفی کامل فارسی',
+  },
+  bioEn: {
+    en: 'English Biography',
+    fa: 'معرفی کامل انگلیسی',
+  },
+  educationFa: {
+    en: 'Persian Education',
+    fa: 'تحصیلات فارسی',
+  },
+  educationEn: {
+    en: 'English Education',
+    fa: 'تحصیلات انگلیسی',
+  },
+  experienceFa: {
+    en: 'Persian Experience',
+    fa: 'سوابق شغلی فارسی',
+  },
+  experienceEn: {
+    en: 'English Experience',
+    fa: 'سوابق شغلی انگلیسی',
+  },
+  expertiseFa: {
+    en: 'Persian Expertise',
+    fa: 'تخصص‌ها فارسی',
+  },
+  expertiseEn: {
+    en: 'English Expertise',
+    fa: 'تخصص‌ها انگلیسی',
+  },
+  objectivesFa: {
+    en: 'Persian Objectives',
+    fa: 'اهداف فارسی',
+  },
+  objectivesEn: {
+    en: 'English Objectives',
+    fa: 'اهداف انگلیسی',
+  },
+  programsFa: {
+    en: 'Persian Programs & Activities',
+    fa: 'برنامه‌ها و فعالیت‌ها فارسی',
+  },
+  programsEn: {
+    en: 'English Programs & Activities',
+    fa: 'برنامه‌ها و فعالیت‌ها انگلیسی',
+  },
+
   workgroupsIntro: {
     en:
       'Manage the workgroups displayed on the public MCOE website.',
     fa:
       'گروه‌های کاری نمایش‌داده‌شده در وب‌سایت MCOE را مدیریت کنید.',
+  },
+  workgroupMembersIntro: {
+    en:
+      'Manage portraits, roles and complete resume information shown in every member profile.',
+    fa:
+      'عکس، سمت و اطلاعات کامل رزومه‌ای نمایش‌داده‌شده در پروفایل اعضا را مدیریت کنید.',
+  },
+  siteImages: {
+    en: 'Gallery & Space Images',
+    fa: 'تصاویر گالری و فضای آموزشی',
+  },
+  siteImagesIntro: {
+    en:
+      'Upload and order authentic school photos for the home gallery and educational space page.',
+    fa:
+      'عکس‌های واقعی مدرسه را برای گالری صفحه اصلی و صفحه فضای آموزشی بارگذاری و مرتب کنید.',
+  },
+  educationLevels: {
+    en: 'Education Levels',
+    fa: 'مقاطع تحصیلی',
+  },
+  educationLevelsIntro: {
+    en: 'Manage education level cards displayed on the home page.',
+    fa: 'کارت‌های مقاطع تحصیلی صفحه اصلی را مدیریت کنید.',
+  },
+  partners: {
+    en: 'Partner Institutions',
+    fa: 'مؤسسه‌های همکار',
+  },
+  partnersIntro: {
+    en: 'Manage connected institutions, links, icons and logos.',
+    fa: 'نام، لینک، آیکن و لوگوی مؤسسه‌های همکار را مدیریت کنید.',
+  },
+  facilities: {
+    en: 'Educational Facilities',
+    fa: 'امکانات فضای آموزشی',
+  },
+  facilitiesIntro: {
+    en: 'Manage the facilities listed on the educational space page.',
+    fa: 'امکانات نمایش‌داده‌شده در صفحه فضای آموزشی را مدیریت کنید.',
+  },
+  sectionTexts: {
+    en: 'Section Headings',
+    fa: 'متن بخش‌ها',
+  },
+  sectionTextsIntro: {
+    en: 'Edit headings, subtitles and descriptive copy for public site sections.',
+    fa: 'عنوان، زیرعنوان و متن توضیحی بخش‌های عمومی سایت را ویرایش کنید.',
+  },
+  siteSection: {
+    en: 'Site Section',
+    fa: 'بخش سایت',
+  },
+  sectionKey: {
+    en: 'Section Key',
+    fa: 'کلید بخش',
+  },
+  homeGallery: {
+    en: 'Home Gallery',
+    fa: 'گالری صفحه اصلی',
+  },
+  educationalSpace: {
+    en: 'Educational Space',
+    fa: 'فضای آموزشی',
+  },
+  captionFa: {
+    en: 'Persian Caption',
+    fa: 'شرح فارسی',
+  },
+  captionEn: {
+    en: 'English Caption',
+    fa: 'شرح انگلیسی',
+  },
+  ageLabelFa: {
+    en: 'Persian Age/Grade Label',
+    fa: 'بازه سنی/پایه فارسی',
+  },
+  ageLabelEn: {
+    en: 'English Age/Grade Label',
+    fa: 'بازه سنی/پایه انگلیسی',
+  },
+  websiteUrl: {
+    en: 'Website URL',
+    fa: 'نشانی وب‌سایت',
+  },
+  partnerLogo: {
+    en: 'Institution Logo',
+    fa: 'لوگوی مؤسسه',
+  },
+  subtitleFa: {
+    en: 'Persian Subtitle',
+    fa: 'زیرعنوان فارسی',
+  },
+  subtitleEn: {
+    en: 'English Subtitle',
+    fa: 'زیرعنوان انگلیسی',
   },
   articlesIntro: {
     en:

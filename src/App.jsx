@@ -62,6 +62,7 @@ import DashboardModulePlaceholder from '@/pages/dashboard/DashboardModulePlaceho
 import EventsAdmin from '@/pages/dashboard/EventsAdmin';
 import HeroSlidesAdmin from '@/pages/dashboard/HeroSlidesAdmin';
 import NewsAdmin from '@/pages/dashboard/NewsAdmin';
+import SiteContentAdmin from '@/pages/dashboard/SiteContentAdmin';
 import WorkgroupsAdmin from '@/pages/dashboard/WorkgroupsAdmin';
 
 
@@ -173,7 +174,7 @@ function AppRoutes() {
           <Route
             path="site-content"
             element={
-              <DashboardModulePlaceholder />
+              <SiteContentAdmin />
             }
           />
         </Route>

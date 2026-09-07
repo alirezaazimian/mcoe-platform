@@ -1,177 +1,371 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useLanguage } from '@/lib/LanguageContext';
-import { djangoApi } from '@/api/djangoApi';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+import { Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/AppButton';
-import TeamSection from '@/components/workinggroups/TeamSection';
-import { Image } from '@/components/ui/image';
-import { Globe, Palette, Sparkles, PenTool, Cpu, Atom, BookOpen, Calculator, Activity, Brain, ArrowRight, ArrowLeft, Users } from 'lucide-react';
+import {
+  Activity,
+  ArrowLeft,
+  ArrowRight,
+  Atom,
+  BookOpen,
+  Brain,
+  Calculator,
+  Cpu,
+  Globe,
+  Mail,
+  Palette,
+  PenTool,
+  Sparkles,
+  Users,
+} from 'lucide-react';
 
-const ICON_MAP = { Globe, Palette, Sparkles, PenTool, Cpu, Atom, BookOpen, Calculator, Activity, Brain };
+import { djangoApi } from '@/api/djangoApi';
+import TeamSection from '@/components/workinggroups/TeamSection';
+import Reveal from '@/components/ui/Reveal';
+import { Image } from '@/components/ui/image';
+import { useLanguage } from '@/lib/LanguageContext';
+import '@/styles/working-groups-clay.css';
+
+
+const ICON_MAP = {
+  Activity,
+  Atom,
+  BookOpen,
+  Brain,
+  Calculator,
+  Cpu,
+  Globe,
+  Palette,
+  PenTool,
+  Sparkles,
+};
+
+
+const cleanMarkdown = (value = '') =>
+  value
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/[#*_>`~|-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+
+function MarkdownBlock({ children }) {
+  if (!children) return null;
+
+  return (
+    <div className="wg-markdown">
+      <ReactMarkdown
+        components={{
+          h1: ({ node: _node, ...props }) => <h2 {...props} />,
+          h2: ({ node: _node, ...props }) => <h3 {...props} />,
+          h3: ({ node: _node, ...props }) => <h4 {...props} />,
+          a: ({ node: _node, ...props }) => (
+            <a
+              {...props}
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          ),
+        }}
+      >
+        {children}
+      </ReactMarkdown>
+    </div>
+  );
+}
+
 
 export default function WorkingGroupDetail() {
   const { slug } = useParams();
-  const { language, isRTL, t } = useLanguage();
-  const [group, setGroup] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const Arrow = isRTL ? ArrowLeft : ArrowRight;
+  const {
+    language,
+    isRTL,
+    t,
+  } = useLanguage();
+  const [group, setGroup] =
+    useState(null);
+  const [loading, setLoading] =
+    useState(true);
+  const BackArrow = isRTL
+    ? ArrowRight
+    : ArrowLeft;
+  const ForwardArrow = isRTL
+    ? ArrowLeft
+    : ArrowRight;
 
   useEffect(() => {
-  setLoading(true);
+    setLoading(true);
 
-  djangoApi.workingGroups
-    .get(slug)
-    .then(setGroup)
-    .catch((error) => {
-      console.error('Failed to load working group:', error);
-      setGroup(null);
-    })
-    .finally(() => setLoading(false));
-}, [slug]);
+    djangoApi.workingGroups
+      .get(slug)
+      .then(setGroup)
+      .catch((error) => {
+        console.error(
+          'Failed to load working group:',
+          error
+        );
+        setGroup(null);
+      })
+      .finally(() =>
+        setLoading(false)
+      );
+  }, [slug]);
 
   if (loading) {
     return (
-      <div className="container-institutional py-20">
-        <div className="max-w-3xl mx-auto">
-          <div className="w-20 h-20 rounded-2xl bg-muted animate-pulse mb-6" />
-          <div className="h-8 bg-muted rounded w-1/2 animate-pulse mb-4" />
-          <div className="space-y-3">
-            {[...Array(6)].map((_, i) => <div key={i} className="h-4 bg-muted rounded animate-pulse" />)}
+      <main className="wg-clay-page">
+        <div className="container-institutional py-10 lg:py-16" aria-busy="true">
+          <div className="wg-detail-poster animate-pulse">
+            <div className="wg-detail-media bg-[#EFE7DA]" />
+            <div className="wg-detail-copy space-y-4">
+              <div className="h-4 w-28 rounded-full bg-[#EFE7DA]" />
+              <div className="h-10 w-4/5 rounded-xl bg-[#EFE7DA]" />
+              <div className="h-4 w-full rounded-full bg-[#EFE7DA]" />
+              <div className="h-4 w-2/3 rounded-full bg-[#EFE7DA]" />
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   if (!group) {
     return (
-      <div className="container-institutional py-24 text-center">
-        <div className="text-5xl mb-4 opacity-20"><Users className="w-16 h-16 mx-auto" /></div>
-        <h1 className="text-2xl font-bold text-foreground mb-2">{t('page.notFound')}</h1>
-        <Link to="/working-groups" className="inline-flex items-center gap-2 text-primary hover:underline font-medium">
-          <Arrow className="w-4 h-4 rotate-180 rtl:rotate-0" />
-          {t('page.backToList')}
-        </Link>
-      </div>
+      <main className="wg-clay-page">
+        <div className="container-institutional py-24 text-center">
+          <div className="wg-empty-state">
+            <div className="wg-empty-icon">
+              <Users aria-hidden="true" />
+            </div>
+            <h1>{t('page.notFound')}</h1>
+            <Link to="/working-groups" className="wg-back-link mt-5">
+              <BackArrow aria-hidden="true" />
+              {t('page.backToList')}
+            </Link>
+          </div>
+        </div>
+      </main>
     );
   }
 
-  const name = group[`name_${language}`] || group.name_fa || group.name_en || '';
-  const desc = group[`description_${language}`] || group.description_fa || group.description_en || '';
-  const Icon = ICON_MAP[group.icon] || Users;
+  const locale = language === 'en'
+    ? 'en'
+    : 'fa';
+  const localized = (field) =>
+    group[`${field}_${locale}`] ||
+    group[`${field}_fa`] ||
+    group[`${field}_en`] ||
+    '';
+  const name = localized('name');
+  const description =
+    localized('description');
+  const summary =
+    localized('summary') ||
+    cleanMarkdown(description);
+  const shortSummary =
+    summary.length > 300
+      ? `${summary.slice(0, 300).trim()}…`
+      : summary;
+  const objectives =
+    localized('objectives');
+  const programs =
+    localized('programs');
+  const Icon =
+    ICON_MAP[group.icon] ||
+    Users;
+
+  const contentLinks = [
+    description && {
+      href: '#overview',
+      label: isRTL ? 'معرفی' : 'Overview',
+    },
+    objectives && {
+      href: '#objectives',
+      label: isRTL ? 'اهداف' : 'Objectives',
+    },
+    programs && {
+      href: '#programs',
+      label: isRTL ? 'برنامه‌ها' : 'Programs',
+    },
+    {
+      href: '#members',
+      label: isRTL ? 'اعضا' : 'Members',
+    },
+  ].filter(Boolean);
 
   return (
-    <>
-      {/* Hero */}
-      <div className="relative h-[50vh] min-h-[400px] overflow-hidden">
-        {group.image ? (
-          <Image src={group.image} alt={name} className="w-full h-full" fittingType="fill" />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-primary to-primary/60" />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/20" />
-        <div className="absolute inset-0 flex items-end">
-          <div className="container-institutional pb-10">
-            <Reveal>
-              <Link to="/working-groups" className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm mb-4 transition-colors">
-                <Arrow className="w-4 h-4 rotate-180 rtl:rotate-0" />
-                {t('page.backToList')}
-              </Link>
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center shrink-0">
-                  <Icon className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-3xl lg:text-5xl font-bold text-white mb-1">{name}</h1>
-                  <span className="inline-block px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-white text-sm font-medium">
-                    {isRTL ? 'کارگروه آموزشی' : 'Working Group'}
-                  </span>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </div>
+    <main className="wg-clay-page">
+      <section className="container-institutional py-7 lg:py-12">
+        <Reveal>
+          <Link to="/working-groups" className="wg-back-link mb-5">
+            <BackArrow aria-hidden="true" />
+            {t('page.backToList')}
+          </Link>
+        </Reveal>
 
-      {/* Content */}
-      <div className="container-institutional py-16 lg:py-24">
-        <div className="grid lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2">
-            <Reveal>
-              <h2 className="text-2xl font-bold text-foreground mb-5">{isRTL ? 'درباره این کارگروه' : 'About This Group'}</h2>
-              <div className="prose-mcoe">
-                <ReactMarkdown
-                  components={{
-                    h1: ({ node, ...props }) => <h1 className="text-2xl font-bold text-foreground mt-8 mb-3" {...props} />,
-                    h2: ({ node, ...props }) => <h2 className="text-xl font-bold text-primary mt-8 mb-3 flex items-center gap-2" {...props} />,
-                    h3: ({ node, ...props }) => <h3 className="text-lg font-bold text-foreground mt-6 mb-2" {...props} />,
-                    p: ({ node, ...props }) => <p className="text-foreground/80 leading-relaxed mb-4 text-lg" {...props} />,
-                    ul: ({ node, ...props }) => <ul className="list-none ps-0 mb-4 space-y-2.5 text-foreground/80" {...props} />,
-                    ol: ({ node, ...props }) => <ol className="list-decimal ps-6 mb-4 space-y-1.5 text-foreground/80" {...props} />,
-                    li: ({ node, ...props }) => <li className="flex items-start gap-2.5 text-base" {...props} />,
-                    a: ({ node, ...props }) => <a className="text-primary hover:underline" {...props} />,
-                    strong: ({ node, ...props }) => <strong className="font-semibold text-foreground" {...props} />,
-                  }}
-                >
-                  {desc}
-                </ReactMarkdown>
-              </div>
-            </Reveal>
-          </div>
+        <Reveal>
+          <article className="wg-detail-poster">
+            <div className="wg-detail-media">
+              {group.image ? (
+                <Image
+                  src={group.image}
+                  alt={name}
+                  className="wg-detail-image"
+                  fittingType="fill"
+                />
+              ) : (
+                <div className="wg-detail-fallback">
+                  <Icon aria-hidden="true" />
+                </div>
+              )}
+              <span className="wg-detail-number" aria-hidden="true">
+                {String(group.sort_order || 1).padStart(2, '0')}
+              </span>
+            </div>
 
-          {/* Sidebar CTA */}
-          <div className="lg:col-span-1">
-            <Reveal delay={0.2}>
-              <div className="sticky top-24 space-y-6">
-                {/* Info card */}
-                <div className="bg-card rounded-2xl p-6 institutional-shadow">
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
+            <div className="wg-detail-copy">
+              <div className="wg-detail-emblem">
+                <Icon aria-hidden="true" />
+              </div>
+              <span className="wg-eyebrow">
+                {isRTL
+                  ? 'کارگروه تخصصی آموزشی'
+                  : 'Specialized Educational Group'}
+              </span>
+              <h1>{name}</h1>
+              {shortSummary && <p>{shortSummary}</p>}
+              <a href="#overview" className="wg-detail-jump-link">
+                {isRTL
+                  ? 'مطالعه معرفی کارگروه'
+                  : 'Read the group overview'}
+                <ForwardArrow aria-hidden="true" />
+              </a>
+            </div>
+          </article>
+        </Reveal>
+      </section>
+
+      <section className="container-institutional pb-16 lg:pb-24">
+        <div className="wg-detail-layout">
+          <div className="wg-detail-content">
+            {description && (
+              <Reveal>
+                <section id="overview" className="wg-editorial-section scroll-mt-24">
+                  <div className="wg-section-heading">
+                    <span aria-hidden="true" />
                     <div>
-                      <h3 className="font-bold text-foreground">{name}</h3>
-                      <p className="text-xs text-muted-foreground">{isRTL ? 'کارگروه آموزشی' : 'Educational Working Group'}</p>
+                      <small>
+                        {isRTL
+                          ? 'شناخت کارگروه'
+                          : 'Discover the Group'}
+                      </small>
+                      <h2>
+                        {isRTL
+                          ? 'معرفی کارگروه'
+                          : 'Group Overview'}
+                      </h2>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-5">
-                    {isRTL ? 'برای مشارکت در فعالیت‌های این کارگروه یا کسب اطلاعات بیشتر، با ما در تماس باشید.' : 'To participate in this group\'s activities or for more information, get in touch with us.'}
-                  </p>
-                  <Button href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister" className="w-full mb-3 bg-transparent text-primary hover:bg-primary hover:text-primary-foreground">
-                    {t('hero.register')}
-                  </Button>
-                  <Button to="/collaborate" variant="outline" className="w-full" icon={false}>
-                    {t('hero.collaborate')}
-                  </Button>
-                  <div className="mt-5 pt-5 border-t border-border">
-                    <p className="text-xs text-muted-foreground mb-2">{isRTL ? 'نیاز به مشاوره؟' : 'Need counseling?'}</p>
-                    <a href="mailto:school@mcoe.ir" className="text-sm font-medium text-primary hover:underline">school@mcoe.ir</a>
-                  </div>
-                </div>
+                  <MarkdownBlock>
+                    {description}
+                  </MarkdownBlock>
+                </section>
+              </Reveal>
+            )}
 
-                {/* Explore card */}
-                <div className="bg-primary/5 border-s-4 border-primary rounded-r-xl p-5">
-                  <h3 className="font-bold text-foreground mb-2 text-sm">{isRTL ? 'کارگروه‌های دیگر' : 'Other Groups'}</h3>
-                  <p className="text-xs text-muted-foreground mb-3">
-                    {isRTL ? 'کارگروه‌های آموزشی دیگر موسسه را کشف کنید.' : 'Explore our other educational working groups.'}
-                  </p>
-                  <Link to="/working-groups" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
-                    {isRTL ? 'مشاهده همه' : 'View all'}
-                    <Arrow className="w-4 h-4" />
-                  </Link>
-                </div>
+            {objectives && (
+              <Reveal>
+                <section id="objectives" className="wg-editorial-section scroll-mt-24">
+                  <div className="wg-section-heading">
+                    <span aria-hidden="true" />
+                    <div>
+                      <small>
+                        {isRTL
+                          ? 'چشم‌انداز آموزشی'
+                          : 'Educational Direction'}
+                      </small>
+                      <h2>
+                        {isRTL
+                          ? 'اهداف کارگروه'
+                          : 'Group Objectives'}
+                      </h2>
+                    </div>
+                  </div>
+                  <MarkdownBlock>
+                    {objectives}
+                  </MarkdownBlock>
+                </section>
+              </Reveal>
+            )}
+
+            {programs && (
+              <Reveal>
+                <section id="programs" className="wg-editorial-section scroll-mt-24">
+                  <div className="wg-section-heading">
+                    <span aria-hidden="true" />
+                    <div>
+                      <small>
+                        {isRTL
+                          ? 'یادگیری در عمل'
+                          : 'Learning in Practice'}
+                      </small>
+                      <h2>
+                        {isRTL
+                          ? 'برنامه‌ها و فعالیت‌ها'
+                          : 'Programs & Activities'}
+                      </h2>
+                    </div>
+                  </div>
+                  <MarkdownBlock>
+                    {programs}
+                  </MarkdownBlock>
+                </section>
+              </Reveal>
+            )}
+          </div>
+
+          <aside className="wg-detail-sidebar">
+            <Reveal delay={0.08}>
+              <nav className="wg-page-index" aria-label={isRTL ? 'فهرست صفحه' : 'Page contents'}>
+                <span>
+                  {isRTL ? 'در این صفحه' : 'On This Page'}
+                </span>
+                {contentLinks.map((link) => (
+                  <a key={link.href} href={link.href}>
+                    {link.label}
+                    <ForwardArrow aria-hidden="true" />
+                  </a>
+                ))}
+              </nav>
+
+              <div className="wg-contact-card">
+                <Mail aria-hidden="true" />
+                <h2>
+                  {isRTL
+                    ? 'همکاری با کارگروه'
+                    : 'Work With This Group'}
+                </h2>
+                <p>
+                  {isRTL
+                    ? 'برای مشارکت در برنامه‌ها یا دریافت اطلاعات بیشتر با مجتمع در ارتباط باشید.'
+                    : 'Contact the institute to participate in programs or receive more information.'}
+                </p>
+                <Link to="/collaborate">
+                  {t('hero.collaborate')}
+                  <ForwardArrow aria-hidden="true" />
+                </Link>
               </div>
             </Reveal>
-          </div>
+          </aside>
         </div>
 
-        {/* Team members */}
-        <div className="lg:col-span-3">
+        <div id="members" className="wg-clay-team scroll-mt-24">
           <TeamSection groupSlug={group.slug} />
         </div>
-      </div>
-    </>
+      </section>
+    </main>
   );
 }

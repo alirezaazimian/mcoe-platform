@@ -1,36 +1,75 @@
-import React, { useEffect, useState } from 'react';
-import { useLanguage } from '@/lib/LanguageContext';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  Linkedin,
+  UserRound,
+} from 'lucide-react';
+
 import { djangoApi } from '@/api/djangoApi';
 import { Image } from '@/components/ui/image';
 import Reveal from '@/components/ui/Reveal';
-import { Linkedin, UserRound } from 'lucide-react';
+import MemberResumeModal from '@/components/workinggroups/MemberResumeModal';
+import { useLanguage } from '@/lib/LanguageContext';
 
-export default function TeamSection({ groupSlug }) {
-  const { language, isRTL, t } = useLanguage();
-  const [members, setMembers] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+export default function TeamSection({
+  groupSlug,
+}) {
+  const {
+    language,
+    isRTL,
+  } = useLanguage();
+  const [members, setMembers] =
+    useState([]);
+  const [loading, setLoading] =
+    useState(true);
+  const [selectedMember, setSelectedMember] =
+    useState(null);
+  const ForwardArrow = isRTL
+    ? ArrowLeft
+    : ArrowRight;
+  const closeResume = useCallback(
+    () => setSelectedMember(null),
+    []
+  );
 
   useEffect(() => {
-  setLoading(true);
+    setLoading(true);
 
-  djangoApi.workingGroupMembers
-    .listByGroup(groupSlug)
-    .then(setMembers)
-    .catch((error) => {
-      console.error('Failed to load working group members:', error);
-      setMembers([]);
-    })
-    .finally(() => setLoading(false));
-}, [groupSlug]);
+    djangoApi.workingGroupMembers
+      .listByGroup(groupSlug)
+      .then(setMembers)
+      .catch((error) => {
+        console.error(
+          'Failed to load working group members:',
+          error
+        );
+        setMembers([]);
+      })
+      .finally(() =>
+        setLoading(false)
+      );
+  }, [groupSlug]);
 
   if (loading) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="bg-card rounded-2xl p-5 institutional-shadow animate-pulse">
-            <div className="w-24 h-24 rounded-full bg-muted mx-auto mb-4" />
-            <div className="h-4 bg-muted rounded w-2/3 mx-auto mb-2" />
-            <div className="h-3 bg-muted rounded w-1/2 mx-auto" />
+      <div
+        className="wg-team-grid"
+        aria-busy="true"
+      >
+        {[...Array(4)].map((_, index) => (
+          <div
+            key={index}
+            className="wg-member-card wg-team-skeleton animate-pulse"
+          >
+            <div className="wg-member-photo bg-[#EFE7DA]" />
+            <div className="mx-auto mb-2 h-4 w-2/3 rounded-full bg-[#EFE7DA]" />
+            <div className="mx-auto h-3 w-1/2 rounded-full bg-[#EFE7DA]" />
           </div>
         ))}
       </div>
@@ -39,62 +78,121 @@ export default function TeamSection({ groupSlug }) {
 
   if (!members.length) return null;
 
-  const heading = isRTL ? 'اعضای این کارگروه' : 'Members of This Group';
+  const locale = language === 'en'
+    ? 'en'
+    : 'fa';
+  const heading = isRTL
+    ? 'اعضای این کارگروه'
+    : 'Members of This Group';
   const subheading = isRTL
-    ? 'افرادی که فعالیت‌های این کارگروه را پیش می‌برند.'
-    : 'The people who drive this group\'s activities.';
+    ? 'برای مشاهده پروفایل و رزومه هر عضو، کارت او را انتخاب کنید.'
+    : 'Select any member card to view their profile and resume.';
 
   return (
-    <div className="mt-16 lg:mt-24 pt-12 border-t border-border">
+    <section className="wg-team-section">
       <Reveal>
-        <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-3 text-balance">{heading}</h2>
-        <p className="text-muted-foreground mb-10 max-w-2xl leading-relaxed">{subheading}</p>
+        <div className="wg-section-heading">
+          <span aria-hidden="true" />
+          <div>
+            <small>
+              {isRTL
+                ? 'اعضای تخصصی'
+                : 'Specialist Members'}
+            </small>
+            <h2>{heading}</h2>
+          </div>
+        </div>
+        <p className="wg-team-intro">
+          {subheading}
+        </p>
       </Reveal>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {members.map((m, i) => {
-          const name = m[`name_${language}`] || m.name_fa || m.name_en || '';
-          const role = m[`role_${language}`] || m.role_fa || m.role_en || '';
-          const summary = m[`summary_${language}`] || m.summary_fa || m.summary_en || '';
+      <div className="wg-team-grid">
+        {members.map((member, index) => {
+          const name =
+            member[`name_${locale}`] ||
+            member.name_fa ||
+            member.name_en ||
+            '';
+          const role =
+            member[`role_${locale}`] ||
+            member.role_fa ||
+            member.role_en ||
+            '';
+          const summary =
+            member[`summary_${locale}`] ||
+            member.summary_fa ||
+            member.summary_en ||
+            '';
 
           return (
-            <Reveal key={m.id || i} delay={(i % 4) * 0.08}>
-              <article className="glass neumorphic-inset rounded-2xl p-5 text-center h-full flex flex-col items-center">
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-muted mb-4 shrink-0">
-                  {m.photo_url ? (
-                    <Image src={m.photo_url} alt={name} className="w-full h-full" fittingType="fill" />
+            <Reveal
+              key={member.id || index}
+              delay={(index % 4) * 0.055}
+              className="h-full"
+            >
+              <button
+                type="button"
+                className="wg-member-card"
+                onClick={() =>
+                  setSelectedMember(member)
+                }
+                aria-haspopup="dialog"
+                aria-label={
+                  isRTL
+                    ? `مشاهده رزومه ${name}`
+                    : `View ${name}'s resume`
+                }
+              >
+                <div className="wg-member-photo">
+                  {member.photo_url ? (
+                    <Image
+                      src={member.photo_url}
+                      alt={name}
+                      className="h-full w-full object-contain"
+                      fittingType="fit"
+                    />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                      <UserRound className="w-10 h-10" />
+                    <div className="wg-member-fallback">
+                      <UserRound aria-hidden="true" />
                     </div>
                   )}
                 </div>
 
-                <h3 className="font-bold text-foreground text-base leading-tight">{name}</h3>
-                {role && (
-                  <p className="text-sm font-medium text-primary mt-1">{role}</p>
-                )}
-                {summary && (
-                  <p className="text-xs text-muted-foreground leading-relaxed mt-3">{summary}</p>
-                )}
-
-                {m.linkedin_url && (
-                  <a
-                    href={m.linkedin_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass neumorphic-inset mt-4 w-9 h-9 rounded-full flex items-center justify-center text-[#0A66C2] hover:text-[#0A66C2] transition-colors"
-                    aria-label={`${name} LinkedIn`}
-                    title="LinkedIn"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                  </a>
-                )}
-              </article>
+                <div className="wg-member-body">
+                  <div className="wg-member-name-row">
+                    <h3>{name}</h3>
+                    {member.linkedin_url && (
+                      <Linkedin aria-hidden="true" />
+                    )}
+                  </div>
+                  {role && (
+                    <p className="wg-member-role">
+                      {role}
+                    </p>
+                  )}
+                  {summary && (
+                    <p className="wg-member-summary">
+                      {summary}
+                    </p>
+                  )}
+                  <span className="wg-member-more">
+                    {isRTL
+                      ? 'مشاهده رزومه'
+                      : 'View resume'}
+                    <ForwardArrow aria-hidden="true" />
+                  </span>
+                </div>
+              </button>
             </Reveal>
           );
         })}
       </div>
-    </div>
+
+      <MemberResumeModal
+        member={selectedMember}
+        onClose={closeResume}
+      />
+    </section>
   );
 }

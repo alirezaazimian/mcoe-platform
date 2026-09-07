@@ -3,9 +3,14 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     ArticleViewSet,
     CollaborationRequestCreateView,
+    EducationLevelViewSet,
     EventViewSet,
+    FacilityViewSet,
     HeroSlideViewSet,
     NewsViewSet,
+    PartnerViewSet,
+    SiteImageViewSet,
+    SiteSectionViewSet,
     WorkingGroupMemberViewSet,
     WorkingGroupViewSet,
 )
@@ -23,6 +28,36 @@ router.register(
     "working-group-members",
     WorkingGroupMemberViewSet,
     basename="working-group-member",
+)
+
+router.register(
+    "education-levels",
+    EducationLevelViewSet,
+    basename="education-level",
+)
+
+router.register(
+    "partners",
+    PartnerViewSet,
+    basename="partner",
+)
+
+router.register(
+    "site-images",
+    SiteImageViewSet,
+    basename="site-image",
+)
+
+router.register(
+    "facilities",
+    FacilityViewSet,
+    basename="facility",
+)
+
+router.register(
+    "site-sections",
+    SiteSectionViewSet,
+    basename="site-section",
 )
 
 router.register(

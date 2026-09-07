@@ -4,95 +4,178 @@ import { useLanguage } from '@/lib/LanguageContext';
 import { djangoApi } from '@/api/djangoApi';
 import Reveal from '@/components/ui/Reveal';
 import { Image } from '@/components/ui/image';
-import { Globe, Palette, Sparkles, PenTool, Cpu, Atom, BookOpen, Calculator, Activity, Brain, ArrowRight, ArrowLeft, Users } from 'lucide-react';
+import {
+  Activity,
+  ArrowLeft,
+  ArrowRight,
+  Atom,
+  BookOpen,
+  Brain,
+  Calculator,
+  Cpu,
+  Globe,
+  Palette,
+  PenTool,
+  Sparkles,
+  Users,
+} from 'lucide-react';
+import '@/styles/working-groups-clay.css';
 
-const ICON_MAP = { Globe, Palette, Sparkles, PenTool, Cpu, Atom, BookOpen, Calculator, Activity, Brain };
+const ICON_MAP = {
+  Globe,
+  Palette,
+  Sparkles,
+  PenTool,
+  Cpu,
+  Atom,
+  BookOpen,
+  Calculator,
+  Activity,
+  Brain,
+};
+
+const CARD_ACCENTS = [
+  { color: '#001858', soft: 'rgba(0, 24, 88, 0.15)' },
+  { color: '#002699', soft: 'rgba(0, 38, 153, 0.14)' },
+  { color: '#F5A623', soft: 'rgba(245, 166, 35, 0.17)' },
+];
+
+const cleanMarkdown = (value = '') =>
+  value
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/[#*_>`~|-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
 export default function WorkingGroups() {
   const { language, isRTL, t } = useLanguage();
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
-  const Arrow = isRTL ? ArrowLeft : ArrowRight;
+  const ForwardArrow = isRTL ? ArrowLeft : ArrowRight;
+  const numberLocale = language === 'fa' ? 'fa-IR' : language === 'ar' ? 'ar-SA' : 'en-US';
+  const numberFormatter = new Intl.NumberFormat(numberLocale, {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
 
   useEffect(() => {
-  djangoApi.workingGroups
-    .list()
-    .then(setGroups)
-    .catch((error) => {
-      console.error('Failed to load working groups:', error);
-      setGroups([]);
-    })
-    .finally(() => setLoading(false));
-}, []);
+    djangoApi.workingGroups
+      .list()
+      .then(setGroups)
+      .catch((error) => {
+        console.error('Failed to load working groups:', error);
+        setGroups([]);
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
-    <>
-      <div className="bg-muted/30 border-b border-border py-16 lg:py-24">
-        <div className="container-institutional">
+    <main className="wg-clay-page">
+      <section className="wg-list-intro">
+        <div className="container-institutional py-8 lg:py-12">
           <Reveal>
-            <span className="text-xs font-semibold text-secondary tracking-widest uppercase mb-3 block">{isRTL ? 'کارگروه‌ها' : 'Working Groups'}</span>
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">{t('groups.title')}</h1>
-            <p className="text-muted-foreground text-lg max-w-xl">{t('groups.subtitle')}</p>
+            <div className="wg-intro-panel">
+              <div className="wg-intro-copy">
+                <span className="wg-eyebrow">
+                  {isRTL ? 'کارگروه‌های آموزشی' : 'Educational Working Groups'}
+                </span>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
+                  {t('groups.title')}
+                </h1>
+                <p className="mt-4 max-w-2xl text-base lg:text-lg leading-relaxed text-muted-foreground">
+                  {t('groups.subtitle')}
+                </p>
+              </div>
+
+              <div className="wg-count-card" aria-label={isRTL ? 'تعداد کارگروه‌ها' : 'Working group count'}>
+                <strong>{loading ? '—' : groups.length.toLocaleString(numberLocale)}</strong>
+                <span>{isRTL ? 'کارگروه فعال' : 'active groups'}</span>
+              </div>
+            </div>
           </Reveal>
         </div>
-      </div>
+      </section>
 
-      <div className="container-institutional py-16 lg:py-24">
-        <Reveal className="mb-12">
-          <p className="text-muted-foreground leading-relaxed max-w-3xl">{t('groups.description')}</p>
+      <section className="container-institutional pb-16 lg:pb-24">
+        <Reveal className="mb-8 lg:mb-10">
+          <p className="wg-section-note">{t('groups.description')}</p>
         </Reveal>
 
         {loading ? (
-          <div className="space-y-6">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="grid md:grid-cols-12 gap-0 glass neumorphic-inset rounded-2xl overflow-hidden animate-pulse">
-                <div className="md:col-span-4 aspect-[4/3] md:aspect-auto bg-muted" />
-                <div className="md:col-span-8 p-8 space-y-3">
-                  <div className="h-6 bg-muted rounded w-1/3" />
-                  <div className="h-4 bg-muted rounded w-full" />
-                  <div className="h-4 bg-muted rounded w-3/4" />
+          <div className="wg-card-grid" aria-busy="true" aria-label={isRTL ? 'در حال بارگذاری' : 'Loading'}>
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="wg-card wg-card-skeleton animate-pulse">
+                <div className="wg-card-media bg-muted" />
+                <div className="p-5 lg:p-6 space-y-4">
+                  <div className="h-3.5 bg-muted rounded-full w-1/3" />
+                  <div className="h-6 bg-muted rounded-lg w-4/5" />
+                  <div className="space-y-2.5">
+                    <div className="h-3.5 bg-muted rounded-full w-full" />
+                    <div className="h-3.5 bg-muted rounded-full w-5/6" />
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         ) : groups.length > 0 ? (
-          <div className="space-y-6">
-            {groups.map((group, i) => {
+          <div className="wg-card-grid">
+            {groups.map((group, index) => {
               const name = group[`name_${language}`] || group.name_fa || group.name_en || '';
-              const desc = group[`description_${language}`] || group.description_fa || group.description_en || '';
-              const plainDesc = desc.replace(/[#*_-]/g, '').replace(/\n+/g, ' ').trim();
+              const description =
+                group[`description_${language}`] || group.description_fa || group.description_en || '';
+              const plainDescription = cleanMarkdown(description);
               const Icon = ICON_MAP[group.icon] || Users;
+              const accent = CARD_ACCENTS[index % CARD_ACCENTS.length];
+
               return (
-                <Reveal key={group.id} delay={i * 0.06}>
+                <Reveal key={group.id} delay={(index % 6) * 0.045} className="h-full">
                   <Link
                     to={`/working-groups/${group.slug}`}
-                    className="group grid md:grid-cols-12 gap-0 glass neumorphic-inset rounded-2xl overflow-hidden hover-elevate"
+                    className="wg-card group"
+                    style={{ '--wg-accent': accent.color, '--wg-accent-soft': accent.soft }}
+                    aria-label={`${t('common.readMore')}: ${name}`}
                   >
-                    <div className="md:col-span-4 relative aspect-[4/3] md:aspect-auto overflow-hidden">
+                    <div className="wg-card-media">
                       {group.image ? (
-                        <Image src={group.image} alt={name} className="w-full h-full" fittingType="fill" />
+                        <Image
+                          src={group.image}
+                          alt={name}
+                          className="wg-card-image"
+                          fittingType="fill"
+                        />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-primary/8 to-primary/4 flex items-center justify-center">
-                          <Icon className="w-12 h-12 text-primary/40" />
+                        <div className="wg-image-fallback">
+                          <Icon aria-hidden="true" />
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent md:bg-gradient-to-r" />
-                      <div className="absolute top-4 start-4 w-11 h-11 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-md">
-                        <Icon className="w-5 h-5 text-primary" />
+                      <div className="wg-card-image-shade" />
+                      <div className="wg-card-icon">
+                        <Icon aria-hidden="true" />
                       </div>
+                      <span className="wg-card-index" aria-hidden="true">
+                        {numberFormatter.format(index + 1)}
+                      </span>
                     </div>
-                    <div className="md:col-span-8 p-6 lg:p-8 flex flex-col justify-center">
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="px-2.5 py-1 rounded-full bg-primary/8 text-primary text-xs font-semibold">
-                          {isRTL ? `گروه ${i + 1} از ${groups.length}` : `Group ${i + 1} of ${groups.length}`}
+
+                    <div className="wg-card-body">
+                      <span className="wg-card-kicker">
+                        {isRTL ? 'کارگروه تخصصی' : 'Specialized group'}
+                      </span>
+                      <h2>{name}</h2>
+                      <p className="wg-card-description">
+                        {plainDescription ||
+                          (isRTL
+                            ? 'برنامه‌ها و اعضای این کارگروه را مشاهده کنید.'
+                            : 'View this group’s programs and members.')}
+                      </p>
+
+                      <div className="wg-card-footer">
+                        <span>{t('common.readMore')}</span>
+                        <span className="wg-card-arrow" aria-hidden="true">
+                          <ForwardArrow />
                         </span>
                       </div>
-                      <h2 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{name}</h2>
-                      <p className="text-muted-foreground leading-relaxed mb-4 max-w-2xl line-clamp-3">{plainDesc}</p>
-                      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-                        {t('common.readMore')}
-                        <Arrow className="w-4 h-4 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
-                      </span>
                     </div>
                   </Link>
                 </Reveal>
@@ -100,13 +183,15 @@ export default function WorkingGroups() {
             })}
           </div>
         ) : (
-          <div className="text-center py-24 rounded-2xl bg-muted/30">
-            <div className="text-5xl mb-4 opacity-20"><Users className="w-16 h-16 mx-auto" /></div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">{t('page.noContent')}</h3>
-            <p className="text-sm text-muted-foreground">{t('page.noContentHint')}</p>
+          <div className="wg-empty-state">
+            <div className="wg-empty-icon">
+              <Users aria-hidden="true" />
+            </div>
+            <h2>{t('page.noContent')}</h2>
+            <p>{t('page.noContentHint')}</p>
           </div>
         )}
-      </div>
-    </>
+      </section>
+    </main>
   );
 }

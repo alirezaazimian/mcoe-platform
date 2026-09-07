@@ -771,5 +771,152 @@
   }
 }
 
+/* Opaque inner-clay cards used by education levels and partners. */
+.home-clay-section {
+  background: #fbf6ee;
+}
+
+.home-clay-eyebrow {
+  display: block;
+  margin-block-end: 0.75rem;
+  color: #002699;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.home-clay-card {
+  border: 1px solid rgba(0, 24, 88, 0.07);
+  background: #fbf6ee;
+  box-shadow:
+    inset 8px 8px 18px rgba(80, 65, 45, 0.09),
+    inset -8px -8px 18px rgba(255, 255, 255, 0.92),
+    0 1px 0 rgba(255, 255, 255, 0.5);
+  color: inherit;
+  outline: none;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.home-clay-card:hover,
+.home-clay-card:focus-visible {
+  border-color: rgba(0, 38, 153, 0.18);
+  box-shadow:
+    inset 10px 10px 21px rgba(80, 65, 45, 0.115),
+    inset -8px -8px 18px rgba(255, 255, 255, 0.86),
+    0 8px 20px rgba(0, 24, 88, 0.055);
+  transform: translateY(-2px);
+}
+
+.home-clay-card:focus-visible {
+  outline: 3px solid rgba(245, 166, 35, 0.45);
+  outline-offset: 3px;
+}
+
+.home-clay-image,
+.home-clay-chip,
+.home-clay-icon {
+  background: #f7f0e6;
+  box-shadow:
+    inset 6px 6px 14px rgba(80, 65, 45, 0.12),
+    inset -6px -6px 14px rgba(255, 255, 255, 0.9);
+}
+
+.home-clay-chip {
+  border: 1px solid rgba(245, 166, 35, 0.24);
+}
+
+.home-clay-icon {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
+  border: 1px solid rgba(0, 38, 153, 0.09);
+  border-radius: 1rem;
+  color: #002699;
+  transition: color 220ms ease, box-shadow 220ms ease;
+}
+
+.home-clay-card:hover .home-clay-icon,
+.home-clay-card:focus-visible .home-clay-icon {
+  color: #f5a623;
+  box-shadow:
+    inset 7px 7px 15px rgba(80, 65, 45, 0.14),
+    inset -6px -6px 14px rgba(255, 255, 255, 0.84);
+}
+
 /* HOME INNER CLAY END */
 
+/* EDITABLE EDUCATIONAL SPACE */
+.space-clay-page {
+  min-height: 65vh;
+  background: #fbf6ee;
+}
+
+.space-clay-heading {
+  max-width: 46rem;
+}
+
+.space-clay-heading > span {
+  display: block;
+  margin-block-end: 0.75rem;
+  color: #002699;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.space-clay-heading h1 {
+  color: #001858;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.space-clay-heading p {
+  max-width: 40rem;
+  margin-block-start: 1rem;
+  color: rgba(0, 24, 88, 0.6);
+  font-size: 1rem;
+  line-height: 2;
+}
+
+.space-clay-panel,
+.space-clay-media {
+  border: 1px solid rgba(0, 24, 88, 0.07);
+  background: #fbf6ee;
+  box-shadow:
+    inset 8px 8px 18px rgba(80, 65, 45, 0.09),
+    inset -8px -8px 18px rgba(255, 255, 255, 0.92),
+    0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.space-clay-media::after {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 7px 7px 16px rgba(0, 24, 88, 0.16),
+    inset -6px -6px 14px rgba(255, 255, 255, 0.16);
+  content: '';
+  pointer-events: none;
+}
+
+.space-clay-icon {
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  place-items: center;
+  border: 1px solid rgba(0, 38, 153, 0.1);
+  border-radius: 1rem;
+  background: #f7f0e6;
+  box-shadow:
+    inset 6px 6px 13px rgba(80, 65, 45, 0.12),
+    inset -6px -6px 13px rgba(255, 255, 255, 0.9);
+  color: #002699;
+}

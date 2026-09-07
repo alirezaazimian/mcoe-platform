@@ -212,6 +212,37 @@
   animation: mcoe-admin-spin 0.8s linear infinite;
 }
 
+.mcoe-admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block-end: 18px;
+  padding: 7px;
+  border-radius: 14px;
+  background: #ebe7e2;
+  box-shadow: var(--shadow-in-sm);
+}
+
+.mcoe-admin-tabs button {
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #625d58;
+  font-size: 12px;
+  font-weight: 700;
+  transition: color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.mcoe-admin-tabs button.is-active {
+  background: #f4f0ec;
+  box-shadow:
+    4px 4px 9px rgba(160, 143, 126, 0.2),
+    -4px -4px 9px rgba(255, 255, 255, 0.82);
+  color: #080c66;
+}
+
 @keyframes mcoe-admin-spin {
   to {
     transform: rotate(360deg);

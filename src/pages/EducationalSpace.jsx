@@ -1,86 +1,203 @@
 import React from 'react';
-import { useLanguage } from '@/lib/LanguageContext';
+import {
+  Building2,
+  Dumbbell,
+  FlaskConical,
+  Library,
+  Monitor,
+  Palette,
+  Puzzle,
+  Trees,
+  UtensilsCrossed,
+} from 'lucide-react';
+
+import { djangoApi } from '@/api/djangoApi';
 import Reveal from '@/components/ui/Reveal';
-import { Building2, FlaskConical, Library, Palette, Dumbbell, Trees, UtensilsCrossed, Monitor, Puzzle } from 'lucide-react';
+import { Image } from '@/components/ui/image';
+import {
+  usePublicContent,
+  useSiteSection,
+} from '@/hooks/useSiteContent';
+import { useLanguage } from '@/lib/LanguageContext';
 
-// MCOE logo-derived brand palette — each facility block gets its own accent.
-const BLOCK_COLORS = [
-  'text-[#001858]',   // navy   — classrooms
-  'text-[#2E7D32]',   // green  — labs
-  'text-[#8E44AD]',   // purple — library
-  'text-[#E1306C]',   // pink   — art
-  'text-[#F5A623]',   // amber  — sports
-  'text-[#2E7D32]',   // green  — yard
-  'text-[#EB5757]',   // red    — kitchen
-  'text-[#0A66C2]',   // blue   — computer
-  'text-[#6B4226]',   // brown  — montessori
-];
 
-const SPACES = [
-  '/media/site/d641eceeb_generated_8663238f.jpg',
-  '/media/site/fc1ec2660_generated_c31ef5f8.jpg',
-  '/media/site/762d5af46_generated_2f7e8049.jpg',
-  '/media/site/79b290cdc_generated_d244f2b5.jpg',
-];
+const ICONS = {
+  Building2,
+  Dumbbell,
+  FlaskConical,
+  Library,
+  Monitor,
+  Palette,
+  Puzzle,
+  Trees,
+  UtensilsCrossed,
+};
+
+
+const FALLBACK_FACILITIES = [
+  ['کلاس‌های استاندارد', 'Standard Classrooms', 'مجهز به ابزار فناوری اطلاعات و امکانات چندرسانه‌ای', 'Equipped with IT tools and multimedia facilities', 'Building2'],
+  ['آزمایشگاه‌های مجهز', 'Equipped Labs', 'آزمایشگاه‌های علوم، زیست‌شناسی، فیزیک و اپتیک برای آموزش عملی', 'Science, biology, physics and optics labs for hands-on learning', 'FlaskConical'],
+  ['کتابخانه', 'Library', 'منبع غنی آموزشی و محیطی آرام برای مطالعه', 'A rich learning resource and a calm reading environment', 'Library'],
+  ['فضای هنر', 'Art Space', 'کارگاه نقاشی، سفال و هنرهای دستی', 'Painting, pottery and crafts workshops', 'Palette'],
+  ['سالن ورزشی', 'Sports Hall', 'فضای مناسب تربیت بدنی و فعالیت‌های ورزشی', 'A dedicated space for physical education and sports', 'Dumbbell'],
+  ['حیاط و فضای باز', 'Yard & Open Space', 'فضای بازی و فعالیت‌های برون‌کلاسی', 'Playground and outdoor learning activities', 'Trees'],
+  ['آشپزخانه و ناهارخوری', 'Kitchen & Dining Hall', 'پخت روزانه و سرو غذای گرم', 'Daily preparation and service of hot meals', 'UtensilsCrossed'],
+  ['سایت کامپیوتر', 'Computer Lab', 'سیستم‌های به‌روز و شبکه داخلی فعال', 'Modern systems with an active internal network', 'Monitor'],
+  ['کارگاه مونته‌سوری', 'Montessori Workshop', 'ابزارهای بازی، یادگیری و پرورش توانایی‌های شناختی', 'Play and learning tools for cognitive development', 'Puzzle'],
+].map((values, index) => ({
+  id: `fallback-${index}`,
+  name_fa: values[0],
+  name_en: values[1],
+  description_fa: values[2],
+  description_en: values[3],
+  icon: values[4],
+}));
+
 
 export default function EducationalSpace() {
-  const { t, isRTL } = useLanguage();
-
-  const facilities = [
-    { icon: Building2, name: isRTL ? 'کلاس‌های استاندارد' : 'Standard Classrooms', desc: isRTL ? 'مجهز به ابزار IT و امکانات چند رسانه‌ای' : 'Equipped with IT tools and multimedia facilities' },
-    { icon: FlaskConical, name: isRTL ? 'آزمایشگاه‌های مجهز' : 'Equipped Labs', desc: isRTL ? 'آزمایشگاه علوم، زمین‌شناسی، زیست‌شناسی و تشریح، فیزیک الکترونیک و اپتیک برای آموزش عملی' : 'Science, geology, biology & anatomy, electronic physics and optics labs for hands-on learning' },
-    { icon: Library, name: isRTL ? 'کتابخانه' : 'Library', desc: isRTL ? 'منبع غنی منابع آموزشی و فضای مطالعه' : 'Rich resource center and reading space' },
-    { icon: Palette, name: isRTL ? 'فضای هنر' : 'Art Space', desc: isRTL ? 'کارگاه نقاشی، سفال و هنرهای دستی' : 'Painting, pottery, and crafts workshop' },
-    { icon: Dumbbell, name: isRTL ? 'سالن ورزشی' : 'Sports Hall', desc: isRTL ? 'فضای مناسب برای تربیت بدنی و فعالیت ورزشی' : 'Space for physical education and sports' },
-    { icon: Trees, name: isRTL ? 'حیاط و فضای باز' : 'Yard & Open Space', desc: isRTL ? 'فضای بازی و فعالیت‌های برون‌کلاسی' : 'Playground and outdoor activities space' },
-    { icon: UtensilsCrossed, name: isRTL ? 'آشپزخانه و ناهارخوری' : 'Kitchen & Dining Hall', desc: isRTL ? 'امکان پخت غذای روزانه و سرو غذای گرم' : 'Daily meal preparation with hot food service' },
-    { icon: Monitor, name: isRTL ? 'سایت کامپیوتر' : 'Computer Site', desc: isRTL ? 'شامل سیستم‌های بروز و شبکه داخلی فعال' : 'Modern systems with an active internal network' },
-    { icon: Puzzle, name: isRTL ? 'کارگاه مونته سوری' : 'Montessori Workshop', desc: isRTL ? 'کارگاه کودک توانا' : 'Play and cognitive tools' },
-  ];
+  const {
+    language,
+    isRTL,
+  } = useLanguage();
+  const locale = language === 'en'
+    ? 'en'
+    : 'fa';
+  const { data: imageData } =
+    usePublicContent(
+      'educational-space-images',
+      () =>
+        djangoApi.siteImages.listBySection(
+          'educational_space'
+        )
+    );
+  const { data: facilityData } =
+    usePublicContent(
+      'facilities',
+      djangoApi.facilities.list
+    );
+  const { data: section } =
+    useSiteSection(
+      'educational-space'
+    );
+  const images = Array.isArray(imageData)
+    ? imageData.filter((item) => item.image)
+    : [];
+  const facilities =
+    Array.isArray(facilityData) &&
+    facilityData.length
+      ? facilityData
+      : FALLBACK_FACILITIES;
+  const title =
+    section?.[`title_${locale}`] ||
+    (isRTL
+      ? 'فضای آموزشی'
+      : 'Educational Space');
+  const subtitle =
+    section?.[`subtitle_${locale}`] ||
+    (isRTL
+      ? 'فضایی برای یادگیری و رشد'
+      : 'A place to learn and grow');
+  const body =
+    section?.[`body_${locale}`] ||
+    (isRTL
+      ? 'فضاهای آموزشی مجتمع برای تجربه، خلاقیت، تعامل و یادگیری ایمن طراحی شده‌اند.'
+      : 'Our educational spaces are designed for safe learning, creativity, interaction and experience.');
 
   return (
-    <>
-      <div className="bg-muted/30 border-b border-border py-16 lg:py-24">
+    <main className="space-clay-page">
+      <section className="border-b border-[#001858]/[0.07] py-16 lg:py-24">
         <div className="container-institutional">
           <Reveal>
-            <span className="text-xs font-semibold text-secondary tracking-widest uppercase mb-3 block">{isRTL ? 'فضا' : 'Space'}</span>
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">{t('space.title')}</h1>
-            <p className="text-muted-foreground text-lg max-w-xl">{t('space.subtitle')}</p>
+            <div className="space-clay-heading">
+              <span>{subtitle}</span>
+              <h1>{title}</h1>
+              {body && <p>{body}</p>}
+            </div>
           </Reveal>
         </div>
-      </div>
+      </section>
 
-      <div className="container-institutional py-16 lg:py-24">
-        <Reveal className="mb-12">
-          <p className="text-muted-foreground leading-relaxed max-w-3xl">{t('space.body')}</p>
-        </Reveal>
+      <section className="container-institutional py-14 lg:py-20">
+        {images.length ? (
+          <div className="mb-16 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+            {images.map((item, index) => {
+              const alt =
+                item[`alt_${locale}`] ||
+                item.alt_fa ||
+                title;
+              const caption =
+                item[`caption_${locale}`] ||
+                item.caption_fa;
 
-        {/* Image gallery */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-16">
-          {SPACES.map((img, i) => (
-            <Reveal key={i} delay={i * 0.06}>
-              <div className="aspect-square rounded-xl overflow-hidden institutional-shadow group">
-                <img src={img} alt={`Space ${i + 1}`} className="w-full h-full object-cover gentle-zoom" />
-              </div>
-            </Reveal>
-          ))}
+              return (
+                <Reveal
+                  key={item.id}
+                  delay={(index % 4) * 0.055}
+                  className={
+                    index === 0
+                      ? 'col-span-2 row-span-2'
+                      : ''
+                  }
+                >
+                  <figure className="space-clay-media group relative aspect-square overflow-hidden rounded-2xl">
+                    <Image
+                      src={item.image}
+                      alt={alt}
+                      className="h-full w-full transition-transform duration-700 group-hover:scale-[1.025]"
+                      fittingType="fill"
+                    />
+                    {caption && (
+                      <figcaption className="absolute inset-x-4 bottom-4 z-20 rounded-xl bg-[#001858]/90 px-3 py-2 text-xs leading-5 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        {caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                </Reveal>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="space-clay-panel mb-16 rounded-2xl px-6 py-12 text-center text-sm text-[#001858]/55">
+            {isRTL
+              ? 'تصاویر واقعی مدرسه از بخش «محتوای سایت» در داشبورد قابل افزودن هستند.'
+              : 'Authentic school photos can be added from Site Content in the dashboard.'}
+          </div>
+        )}
+
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {facilities.map((facility, index) => {
+            const Icon =
+              ICONS[facility.icon] ||
+              Building2;
+            const name =
+              facility[`name_${locale}`] ||
+              facility.name_fa;
+            const description =
+              facility[`description_${locale}`] ||
+              facility.description_fa;
+
+            return (
+              <Reveal
+                key={facility.id || name}
+                delay={(index % 3) * 0.07}
+                className="h-full"
+              >
+                <article className="space-clay-panel h-full rounded-2xl p-6">
+                  <div className="space-clay-icon mb-5">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h2 className="mb-2 text-lg font-bold text-[#001858]">
+                    {name}
+                  </h2>
+                  <p className="text-sm leading-7 text-[#001858]/58">
+                    {description}
+                  </p>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
-
-        {/* Facilities */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {facilities.map((f, i) => (
-            <Reveal key={i} delay={(i % 3) * 0.08}>
-              <div className="glass neumorphic-inset rounded-2xl p-6 h-full">
-                <div className="w-14 h-14 rounded-2xl glass neumorphic-inset flex items-center justify-center mb-5">
-                  <f.icon className={`w-6 h-6 ${BLOCK_COLORS[i]}`} />
-                </div>
-                <h3 className="font-bold text-foreground text-lg mb-2">{f.name}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </>
+      </section>
+    </main>
   );
 }

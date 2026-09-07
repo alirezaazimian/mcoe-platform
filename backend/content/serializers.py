@@ -1,6 +1,19 @@
 from rest_framework import serializers
 
-from .models import HeroSlide, CollaborationRequest, Event, Article, News, WorkingGroup, WorkingGroupMember
+from .models import (
+    Article,
+    CollaborationRequest,
+    EducationLevel,
+    Event,
+    Facility,
+    HeroSlide,
+    News,
+    Partner,
+    SiteImage,
+    SiteSection,
+    WorkingGroup,
+    WorkingGroupMember,
+)
 
 
 class WorkingGroupSerializer(serializers.ModelSerializer):
@@ -13,6 +26,12 @@ class WorkingGroupSerializer(serializers.ModelSerializer):
             'slug',
             'description_fa',
             'description_en',
+            'summary_fa',
+            'summary_en',
+            'objectives_fa',
+            'objectives_en',
+            'programs_fa',
+            'programs_en',
             'icon',
             'image',
             'sort_order',
@@ -23,7 +42,13 @@ class WorkingGroupMemberSerializer(serializers.ModelSerializer):
     group_slug = serializers.SlugRelatedField(
         source='group',
         slug_field='slug',
-        read_only=True,
+        queryset=WorkingGroup.objects.all(),
+    )
+
+    photo = serializers.ImageField(
+        write_only=True,
+        required=False,
+        allow_null=True,
     )
 
     photo_url = serializers.ImageField(
@@ -41,10 +66,99 @@ class WorkingGroupMemberSerializer(serializers.ModelSerializer):
             'role_en',
             'summary_fa',
             'summary_en',
+            'bio_fa',
+            'bio_en',
+            'education_fa',
+            'education_en',
+            'experience_fa',
+            'experience_en',
+            'expertise_fa',
+            'expertise_en',
+            'email',
+            'photo',
             'photo_url',
             'linkedin_url',
             'group_slug',
             'sort_order',
+        ]
+
+
+class EducationLevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EducationLevel
+        fields = [
+            'id',
+            'slug',
+            'title_fa',
+            'title_en',
+            'description_fa',
+            'description_en',
+            'age_label_fa',
+            'age_label_en',
+            'image',
+            'is_active',
+            'sort_order',
+        ]
+
+
+class PartnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Partner
+        fields = [
+            'id',
+            'name_fa',
+            'name_en',
+            'url',
+            'icon',
+            'image',
+            'is_active',
+            'sort_order',
+        ]
+
+
+class SiteImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SiteImage
+        fields = [
+            'id',
+            'section',
+            'image',
+            'alt_fa',
+            'alt_en',
+            'caption_fa',
+            'caption_en',
+            'is_active',
+            'sort_order',
+        ]
+
+
+class FacilitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Facility
+        fields = [
+            'id',
+            'name_fa',
+            'name_en',
+            'description_fa',
+            'description_en',
+            'icon',
+            'is_active',
+            'sort_order',
+        ]
+
+
+class SiteSectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SiteSection
+        fields = [
+            'id',
+            'key',
+            'title_fa',
+            'title_en',
+            'subtitle_fa',
+            'subtitle_en',
+            'body_fa',
+            'body_en',
         ]
 
 class NewsSerializer(serializers.ModelSerializer):

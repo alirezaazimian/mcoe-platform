@@ -7,9 +7,14 @@ from rest_framework import (
 from .models import (
     Article,
     CollaborationRequest,
+    EducationLevel,
     Event,
+    Facility,
     HeroSlide,
     News,
+    Partner,
+    SiteImage,
+    SiteSection,
     WorkingGroup,
     WorkingGroupMember,
 )
@@ -19,9 +24,14 @@ from .permissions import (
 from .serializers import (
     ArticleSerializer,
     CollaborationRequestSerializer,
+    EducationLevelSerializer,
     EventSerializer,
+    FacilitySerializer,
     HeroSlideSerializer,
     NewsSerializer,
+    PartnerSerializer,
+    SiteImageSerializer,
+    SiteSectionSerializer,
     WorkingGroupMemberSerializer,
     WorkingGroupSerializer,
 )
@@ -49,11 +59,17 @@ class WorkingGroupViewSet(
 
 
 class WorkingGroupMemberViewSet(
-    viewsets.ReadOnlyModelViewSet
+    viewsets.ModelViewSet
 ):
     serializer_class = (
         WorkingGroupMemberSerializer
     )
+
+    permission_classes = [
+        PublicReadAdminWritePermission
+    ]
+
+    parser_classes = CONTENT_PARSERS
 
     def get_queryset(self):
         queryset = (
@@ -74,6 +90,71 @@ class WorkingGroupMemberViewSet(
             )
 
         return queryset
+
+
+def is_staff_request(request):
+    user = request.user
+
+    return bool(
+        user
+        and user.is_authenticated
+        and user.is_staff
+    )
+
+
+class ActiveContentViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        PublicReadAdminWritePermission
+    ]
+    parser_classes = CONTENT_PARSERS
+
+    def get_queryset(self):
+        queryset = self.queryset.all()
+
+        if is_staff_request(self.request):
+            return queryset
+
+        return queryset.filter(is_active=True)
+
+
+class EducationLevelViewSet(ActiveContentViewSet):
+    queryset = EducationLevel.objects.all()
+    serializer_class = EducationLevelSerializer
+    lookup_field = 'slug'
+
+
+class PartnerViewSet(ActiveContentViewSet):
+    queryset = Partner.objects.all()
+    serializer_class = PartnerSerializer
+
+
+class SiteImageViewSet(ActiveContentViewSet):
+    queryset = SiteImage.objects.all()
+    serializer_class = SiteImageSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        section = self.request.query_params.get('section')
+
+        if section:
+            queryset = queryset.filter(section=section)
+
+        return queryset
+
+
+class FacilityViewSet(ActiveContentViewSet):
+    queryset = Facility.objects.all()
+    serializer_class = FacilitySerializer
+
+
+class SiteSectionViewSet(viewsets.ModelViewSet):
+    queryset = SiteSection.objects.all()
+    serializer_class = SiteSectionSerializer
+    lookup_field = 'key'
+    permission_classes = [
+        PublicReadAdminWritePermission
+    ]
+    parser_classes = CONTENT_PARSERS
 
 
 class NewsViewSet(

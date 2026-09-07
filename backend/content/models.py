@@ -1,8 +1,5 @@
 from django.db import models
 
-# Create your models here.
-from django.db import models
-
 
 class WorkingGroup(models.Model):
     name_fa = models.CharField(
@@ -30,6 +27,36 @@ class WorkingGroup(models.Model):
     description_en = models.TextField(
         blank=True,
         verbose_name='توضیحات انگلیسی',
+    )
+
+    summary_fa = models.TextField(
+        blank=True,
+        verbose_name='خلاصه معرفی فارسی',
+    )
+
+    summary_en = models.TextField(
+        blank=True,
+        verbose_name='خلاصه معرفی انگلیسی',
+    )
+
+    objectives_fa = models.TextField(
+        blank=True,
+        verbose_name='اهداف فارسی',
+    )
+
+    objectives_en = models.TextField(
+        blank=True,
+        verbose_name='اهداف انگلیسی',
+    )
+
+    programs_fa = models.TextField(
+        blank=True,
+        verbose_name='برنامه‌ها و فعالیت‌ها فارسی',
+    )
+
+    programs_en = models.TextField(
+        blank=True,
+        verbose_name='برنامه‌ها و فعالیت‌ها انگلیسی',
     )
 
     icon = models.CharField(
@@ -107,6 +134,51 @@ class WorkingGroupMember(models.Model):
         verbose_name='خلاصه انگلیسی',
     )
 
+    bio_fa = models.TextField(
+        blank=True,
+        verbose_name='درباره عضو فارسی',
+    )
+
+    bio_en = models.TextField(
+        blank=True,
+        verbose_name='درباره عضو انگلیسی',
+    )
+
+    education_fa = models.TextField(
+        blank=True,
+        verbose_name='تحصیلات فارسی',
+    )
+
+    education_en = models.TextField(
+        blank=True,
+        verbose_name='تحصیلات انگلیسی',
+    )
+
+    experience_fa = models.TextField(
+        blank=True,
+        verbose_name='سوابق شغلی فارسی',
+    )
+
+    experience_en = models.TextField(
+        blank=True,
+        verbose_name='سوابق شغلی انگلیسی',
+    )
+
+    expertise_fa = models.TextField(
+        blank=True,
+        verbose_name='تخصص‌ها فارسی',
+    )
+
+    expertise_en = models.TextField(
+        blank=True,
+        verbose_name='تخصص‌ها انگلیسی',
+    )
+
+    email = models.EmailField(
+        blank=True,
+        verbose_name='ایمیل کاری',
+    )
+
     photo = models.ImageField(
         upload_to='working-group-members/',
         blank=True,
@@ -139,6 +211,289 @@ class WorkingGroupMember(models.Model):
 
     def __str__(self):
         return f'{self.name_fa} - {self.group.name_fa}'
+
+
+class EducationLevel(models.Model):
+    slug = models.SlugField(
+        max_length=100,
+        unique=True,
+        verbose_name='Slug',
+    )
+
+    title_fa = models.CharField(
+        max_length=200,
+        verbose_name='عنوان فارسی',
+    )
+
+    title_en = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name='عنوان انگلیسی',
+    )
+
+    description_fa = models.TextField(
+        blank=True,
+        verbose_name='توضیحات فارسی',
+    )
+
+    description_en = models.TextField(
+        blank=True,
+        verbose_name='توضیحات انگلیسی',
+    )
+
+    age_label_fa = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name='بازه سنی/پایه فارسی',
+    )
+
+    age_label_en = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name='بازه سنی/پایه انگلیسی',
+    )
+
+    image = models.ImageField(
+        upload_to='education-levels/',
+        blank=True,
+        null=True,
+        verbose_name='تصویر',
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name='فعال',
+    )
+
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name='ترتیب نمایش',
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort_order', 'id']
+        verbose_name = 'مقطع تحصیلی'
+        verbose_name_plural = 'مقاطع تحصیلی'
+
+    def __str__(self):
+        return self.title_fa
+
+
+class Partner(models.Model):
+    name_fa = models.CharField(
+        max_length=250,
+        verbose_name='نام فارسی',
+    )
+
+    name_en = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name='نام انگلیسی',
+    )
+
+    url = models.URLField(
+        blank=True,
+        verbose_name='نشانی وب‌سایت',
+    )
+
+    icon = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name='نام آیکن Lucide',
+    )
+
+    image = models.ImageField(
+        upload_to='partners/',
+        blank=True,
+        null=True,
+        verbose_name='لوگو',
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name='فعال',
+    )
+
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name='ترتیب نمایش',
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort_order', 'id']
+        verbose_name = 'مؤسسه همکار'
+        verbose_name_plural = 'مؤسسه‌های همکار'
+
+    def __str__(self):
+        return self.name_fa
+
+
+class SiteImage(models.Model):
+    class Section(models.TextChoices):
+        HOME_GALLERY = 'home_gallery', 'گالری صفحه اصلی'
+        EDUCATIONAL_SPACE = 'educational_space', 'فضای آموزشی'
+
+    section = models.CharField(
+        max_length=40,
+        choices=Section.choices,
+        verbose_name='بخش سایت',
+    )
+
+    image = models.ImageField(
+        upload_to='site-images/%Y/%m/',
+        verbose_name='تصویر',
+    )
+
+    alt_fa = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name='متن جایگزین فارسی',
+    )
+
+    alt_en = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name='متن جایگزین انگلیسی',
+    )
+
+    caption_fa = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name='شرح فارسی',
+    )
+
+    caption_en = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name='شرح انگلیسی',
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name='فعال',
+    )
+
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name='ترتیب نمایش',
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['section', 'sort_order', 'id']
+        verbose_name = 'تصویر سایت'
+        verbose_name_plural = 'تصاویر سایت'
+
+    def __str__(self):
+        return self.alt_fa or f'{self.get_section_display()} #{self.id}'
+
+
+class Facility(models.Model):
+    name_fa = models.CharField(
+        max_length=200,
+        verbose_name='نام فارسی',
+    )
+
+    name_en = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name='نام انگلیسی',
+    )
+
+    description_fa = models.TextField(
+        blank=True,
+        verbose_name='توضیحات فارسی',
+    )
+
+    description_en = models.TextField(
+        blank=True,
+        verbose_name='توضیحات انگلیسی',
+    )
+
+    icon = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name='نام آیکن Lucide',
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name='فعال',
+    )
+
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name='ترتیب نمایش',
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort_order', 'id']
+        verbose_name = 'امکانات فضای آموزشی'
+        verbose_name_plural = 'امکانات فضای آموزشی'
+
+    def __str__(self):
+        return self.name_fa
+
+
+class SiteSection(models.Model):
+    key = models.SlugField(
+        max_length=100,
+        unique=True,
+        verbose_name='کلید بخش',
+    )
+
+    title_fa = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name='عنوان فارسی',
+    )
+
+    title_en = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name='عنوان انگلیسی',
+    )
+
+    subtitle_fa = models.TextField(
+        blank=True,
+        verbose_name='زیرعنوان فارسی',
+    )
+
+    subtitle_en = models.TextField(
+        blank=True,
+        verbose_name='زیرعنوان انگلیسی',
+    )
+
+    body_fa = models.TextField(
+        blank=True,
+        verbose_name='متن فارسی',
+    )
+
+    body_en = models.TextField(
+        blank=True,
+        verbose_name='متن انگلیسی',
+    )
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['key']
+        verbose_name = 'متن بخش سایت'
+        verbose_name_plural = 'متن بخش‌های سایت'
+
+    def __str__(self):
+        return self.title_fa or self.key
 
 
 class News(models.Model):

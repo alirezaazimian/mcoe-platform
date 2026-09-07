@@ -3,9 +3,14 @@ from django.contrib import admin
 from .models import (
     Article,
     CollaborationRequest,
+    EducationLevel,
     Event,
+    Facility,
     HeroSlide,
     News,
+    Partner,
+    SiteImage,
+    SiteSection,
     WorkingGroup,
     WorkingGroupMember,
 )
@@ -68,6 +73,61 @@ class WorkingGroupMemberAdmin(admin.ModelAdmin):
     list_editable = (
         "sort_order",
     )
+
+
+@admin.register(EducationLevel)
+class EducationLevelAdmin(admin.ModelAdmin):
+    list_display = (
+        'title_fa',
+        'slug',
+        'is_active',
+        'sort_order',
+    )
+    list_editable = ('is_active', 'sort_order')
+    search_fields = ('title_fa', 'title_en', 'slug')
+
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = (
+        'name_fa',
+        'url',
+        'is_active',
+        'sort_order',
+    )
+    list_editable = ('is_active', 'sort_order')
+    search_fields = ('name_fa', 'name_en')
+
+
+@admin.register(SiteImage)
+class SiteImageAdmin(admin.ModelAdmin):
+    list_display = (
+        'alt_fa',
+        'section',
+        'is_active',
+        'sort_order',
+    )
+    list_filter = ('section', 'is_active')
+    list_editable = ('is_active', 'sort_order')
+    search_fields = ('alt_fa', 'alt_en', 'caption_fa', 'caption_en')
+
+
+@admin.register(Facility)
+class FacilityAdmin(admin.ModelAdmin):
+    list_display = (
+        'name_fa',
+        'icon',
+        'is_active',
+        'sort_order',
+    )
+    list_editable = ('is_active', 'sort_order')
+    search_fields = ('name_fa', 'name_en')
+
+
+@admin.register(SiteSection)
+class SiteSectionAdmin(admin.ModelAdmin):
+    list_display = ('key', 'title_fa', 'title_en', 'updated_at')
+    search_fields = ('key', 'title_fa', 'title_en')
 
 
 @admin.register(News)
