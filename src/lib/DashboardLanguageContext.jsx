@@ -384,21 +384,21 @@ const translations = {
   },
   articlesIntro: {
     en:
-      'Manage drafts and published articles for the public MCOE website.',
+      'Manage article copy and separate thumbnail, hero and main images for the public MCOE website.',
     fa:
-      'پیش‌نویس‌ها و مقالات منتشرشده وب‌سایت MCOE را مدیریت کنید.',
+      'متن مقالات و سه تصویر مستقلِ بندانگشتی، هیرو و اصلی را مدیریت کنید.',
   },
   newsIntro: {
     en:
-      'Manage drafts, announcements and published news for MCOE.',
+      'Manage news copy and separate thumbnail, hero and main images for MCOE.',
     fa:
-      'پیش‌نویس‌ها، اطلاعیه‌ها و اخبار منتشرشده MCOE را مدیریت کنید.',
+      'متن اخبار و سه تصویر مستقلِ بندانگشتی، هیرو و اصلی را مدیریت کنید.',
   },
   eventsIntro: {
     en:
-      'Manage upcoming and completed school events.',
+      'Manage school events and separate thumbnail, hero and main images.',
     fa:
-      'رویدادهای پیش رو و برگزارشده مدرسه را مدیریت کنید.',
+      'رویدادهای مدرسه و سه تصویر مستقلِ بندانگشتی، هیرو و اصلی را مدیریت کنید.',
   },
   heroSlidesIntro: {
     en:
@@ -451,6 +451,18 @@ const translations = {
   featuredImage: {
     en: 'Featured Image',
     fa: 'تصویر شاخص',
+  },
+  thumbnailImage: {
+    en: 'Thumbnail Image (listing card)',
+    fa: 'تصویر بندانگشتی (کارت فهرست)',
+  },
+  heroImage: {
+    en: 'Hero Image (top of detail page)',
+    fa: 'تصویر هیرو (بالای صفحه جزئیات)',
+  },
+  mainImage: {
+    en: 'Main Image (after the content)',
+    fa: 'تصویر اصلی (پس از متن)',
   },
   category: {
     en: 'Category',

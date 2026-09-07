@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
 import ReactMarkdown from 'react-markdown';
 import Reveal from '@/components/ui/Reveal';
+import remarkAutoLinkLiterals from '@/lib/remarkAutoLinkLiterals';
 import { Calendar, Clock, User, Tag, ArrowRight, ArrowLeft, Share2, BookOpen } from 'lucide-react';
 
 export default function ArticleLayout({ item, type, related = [], loading }) {
@@ -44,6 +45,8 @@ export default function ArticleLayout({ item, type, related = [], loading }) {
   const summary = item[`summary_${language}`] || item.summary_fa || item.summary_en || '';
   const body = item[`body_${language}`] || item.body_fa || item.body_en || '';
   const date = item.publish_date || item.created_date;
+  const heroImage = item.hero_image;
+  const mainImage = item.featured_image;
   const listPath = type === 'news' ? '/news' : '/articles';
   const detailPath = type === 'news' ? '/news' : '/articles';
 
@@ -59,9 +62,9 @@ export default function ArticleLayout({ item, type, related = [], loading }) {
   return (
     <>
       {/* Hero banner */}
-      {item.featured_image && (
+      {heroImage && (
         <div className="relative h-[40vh] min-h-[300px] overflow-hidden">
-          <img src={item.featured_image} alt={title} className="w-full h-full object-cover" />
+          <img src={heroImage} alt={title} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/20" />
         </div>
       )}
@@ -118,6 +121,7 @@ export default function ArticleLayout({ item, type, related = [], loading }) {
           {/* Body */}
           <div className="prose-mcoe">
             <ReactMarkdown
+              remarkPlugins={[remarkAutoLinkLiterals]}
               components={{
                 h1: ({node, ...props}) => <h1 className="text-2xl font-bold text-foreground mt-8 mb-3" {...props} />,
                 h2: ({node, ...props}) => <h2 className="text-xl font-bold text-foreground mt-6 mb-3" {...props} />,
@@ -125,7 +129,7 @@ export default function ArticleLayout({ item, type, related = [], loading }) {
                 p: ({node, ...props}) => <p className="text-foreground/80 leading-relaxed mb-4" {...props} />,
                 ul: ({node, ...props}) => <ul className="list-disc ps-6 mb-4 space-y-1.5 text-foreground/80" {...props} />,
                 ol: ({node, ...props}) => <ol className="list-decimal ps-6 mb-4 space-y-1.5 text-foreground/80" {...props} />,
-                a: ({node, ...props}) => <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+                a: ({node, ...props}) => <a className="font-medium text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary break-words" target="_blank" rel="noopener noreferrer" {...props} />,
                 strong: ({node, ...props}) => <strong className="font-semibold text-foreground" {...props} />,
                 blockquote: ({node, ...props}) => <blockquote className="border-s-4 border-primary/30 ps-4 py-2 my-4 text-foreground/70 italic" {...props} />,
                 img: ({node, ...props}) => <img className="rounded-xl my-4 w-full" {...props} />,
@@ -134,6 +138,21 @@ export default function ArticleLayout({ item, type, related = [], loading }) {
               {body || summary}
             </ReactMarkdown>
           </div>
+
+          {/* Full main image belongs to the article body, not the hero. */}
+          {mainImage && (
+            <figure className="mt-10 overflow-hidden rounded-[2rem] border border-primary/10 bg-background p-2.5 institutional-shadow sm:p-4">
+              <div className="overflow-hidden rounded-[1.4rem] bg-card shadow-inner">
+                <img
+                  src={mainImage}
+                  alt={title}
+                  className="block h-auto w-full object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </figure>
+          )}
 
           {/* Tags */}
           {item.tags && item.tags.length > 0 && (
@@ -161,8 +180,8 @@ export default function ArticleLayout({ item, type, related = [], loading }) {
                   <Reveal key={rel.id} delay={i * 0.08}>
                     <Link to={`${detailPath}/${rel.id}`} className="group block bg-card rounded-2xl overflow-hidden hover-elevate institutional-shadow h-full">
                       <div className="aspect-[16/10] overflow-hidden">
-                        {rel.featured_image ? (
-                          <img src={rel.featured_image} alt={relTitle} className="w-full h-full object-cover gentle-zoom" />
+                        {(rel.thumbnail_image || rel.featured_image) ? (
+                          <img src={rel.thumbnail_image || rel.featured_image} alt={relTitle} className="w-full h-full object-cover gentle-zoom" />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10" />
                         )}

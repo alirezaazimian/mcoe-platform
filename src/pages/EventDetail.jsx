@@ -5,6 +5,7 @@ import { djangoApi } from '@/api/djangoApi';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/AppButton';
 import ReactMarkdown from 'react-markdown';
+import remarkAutoLinkLiterals from '@/lib/remarkAutoLinkLiterals';
 import { Calendar, MapPin, Users, Clock, ArrowRight, ArrowLeft, ExternalLink } from 'lucide-react';
 
 export default function EventDetail() {
@@ -82,6 +83,8 @@ export default function EventDetail() {
   const eventDate = item.event_date ? new Date(item.event_date) : null;
   const deadline = item.registration_deadline ? new Date(item.registration_deadline) : null;
   const isUpcoming = item.status === 'upcoming';
+  const heroImage = item.hero_image;
+  const mainImage = item.banner_image;
 
   const fmtDate = (d) => d ? d.toLocaleDateString(language === 'fa' ? 'fa-IR' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
   const fmtTime = (d) => d ? d.toLocaleTimeString(language === 'fa' ? 'fa-IR' : 'en-US', { hour: '2-digit', minute: '2-digit' }) : '';
@@ -89,9 +92,9 @@ export default function EventDetail() {
   return (
     <>
       {/* Banner */}
-      {item.banner_image && (
+      {heroImage && (
         <div className="relative h-[40vh] min-h-[280px] overflow-hidden">
-          <img src={item.banner_image} alt={title} className="w-full h-full object-cover" />
+          <img src={heroImage} alt={title} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10" />
           <div className="absolute top-4 end-4">
             <span className={`px-3 py-1.5 rounded-full text-xs font-semibold ${isUpcoming ? 'bg-success text-white' : 'bg-muted text-muted-foreground'}`}>
@@ -120,18 +123,33 @@ export default function EventDetail() {
 
             <div className="prose-mcoe">
               <ReactMarkdown
+                remarkPlugins={[remarkAutoLinkLiterals]}
                 components={{
                   h1: ({node, ...props}) => <h1 className="text-2xl font-bold text-foreground mt-8 mb-3" {...props} />,
                   h2: ({node, ...props}) => <h2 className="text-xl font-bold text-foreground mt-6 mb-3" {...props} />,
                   p: ({node, ...props}) => <p className="text-foreground/80 leading-relaxed mb-4" {...props} />,
                   ul: ({node, ...props}) => <ul className="list-disc ps-6 mb-4 space-y-1.5 text-foreground/80" {...props} />,
-                  a: ({node, ...props}) => <a className="text-primary hover:underline" {...props} />,
+                  a: ({node, ...props}) => <a className="font-medium text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary break-words" target="_blank" rel="noopener noreferrer" {...props} />,
                   strong: ({node, ...props}) => <strong className="font-semibold text-foreground" {...props} />,
                 }}
               >
                 {desc}
               </ReactMarkdown>
             </div>
+
+            {mainImage && (
+              <figure className="mt-10 overflow-hidden rounded-[2rem] border border-primary/10 bg-background p-2.5 institutional-shadow sm:p-4">
+                <div className="overflow-hidden rounded-[1.4rem] bg-card shadow-inner">
+                  <img
+                    src={mainImage}
+                    alt={title}
+                    className="block h-auto w-full object-contain"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </figure>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -233,8 +251,8 @@ export default function EventDetail() {
                   <Reveal key={rel.id} delay={i * 0.08}>
                     <Link to={`/events/${rel.id}`} className="group block bg-card rounded-2xl overflow-hidden hover-elevate institutional-shadow h-full">
                       <div className="aspect-[16/9] overflow-hidden">
-                        {rel.banner_image ? (
-                          <img src={rel.banner_image} alt={relTitle} className="w-full h-full object-cover gentle-zoom" />
+                        {(rel.thumbnail_image || rel.banner_image) ? (
+                          <img src={rel.thumbnail_image || rel.banner_image} alt={relTitle} className="w-full h-full object-cover gentle-zoom" />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-primary/15 to-secondary/10" />
                         )}

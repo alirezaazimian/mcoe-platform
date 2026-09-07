@@ -549,6 +549,20 @@ class News(models.Model):
         verbose_name='تصویر شاخص',
     )
 
+    thumbnail_image = models.ImageField(
+        upload_to='news-thumbnails/%Y/%m/',
+        blank=True,
+        null=True,
+        verbose_name='تصویر بندانگشتی',
+    )
+
+    hero_image = models.ImageField(
+        upload_to='news-heroes/%Y/%m/',
+        blank=True,
+        null=True,
+        verbose_name='تصویر هیرو',
+    )
+
     category = models.CharField(
         max_length=30,
         choices=Category.choices,
@@ -669,6 +683,20 @@ class Article(models.Model):
         verbose_name="تصویر شاخص",
     )
 
+    thumbnail_image = models.ImageField(
+        upload_to="article-thumbnails/%Y/%m/",
+        blank=True,
+        null=True,
+        verbose_name="تصویر بندانگشتی",
+    )
+
+    hero_image = models.ImageField(
+        upload_to="article-heroes/%Y/%m/",
+        blank=True,
+        null=True,
+        verbose_name="تصویر هیرو",
+    )
+
     category = models.CharField(
         max_length=30,
         choices=Category.choices,
@@ -773,6 +801,20 @@ class Event(models.Model):
         blank=True,
         null=True,
         verbose_name="تصویر رویداد",
+    )
+
+    thumbnail_image = models.ImageField(
+        upload_to="event-thumbnails/%Y/%m/",
+        blank=True,
+        null=True,
+        verbose_name="تصویر بندانگشتی رویداد",
+    )
+
+    hero_image = models.ImageField(
+        upload_to="event-heroes/%Y/%m/",
+        blank=True,
+        null=True,
+        verbose_name="تصویر هیرو رویداد",
     )
 
     category = models.CharField(

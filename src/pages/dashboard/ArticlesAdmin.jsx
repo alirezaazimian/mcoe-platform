@@ -143,9 +143,23 @@ export default function ArticlesAdmin() {
       columns={[
         {
           key:
+            'thumbnail_image',
+          labelKey:
+            'thumbnailImage',
+          type: 'image',
+        },
+        {
+          key:
+            'hero_image',
+          labelKey:
+            'heroImage',
+          type: 'image',
+        },
+        {
+          key:
             'featured_image',
           labelKey:
-            'featuredImage',
+            'mainImage',
           type: 'image',
         },
         {
@@ -254,9 +268,25 @@ export default function ArticlesAdmin() {
         },
         {
           key:
+            'thumbnail_image',
+          labelKey:
+            'thumbnailImage',
+          type: 'file',
+          full: true,
+        },
+        {
+          key:
+            'hero_image',
+          labelKey:
+            'heroImage',
+          type: 'file',
+          full: true,
+        },
+        {
+          key:
             'featured_image',
           labelKey:
-            'featuredImage',
+            'mainImage',
           type: 'file',
           full: true,
         },
@@ -319,6 +349,8 @@ export default function ArticlesAdmin() {
         summary_en: '',
         body_fa: '',
         body_en: '',
+        thumbnail_image: '',
+        hero_image: '',
         featured_image: '',
         category: 'general',
         tags: '',

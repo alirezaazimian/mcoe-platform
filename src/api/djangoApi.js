@@ -250,15 +250,20 @@ function makeBody(
   const normalized =
     normalize(payload);
 
-  const file =
-    payload[fileKey];
+  const fileKeys =
+    (Array.isArray(fileKey)
+      ? fileKey
+      : [fileKey]
+    ).filter(Boolean);
 
-  const hasNewFile =
-    typeof File !==
-      'undefined' &&
-    file instanceof File;
+  const newFiles =
+    fileKeys.filter((key) =>
+      typeof File !==
+        'undefined' &&
+      payload[key] instanceof File
+    );
 
-  if (!hasNewFile) {
+  if (!newFiles.length) {
     return JSON.stringify(
       normalized
     );
@@ -302,10 +307,12 @@ function makeBody(
     }
   );
 
-  formData.append(
-    fileKey,
-    file
-  );
+  newFiles.forEach((key) => {
+    formData.append(
+      key,
+      payload[key]
+    );
+  });
 
   return formData;
 }
@@ -928,7 +935,11 @@ export const djangoApi = {
           method: 'POST',
           body: makeBody(
             payload,
-            'featured_image',
+            [
+              'thumbnail_image',
+              'hero_image',
+              'featured_image',
+            ],
             normalizeNews
           ),
           auth: true,
@@ -944,7 +955,11 @@ export const djangoApi = {
           method: 'PATCH',
           body: makeBody(
             payload,
-            'featured_image',
+            [
+              'thumbnail_image',
+              'hero_image',
+              'featured_image',
+            ],
             normalizeNews
           ),
           auth: true,
@@ -994,7 +1009,11 @@ export const djangoApi = {
           method: 'POST',
           body: makeBody(
             payload,
-            'featured_image',
+            [
+              'thumbnail_image',
+              'hero_image',
+              'featured_image',
+            ],
             normalizeArticle
           ),
           auth: true,
@@ -1010,7 +1029,11 @@ export const djangoApi = {
           method: 'PATCH',
           body: makeBody(
             payload,
-            'featured_image',
+            [
+              'thumbnail_image',
+              'hero_image',
+              'featured_image',
+            ],
             normalizeArticle
           ),
           auth: true,
@@ -1066,7 +1089,11 @@ export const djangoApi = {
           method: 'POST',
           body: makeBody(
             payload,
-            'banner_image',
+            [
+              'thumbnail_image',
+              'hero_image',
+              'banner_image',
+            ],
             normalizeEvent
           ),
           auth: true,
@@ -1082,7 +1109,11 @@ export const djangoApi = {
           method: 'PATCH',
           body: makeBody(
             payload,
-            'banner_image',
+            [
+              'thumbnail_image',
+              'hero_image',
+              'banner_image',
+            ],
             normalizeEvent
           ),
           auth: true,

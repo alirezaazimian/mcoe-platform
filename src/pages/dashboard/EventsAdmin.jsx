@@ -86,9 +86,23 @@ export default function EventsAdmin() {
       columns={[
         {
           key:
+            'thumbnail_image',
+          labelKey:
+            'thumbnailImage',
+          type: 'image',
+        },
+        {
+          key:
+            'hero_image',
+          labelKey:
+            'heroImage',
+          type: 'image',
+        },
+        {
+          key:
             'banner_image',
           labelKey:
-            'eventImage',
+            'mainImage',
           type: 'image',
         },
         {
@@ -212,9 +226,25 @@ export default function EventsAdmin() {
         },
         {
           key:
+            'thumbnail_image',
+          labelKey:
+            'thumbnailImage',
+          type: 'file',
+          full: true,
+        },
+        {
+          key:
+            'hero_image',
+          labelKey:
+            'heroImage',
+          type: 'file',
+          full: true,
+        },
+        {
+          key:
             'banner_image',
           labelKey:
-            'eventImage',
+            'mainImage',
           type: 'file',
           full: true,
         },
@@ -254,6 +284,8 @@ export default function EventsAdmin() {
         title_en: '',
         description_fa: '',
         description_en: '',
+        thumbnail_image: '',
+        hero_image: '',
         banner_image: '',
         category: '',
         event_date: '',

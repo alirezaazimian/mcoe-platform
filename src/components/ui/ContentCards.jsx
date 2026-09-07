@@ -15,8 +15,8 @@ export function NewsCard({ item, featured = false }) {
     return (
       <Link to={`/news/${item.id}`} className="group block glass neumorphic-inset rounded-2xl overflow-hidden hover-elevate h-full">
         <div className="relative aspect-[16/10] overflow-hidden">
-          {item.featured_image ? (
-            <img src={item.featured_image} alt={title} className="w-full h-full object-cover gentle-zoom" />
+          {(item.thumbnail_image || item.featured_image) ? (
+            <img src={item.thumbnail_image || item.featured_image} alt={title} className="w-full h-full object-cover gentle-zoom" />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10" />
           )}
@@ -42,8 +42,8 @@ export function NewsCard({ item, featured = false }) {
   return (
     <Link to={`/news/${item.id}`} className="group block glass neumorphic-inset rounded-2xl overflow-hidden hover-elevate h-full">
       <div className="relative aspect-[16/10] overflow-hidden">
-        {item.featured_image ? (
-          <img src={item.featured_image} alt={title} className="w-full h-full object-cover gentle-zoom" />
+        {(item.thumbnail_image || item.featured_image) ? (
+          <img src={item.thumbnail_image || item.featured_image} alt={title} className="w-full h-full object-cover gentle-zoom" />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10" />
         )}
@@ -68,8 +68,8 @@ export function ArticleCard({ item }) {
   return (
     <Link to={`/articles/${item.id}`} className="group block glass neumorphic-inset rounded-2xl overflow-hidden hover-elevate h-full">
       <div className="relative aspect-[16/10] overflow-hidden">
-        {item.featured_image ? (
-          <img src={item.featured_image} alt={title} className="w-full h-full object-cover gentle-zoom" />
+        {(item.thumbnail_image || item.featured_image) ? (
+          <img src={item.thumbnail_image || item.featured_image} alt={title} className="w-full h-full object-cover gentle-zoom" />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
             <span className="text-primary/20 text-4xl font-bold">{isRTL ? 'م' : 'A'}</span>
@@ -104,8 +104,8 @@ export function EventCard({ item }) {
   return (
     <Link to={`/events/${item.id}`} className="group block glass neumorphic-inset rounded-2xl overflow-hidden hover-elevate h-full">
       <div className="relative aspect-[16/9] overflow-hidden">
-        {item.banner_image ? (
-          <img src={item.banner_image} alt={title} className="w-full h-full object-cover gentle-zoom" />
+        {(item.thumbnail_image || item.banner_image) ? (
+          <img src={item.thumbnail_image || item.banner_image} alt={title} className="w-full h-full object-cover gentle-zoom" />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-primary/15 to-secondary/10" />
         )}
