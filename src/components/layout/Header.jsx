@@ -1,22 +1,22 @@
 import McoeLogo from '@/components/ui/McoeLogo';
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
-import { Menu, X, Search, ChevronDown, GraduationCap } from 'lucide-react';
+import { Menu, X, Moon, Sun, ChevronDown, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { djangoApi } from '@/api/djangoApi';
 
-export default function Header() {
+export default function Header({
+  theme,
+  onToggleTheme,
+}) {
   const { t, isRTL } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileExpanded, setMobileExpanded] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
   const [workingGroups, setWorkingGroups] = useState([]);
 
   useEffect(() => {
@@ -42,15 +42,6 @@ export default function Header() {
   };
 }, []);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const term = searchQuery.trim();
-    if (!term) return;
-    navigate(`/search?q=${encodeURIComponent(term)}`);
-    setSearchQuery('');
-    setSearchOpen(false);
-  };
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll);
@@ -59,7 +50,6 @@ export default function Header() {
 
   useEffect(() => {
     setMobileOpen(false);
-    setSearchOpen(false);
     setOpenDropdown(null);
   }, [location.pathname]);
 
@@ -201,11 +191,44 @@ export default function Header() {
             {/* Actions */}
             <div className="flex items-center gap-1.5">
               <button
-                onClick={() => setSearchOpen((s) => !s)}
-                className="p-2.5 rounded-lg text-foreground/70 hover:text-primary hover:bg-muted/50 transition-colors"
-                aria-label={t('common.search')}
+                type="button"
+                onClick={onToggleTheme}
+                className="mcoe-theme-toggle"
+                aria-pressed={theme === 'dark'}
+                aria-label={
+                  theme === 'dark'
+                    ? (
+                        isRTL
+                          ? 'فعال کردن حالت روز'
+                          : 'Switch to light mode'
+                      )
+                    : (
+                        isRTL
+                          ? 'فعال کردن حالت شب'
+                          : 'Switch to dark mode'
+                      )
+                }
+                title={
+                  theme === 'dark'
+                    ? (
+                        isRTL
+                          ? 'حالت روز'
+                          : 'Light mode'
+                      )
+                    : (
+                        isRTL
+                          ? 'حالت شب'
+                          : 'Dark mode'
+                      )
+                }
               >
-                {searchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
+                <span aria-hidden="true">
+                  {theme === 'dark' ? (
+                    <Sun className="w-5 h-5" />
+                  ) : (
+                    <Moon className="w-5 h-5" />
+                  )}
+                </span>
               </button>
               <div className="hidden xl:block">
                 <LanguageSwitcher />
@@ -220,23 +243,6 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Search bar */}
-          {searchOpen && (
-            <div className="pb-4 fade-in">
-              <form onSubmit={handleSearch} className="relative">
-                <Search className="absolute top-1/2 -translate-y-1/2 start-4 w-5 h-5 text-muted-foreground pointer-events-none" />
-                <input
-                  autoFocus
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={t('common.searchPlaceholder')}
-                  className="w-full bg-card border border-border rounded-xl py-3 ps-12 pe-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all"
-                />
-                <button type="submit" className="sr-only">{isRTL ? 'جستجو' : 'Search'}</button>
-              </form>
-            </div>
-          )}
         </div>
 
         {/* Mobile menu */}

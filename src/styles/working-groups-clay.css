@@ -1315,3 +1315,102 @@
     transition: none;
   }
 }
+
+/* MCOE night palette */
+
+.dark .wg-clay-page {
+  --wg-cream: #001858;
+  --wg-cream-deep: #001244;
+  --wg-navy: #fbf6ee;
+  --wg-blue: #f5a623;
+  --wg-gold: #f5a623;
+  --wg-white: #fbf6ee;
+  --wg-line: rgba(245, 166, 35, 0.12);
+  --wg-shadow: rgba(0, 7, 32, 0.46);
+}
+
+.dark .wg-intro-panel,
+.dark .wg-count-card,
+.dark .wg-card,
+.dark .wg-card-icon,
+.dark .wg-card-arrow,
+.dark .wg-empty-state,
+.dark .wg-empty-icon,
+.dark .wg-back-link,
+.dark .wg-detail-poster,
+.dark .wg-detail-emblem,
+.dark .wg-detail-jump-link,
+.dark .wg-editorial-section,
+.dark .wg-page-index,
+.dark .wg-contact-card,
+.dark .wg-member-card,
+.dark .wg-resume-dialog,
+.dark .wg-resume-close,
+.dark .wg-resume-actions a,
+.dark .wg-resume-empty {
+  border-color: var(--wg-line);
+  box-shadow:
+    inset 7px 7px 16px rgba(0, 7, 32, 0.5),
+    inset -7px -7px 16px rgba(0, 38, 153, 0.3),
+    0 8px 20px rgba(0, 7, 32, 0.16);
+}
+
+.dark .wg-card:hover,
+.dark .wg-card:focus-visible,
+.dark .wg-member-card:hover,
+.dark .wg-member-card:focus-visible {
+  border-color: rgba(245, 166, 35, 0.3);
+  box-shadow:
+    inset 9px 9px 20px rgba(0, 7, 32, 0.58),
+    inset -8px -8px 18px rgba(0, 38, 153, 0.36),
+    0 12px 28px rgba(0, 7, 32, 0.22);
+}
+
+.dark .wg-card-media,
+.dark .wg-detail-media,
+.dark .wg-member-photo,
+.dark .wg-resume-photo {
+  box-shadow:
+    inset 7px 7px 16px rgba(0, 7, 32, 0.52),
+    inset -6px -6px 14px rgba(0, 38, 153, 0.24);
+}
+
+.dark .wg-count-card span,
+.dark .wg-section-note,
+.dark .wg-card-description,
+.dark .wg-markdown,
+.dark .wg-member-summary,
+.dark .wg-resume-summary,
+.dark .wg-resume-copy,
+.dark .wg-resume-empty {
+  color: rgba(251, 246, 238, 0.68);
+}
+
+.dark .wg-resume-dialog,
+.dark .wg-resume-close,
+.dark .wg-resume-photo,
+.dark .wg-resume-actions a {
+  background: var(--wg-cream);
+  color: var(--wg-blue);
+}
+
+.dark .wg-resume-profile,
+.dark .wg-resume-empty {
+  background: var(--wg-cream-deep);
+}
+
+.dark .wg-resume-profile h2,
+.dark .wg-resume-block-title h3 {
+  color: var(--wg-navy);
+}
+
+.dark .wg-resume-label,
+.dark .wg-resume-role {
+  color: var(--wg-blue);
+}
+
+@media (max-width: 640px) {
+  .dark .wg-resume-overlay {
+    background: var(--wg-cream);
+  }
+}

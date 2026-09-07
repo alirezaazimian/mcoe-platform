@@ -767,3 +767,73 @@
     transform: scaleX(1);
   }
 }
+
+/* MCOE night palette */
+
+.dark .mcoe-fade-brandline p,
+.dark .mcoe-fade-description,
+.dark .mcoe-fade-stat span,
+.dark .mcoe-fade-counter {
+  color: rgba(251, 246, 238, 0.68);
+}
+
+.dark .mcoe-fade-copy h1 {
+  color: #fbf6ee;
+}
+
+.dark .mcoe-fade-stat,
+.dark .mcoe-fade-controls {
+  border-color: rgba(245, 166, 35, 0.1);
+  box-shadow:
+    inset 5px 5px 11px rgba(0, 7, 32, 0.52),
+    inset -5px -5px 11px rgba(0, 38, 153, 0.32);
+}
+
+.dark .mcoe-fade-stat strong,
+.dark .mcoe-fade-counter strong,
+.dark .mcoe-fade-controls button {
+  color: #f5a623;
+}
+
+.dark .mcoe-fade-progress button > i {
+  background: rgba(251, 246, 238, 0.16);
+}
+
+.dark .mcoe-fade-actions .mcoe-fade-primary-action {
+  border-color: rgba(245, 166, 35, 0.4);
+  color: #001858;
+  background: #f5a623;
+  box-shadow:
+    inset 4px 4px 9px rgba(164, 103, 12, 0.2),
+    inset -4px -4px 9px rgba(255, 223, 150, 0.38),
+    6px 8px 18px rgba(0, 7, 32, 0.25);
+}
+
+.dark .mcoe-fade-actions .mcoe-fade-primary-action:hover {
+  border-color: rgba(251, 246, 238, 0.45);
+  color: #fbf6ee;
+  background: #002699;
+}
+
+.dark .mcoe-fade-actions .mcoe-fade-secondary-action {
+  border-color: rgba(245, 166, 35, 0.18);
+  color: #fbf6ee;
+  background: transparent;
+  box-shadow:
+    inset 4px 4px 9px rgba(0, 7, 32, 0.46),
+    inset -4px -4px 9px rgba(0, 38, 153, 0.3);
+}
+
+.dark .mcoe-fade-actions .mcoe-fade-secondary-action:hover,
+.dark .mcoe-fade-controls button:hover,
+.dark .mcoe-fade-controls button:focus-visible {
+  color: #001858;
+  background: #f5a623;
+}
+
+.dark .mcoe-fade-next-preview {
+  border-color: #002699;
+  box-shadow:
+    inset 5px 5px 10px rgba(0, 7, 32, 0.28),
+    10px 14px 32px rgba(0, 7, 32, 0.34);
+}
