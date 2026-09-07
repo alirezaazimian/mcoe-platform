@@ -70,6 +70,12 @@ export default function HeroSlidesAdmin() {
           type: 'image',
         },
         {
+          key: 'title',
+          labelKey: 'titleFa',
+          faKey: 'title_fa',
+          enKey: 'title_en',
+        },
+        {
           key: 'alt',
           labelKey:
             'alternativeText',
@@ -93,6 +99,58 @@ export default function HeroSlidesAdmin() {
           labelKey: 'image',
           type: 'file',
           required: true,
+          full: true,
+        },
+        {
+          key: 'eyebrow_fa',
+          labelKey: 'eyebrowFa',
+          type: 'text',
+        },
+        {
+          key: 'eyebrow_en',
+          labelKey: 'eyebrowEn',
+          type: 'text',
+        },
+        {
+          key: 'title_fa',
+          labelKey: 'titleFa',
+          type: 'text',
+          full: true,
+        },
+        {
+          key: 'title_en',
+          labelKey: 'titleEn',
+          type: 'text',
+          full: true,
+        },
+        {
+          key: 'description_fa',
+          labelKey: 'descriptionFa',
+          type: 'textarea',
+          rows: 3,
+          full: true,
+        },
+        {
+          key: 'description_en',
+          labelKey: 'descriptionEn',
+          type: 'textarea',
+          rows: 3,
+          full: true,
+        },
+        {
+          key: 'cta_label_fa',
+          labelKey: 'ctaLabelFa',
+          type: 'text',
+        },
+        {
+          key: 'cta_label_en',
+          labelKey: 'ctaLabelEn',
+          type: 'text',
+        },
+        {
+          key: 'cta_url',
+          labelKey: 'ctaUrl',
+          type: 'text',
           full: true,
         },
         {
@@ -120,12 +178,23 @@ export default function HeroSlidesAdmin() {
         },
       ]}
       searchFields={[
+        'title_fa',
+        'title_en',
         'alt_fa',
         'alt_en',
         'sort_order',
       ]}
       defaultValues={{
         image: '',
+        eyebrow_fa: '',
+        eyebrow_en: '',
+        title_fa: '',
+        title_en: '',
+        description_fa: '',
+        description_en: '',
+        cta_label_fa: '',
+        cta_label_en: '',
+        cta_url: '',
         alt_fa: '',
         alt_en: '',
         sort_order: 0,

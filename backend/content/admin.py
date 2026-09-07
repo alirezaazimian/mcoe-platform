@@ -238,6 +238,7 @@ class EventAdmin(admin.ModelAdmin):
 class HeroSlideAdmin(admin.ModelAdmin):
     list_display = (
         "id",
+        "title_fa",
         "is_active",
         "sort_order",
         "updated_at",
@@ -255,6 +256,13 @@ class HeroSlideAdmin(admin.ModelAdmin):
     ordering = (
         "sort_order",
         "id",
+    )
+
+    search_fields = (
+        "title_fa",
+        "title_en",
+        "alt_fa",
+        "alt_en",
     )
 
 

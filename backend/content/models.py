@@ -915,6 +915,58 @@ class HeroSlide(models.Model):
         verbose_name="متن جایگزین انگلیسی",
     )
 
+    eyebrow_fa = models.CharField(
+        max_length=160,
+        blank=True,
+        verbose_name="پیش‌عنوان فارسی",
+    )
+
+    eyebrow_en = models.CharField(
+        max_length=160,
+        blank=True,
+        verbose_name="پیش‌عنوان انگلیسی",
+    )
+
+    title_fa = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name="عنوان فارسی",
+    )
+
+    title_en = models.CharField(
+        max_length=300,
+        blank=True,
+        verbose_name="عنوان انگلیسی",
+    )
+
+    description_fa = models.TextField(
+        blank=True,
+        verbose_name="توضیحات فارسی",
+    )
+
+    description_en = models.TextField(
+        blank=True,
+        verbose_name="توضیحات انگلیسی",
+    )
+
+    cta_label_fa = models.CharField(
+        max_length=120,
+        blank=True,
+        verbose_name="متن دکمه فارسی",
+    )
+
+    cta_label_en = models.CharField(
+        max_length=120,
+        blank=True,
+        verbose_name="متن دکمه انگلیسی",
+    )
+
+    cta_url = models.CharField(
+        max_length=500,
+        blank=True,
+        verbose_name="پیوند دکمه",
+    )
+
     is_active = models.BooleanField(
         default=True,
         verbose_name="فعال",

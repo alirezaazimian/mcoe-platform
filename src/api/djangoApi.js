@@ -520,6 +520,24 @@ function normalizeHeroSlide(
       payload.alt_fa || '',
     alt_en:
       payload.alt_en || '',
+    eyebrow_fa:
+      payload.eyebrow_fa || '',
+    eyebrow_en:
+      payload.eyebrow_en || '',
+    title_fa:
+      payload.title_fa || '',
+    title_en:
+      payload.title_en || '',
+    description_fa:
+      payload.description_fa || '',
+    description_en:
+      payload.description_en || '',
+    cta_label_fa:
+      payload.cta_label_fa || '',
+    cta_label_en:
+      payload.cta_label_en || '',
+    cta_url:
+      payload.cta_url || '',
     is_active:
       Boolean(
         payload.is_active

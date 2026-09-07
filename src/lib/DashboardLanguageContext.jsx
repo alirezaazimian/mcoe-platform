@@ -402,9 +402,29 @@ const translations = {
   },
   heroSlidesIntro: {
     en:
-      'Upload, order and publish the images displayed in the home page hero slider.',
+      'Manage each hero story: image, bilingual copy, action link, order and publication status.',
     fa:
-      'تصاویر اسلایدر ابتدای صفحه اصلی را بارگذاری، مرتب و منتشر کنید.',
+      'تصویر، متن دوزبانه، پیوند دکمه، ترتیب و وضعیت انتشار هر اسلاید هیرو را مدیریت کنید.',
+  },
+  eyebrowFa: {
+    en: 'Persian Eyebrow',
+    fa: 'پیش‌عنوان فارسی',
+  },
+  eyebrowEn: {
+    en: 'English Eyebrow',
+    fa: 'پیش‌عنوان انگلیسی',
+  },
+  ctaLabelFa: {
+    en: 'Persian Button Label',
+    fa: 'متن فارسی دکمه',
+  },
+  ctaLabelEn: {
+    en: 'English Button Label',
+    fa: 'متن انگلیسی دکمه',
+  },
+  ctaUrl: {
+    en: 'Button Link',
+    fa: 'پیوند دکمه',
   },
 
   altFa: {

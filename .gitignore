@@ -41,3 +41,7 @@ __pycache__/
 .env
 .env.local
 .env.*
+
+# Deployment-only content bundles (never commit school media/data)
+/private-imports/
+/work/
