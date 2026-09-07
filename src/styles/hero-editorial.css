@@ -1,0 +1,769 @@
+.mcoe-fade-hero-section {
+  position: relative;
+  width: 100%;
+  overflow: clip;
+  background: transparent;
+}
+
+.mcoe-fade-carousel {
+  --mcoe-hero-edge: max(1.5rem, calc((100vw - 1280px) / 2 + 1.5rem));
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: clamp(39rem, 74svh, 46rem);
+  overflow: hidden;
+  background: transparent;
+}
+
+.mcoe-fade-visual {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  z-index: 1;
+  width: 70%;
+  overflow: hidden;
+  background: #001858;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 12%,
+    rgba(0, 0, 0, 0.76) 28%,
+    #000 43%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 12%,
+    rgba(0, 0, 0, 0.76) 28%,
+    #000 43%,
+    #000 100%
+  );
+}
+
+[dir='rtl'] .mcoe-fade-visual {
+  -webkit-mask-image: linear-gradient(
+    to left,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 12%,
+    rgba(0, 0, 0, 0.76) 28%,
+    #000 43%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to left,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 12%,
+    rgba(0, 0, 0, 0.76) 28%,
+    #000 43%,
+    #000 100%
+  );
+}
+
+.mcoe-fade-visual > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.mcoe-fade-photo-tone {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(
+      0deg,
+      rgba(0, 24, 88, 0.28) 0%,
+      rgba(0, 24, 88, 0.02) 42%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 38, 153, 0.08),
+      transparent 36%
+    );
+  pointer-events: none;
+}
+
+.mcoe-fade-content-shell {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  min-height: clamp(39rem, 74svh, 46rem);
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(2.5rem, 5vh, 4rem) var(--mcoe-hero-edge);
+}
+
+.mcoe-fade-content {
+  display: flex;
+  width: min(45rem, 50vw);
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.mcoe-fade-brandline {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block-end: clamp(1.3rem, 2.5vh, 2rem);
+}
+
+.mcoe-fade-brandline > span {
+  width: clamp(1.75rem, 3vw, 2rem);
+  height: 3px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: #f5a623;
+  box-shadow:
+    inset 1px 1px 2px rgba(255, 255, 255, 0.38),
+    0 3px 8px rgba(245, 166, 35, 0.14);
+}
+
+.mcoe-fade-brandline p {
+  display: block;
+  margin: 0;
+  max-width: 27rem;
+  overflow: hidden;
+  color: rgba(0, 24, 88, 0.62);
+  font-size: clamp(0.72rem, 1vw, 0.82rem);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.015em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mcoe-fade-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mcoe-fade-copy h1 {
+  max-width: 100%;
+  margin: 0;
+  color: #001858;
+  font-size: clamp(2rem, 2.55vw, 2.85rem);
+  font-weight: 820;
+  line-height: 1.28;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.mcoe-fade-copy h1 > span {
+  display: block;
+  max-width: 100%;
+}
+
+[dir='ltr'] .mcoe-fade-copy h1 {
+  font-size: clamp(1.95rem, 2.4vw, 2.75rem);
+  line-height: 1.12;
+}
+
+.mcoe-fade-description {
+  max-width: 39rem;
+  margin: clamp(1rem, 2.3vh, 1.45rem) 0 0;
+  color: rgba(34, 34, 34, 0.72);
+  font-size: clamp(1rem, 1.22vw, 1.08rem);
+  font-weight: 480;
+  line-height: 2;
+}
+
+[dir='ltr'] .mcoe-fade-description {
+  line-height: 1.75;
+}
+
+@media (min-width: 1101px) {
+  .mcoe-fade-copy h1 > span {
+    white-space: nowrap;
+  }
+}
+
+.mcoe-fade-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block-start: clamp(1.25rem, 3vh, 1.9rem);
+}
+
+.mcoe-fade-actions .mcoe-fade-primary-action,
+.mcoe-fade-actions .mcoe-fade-secondary-action {
+  min-height: 3.25rem;
+  padding: 0.82rem 1.25rem;
+  border-radius: 1.05rem;
+  font-size: 0.88rem;
+}
+
+.mcoe-fade-actions .mcoe-fade-primary-action {
+  border: 1px solid rgba(0, 24, 88, 0.12);
+  color: #fbf6ee;
+  background: #001858;
+  box-shadow:
+    inset 4px 4px 9px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 9px rgba(0, 38, 153, 0.55),
+    5px 7px 15px rgba(0, 24, 88, 0.11),
+    -4px -4px 12px rgba(255, 255, 255, 0.62);
+}
+
+.mcoe-fade-actions .mcoe-fade-primary-action:hover {
+  border-color: rgba(245, 166, 35, 0.72);
+  color: #fbf6ee;
+  background: #002699;
+}
+
+.mcoe-fade-actions .mcoe-fade-secondary-action {
+  border: 1px solid rgba(0, 24, 88, 0.08);
+  color: #001858;
+  background: transparent;
+  box-shadow:
+    inset 4px 4px 9px rgba(0, 24, 88, 0.075),
+    inset -4px -4px 9px rgba(255, 255, 255, 0.76);
+}
+
+.mcoe-fade-actions .mcoe-fade-secondary-action:hover {
+  border-color: rgba(245, 166, 35, 0.35);
+  color: #002699;
+  background: rgba(245, 166, 35, 0.07);
+}
+
+.mcoe-fade-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  margin-block-start: clamp(1.45rem, 3vh, 2rem);
+}
+
+.mcoe-fade-stat {
+  min-width: 0;
+  padding: clamp(0.78rem, 1.3vw, 1rem) clamp(0.7rem, 1.25vw, 1rem);
+  border: 1px solid rgba(0, 24, 88, 0.055);
+  border-radius: 1.15rem;
+  background: transparent;
+  box-shadow:
+    inset 4px 4px 10px rgba(0, 24, 88, 0.07),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.72);
+}
+
+.mcoe-fade-stat strong,
+.mcoe-fade-stat span {
+  display: block;
+}
+
+.mcoe-fade-stat strong {
+  color: #002699;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-weight: 820;
+  line-height: 1.1;
+}
+
+.mcoe-fade-stat span {
+  margin-block-start: 0.35rem;
+  overflow: hidden;
+  color: rgba(0, 24, 88, 0.57);
+  font-size: clamp(0.68rem, 0.82vw, 0.77rem);
+  font-weight: 560;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mcoe-fade-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-start: clamp(1.1rem, 2.5vh, 1.6rem);
+}
+
+.mcoe-fade-progress {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.mcoe-fade-progress button {
+  width: clamp(1.4rem, 3vw, 2.6rem);
+  height: 1rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.mcoe-fade-progress button > i {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(0, 24, 88, 0.13);
+}
+
+.mcoe-fade-progress button > i > span {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: inherit;
+  background: #f5a623;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+[dir='rtl'] .mcoe-fade-progress button > i > span {
+  transform-origin: right center;
+}
+
+.mcoe-fade-progress button.is-active {
+  width: clamp(3.2rem, 6vw, 5.2rem);
+}
+
+.mcoe-fade-progress button.is-active > i {
+  background: rgba(245, 166, 35, 0.2);
+}
+
+.mcoe-fade-progress button.is-active > i > span {
+  animation: mcoeFadeProgress var(--hero-duration) linear forwards;
+}
+
+.mcoe-fade-carousel.is-paused .mcoe-fade-progress button.is-active > i > span {
+  animation-play-state: paused;
+}
+
+.mcoe-fade-progress button:focus-visible {
+  outline: 2px solid #f5a623;
+  outline-offset: 3px;
+}
+
+.mcoe-fade-controls {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.3rem;
+  border: 1px solid rgba(0, 24, 88, 0.05);
+  border-radius: 1rem;
+  background: transparent;
+  box-shadow:
+    inset 4px 4px 9px rgba(0, 24, 88, 0.07),
+    inset -4px -4px 9px rgba(255, 255, 255, 0.72);
+}
+
+.mcoe-fade-controls button {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 0;
+  border-radius: 0.72rem;
+  color: #001858;
+  background: transparent;
+  transition: color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.mcoe-fade-controls button:hover,
+.mcoe-fade-controls button:focus-visible {
+  color: #fbf6ee;
+  background: #001858;
+  box-shadow:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.2),
+    inset -3px -3px 6px rgba(0, 38, 153, 0.45);
+  outline: none;
+}
+
+.mcoe-fade-controls svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  stroke-width: 1.8;
+}
+
+.mcoe-fade-counter {
+  display: flex;
+  min-width: 3.7rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding-inline: 0.2rem;
+  color: rgba(0, 24, 88, 0.42);
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.64rem;
+}
+
+.mcoe-fade-counter strong {
+  color: #002699;
+  font-size: 0.8rem;
+}
+
+.mcoe-fade-counter i {
+  width: 0.75rem;
+  height: 1px;
+  background: #f5a623;
+}
+
+.mcoe-fade-next-preview {
+  position: absolute;
+  inset-inline-end: clamp(1rem, 2vw, 2rem);
+  inset-block-end: clamp(1rem, 2vw, 2rem);
+  z-index: 5;
+  width: clamp(6.5rem, 8.5vw, 8.5rem);
+  height: clamp(8.5rem, 11vw, 11rem);
+  overflow: hidden;
+  padding: 0;
+  border: 5px solid #fbf6ee;
+  border-radius: 1.35rem;
+  color: #fbf6ee;
+  background: #001858;
+  box-shadow:
+    inset 5px 5px 10px rgba(0, 24, 88, 0.22),
+    10px 14px 32px rgba(0, 24, 88, 0.24);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease;
+}
+
+.mcoe-fade-next-preview::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0, 24, 88, 0.74), transparent 68%);
+  content: '';
+}
+
+.mcoe-fade-next-preview:hover,
+.mcoe-fade-next-preview:focus-visible {
+  transform: translateY(-5px);
+  box-shadow: 12px 18px 38px rgba(0, 24, 88, 0.3);
+  outline: 2px solid #f5a623;
+  outline-offset: 3px;
+}
+
+.mcoe-fade-next-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mcoe-fade-next-preview span,
+.mcoe-fade-next-preview strong {
+  position: absolute;
+  z-index: 2;
+  inset-block-end: 0.8rem;
+}
+
+.mcoe-fade-next-preview span {
+  inset-inline-start: 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 650;
+}
+
+.mcoe-fade-next-preview strong {
+  inset-inline-end: 0.8rem;
+  color: #f5a623;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.72rem;
+}
+
+.mcoe-fade-loading {
+  background: transparent;
+}
+
+.mcoe-fade-loading::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 70%;
+  background: linear-gradient(120deg, rgba(0, 24, 88, 0.04), rgba(0, 38, 153, 0.12), rgba(0, 24, 88, 0.04));
+  background-size: 200% 100%;
+  content: '';
+  animation: mcoeFadeLoading 1.7s ease-in-out infinite;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 42%);
+  mask-image: linear-gradient(to right, transparent, #000 42%);
+}
+
+[dir='rtl'] .mcoe-fade-loading::after {
+  -webkit-mask-image: linear-gradient(to left, transparent, #000 42%);
+  mask-image: linear-gradient(to left, transparent, #000 42%);
+}
+
+.mcoe-fade-loading-copy {
+  position: absolute;
+  inset-block-start: 22%;
+  inset-inline-start: var(--mcoe-hero-edge);
+  z-index: 2;
+  display: grid;
+  width: min(38rem, 43vw);
+  gap: 1rem;
+}
+
+.mcoe-fade-loading-copy > * {
+  display: block;
+  margin: 0;
+  border-radius: 99px;
+  background: rgba(0, 24, 88, 0.09);
+}
+
+.mcoe-fade-loading-copy span {
+  width: 34%;
+  height: 0.8rem;
+}
+
+.mcoe-fade-loading-copy strong {
+  width: 88%;
+  height: 3.25rem;
+}
+
+.mcoe-fade-loading-copy strong + strong {
+  width: 68%;
+}
+
+.mcoe-fade-loading-copy p {
+  width: 77%;
+  height: 1rem;
+  margin-block-start: 0.75rem;
+}
+
+@keyframes mcoeFadeProgress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes mcoeFadeLoading {
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .mcoe-fade-content {
+    width: min(38rem, 49vw);
+  }
+
+  .mcoe-fade-next-preview {
+    display: none;
+  }
+}
+
+@media (max-width: 820px) {
+  .mcoe-fade-carousel {
+    --mcoe-hero-edge: clamp(1.15rem, 5vw, 2rem);
+    min-height: 50rem;
+    overflow: visible;
+  }
+
+  .mcoe-fade-visual {
+    inset-block-start: 0;
+    inset-inline: 0;
+    width: 100%;
+    height: 31rem;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.72) 68%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.72) 68%,
+      transparent 100%
+    );
+  }
+
+  [dir='rtl'] .mcoe-fade-visual {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.72) 68%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.72) 68%,
+      transparent 100%
+    );
+  }
+
+  .mcoe-fade-visual > img {
+    object-position: center top;
+  }
+
+  .mcoe-fade-photo-tone {
+    background: linear-gradient(0deg, rgba(0, 24, 88, 0.12), transparent 45%);
+  }
+
+  .mcoe-fade-content-shell {
+    min-height: 50rem;
+    align-items: flex-end;
+    padding: 19rem var(--mcoe-hero-edge) 2.25rem;
+  }
+
+  .mcoe-fade-content {
+    width: 100%;
+    max-width: 42rem;
+  }
+
+  .mcoe-fade-copy h1,
+  [dir='ltr'] .mcoe-fade-copy h1 {
+    max-width: 100%;
+    font-size: clamp(1.95rem, 4.2vw, 2.85rem);
+  }
+
+  .mcoe-fade-description {
+    max-width: 37rem;
+  }
+
+  .mcoe-fade-loading::after {
+    inset-inline: 0;
+    width: 100%;
+    height: 31rem;
+    -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  }
+
+  [dir='rtl'] .mcoe-fade-loading::after {
+    -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  }
+
+  .mcoe-fade-loading-copy {
+    inset-block-start: auto;
+    inset-block-end: 15%;
+    width: calc(100% - (var(--mcoe-hero-edge) * 2));
+  }
+}
+
+@media (max-width: 580px) {
+  .mcoe-fade-carousel {
+    min-height: 48rem;
+  }
+
+  .mcoe-fade-visual {
+    height: 27rem;
+  }
+
+  .mcoe-fade-content-shell {
+    min-height: 48rem;
+    padding-block-start: 15.75rem;
+    padding-block-end: 1.5rem;
+  }
+
+  .mcoe-fade-brandline {
+    gap: 0.65rem;
+    margin-block-end: 1rem;
+  }
+
+  .mcoe-fade-brandline > img {
+    width: 2.55rem;
+    height: 2.55rem;
+  }
+
+  .mcoe-fade-brandline > div {
+    padding-inline-start: 0.65rem;
+  }
+
+  .mcoe-fade-brandline span {
+    font-size: 0.7rem;
+  }
+
+  .mcoe-fade-brandline p {
+    max-width: 15rem;
+    font-size: 0.73rem;
+  }
+
+  .mcoe-fade-copy h1,
+  [dir='ltr'] .mcoe-fade-copy h1 {
+    max-width: 100%;
+    font-size: clamp(1.65rem, 7.5vw, 2.2rem);
+  }
+
+  .mcoe-fade-description {
+    margin-block-start: 0.8rem;
+    font-size: 0.92rem;
+    line-height: 1.85;
+  }
+
+  .mcoe-fade-actions {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    margin-block-start: 1.05rem;
+  }
+
+  .mcoe-fade-actions .mcoe-fade-primary-action,
+  .mcoe-fade-actions .mcoe-fade-secondary-action {
+    width: 100%;
+    min-width: 0;
+    min-height: 3rem;
+    padding: 0.7rem 0.55rem;
+    font-size: 0.72rem;
+  }
+
+  .mcoe-fade-stats {
+    gap: 0.4rem;
+    margin-block-start: 1.15rem;
+  }
+
+  .mcoe-fade-stat {
+    padding: 0.7rem 0.42rem;
+    border-radius: 0.95rem;
+  }
+
+  .mcoe-fade-stat strong {
+    font-size: 1rem;
+  }
+
+  .mcoe-fade-stat span {
+    font-size: 0.58rem;
+  }
+
+  .mcoe-fade-nav-row {
+    gap: 0.55rem;
+    margin-block-start: 0.9rem;
+  }
+
+  .mcoe-fade-progress {
+    gap: 0.25rem;
+  }
+
+  .mcoe-fade-progress button {
+    width: 1rem;
+  }
+
+  .mcoe-fade-progress button.is-active {
+    width: 2.4rem;
+  }
+
+  .mcoe-fade-controls {
+    padding: 0.22rem;
+  }
+
+  .mcoe-fade-controls button {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  .mcoe-fade-counter {
+    min-width: 3.25rem;
+    gap: 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcoe-fade-progress button.is-active > i > span,
+  .mcoe-fade-loading::after {
+    animation: none;
+  }
+
+  .mcoe-fade-progress button.is-active > i > span {
+    transform: scaleX(1);
+  }
+}
