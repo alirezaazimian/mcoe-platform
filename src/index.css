@@ -33,6 +33,10 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 230 100% 14%;
+    --site-clay-background:
+      radial-gradient(circle at 8% 8%, rgba(245, 166, 35, 0.1), transparent 25rem),
+      radial-gradient(circle at 94% 18%, rgba(0, 38, 153, 0.07), transparent 31rem),
+      #fbf6ee;
   }
 
   .dark {
@@ -74,6 +78,14 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  .site-public-shell {
+    background: var(--site-clay-background);
+  }
+
+  .site-public-main > * {
+    background-color: transparent !important;
   }
 
   [dir="rtl"] {

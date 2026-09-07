@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <div
       className="home-inner-clay
-        bg-[#FBF6EE]
-        [&>section]:!bg-[#FBF6EE]
+        bg-transparent
+        [&>section]:!bg-transparent
       "
     >
       <Hero />

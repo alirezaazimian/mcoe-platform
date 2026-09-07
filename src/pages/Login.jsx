@@ -193,8 +193,8 @@ export default function Login() {
     <main
       dir={isRTL ? "rtl" : "ltr"}
       className="
+        site-public-shell
         min-h-screen
-        bg-[#FBF6EE]
         px-4
         py-6
         text-[#222222]
