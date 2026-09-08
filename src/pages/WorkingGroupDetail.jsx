@@ -214,7 +214,7 @@ export default function WorkingGroupDetail() {
                   src={group.image}
                   alt={name}
                   className="wg-detail-image"
-                  fittingType="fill"
+                  fittingType="fit"
                 />
               ) : (
                 <div className="wg-detail-fallback">

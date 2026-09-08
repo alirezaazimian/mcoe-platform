@@ -142,14 +142,13 @@ export default function WorkingGroups() {
                           src={group.image}
                           alt={name}
                           className="wg-card-image"
-                          fittingType="fill"
+                          fittingType="fit"
                         />
                       ) : (
                         <div className="wg-image-fallback">
                           <Icon aria-hidden="true" />
                         </div>
                       )}
-                      <div className="wg-card-image-shade" />
                       <div className="wg-card-icon">
                         <Icon aria-hidden="true" />
                       </div>
