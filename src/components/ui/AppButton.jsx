@@ -39,7 +39,7 @@ export default function AppButton({
   const { isRTL } = useLanguage();
 
   const base =
-    'neumorphic-btn inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300 rounded-lg whitespace-nowrap';
+    'mcoe-liquid-button neumorphic-btn inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300 rounded-lg whitespace-nowrap';
 
   const sizes = {
     sm: 'px-4 py-2 text-sm',

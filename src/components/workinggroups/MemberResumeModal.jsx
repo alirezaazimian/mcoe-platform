@@ -175,13 +175,17 @@ export default function MemberResumeModal({
                 href={member.linkedin_url}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="mcoe-liquid-button"
               >
                 <Linkedin aria-hidden="true" />
                 LinkedIn
               </a>
             )}
             {member.email && (
-              <a href={`mailto:${member.email}`}>
+              <a
+                href={`mailto:${member.email}`}
+                className="mcoe-liquid-button"
+              >
                 <Mail aria-hidden="true" />
                 {member.email}
               </a>

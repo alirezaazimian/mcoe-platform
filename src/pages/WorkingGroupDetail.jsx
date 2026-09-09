@@ -141,7 +141,7 @@ export default function WorkingGroupDetail() {
               <Users aria-hidden="true" />
             </div>
             <h1>{t('page.notFound')}</h1>
-            <Link to="/working-groups" className="wg-back-link mt-5">
+            <Link to="/working-groups" className="mcoe-liquid-button wg-back-link mt-5">
               <BackArrow aria-hidden="true" />
               {t('page.backToList')}
             </Link>
@@ -200,7 +200,7 @@ export default function WorkingGroupDetail() {
     <main className="wg-clay-page">
       <section className="container-institutional py-7 lg:py-12">
         <Reveal>
-          <Link to="/working-groups" className="wg-back-link mb-5">
+          <Link to="/working-groups" className="mcoe-liquid-button wg-back-link mb-5">
             <BackArrow aria-hidden="true" />
             {t('page.backToList')}
           </Link>
@@ -237,7 +237,7 @@ export default function WorkingGroupDetail() {
               </span>
               <h1>{name}</h1>
               {shortSummary && <p>{shortSummary}</p>}
-              <a href="#overview" className="wg-detail-jump-link">
+              <a href="#overview" className="mcoe-liquid-button wg-detail-jump-link">
                 {isRTL
                   ? 'مطالعه معرفی کارگروه'
                   : 'Read the group overview'}
@@ -353,7 +353,7 @@ export default function WorkingGroupDetail() {
                     ? 'برای مشارکت در برنامه‌ها یا دریافت اطلاعات بیشتر با مجتمع در ارتباط باشید.'
                     : 'Contact the institute to participate in programs or receive more information.'}
                 </p>
-                <Link to="/collaborate">
+                <Link to="/collaborate" className="mcoe-liquid-button">
                   {t('hero.collaborate')}
                   <ForwardArrow aria-hidden="true" />
                 </Link>

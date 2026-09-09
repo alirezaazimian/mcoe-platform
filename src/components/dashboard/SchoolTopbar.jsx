@@ -296,6 +296,7 @@ export default function SchoolTopbar() {
             <>
               <button
                 type="button"
+                data-mcoe-liquid="off"
                 aria-label="Close menu"
                 onClick={() =>
                   setMenuOpen(false)

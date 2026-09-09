@@ -75,6 +75,7 @@ export default function Modal({
     >
       <button
         type="button"
+        data-mcoe-liquid="off"
         aria-label="Close"
         onClick={onClose}
         style={{

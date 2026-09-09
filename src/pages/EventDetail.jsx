@@ -227,7 +227,7 @@ export default function EventDetail() {
               )}
 
               {item.map_url && (
-                <a href={item.map_url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-medium text-primary border border-border rounded-lg hover:bg-muted/40 transition-colors">
+                <a href={item.map_url} target="_blank" rel="noopener noreferrer" className="mcoe-liquid-button flex items-center justify-center gap-2 w-full py-2.5 text-sm font-medium text-primary border border-border rounded-lg hover:bg-muted/40 transition-colors">
                   <MapPin className="w-4 h-4" />
                   {isRTL ? 'مشاهده روی نقشه' : 'View on map'}
                   <ExternalLink className="w-3.5 h-3.5" />

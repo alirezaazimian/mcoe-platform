@@ -579,6 +579,7 @@ export default function HeroSlider() {
                       slideIndex
                     }
                     type="button"
+                    data-mcoe-liquid="off"
                     aria-current={
                       slideIndex === index
                         ? 'true'
@@ -623,6 +624,10 @@ export default function HeroSlider() {
                 <span
                   className="mcoe-fade-counter"
                   aria-hidden="true"
+                  style={{
+                    '--mcoe-liquid-level':
+                      `${((index + 1) / count) * 100}%`,
+                  }}
                 >
                   <strong>
                     {twoDigits(
@@ -684,6 +689,7 @@ export default function HeroSlider() {
       {count > 1 && nextSlide && (
         <button
           type="button"
+          data-mcoe-liquid="off"
           className="mcoe-fade-next-preview"
           onClick={() => go(1)}
           aria-label={`${nextLabel}: ${nextTitle}`}

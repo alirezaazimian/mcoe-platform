@@ -133,6 +133,7 @@ export default function TeamSection({
             >
               <button
                 type="button"
+                data-mcoe-liquid="off"
                 className="wg-member-card"
                 onClick={() =>
                   setSelectedMember(member)

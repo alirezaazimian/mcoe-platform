@@ -12,7 +12,6 @@ import {
   Heart,
   Palette,
   Play,
-  Sparkles,
   Sprout,
   Star,
   Sun,
@@ -21,47 +20,56 @@ import {
 
 import Reveal from '@/components/ui/Reveal';
 import { useLanguage } from '@/lib/LanguageContext';
+import '@/styles/kindergarten-dream.css';
 
 
 const HERO_IMAGE =
   '/media/site/fc1ec2660_generated_c31ef5f8.jpg';
 
+const KINDERGARTEN_MARK =
+  '/kindergarten-dream-mark-brand-inner-v3.png';
+
 
 const COLORS = {
   cream: '#FBF6EE',
-  creamSoft: '#FFF9F1',
-
   navy: '#001858',
   blue: '#002699',
-
   sunlight: '#F5A623',
-  
-
   text: '#222222',
+  navySoft: 'rgba(0, 24, 88, 0.24)',
+};
 
-  paleBlue: '#DCE5FF',
-  paleBlue2: '#E8EDFF',
-  paleYellow: '#FFE8B5',
 
-  navySoft: '#C8D2EF',
+const surfaces = {
+  cream: COLORS.cream,
+  creamSoft: COLORS.cream,
+  blue: COLORS.blue,
+  navy: COLORS.navy,
+  sunlight: COLORS.sunlight,
+  paleBlue:
+    'linear-gradient(145deg, rgba(0, 38, 153, 0.18), rgba(0, 38, 153, 0.10)), #FBF6EE',
+  paleBlue2:
+    'linear-gradient(145deg, rgba(0, 38, 153, 0.10), rgba(0, 38, 153, 0.05)), #FBF6EE',
+  paleYellow:
+    'linear-gradient(145deg, rgba(245, 166, 35, 0.24), rgba(245, 166, 35, 0.14)), #FBF6EE',
 };
 
 
 const shadows = {
   cream:
-    'inset 9px 9px 20px rgba(80, 65, 45, 0.10), inset -9px -9px 20px rgba(255, 255, 255, 0.94), 0 1px 0 rgba(255,255,255,0.55)',
+    'inset 12px 12px 26px rgba(0, 24, 88, 0.12), inset -11px -11px 24px rgba(251, 246, 238, 0.96), inset 0 0 0 1px rgba(0, 24, 88, 0.04)',
 
   blue:
-    'inset 9px 9px 20px rgba(0, 14, 58, 0.30), inset -8px -8px 18px rgba(74, 105, 198, 0.18), 0 1px 0 rgba(255,255,255,0.08)',
+    'inset 13px 13px 28px rgba(0, 24, 88, 0.52), inset -11px -11px 24px rgba(251, 246, 238, 0.10), inset 0 0 0 1px rgba(251, 246, 238, 0.06)',
 
   soft:
-    'inset 7px 7px 16px rgba(80, 65, 45, 0.09), inset -7px -7px 16px rgba(255, 255, 255, 0.90), 0 1px 0 rgba(255,255,255,0.45)',
+    'inset 10px 10px 22px rgba(0, 24, 88, 0.13), inset -9px -9px 20px rgba(251, 246, 238, 0.92), inset 0 0 0 1px rgba(0, 24, 88, 0.04)',
 
   yellow:
-    'inset 8px 8px 18px rgba(168, 109, 18, 0.18), inset -8px -8px 18px rgba(255, 226, 166, 0.42), 0 1px 0 rgba(255,255,255,0.28)',
+    'inset 11px 11px 24px rgba(0, 24, 88, 0.17), inset -10px -10px 22px rgba(251, 246, 238, 0.30), inset 0 0 0 1px rgba(0, 24, 88, 0.045)',
 
   inset:
-    'inset 10px 10px 22px rgba(0, 24, 88, 0.16), inset -10px -10px 22px rgba(255, 255, 255, 0.72)',
+    'inset 11px 11px 24px rgba(0, 24, 88, 0.18), inset -10px -10px 22px rgba(251, 246, 238, 0.75), inset 0 0 0 1px rgba(0, 24, 88, 0.045)',
 };
 
 
@@ -317,28 +325,28 @@ export default function KindergartenDreamPage() {
     switch (theme) {
       case 'blue':
         return {
-          background: COLORS.paleBlue,
+          background: surfaces.paleBlue,
           color: COLORS.navy,
           boxShadow: shadows.soft,
         };
 
       case 'yellow':
         return {
-          background: COLORS.paleYellow,
-          color: '#75500F',
+          background: surfaces.paleYellow,
+          color: COLORS.navy,
           boxShadow: shadows.yellow,
         };
 
       case 'navy':
         return {
-          background: COLORS.navy,
-          color: '#FFFFFF',
+          background: surfaces.navy,
+          color: COLORS.cream,
           boxShadow: shadows.blue,
         };
 
       default:
         return {
-          background: COLORS.creamSoft,
+          background: surfaces.creamSoft,
           color: COLORS.text,
           boxShadow: shadows.cream,
         };
@@ -348,9 +356,9 @@ export default function KindergartenDreamPage() {
 
   return (
     <main
-      className="relative overflow-hidden"
+      className="kindergarten-dream-page relative overflow-hidden"
       style={{
-        background: COLORS.cream,
+        background: surfaces.cream,
         color: COLORS.text,
       }}
     >
@@ -360,32 +368,10 @@ export default function KindergartenDreamPage() {
       ========================================== */}
       <section className="relative min-h-[calc(100vh-5rem)] overflow-hidden">
 
-        {/* Giant MCOE blue clay form */}
-        <div
-          aria-hidden="true"
-          className="
-            absolute
-            -top-40
-            -end-40
-            w-[34rem]
-            h-[34rem]
-            lg:w-[46rem]
-            lg:h-[46rem]
-            rounded-[42%_58%_65%_35%/45%_39%_61%_55%]
-            rotate-[-12deg]
-          "
-          style={{
-            background:
-              'linear-gradient(145deg, #002699 0%, #001858 78%)',
-            boxShadow:
-              '26px 28px 60px rgba(0,24,88,.23), inset 8px 8px 22px rgba(255,255,255,.08), inset -12px -12px 26px rgba(0,0,0,.12)',
-          }}
-        />
-
-
         {/* Sunlight shape */}
         <motion.div
           aria-hidden="true"
+          data-kg-inset="true"
           className="
             absolute
             top-28
@@ -399,7 +385,7 @@ export default function KindergartenDreamPage() {
             justify-center
           "
           style={{
-            background: COLORS.sunlight,
+            background: surfaces.sunlight,
             boxShadow: shadows.yellow,
           }}
           animate={floatAnim.animate}
@@ -417,17 +403,21 @@ export default function KindergartenDreamPage() {
         {/* tiny decorative circles */}
         <div
           aria-hidden="true"
+          data-kg-inset="true"
           className="absolute top-[22%] start-[7%] w-5 h-5 rounded-full"
           style={{
-            background: COLORS.blue,
+            background: surfaces.blue,
+            boxShadow: shadows.blue,
           }}
         />
 
         <div
           aria-hidden="true"
+          data-kg-inset="true"
           className="absolute top-[30%] start-[10%] w-3 h-3 rounded-full"
           style={{
-            background: COLORS.sunlight,
+            background: surfaces.sunlight,
+            boxShadow: shadows.yellow,
           }}
         />
 
@@ -471,35 +461,6 @@ export default function KindergartenDreamPage() {
             ========================== */}
             <div className="relative z-20">
 
-              <Reveal>
-                <div
-                  className="
-                    inline-flex
-                    items-center
-                    gap-2
-                    px-5
-                    py-3
-                    rounded-[1.25rem]
-                    text-sm
-                    font-black
-                    mb-8
-                  "
-                  style={{
-                    background:
-                      COLORS.paleYellow,
-                    color:
-                      COLORS.navy,
-                    boxShadow:
-                      shadows.yellow,
-                  }}
-                >
-                  <Sparkles className="w-4 h-4" />
-
-                  {content.eyebrow}
-                </div>
-              </Reveal>
-
-
               <Reveal delay={0.05}>
                 <h1
                   className="
@@ -515,6 +476,10 @@ export default function KindergartenDreamPage() {
                     color: COLORS.navy,
                   }}
                 >
+                  <span className="sr-only">
+                    {content.eyebrow}.{' '}
+                  </span>
+
                   <span className="block">
                     {content.titleTop}
                   </span>
@@ -555,6 +520,7 @@ export default function KindergartenDreamPage() {
                 <div className="flex flex-wrap gap-4 mt-8">
 
                   <div
+                    data-kg-inset="true"
                     className="
                       flex
                       items-center
@@ -567,7 +533,7 @@ export default function KindergartenDreamPage() {
                     "
                     style={{
                       background:
-                        COLORS.creamSoft,
+                        surfaces.creamSoft,
                       color:
                         COLORS.navy,
                       boxShadow:
@@ -581,6 +547,7 @@ export default function KindergartenDreamPage() {
 
 
                   <div
+                    data-kg-inset="true"
                     className="
                       flex
                       items-center
@@ -593,7 +560,7 @@ export default function KindergartenDreamPage() {
                     "
                     style={{
                       background:
-                        COLORS.paleBlue2,
+                        surfaces.paleBlue2,
                       color:
                         COLORS.blue,
                       boxShadow:
@@ -615,6 +582,7 @@ export default function KindergartenDreamPage() {
 
                   <button
                     type="button"
+                    data-kg-inset="true"
                     onClick={scrollToStory}
                     className="
                       group
@@ -631,8 +599,8 @@ export default function KindergartenDreamPage() {
                     "
                     style={{
                       background:
-                        COLORS.navy,
-                      color: '#FFFFFF',
+                        surfaces.navy,
+                      color: COLORS.cream,
                       boxShadow:
                         shadows.blue,
                     }}
@@ -645,6 +613,7 @@ export default function KindergartenDreamPage() {
 
                   <a
                     href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
+                    data-kg-inset="true"
                     className="
                       inline-flex
                       items-center
@@ -659,7 +628,7 @@ export default function KindergartenDreamPage() {
                     "
                     style={{
                       background:
-                        COLORS.sunlight,
+                        surfaces.sunlight,
                       color:
                         COLORS.navy,
                       boxShadow:
@@ -693,6 +662,7 @@ export default function KindergartenDreamPage() {
                 {/* Back blue plate */}
                 <div
                   aria-hidden="true"
+                  data-kg-inset="true"
                   className="
                     absolute
                     top-[8%]
@@ -704,7 +674,7 @@ export default function KindergartenDreamPage() {
                   "
                   style={{
                     background:
-                      COLORS.blue,
+                      surfaces.blue,
                     boxShadow:
                       shadows.blue,
                   }}
@@ -713,6 +683,7 @@ export default function KindergartenDreamPage() {
 
                 {/* Main image clay object */}
                 <div
+                  data-kg-inset="true"
                   className="
                     relative
                     z-10
@@ -724,7 +695,7 @@ export default function KindergartenDreamPage() {
                   "
                   style={{
                     background:
-                      COLORS.creamSoft,
+                      surfaces.creamSoft,
                     boxShadow:
                       shadows.cream,
                   }}
@@ -764,6 +735,7 @@ export default function KindergartenDreamPage() {
 
                     {/* quote */}
                     <div
+                      data-kg-inset="true"
                       className="
                         absolute
                         bottom-5
@@ -772,11 +744,10 @@ export default function KindergartenDreamPage() {
                         px-5
                         py-5
                         rounded-[1.6rem]
-                        backdrop-blur-md
                       "
                       style={{
                         background:
-                          'rgba(251,246,238,.90)',
+                          surfaces.creamSoft,
                         color:
                           COLORS.navy,
                         boxShadow:
@@ -810,48 +781,37 @@ export default function KindergartenDreamPage() {
                 </div>
 
 
-                {/* floating block 1 */}
-                <motion.div
+                {/* Floating kindergarten mark */}
+                <motion.img
+                  src={KINDERGARTEN_MARK}
+                  alt=""
+                  width="760"
+                  height="703"
+                  loading="eager"
+                  decoding="async"
+                  draggable="false"
+                  aria-hidden="true"
                   className="
                     absolute
                     z-20
                     -top-1
                     end-[2%]
                     w-28
-                    h-28
                     sm:w-36
-                    sm:h-36
-                    rounded-[2.4rem]
+                    h-auto
                     rotate-[9deg]
-                    flex
-                    flex-col
-                    items-center
-                    justify-center
-                    gap-2
-                 "
-                 animate={floatAnim.animate}
-                transition={{ ...floatAnim.transition, delay: 0.4 }}
-                style={{
-                    background:
-                      COLORS.sunlight,
-                    color:
-                      COLORS.navy,
-                    boxShadow:
-                      shadows.yellow,
-                  }}
-                >
-                  <Palette className="w-8 h-8" />
-
-                  <span className="text-sm font-black">
-                    {isRTL
-                      ? 'خلق کردن'
-                      : 'Create'}
-                  </span>
-                 </motion.div>
+                    object-contain
+                    pointer-events-none
+                    select-none
+                  "
+                  animate={floatAnim.animate}
+                  transition={{ ...floatAnim.transition, delay: 0.4 }}
+                />
 
 
                 {/* floating block 2 */}
                 <motion.div
+                  data-kg-inset="true"
   className="
     absolute
     z-20
@@ -872,7 +832,7 @@ export default function KindergartenDreamPage() {
   animate={floatAnimAlt.animate}
   transition={{ ...floatAnimAlt.transition, delay: 0.2 }}
   style={{
-    background: COLORS.paleBlue,
+    background: surfaces.paleBlue,
     color: COLORS.navy,
     boxShadow: shadows.soft,
   }}
@@ -890,6 +850,7 @@ export default function KindergartenDreamPage() {
                 {/* mini sun sphere */}
 <motion.div
   aria-hidden="true"
+  data-kg-inset="true"
   className="
     absolute
     z-30
@@ -909,7 +870,7 @@ export default function KindergartenDreamPage() {
     ease: 'easeInOut',
   }}
   style={{
-    background: COLORS.sunlight,
+    background: surfaces.sunlight,
     boxShadow: shadows.yellow,
   }}
 />
@@ -937,13 +898,53 @@ export default function KindergartenDreamPage() {
         <div className="container-institutional">
 
           <Reveal>
-            <div className="
-              max-w-4xl
-              mx-auto
-              text-center
-            ">
+            <div className="relative max-w-6xl mx-auto">
+              <motion.div
+                data-kg-inset="true"
+                className="
+                  relative
+                  z-10
+                  mx-auto
+                  mb-9
+                  flex
+                  h-24
+                  w-24
+                  rotate-[9deg]
+                  flex-col
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-[2rem]
+                  sm:h-28
+                  sm:w-28
+                  lg:absolute
+                  lg:-top-6
+                  lg:-end-8
+                  lg:mb-0
+                "
+                animate={floatAnim.animate}
+                transition={{ ...floatAnim.transition, delay: 0.4 }}
+                style={{
+                  background: surfaces.sunlight,
+                  color: COLORS.navy,
+                  boxShadow: shadows.yellow,
+                }}
+              >
+                <Palette className="h-7 w-7" />
+
+                <span className="text-sm font-black">
+                  {isRTL ? 'خلق کردن' : 'Create'}
+                </span>
+              </motion.div>
+
+              <div className="
+                max-w-4xl
+                mx-auto
+                text-center
+              ">
 
               <div
+                data-kg-inset="true"
                 className="
                   inline-flex
                   items-center
@@ -955,7 +956,7 @@ export default function KindergartenDreamPage() {
                  font-black
              "
              style={{
-               background: COLORS.sunlight,
+               background: surfaces.sunlight,
                color: COLORS.navy,
                boxShadow: shadows.yellow,
              }}
@@ -1002,6 +1003,7 @@ export default function KindergartenDreamPage() {
                 {content.story}
               </p>
 
+              </div>
             </div>
           </Reveal>
 
@@ -1057,6 +1059,7 @@ export default function KindergartenDreamPage() {
                     className={spanClass}
                   >
                     <article
+                      data-kg-inset="true"
                       className={`
                         ${rotateClass}
                         relative
@@ -1095,6 +1098,7 @@ export default function KindergartenDreamPage() {
                         ">
 
                           <div
+                            data-kg-inset="true"
                             className="
                               w-14
                               h-14
@@ -1106,12 +1110,12 @@ export default function KindergartenDreamPage() {
                             style={{
                               background:
                                 theme === 'navy'
-                                  ? 'rgba(255,255,255,.13)'
-                                  : 'rgba(255,255,255,.5)',
+                                  ? 'rgba(251,246,238,.10)'
+                                  : surfaces.creamSoft,
 
                               boxShadow:
                                 theme === 'navy'
-                                  ? 'inset 3px 3px 7px rgba(255,255,255,.08)'
+                                  ? 'inset 3px 3px 7px rgba(251,246,238,.08)'
                                   : shadows.inset,
                             }}
                           >
@@ -1190,9 +1194,10 @@ export default function KindergartenDreamPage() {
               {/* Text side */}
               <div>
                 <div
+                  data-kg-inset="true"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-sm font-black"
                   style={{
-                    background: COLORS.creamSoft,
+                    background: surfaces.creamSoft,
                     color: COLORS.sunlight,
                     boxShadow: shadows.soft,
                   }}
@@ -1233,9 +1238,10 @@ export default function KindergartenDreamPage() {
                   ].map((item) => (
                     <div
                       key={item}
+                      data-kg-inset="true"
                       className="px-4 py-3 rounded-2xl text-sm font-bold"
                       style={{
-                        background: COLORS.paleBlue2,
+                        background: surfaces.paleBlue2,
                         color: COLORS.blue,
                         boxShadow: shadows.soft,
                       }}
@@ -1251,6 +1257,7 @@ export default function KindergartenDreamPage() {
   {/* decorative floating blob behind slider */}
   <motion.div
     aria-hidden="true"
+    data-kg-inset="true"
     className="
       absolute
       -top-10
@@ -1263,7 +1270,7 @@ export default function KindergartenDreamPage() {
       z-0
     "
     style={{
-      background: COLORS.paleBlue,
+      background: surfaces.paleBlue,
       boxShadow: shadows.soft,
     }}
     animate={{
@@ -1279,6 +1286,7 @@ export default function KindergartenDreamPage() {
 
   <motion.div
     aria-hidden="true"
+    data-kg-inset="true"
     className="
       absolute
       -bottom-8
@@ -1291,7 +1299,7 @@ export default function KindergartenDreamPage() {
       z-0
     "
     style={{
-      background: COLORS.sunlight,
+      background: surfaces.sunlight,
       boxShadow: shadows.yellow,
     }}
     animate={{
@@ -1306,9 +1314,10 @@ export default function KindergartenDreamPage() {
   />
 
   <div
+    data-kg-inset="true"
     className="relative z-10 w-full rounded-[3.2rem] p-4 sm:p-5 lg:p-6"
     style={{
-      background: COLORS.creamSoft,
+      background: surfaces.creamSoft,
       boxShadow: shadows.cream,
     }}
   >
@@ -1332,6 +1341,7 @@ export default function KindergartenDreamPage() {
       {/* tag */}
       <AnimatePresence mode="wait">
         <motion.div
+          data-kg-inset="true"
           key={`tag-${activeSlide}`}
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -1339,10 +1349,9 @@ export default function KindergartenDreamPage() {
           transition={{ duration: 0.35 }}
           className="absolute top-5 start-5 px-4 py-2 rounded-2xl text-xs sm:text-sm font-black"
           style={{
-            background: COLORS.sunlight,
+            background: surfaces.sunlight,
             color: COLORS.navy,
-            boxShadow:
-              '10px 12px 22px rgba(245,166,35,.24), -6px -6px 16px rgba(255,255,255,.35)',
+            boxShadow: shadows.yellow,
           }}
         >
           {slides[activeSlide].tag}
@@ -1352,6 +1361,7 @@ export default function KindergartenDreamPage() {
       {/* caption */}
       <AnimatePresence mode="wait">
         <motion.div
+          data-kg-inset="true"
           key={`caption-${activeSlide}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -1359,7 +1369,7 @@ export default function KindergartenDreamPage() {
           transition={{ duration: 0.45, delay: 0.05 }}
           className="absolute bottom-5 start-5 end-5 rounded-[1.8rem] px-5 py-5 sm:px-6 sm:py-6"
           style={{
-            background: 'rgba(251,246,238,.92)',
+            background: surfaces.creamSoft,
             color: COLORS.navy,
             boxShadow: shadows.soft,
           }}
@@ -1368,7 +1378,10 @@ export default function KindergartenDreamPage() {
             {slides[activeSlide].title}
           </h3>
 
-          <p className="mt-3 text-sm sm:text-base leading-7 text-[#4D4D4D] max-w-2xl">
+          <p
+            className="mt-3 text-sm sm:text-base leading-7 max-w-2xl"
+            style={{ color: 'rgba(34,34,34,.70)' }}
+          >
             {slides[activeSlide].text}
           </p>
         </motion.div>
@@ -1377,10 +1390,11 @@ export default function KindergartenDreamPage() {
       {/* arrows */}
       <button
         type="button"
+        data-kg-inset="true"
         onClick={prevSlide}
         className="absolute top-1/2 -translate-y-1/2 start-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105"
         style={{
-          background: 'rgba(251,246,238,.92)',
+          background: surfaces.creamSoft,
           color: COLORS.navy,
           boxShadow: shadows.soft,
         }}
@@ -1391,10 +1405,11 @@ export default function KindergartenDreamPage() {
 
       <button
         type="button"
+        data-kg-inset="true"
         onClick={nextSlide}
         className="absolute top-1/2 -translate-y-1/2 end-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105"
         style={{
-          background: 'rgba(251,246,238,.92)',
+          background: surfaces.creamSoft,
           color: COLORS.navy,
           boxShadow: shadows.soft,
         }}
@@ -1411,6 +1426,8 @@ export default function KindergartenDreamPage() {
       <button
         key={index}
         type="button"
+        data-mcoe-liquid="off"
+        data-kg-inset="true"
         onClick={() => goToSlide(index)}
         className="transition-all duration-300 rounded-full"
         style={{
@@ -1422,7 +1439,7 @@ export default function KindergartenDreamPage() {
               : COLORS.navySoft,
           boxShadow:
             index === activeSlide
-              ? '8px 10px 18px rgba(245,166,35,.24)'
+              ? shadows.yellow
               : 'none',
         }}
         aria-label={`${isRTL ? 'اسلاید' : 'Slide'} ${index + 1}`}
@@ -1448,6 +1465,7 @@ export default function KindergartenDreamPage() {
 
           <Reveal>
             <div
+              data-kg-inset="true"
               className="
                 relative
                 overflow-hidden
@@ -1460,7 +1478,7 @@ export default function KindergartenDreamPage() {
               "
               style={{
                 background:
-                  COLORS.navy,
+                  surfaces.navy,
                 boxShadow:
                   shadows.blue,
               }}
@@ -1469,6 +1487,7 @@ export default function KindergartenDreamPage() {
               {/* giant accent */}
               <div
                 aria-hidden="true"
+                data-kg-inset="true"
                 className="
                   absolute
                   -top-24
@@ -1479,13 +1498,16 @@ export default function KindergartenDreamPage() {
                 "
                 style={{
                   background:
-                    COLORS.blue,
+                    surfaces.blue,
+                  boxShadow:
+                    shadows.blue,
                 }}
               />
 
 
               <div
                 aria-hidden="true"
+                data-kg-inset="true"
                 className="
                   absolute
                   -bottom-16
@@ -1497,7 +1519,9 @@ export default function KindergartenDreamPage() {
                 "
                 style={{
                   background:
-                    COLORS.sunlight,
+                    surfaces.sunlight,
+                  boxShadow:
+                    shadows.yellow,
                 }}
               />
 
@@ -1513,24 +1537,28 @@ export default function KindergartenDreamPage() {
 
                 <div className="max-w-3xl">
 
-                  <h2 className="
-                    text-3xl
-                    sm:text-4xl
-                    lg:text-5xl
-                    font-black
-                    leading-tight
-                    text-white
-                  ">
+                  <h2
+                    className="
+                      text-3xl
+                      sm:text-4xl
+                      lg:text-5xl
+                      font-black
+                      leading-tight
+                    "
+                    style={{ color: COLORS.cream }}
+                  >
                     {content.nextTitle}
                   </h2>
 
-                  <p className="
-                    mt-5
-                    text-base
-                    sm:text-lg
-                    leading-8
-                    text-white/70
-                  ">
+                  <p
+                    className="
+                      mt-5
+                      text-base
+                      sm:text-lg
+                      leading-8
+                    "
+                    style={{ color: 'rgba(251,246,238,.72)' }}
+                  >
                     {content.nextText}
                   </p>
 
@@ -1539,6 +1567,7 @@ export default function KindergartenDreamPage() {
 
                 <a
                   href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
+                  data-kg-inset="true"
                   className="
                     relative
                     inline-flex
@@ -1555,7 +1584,7 @@ export default function KindergartenDreamPage() {
                   "
                   style={{
                     background:
-                      COLORS.sunlight,
+                      surfaces.sunlight,
                     color:
                       COLORS.navy,
                     boxShadow:

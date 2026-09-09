@@ -115,10 +115,10 @@ export default function Header({
       {/* Main header */}
       <header
         className={cn(
-          'sticky top-0 z-50 transition-all duration-500',
+          'mcoe-main-header sticky top-0 z-50 border-b border-white/10 bg-primary text-[#FBF6EE] transition-all duration-500',
           scrolled
-            ? 'glass bg-background/85 border-b border-border/60 shadow-sm'
-            : 'bg-background/0'
+            ? 'shadow-[0_12px_30px_rgba(0,24,88,0.24)]'
+            : 'shadow-[0_5px_18px_rgba(0,24,88,0.14)]'
         )}
       >
         <div className="container-institutional">
@@ -132,8 +132,8 @@ export default function Header({
                 />
               </div>
               <div className="hidden sm:block leading-tight">
-                <div className="font-bold text-foreground text-sm">{isRTL ? 'مجتمع آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}</div>
-                <div className="text-[10px] text-muted-foreground tracking-wide uppercase">{isRTL ? 'آموزش . رشد . آینده' : 'Hazrat Masoumeh (S) Educational Complex'}</div>
+                <div className="text-sm font-bold text-[#FBF6EE]">{isRTL ? 'مجتمع آموزشی معصومه عظیمیان' : 'Masoumeh Azimian Institute'}</div>
+                <div className="text-[10px] tracking-wide text-[#FBF6EE]/65 uppercase">{isRTL ? 'آموزش . رشد . آینده' : 'Hazrat Masoumeh (S) Educational Complex'}</div>
               </div>
             </Link>
 
@@ -154,8 +154,8 @@ export default function Header({
                       className={cn(
                         'nav-hover px-2.5 py-2 text-[13px] font-medium rounded-lg transition-all duration-200 flex items-center gap-1 whitespace-nowrap',
                         active
-                          ? 'is-active text-primary'
-                          : 'text-foreground/70 hover:text-primary'
+                          ? 'is-active text-[#F5A623]'
+                          : 'text-[#FBF6EE]/80 hover:text-white'
                       )}
                     >
                       {item.label}
@@ -235,7 +235,7 @@ export default function Header({
               </div>
               <button
                 onClick={() => setMobileOpen((s) => !s)}
-                className="xl:hidden p-2.5 rounded-lg text-foreground hover:bg-muted/50 transition-colors"
+                className="xl:hidden rounded-lg p-2.5 text-[#FBF6EE] transition-colors hover:bg-[#001858]/30 hover:text-white"
                 aria-label="Menu"
               >
                 {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

@@ -56,13 +56,13 @@ export default function Footer() {
               {t('footer.about')}
             </p>
             <div className="flex items-center justify-center sm:justify-start gap-3 mt-6">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg flex items-center justify-center bg-[#E1306C] hover:opacity-90 transition-opacity" aria-label="Instagram">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mcoe-liquid-button w-9 h-9 rounded-lg flex items-center justify-center bg-[#E1306C] hover:opacity-90 transition-opacity" aria-label="Instagram">
                 <Instagram className="w-4 h-4 text-white" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg flex items-center justify-center bg-[#0A66C2] hover:opacity-90 transition-opacity" aria-label="LinkedIn">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="mcoe-liquid-button w-9 h-9 rounded-lg flex items-center justify-center bg-[#0A66C2] hover:opacity-90 transition-opacity" aria-label="LinkedIn">
                 <Linkedin className="w-4 h-4 text-white" />
               </a>
-              <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg flex items-center justify-center bg-[#229ED9] hover:opacity-90 transition-opacity" aria-label="Telegram">
+              <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="mcoe-liquid-button w-9 h-9 rounded-lg flex items-center justify-center bg-[#229ED9] hover:opacity-90 transition-opacity" aria-label="Telegram">
                 <Send className="w-4 h-4 text-white" />
               </a>
             </div>
