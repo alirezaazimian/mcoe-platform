@@ -1171,24 +1171,11 @@
   color: #f5a623;
 }
 
-.mcoe-main-header .neumorphic-switch-inner {
-  background-color: #001858;
-  box-shadow:
-    inset 3px 3px 7px rgba(0, 7, 32, 0.44),
-    inset -3px -3px 7px rgba(0, 38, 153, 0.36);
-}
-
-.mcoe-main-header .neumorphic-switch-segment {
-  color: rgba(251, 246, 238, 0.68);
-}
-
-.mcoe-main-header .neumorphic-switch-segment:hover {
-  color: #fbf6ee;
-}
-
-.mcoe-main-header .neumorphic-switch-segment.is-active {
-  background-color: #f5a623 !important;
-  color: #001858 !important;
+.mcoe-language-toggle-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.015em;
 }
 
 /* Global MCOE button language — raised Upper/Outer Liquid Clay on interaction. */

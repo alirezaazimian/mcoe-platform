@@ -20,23 +20,19 @@ export default function LanguageSwitcher({ compact = false }) {
 
   return (
     <button
+      type="button"
       onClick={toggleLanguage}
-      className="neumorphic-switch-inner group flex items-center rounded-full p-0.5"
-      aria-label="Toggle language"
+      className="mcoe-theme-toggle mcoe-language-toggle"
+      aria-pressed={language === 'en'}
+      aria-label={
+        language === 'fa'
+          ? 'Switch to English'
+          : 'تغییر زبان به فارسی'
+      }
+      title={language === 'fa' ? 'English' : 'فارسی'}
     >
-      <span
-        className={`neumorphic-switch-segment px-3 py-1 text-xs font-semibold rounded-full ${
-          language === 'fa' ? 'is-active bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
-        }`}
-      >
-        فا
-      </span>
-      <span
-        className={`neumorphic-switch-segment px-3 py-1 text-xs font-semibold rounded-full ${
-          language === 'en' ? 'is-active bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
-        }`}
-      >
-        EN
+      <span aria-hidden="true" className="mcoe-language-toggle-label">
+        {language === 'fa' ? 'EN' : 'فا'}
       </span>
     </button>
   );
