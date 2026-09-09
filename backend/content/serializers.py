@@ -7,6 +7,7 @@ from .models import (
     Event,
     Facility,
     HeroSlide,
+    KindergartenSlide,
     News,
     Partner,
     SiteImage,
@@ -283,6 +284,46 @@ class HeroSlideSerializer(serializers.ModelSerializer):
             "cta_label_fa",
             "cta_label_en",
             "cta_url",
+            "is_active",
+            "sort_order",
+        ]
+
+    def validate_image(self, image):
+        max_size = 10 * 1024 * 1024
+
+        if image.size > max_size:
+            raise serializers.ValidationError(
+                "Image must be smaller than 10 MB."
+            )
+
+        return image
+
+
+class KindergartenSlideSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(
+        write_only=True,
+        required=True,
+    )
+
+    image_url = serializers.ImageField(
+        source="image",
+        read_only=True,
+    )
+
+    class Meta:
+        model = KindergartenSlide
+        fields = [
+            "id",
+            "image",
+            "image_url",
+            "title_fa",
+            "title_en",
+            "text_fa",
+            "text_en",
+            "tag_fa",
+            "tag_en",
+            "alt_fa",
+            "alt_en",
             "is_active",
             "sort_order",
         ]

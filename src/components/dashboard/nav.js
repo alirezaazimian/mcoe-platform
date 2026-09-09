@@ -44,6 +44,11 @@ export const DASHBOARD_NAV_ITEMS = [
     icon: Images,
   },
   {
+    path: '/dashboard/kindergarten-slides',
+    key: 'kindergartenSlides',
+    icon: Images,
+  },
+  {
     path: '/dashboard/teachers',
     key: 'teachers',
     icon: Presentation,

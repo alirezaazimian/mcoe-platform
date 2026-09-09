@@ -61,6 +61,7 @@ import ArticlesAdmin from '@/pages/dashboard/ArticlesAdmin';
 import DashboardModulePlaceholder from '@/pages/dashboard/DashboardModulePlaceholder';
 import EventsAdmin from '@/pages/dashboard/EventsAdmin';
 import HeroSlidesAdmin from '@/pages/dashboard/HeroSlidesAdmin';
+import KindergartenSlidesAdmin from '@/pages/dashboard/KindergartenSlidesAdmin';
 import NewsAdmin from '@/pages/dashboard/NewsAdmin';
 import SiteContentAdmin from '@/pages/dashboard/SiteContentAdmin';
 import WorkgroupsAdmin from '@/pages/dashboard/WorkgroupsAdmin';
@@ -140,6 +141,13 @@ function AppRoutes() {
             path="hero-slides"
             element={
               <HeroSlidesAdmin />
+            }
+          />
+
+          <Route
+            path="kindergarten-slides"
+            element={
+              <KindergartenSlidesAdmin />
             }
           />
 

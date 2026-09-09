@@ -7,6 +7,7 @@ from .models import (
     Event,
     Facility,
     HeroSlide,
+    KindergartenSlide,
     News,
     Partner,
     SiteImage,
@@ -238,7 +239,6 @@ class EventAdmin(admin.ModelAdmin):
 class HeroSlideAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "title_fa",
         "is_active",
         "sort_order",
         "updated_at",
@@ -258,11 +258,37 @@ class HeroSlideAdmin(admin.ModelAdmin):
         "id",
     )
 
+
+@admin.register(KindergartenSlide)
+class KindergartenSlideAdmin(admin.ModelAdmin):
+    list_display = (
+        "title_fa",
+        "is_active",
+        "sort_order",
+        "updated_at",
+    )
+
+    list_filter = (
+        "is_active",
+    )
+
     search_fields = (
         "title_fa",
         "title_en",
-        "alt_fa",
-        "alt_en",
+        "text_fa",
+        "text_en",
+        "tag_fa",
+        "tag_en",
+    )
+
+    list_editable = (
+        "is_active",
+        "sort_order",
+    )
+
+    ordering = (
+        "sort_order",
+        "id",
     )
 
 

@@ -11,6 +11,7 @@ from .models import (
     Event,
     Facility,
     HeroSlide,
+    KindergartenSlide,
     News,
     Partner,
     SiteImage,
@@ -28,6 +29,7 @@ from .serializers import (
     EventSerializer,
     FacilitySerializer,
     HeroSlideSerializer,
+    KindergartenSlideSerializer,
     NewsSerializer,
     PartnerSerializer,
     SiteImageSerializer,
@@ -359,6 +361,13 @@ class HeroSlideViewSet(
         return queryset.filter(
             is_active=True
         )
+
+
+class KindergartenSlideViewSet(
+    ActiveContentViewSet
+):
+    queryset = KindergartenSlide.objects.all()
+    serializer_class = KindergartenSlideSerializer
 
 
 class CollaborationRequestCreateView(

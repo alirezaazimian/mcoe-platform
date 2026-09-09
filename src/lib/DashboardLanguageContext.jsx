@@ -32,6 +32,10 @@ const translations = {
     en: 'Hero Slides',
     fa: 'اسلایدهای صفحه اصلی',
   },
+  kindergartenSlides: {
+    en: 'Kindergarten Slides',
+    fa: 'اسلایدهای کودکستان',
+  },
   teachers: {
     en: 'Teachers',
     fa: 'معلمان',
@@ -425,6 +429,36 @@ const translations = {
   ctaUrl: {
     en: 'Button Link',
     fa: 'پیوند دکمه',
+  },
+  kindergartenSlidesIntro: {
+    en:
+      'Manage every image, title, caption, label, display order and publication status in the Childhood Dream slider.',
+    fa:
+      'تصویر، عنوان، توضیح، برچسب، ترتیب نمایش و وضعیت انتشار اسلایدر کودکستان رویای کودکی را مدیریت کنید.',
+  },
+  kindergartenSlideTitle: {
+    en: 'Slide Title',
+    fa: 'عنوان اسلاید',
+  },
+  kindergartenSlideTag: {
+    en: 'Slide Label',
+    fa: 'برچسب اسلاید',
+  },
+  kindergartenSlideTextFa: {
+    en: 'Persian Slide Text',
+    fa: 'متن فارسی اسلاید',
+  },
+  kindergartenSlideTextEn: {
+    en: 'English Slide Text',
+    fa: 'متن انگلیسی اسلاید',
+  },
+  kindergartenSlideTagFa: {
+    en: 'Persian Slide Label',
+    fa: 'برچسب فارسی اسلاید',
+  },
+  kindergartenSlideTagEn: {
+    en: 'English Slide Label',
+    fa: 'برچسب انگلیسی اسلاید',
   },
 
   altFa: {

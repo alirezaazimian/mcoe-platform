@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 
 import Reveal from '@/components/ui/Reveal';
+import { djangoApi } from '@/api/djangoApi';
 import { useLanguage } from '@/lib/LanguageContext';
 import '@/styles/kindergarten-dream.css';
 import '@/styles/level-actions.css';
@@ -29,6 +30,66 @@ const HERO_IMAGE =
 
 const KINDERGARTEN_MARK =
   '/kindergarten-dream-mark-brand-inner-v3.png';
+
+
+const DEFAULT_KINDERGARTEN_SLIDES = [
+  {
+    id: 'default-play',
+    image_url: HERO_IMAGE,
+    title_fa: 'یادگیری از مسیر بازی',
+    title_en: 'Learning through play',
+    text_fa:
+      'بازی برای کودک فقط سرگرمی نیست؛ راهی برای تجربه، کشف و فهم جهان است.',
+    text_en:
+      'For children, play is not just entertainment. It is a way to explore, experience and understand the world.',
+    tag_fa: 'بازی گروهی',
+    tag_en: 'Group play',
+    alt_fa: 'کودکان در حال یادگیری از مسیر بازی گروهی',
+    alt_en: 'Children learning through group play',
+  },
+  {
+    id: 'default-creativity',
+    image_url: '/media/site/af4db7d64_6.jpg',
+    title_fa: 'هنر، خلاقیت و بیان',
+    title_en: 'Art, creativity and expression',
+    text_fa:
+      'کودکان با رنگ، فرم، ساختن و تخیل، دنیای درونی خود را بیان می‌کنند.',
+    text_en:
+      'Children express their inner worlds through color, form, making and imagination.',
+    tag_fa: 'کارگاه خلاقیت',
+    tag_en: 'Creative workshop',
+    alt_fa: 'فعالیت هنری و خلاقانه کودکان',
+    alt_en: 'Children taking part in a creative art activity',
+  },
+  {
+    id: 'default-discovery',
+    image_url: '/media/site/7a95f3af1_IMG_7095.jpg',
+    title_fa: 'تجربه، لمس و کشف',
+    title_en: 'Touch, experience and discover',
+    text_fa:
+      'کشف جهان با مشاهده، لمس، گفت‌وگو و ارتباط با محیط اطراف اتفاق می‌افتد.',
+    text_en:
+      'Discovery happens through observation, touch, dialogue and connection with the environment.',
+    tag_fa: 'کشف و تجربه',
+    tag_en: 'Explore & discover',
+    alt_fa: 'کودکان در حال تجربه و کشف محیط پیرامون',
+    alt_en: 'Children exploring and discovering their surroundings',
+  },
+];
+
+
+function localizedSlideValue(
+  slide,
+  field,
+  isRTL
+) {
+  const primary =
+    slide[`${field}_${isRTL ? 'fa' : 'en'}`];
+  const fallback =
+    slide[`${field}_${isRTL ? 'en' : 'fa'}`];
+
+  return primary || fallback || '';
+}
 
 
 const COLORS = {
@@ -246,49 +307,92 @@ export default function KindergartenDreamPage() {
       };
 
 
-      const slides = isRTL
-    ? [
-        {
-          image: HERO_IMAGE,
-          title: 'یادگیری از مسیر بازی',
-          text: 'بازی برای کودک فقط سرگرمی نیست؛ راهی برای تجربه، کشف و فهم جهان است.',
-          tag: 'بازی گروهی',
-        },
-        {
-          image: '/media/site/af4db7d64_6.jpg',
-          title: 'هنر، خلاقیت و بیان',
-          text: 'کودکان با رنگ، فرم، ساختن و تخیل، دنیای درونی خود را بیان می‌کنند.',
-          tag: 'کارگاه خلاقیت',
-        },
-        {
-          image: '/media/site/7a95f3af1_IMG_7095.jpg',
-          title: 'تجربه، لمس و کشف',
-          text: 'کشف جهان با مشاهده، لمس، گفت‌وگو و ارتباط با محیط اطراف اتفاق می‌افتد.',
-          tag: 'کشف و تجربه',
-        },
-      ]
-    : [
-        {
-          image: HERO_IMAGE,
-          title: 'Learning through play',
-          text: 'For children, play is not just entertainment. It is a way to explore, experience and understand the world.',
-          tag: 'Group play',
-        },
-        {
-          image: '/media/site/af4db7d64_6.jpg',
-          title: 'Art, creativity and expression',
-          text: 'Children express their inner worlds through color, form, making and imagination.',
-          tag: 'Creative workshop',
-        },
-        {
-          image: '/media/site/7a95f3af1_IMG_7095.jpg',
-          title: 'Touch, experience and discover',
-          text: 'Discovery happens through observation, touch, dialogue and connection with the environment.',
-          tag: 'Explore & discover',
-        },
-      ];
+  const [
+    slideRecords,
+    setSlideRecords,
+  ] = useState(
+    DEFAULT_KINDERGARTEN_SLIDES
+  );
+
+  const slides = slideRecords.map(
+    (slide) => {
+      const title =
+        localizedSlideValue(
+          slide,
+          'title',
+          isRTL
+        );
+
+      return {
+        id:
+          slide.id ||
+          slide.image_url ||
+          slide.image,
+        image:
+          slide.image_url ||
+          slide.image ||
+          HERO_IMAGE,
+        title,
+        text:
+          localizedSlideValue(
+            slide,
+            'text',
+            isRTL
+          ),
+        tag:
+          localizedSlideValue(
+            slide,
+            'tag',
+            isRTL
+          ),
+        alt:
+          localizedSlideValue(
+            slide,
+            'alt',
+            isRTL
+          ) || title,
+      };
+    }
+  );
 
   const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    djangoApi.kindergartenSlides
+      .list()
+      .then((response) => {
+        const records =
+          Array.isArray(response)
+            ? response
+            : response?.results;
+
+        if (
+          !cancelled &&
+          Array.isArray(records) &&
+          records.length
+        ) {
+          setSlideRecords(records);
+        }
+      })
+      .catch(() => {
+        // Keep the bundled slides available if the API is offline.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    setActiveSlide((current) =>
+      Math.min(
+        current,
+        Math.max(slides.length - 1, 0)
+      )
+    );
+  }, [slides.length]);
 
   useEffect(() => {
     if (!slides.length) return;
@@ -611,11 +715,12 @@ export default function KindergartenDreamPage() {
 
 
             {/* ==========================
-                HERO CLAY ART
+                HERO STANDALONE PHOTO
             ========================== */}
             <Reveal delay={0.12}>
               <div
                 className="
+                  kg-kindergarten-photo-stage
                   relative
                   max-w-[650px]
                   mx-auto
@@ -625,58 +730,21 @@ export default function KindergartenDreamPage() {
                 "
               >
 
-                {/* Back blue plate */}
+                {/* The photo itself is the visual object; no surrounding frame. */}
                 <div
-                  aria-hidden="true"
-                  data-kg-inset="true"
-                  data-kg-liquid-shape="blue"
                   className="
-                    absolute
-                    top-[8%]
-                    start-[7%]
-                    w-[85%]
-                    h-[83%]
-                    rounded-[38%_62%_55%_45%/45%_35%_65%_55%]
-                    rotate-[-7deg]
-                  "
-                  style={{
-                    background:
-                      surfaces.blue,
-                    boxShadow:
-                      shadows.blue,
-                  }}
-                />
-
-
-                {/* Main image clay object */}
-                <div
-                  data-kg-inset="true"
-                  className="
+                    kg-kindergarten-standalone-photo
                     relative
                     z-10
                     ms-auto
-                    w-[88%]
-                    rounded-[3.5rem_2rem_4.5rem_2.6rem]
-                    p-4
+                    w-[92%]
+                    overflow-hidden
+                    rounded-[3.8rem_2.1rem_4.8rem_2.8rem]
+                    aspect-[4/4.7]
+                    sm:aspect-square
                     rotate-[2deg]
                   "
-                  style={{
-                    background:
-                      surfaces.creamSoft,
-                    boxShadow:
-                      shadows.cream,
-                  }}
                 >
-
-                  <div
-                    className="
-                      relative
-                      overflow-hidden
-                      rounded-[2.8rem_1.5rem_3.8rem_2rem]
-                      aspect-[4/4.7]
-                      sm:aspect-square
-                    "
-                  >
                     <img
                       src={HERO_IMAGE}
                       alt={content.eyebrow}
@@ -744,7 +812,6 @@ export default function KindergartenDreamPage() {
 
                       </div>
                     </div>
-                  </div>
                 </div>
 
 
@@ -1225,7 +1292,7 @@ export default function KindergartenDreamPage() {
               </div>
 
              {/* Slider side */}
-<div className="relative lg:min-h-[680px] flex items-center">
+<div className="relative lg:min-h-[680px] flex flex-col justify-center">
   {/* decorative floating blob behind slider */}
   <motion.div
     aria-hidden="true"
@@ -1287,21 +1354,13 @@ export default function KindergartenDreamPage() {
     }}
   />
 
-  <div
-    data-kg-inset="true"
-    className="relative z-10 w-full rounded-[3.2rem] p-4 sm:p-5 lg:p-6"
-    style={{
-      background: surfaces.creamSoft,
-      boxShadow: shadows.cream,
-    }}
-  >
-    <div className="relative overflow-hidden rounded-[2.6rem] aspect-[4/5] sm:aspect-[16/11] lg:aspect-[16/10]">
+  <div className="kg-kindergarten-standalone-slider relative z-10 w-full overflow-hidden rounded-[3.4rem_2.2rem_3.8rem_2.6rem] aspect-[4/5] sm:aspect-[16/11] lg:aspect-[16/10]">
       {/* image transition */}
       <AnimatePresence mode="wait">
         <motion.img
-          key={slides[activeSlide].image}
+          key={slides[activeSlide].id}
           src={slides[activeSlide].image}
-          alt={slides[activeSlide].title}
+          alt={slides[activeSlide].alt}
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ opacity: 0, scale: 1.07 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -1313,113 +1372,103 @@ export default function KindergartenDreamPage() {
       <div className="absolute inset-0 bg-gradient-to-t from-[#001858]/55 via-[#001858]/15 to-transparent" />
 
       {/* tag */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          data-kg-inset="true"
-          data-kg-liquid-shape="orange"
-          key={`tag-${activeSlide}`}
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.35 }}
-          className="absolute top-5 start-5 px-4 py-2 rounded-2xl text-xs sm:text-sm font-black"
-          style={{
-            background: surfaces.sunlight,
-            color: COLORS.navy,
-            boxShadow: shadows.yellow,
-          }}
-        >
-          {slides[activeSlide].tag}
-        </motion.div>
-      </AnimatePresence>
+      {slides[activeSlide].tag && (
+        <AnimatePresence mode="wait">
+          <motion.div
+            data-kg-inset="true"
+            data-kg-liquid-shape="orange"
+            key={`tag-${slides[activeSlide].id}`}
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.35 }}
+            className="absolute top-5 start-5 px-4 py-2 rounded-2xl text-xs sm:text-sm font-black"
+            style={{
+              background: surfaces.sunlight,
+              color: COLORS.navy,
+              boxShadow: shadows.yellow,
+            }}
+          >
+            {slides[activeSlide].tag}
+          </motion.div>
+        </AnimatePresence>
+      )}
 
       {/* caption */}
       <AnimatePresence mode="wait">
-        <motion.div
-          data-kg-inset="true"
-          key={`caption-${activeSlide}`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 12 }}
-          transition={{ duration: 0.45, delay: 0.05 }}
-          className="absolute bottom-5 start-5 end-5 rounded-[1.8rem] px-5 py-5 sm:px-6 sm:py-6"
-          style={{
-            background: surfaces.creamSoft,
-            color: COLORS.navy,
-            boxShadow: shadows.soft,
-          }}
-        >
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-black">
-            {slides[activeSlide].title}
-          </h3>
-
-          <p
-            className="mt-3 text-sm sm:text-base leading-7 max-w-2xl"
-            style={{ color: 'rgba(34,34,34,.70)' }}
+        {(slides[activeSlide].title || slides[activeSlide].text) && (
+          <motion.div
+            data-kg-inset="true"
+            key={`caption-${slides[activeSlide].id}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.45, delay: 0.05 }}
+            className="absolute bottom-5 start-5 end-5 rounded-[1.8rem] px-5 py-5 sm:px-6 sm:py-6"
+            style={{
+              background: surfaces.creamSoft,
+              color: COLORS.navy,
+              boxShadow: shadows.soft,
+            }}
           >
-            {slides[activeSlide].text}
-          </p>
-        </motion.div>
+            {slides[activeSlide].title && (
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-black">
+                {slides[activeSlide].title}
+              </h3>
+            )}
+
+            {slides[activeSlide].text && (
+              <p
+                className={`${slides[activeSlide].title ? 'mt-3 ' : ''}text-sm sm:text-base leading-7 max-w-2xl`}
+                style={{ color: 'rgba(34,34,34,.70)' }}
+              >
+                {slides[activeSlide].text}
+              </p>
+            )}
+          </motion.div>
+        )}
       </AnimatePresence>
-
-      {/* arrows */}
-      <button
-        type="button"
-        data-kg-inset="true"
-        onClick={prevSlide}
-        className="absolute top-1/2 -translate-y-1/2 start-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105"
-        style={{
-          background: surfaces.creamSoft,
-          color: COLORS.navy,
-          boxShadow: shadows.soft,
-        }}
-        aria-label={isRTL ? 'اسلاید قبلی' : 'Previous slide'}
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-
-      <button
-        type="button"
-        data-kg-inset="true"
-        onClick={nextSlide}
-        className="absolute top-1/2 -translate-y-1/2 end-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105"
-        style={{
-          background: surfaces.creamSoft,
-          color: COLORS.navy,
-          boxShadow: shadows.soft,
-        }}
-        aria-label={isRTL ? 'اسلاید بعدی' : 'Next slide'}
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
     </div>
-  </div>
 
-  {/* dots */}
-  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3 mt-6 z-20">
-    {slides.map((_, index) => (
+  {/* Controls stay outside the photograph so the image remains unobstructed. */}
+  <div
+    className="kg-kindergarten-slider-controls relative z-20 mt-6"
+    dir="ltr"
+  >
+    <button
+      type="button"
+      data-mcoe-liquid="off"
+      className="kg-kindergarten-slider-arrow"
+      onClick={prevSlide}
+      aria-label={isRTL ? 'اسلاید قبلی' : 'Previous slide'}
+    >
+      <ChevronLeft aria-hidden="true" />
+    </button>
+
+    <div className="kg-kindergarten-slider-dots">
+      {slides.map((slide, index) => (
       <button
-        key={index}
+        key={slide.id}
         type="button"
         data-mcoe-liquid="off"
-        data-kg-inset="true"
         onClick={() => goToSlide(index)}
-        className="transition-all duration-300 rounded-full"
-        style={{
-          width: index === activeSlide ? '36px' : '12px',
-          height: '12px',
-          background:
-            index === activeSlide
-              ? COLORS.sunlight
-              : COLORS.navySoft,
-          boxShadow:
-            index === activeSlide
-              ? shadows.yellow
-              : 'none',
-        }}
+        className="kg-kindergarten-slider-dot"
+        data-active={index === activeSlide ? 'true' : 'false'}
+        aria-current={index === activeSlide ? 'true' : undefined}
         aria-label={`${isRTL ? 'اسلاید' : 'Slide'} ${index + 1}`}
       />
-    ))}
+      ))}
+    </div>
+
+    <button
+      type="button"
+      data-mcoe-liquid="off"
+      className="kg-kindergarten-slider-arrow"
+      onClick={nextSlide}
+      aria-label={isRTL ? 'اسلاید بعدی' : 'Next slide'}
+    >
+      <ChevronRight aria-hidden="true" />
+    </button>
   </div>
 </div>
 

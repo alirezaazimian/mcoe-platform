@@ -129,6 +129,217 @@
   --kg-liquid-wash-dark: rgba(0, 38, 153, 0.08);
 }
 
+/* Borderless imagery: the photograph itself replaces the old cream frame. */
+.kg-kindergarten-photo-stage::before,
+.kg-kindergarten-photo-stage::after {
+  position: absolute;
+  z-index: 0;
+  border-radius: 999px;
+  content: '';
+  filter: blur(42px);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.kg-kindergarten-photo-stage::before {
+  inset-block-start: 18%;
+  inset-inline-start: 4%;
+  width: 58%;
+  height: 58%;
+  background: #002699;
+}
+
+.kg-kindergarten-photo-stage::after {
+  inset-inline-end: 0;
+  inset-block-end: 12%;
+  width: 42%;
+  height: 42%;
+  background: #f5a623;
+  opacity: 0.16;
+}
+
+.kg-kindergarten-standalone-photo,
+.kg-kindergarten-standalone-slider {
+  border: 0;
+  background: transparent;
+  box-shadow:
+    0 28px 62px rgba(0, 24, 88, 0.2),
+    0 9px 24px rgba(0, 38, 153, 0.1),
+    0 4px 14px rgba(245, 166, 35, 0.1);
+  filter: saturate(1.035) contrast(1.015);
+}
+
+.kg-kindergarten-standalone-slider {
+  box-shadow:
+    0 30px 68px rgba(0, 24, 88, 0.18),
+    0 10px 26px rgba(0, 38, 153, 0.1),
+    0 5px 16px rgba(245, 166, 35, 0.11);
+}
+
+.kg-kindergarten-slider-controls {
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-inline: auto;
+  padding: 0.5rem;
+  border: 1px solid rgba(0, 24, 88, 0.07);
+  border-radius: 1.65rem;
+  background: #fbf6ee;
+  box-shadow:
+    9px 11px 24px rgba(0, 24, 88, 0.11),
+    -7px -7px 18px rgba(255, 255, 255, 0.78),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.82),
+    inset -2px -2px 5px rgba(0, 24, 88, 0.07);
+}
+
+.kg-kindergarten-slider-arrow {
+  position: relative;
+  display: inline-flex;
+  width: 3.1rem;
+  height: 3.1rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(0, 38, 153, 0.13);
+  border-radius: 1.1rem;
+  background: #fbf6ee;
+  color: #001858;
+  box-shadow:
+    6px 7px 15px rgba(0, 24, 88, 0.13),
+    -4px -4px 11px rgba(255, 255, 255, 0.82),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.82),
+    inset -3px -3px 6px rgba(0, 24, 88, 0.09);
+  transition:
+    transform 220ms ease,
+    color 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.kg-kindergarten-slider-arrow::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      circle at 25% 18%,
+      rgba(255, 255, 255, 0.84),
+      rgba(255, 255, 255, 0.18) 26%,
+      transparent 48%
+    );
+  content: '';
+  pointer-events: none;
+}
+
+.kg-kindergarten-slider-arrow svg {
+  position: relative;
+  z-index: 1;
+  width: 1.15rem;
+  height: 1.15rem;
+  stroke-width: 2.6;
+}
+
+.kg-kindergarten-slider-arrow:hover {
+  border-color: rgba(255, 205, 112, 0.92);
+  background: #f5a623;
+  color: #001858;
+  box-shadow:
+    8px 10px 20px rgba(245, 166, 35, 0.25),
+    3px 4px 10px rgba(0, 24, 88, 0.13),
+    -4px -4px 11px rgba(255, 255, 255, 0.72),
+    inset 2px 2px 4px rgba(255, 244, 210, 0.72),
+    inset -3px -4px 7px rgba(177, 100, 5, 0.19);
+  transform: translateY(-2px);
+}
+
+.kg-kindergarten-slider-arrow:active {
+  box-shadow:
+    inset 4px 4px 8px rgba(177, 100, 5, 0.22),
+    inset -3px -3px 7px rgba(255, 244, 210, 0.6);
+  transform: translateY(0) scale(0.97);
+}
+
+.kg-kindergarten-slider-arrow:focus-visible,
+.kg-kindergarten-slider-dot:focus-visible {
+  outline: 3px solid rgba(0, 38, 153, 0.28);
+  outline-offset: 3px;
+}
+
+.kg-kindergarten-slider-dots {
+  display: flex;
+  min-width: 5.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.48rem;
+  padding-inline: 0.35rem;
+}
+
+.kg-kindergarten-slider-dot {
+  width: 0.66rem;
+  height: 0.66rem;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 24, 88, 0.24);
+  box-shadow:
+    inset 2px 2px 4px rgba(0, 24, 88, 0.16),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.76);
+  transition:
+    width 280ms ease,
+    background-color 280ms ease,
+    box-shadow 280ms ease,
+    transform 280ms ease;
+}
+
+.kg-kindergarten-slider-dot[data-active='true'] {
+  width: 2rem;
+  background: #f5a623;
+  box-shadow:
+    0 5px 12px rgba(245, 166, 35, 0.24),
+    inset 2px 2px 4px rgba(255, 244, 210, 0.72),
+    inset -2px -3px 5px rgba(177, 100, 5, 0.2);
+}
+
+.kg-kindergarten-slider-dot:hover {
+  transform: scale(1.08);
+}
+
+@media (max-width: 640px) {
+  .kg-kindergarten-photo-stage::before,
+  .kg-kindergarten-photo-stage::after {
+    filter: blur(28px);
+    opacity: 0.14;
+  }
+
+  .kg-kindergarten-standalone-photo,
+  .kg-kindergarten-standalone-slider {
+    box-shadow:
+      0 20px 42px rgba(0, 24, 88, 0.17),
+      0 5px 15px rgba(245, 166, 35, 0.08);
+  }
+
+  .kg-kindergarten-slider-controls {
+    gap: 0.45rem;
+    padding: 0.42rem;
+    border-radius: 1.4rem;
+  }
+
+  .kg-kindergarten-slider-arrow {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.95rem;
+  }
+
+  .kg-kindergarten-slider-dots {
+    min-width: 4.5rem;
+  }
+}
+
 @media (prefers-contrast: more) {
   .kindergarten-dream-page [data-kg-inset='true']::after {
     opacity: 0.08;

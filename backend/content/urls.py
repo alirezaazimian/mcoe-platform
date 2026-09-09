@@ -7,6 +7,7 @@ from .views import (
     EventViewSet,
     FacilityViewSet,
     HeroSlideViewSet,
+    KindergartenSlideViewSet,
     NewsViewSet,
     PartnerViewSet,
     SiteImageViewSet,
@@ -84,6 +85,12 @@ router.register(
     "hero-slides",
     HeroSlideViewSet,
     basename="hero-slide",
+)
+
+router.register(
+    "kindergarten-slides",
+    KindergartenSlideViewSet,
+    basename="kindergarten-slide",
 )
 
 from django.urls import path

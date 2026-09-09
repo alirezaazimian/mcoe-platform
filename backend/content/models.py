@@ -994,6 +994,85 @@ class HeroSlide(models.Model):
         return f"Hero Slide #{self.id or 'new'}"
 
 
+class KindergartenSlide(models.Model):
+    image = models.ImageField(
+        upload_to="kindergarten-slides/%Y/%m/",
+        verbose_name="تصویر اسلاید کودکستان",
+    )
+
+    title_fa = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="عنوان فارسی",
+    )
+
+    title_en = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="عنوان انگلیسی",
+    )
+
+    text_fa = models.TextField(
+        blank=True,
+        verbose_name="متن فارسی",
+    )
+
+    text_en = models.TextField(
+        blank=True,
+        verbose_name="متن انگلیسی",
+    )
+
+    tag_fa = models.CharField(
+        max_length=120,
+        blank=True,
+        verbose_name="برچسب فارسی",
+    )
+
+    tag_en = models.CharField(
+        max_length=120,
+        blank=True,
+        verbose_name="برچسب انگلیسی",
+    )
+
+    alt_fa = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="متن جایگزین فارسی",
+    )
+
+    alt_en = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="متن جایگزین انگلیسی",
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="فعال",
+    )
+
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name="ترتیب نمایش",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "اسلاید کودکستان"
+        verbose_name_plural = "اسلایدهای کودکستان"
+
+    def __str__(self):
+        return self.title_fa or f"Kindergarten Slide #{self.id or 'new'}"
+
+
 class CollaborationRequest(models.Model):
     class Status(models.TextChoices):
         NEW = "new", "جدید"

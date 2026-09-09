@@ -777,6 +777,26 @@ const normalizeSiteSection =
   );
 
 
+const normalizeKindergartenSlide =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'title_fa',
+        'title_en',
+        'text_fa',
+        'text_en',
+        'tag_fa',
+        'tag_en',
+        'alt_fa',
+        'alt_en',
+      ],
+      numbers: ['sort_order'],
+      booleans: ['is_active'],
+    }
+  );
+
+
 const workingGroupMembersApi =
   makeCrudApi(
     'working-group-members',
@@ -833,6 +853,17 @@ const siteSectionsApi = makeCrudApi(
     lookup: 'key',
   }
 );
+
+
+const kindergartenSlidesApi =
+  makeCrudApi(
+    'kindergarten-slides',
+    {
+      fileKey: 'image',
+      normalize:
+        normalizeKindergartenSlide,
+    }
+  );
 
 
 export const djangoApi = {
@@ -922,6 +953,9 @@ export const djangoApi = {
   facilities: facilitiesApi,
 
   siteSections: siteSectionsApi,
+
+  kindergartenSlides:
+    kindergartenSlidesApi,
 
   news: {
     list() {
