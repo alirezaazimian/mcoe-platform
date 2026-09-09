@@ -21,6 +21,7 @@ import {
 import Reveal from '@/components/ui/Reveal';
 import { useLanguage } from '@/lib/LanguageContext';
 import '@/styles/kindergarten-dream.css';
+import '@/styles/level-actions.css';
 
 
 const HERO_IMAGE =
@@ -372,6 +373,7 @@ export default function KindergartenDreamPage() {
         <motion.div
           aria-hidden="true"
           data-kg-inset="true"
+          data-kg-liquid-shape="orange"
           className="
             absolute
             top-28
@@ -404,6 +406,7 @@ export default function KindergartenDreamPage() {
         <div
           aria-hidden="true"
           data-kg-inset="true"
+          data-kg-liquid-shape="blue"
           className="absolute top-[22%] start-[7%] w-5 h-5 rounded-full"
           style={{
             background: surfaces.blue,
@@ -414,6 +417,7 @@ export default function KindergartenDreamPage() {
         <div
           aria-hidden="true"
           data-kg-inset="true"
+          data-kg-liquid-shape="orange"
           className="absolute top-[30%] start-[10%] w-3 h-3 rounded-full"
           style={{
             background: surfaces.sunlight,
@@ -521,6 +525,7 @@ export default function KindergartenDreamPage() {
 
                   <div
                     data-kg-inset="true"
+                    data-kg-liquid-shape="pale-blue"
                     className="
                       flex
                       items-center
@@ -548,6 +553,7 @@ export default function KindergartenDreamPage() {
 
                   <div
                     data-kg-inset="true"
+                    data-kg-liquid-shape="pale-blue"
                     className="
                       flex
                       items-center
@@ -578,32 +584,12 @@ export default function KindergartenDreamPage() {
 
               {/* CTA */}
               <Reveal delay={0.2}>
-                <div className="flex flex-wrap gap-4 mt-10">
+                <div className="mcoe-level-actions">
 
                   <button
                     type="button"
-                    data-kg-inset="true"
                     onClick={scrollToStory}
-                    className="
-                      group
-                      inline-flex
-                      items-center
-                      gap-3
-                      min-h-14
-                      px-7
-                      rounded-[1.4rem]
-                      font-black
-                      transition-all
-                      duration-300
-                      hover:-translate-y-1
-                    "
-                    style={{
-                      background:
-                        surfaces.navy,
-                      color: COLORS.cream,
-                      boxShadow:
-                        shadows.blue,
-                    }}
+                    className="group mcoe-level-action mcoe-level-action--primary gap-3"
                   >
                     <Play className="w-4 h-4 fill-current" />
 
@@ -613,27 +599,7 @@ export default function KindergartenDreamPage() {
 
                   <a
                     href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
-                    data-kg-inset="true"
-                    className="
-                      inline-flex
-                      items-center
-                      justify-center
-                      min-h-14
-                      px-7
-                      rounded-[1.4rem]
-                      font-black
-                      transition-all
-                      duration-300
-                      hover:-translate-y-1
-                    "
-                    style={{
-                      background:
-                        surfaces.sunlight,
-                      color:
-                        COLORS.navy,
-                      boxShadow:
-                        shadows.yellow,
-                    }}
+                    className="mcoe-liquid-button mcoe-level-action mcoe-level-action--secondary"
                   >
                     {content.register}
                   </a>
@@ -663,6 +629,7 @@ export default function KindergartenDreamPage() {
                 <div
                   aria-hidden="true"
                   data-kg-inset="true"
+                  data-kg-liquid-shape="blue"
                   className="
                     absolute
                     top-[8%]
@@ -812,6 +779,7 @@ export default function KindergartenDreamPage() {
                 {/* floating block 2 */}
                 <motion.div
                   data-kg-inset="true"
+                  data-kg-liquid-shape="pale-blue"
   className="
     absolute
     z-20
@@ -851,6 +819,7 @@ export default function KindergartenDreamPage() {
 <motion.div
   aria-hidden="true"
   data-kg-inset="true"
+  data-kg-liquid-shape="orange"
   className="
     absolute
     z-30
@@ -901,6 +870,7 @@ export default function KindergartenDreamPage() {
             <div className="relative max-w-6xl mx-auto">
               <motion.div
                 data-kg-inset="true"
+                data-kg-liquid-shape="orange"
                 className="
                   relative
                   z-10
@@ -945,6 +915,7 @@ export default function KindergartenDreamPage() {
 
               <div
                 data-kg-inset="true"
+                data-kg-liquid-shape="orange"
                 className="
                   inline-flex
                   items-center
@@ -1239,6 +1210,7 @@ export default function KindergartenDreamPage() {
                     <div
                       key={item}
                       data-kg-inset="true"
+                      data-kg-liquid-shape="pale-blue"
                       className="px-4 py-3 rounded-2xl text-sm font-bold"
                       style={{
                         background: surfaces.paleBlue2,
@@ -1258,6 +1230,7 @@ export default function KindergartenDreamPage() {
   <motion.div
     aria-hidden="true"
     data-kg-inset="true"
+    data-kg-liquid-shape="pale-blue"
     className="
       absolute
       -top-10
@@ -1287,6 +1260,7 @@ export default function KindergartenDreamPage() {
   <motion.div
     aria-hidden="true"
     data-kg-inset="true"
+    data-kg-liquid-shape="orange"
     className="
       absolute
       -bottom-8
@@ -1342,6 +1316,7 @@ export default function KindergartenDreamPage() {
       <AnimatePresence mode="wait">
         <motion.div
           data-kg-inset="true"
+          data-kg-liquid-shape="orange"
           key={`tag-${activeSlide}`}
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -1488,6 +1463,7 @@ export default function KindergartenDreamPage() {
               <div
                 aria-hidden="true"
                 data-kg-inset="true"
+                data-kg-liquid-shape="blue"
                 className="
                   absolute
                   -top-24
@@ -1508,6 +1484,7 @@ export default function KindergartenDreamPage() {
               <div
                 aria-hidden="true"
                 data-kg-inset="true"
+                data-kg-liquid-shape="orange"
                 className="
                   absolute
                   -bottom-16
@@ -1567,29 +1544,7 @@ export default function KindergartenDreamPage() {
 
                 <a
                   href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
-                  data-kg-inset="true"
-                  className="
-                    relative
-                    inline-flex
-                    items-center
-                    justify-center
-                    min-h-16
-                    px-8
-                    rounded-[1.5rem]
-                    font-black
-                    transition-all
-                    duration-300
-                    hover:-translate-y-1
-                    whitespace-nowrap
-                  "
-                  style={{
-                    background:
-                      surfaces.sunlight,
-                    color:
-                      COLORS.navy,
-                    boxShadow:
-                      shadows.yellow,
-                  }}
+                  className="mcoe-liquid-button mcoe-level-action mcoe-level-action--accent"
                 >
                   {content.cta}
                 </a>

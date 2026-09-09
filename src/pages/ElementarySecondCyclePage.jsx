@@ -15,6 +15,7 @@ import {
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/AppButton';
 import { useLanguage } from '@/lib/LanguageContext';
+import '@/styles/level-actions.css';
 
 
 const HERO_IMAGE =
@@ -353,27 +354,11 @@ export default function ElementarySecondCyclePage() {
 
 
               <Reveal delay={0.2}>
-                <div className="flex flex-wrap gap-4 mt-10">
+                <div className="mcoe-level-actions">
 
                   <a
                     href="#second-cycle-programs"
-                    className="
-                      inline-flex
-                      items-center
-                      justify-center
-                      min-h-14
-                      px-7
-                      rounded-lg
-                      font-black
-                      transition-all
-                      duration-300
-                      hover:-translate-y-1
-                    "
-                    style={{
-                      background: COLORS.navy,
-                      color: '#fff',
-                      boxShadow: SHADOWS.blue,
-                    }}
+                    className="mcoe-liquid-button mcoe-level-action mcoe-level-action--primary"
                   >
                     {content.programs}
                   </a>
@@ -381,23 +366,7 @@ export default function ElementarySecondCyclePage() {
 
                   <a
                     href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
-                    className="
-                      inline-flex
-                      items-center
-                      justify-center
-                      min-h-14
-                      px-7
-                      rounded-lg
-                      font-black
-                      transition-all
-                      duration-300
-                      hover:-translate-y-1
-                    "
-                    style={{
-                      background: COLORS.sunlight,
-                      color: COLORS.navy,
-                      boxShadow: SHADOWS.yellow,
-                    }}
+                    className="mcoe-liquid-button mcoe-level-action mcoe-level-action--secondary"
                   >
                     {content.registration}
                   </a>
@@ -1172,22 +1141,24 @@ export default function ElementarySecondCyclePage() {
                 />
 
 
-                <Button
-                  href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
-                  className="w-full mb-3"
-                >
-                  {t('hero.register')}
-                </Button>
+                <div className="mcoe-level-actions mcoe-level-actions--stacked">
+                  <Button
+                    href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
+                    className="mcoe-level-action mcoe-level-action--primary"
+                  >
+                    {t('hero.register')}
+                  </Button>
 
 
-                <Button
-                  href="https://survey.porsline.ir/s/qP6AU8hR"
-                  variant="outline"
-                  className="w-full"
-                  icon={false}
-                >
-                  {t('hero.collaborate')}
-                </Button>
+                  <Button
+                    href="https://survey.porsline.ir/s/qP6AU8hR"
+                    variant="outline"
+                    className="mcoe-level-action mcoe-level-action--secondary"
+                    icon={false}
+                  >
+                    {t('hero.collaborate')}
+                  </Button>
+                </div>
 
 
                 <div

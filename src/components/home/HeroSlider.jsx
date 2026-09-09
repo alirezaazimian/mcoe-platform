@@ -95,14 +95,6 @@ function localized(
 }
 
 
-function twoDigits(value) {
-  return String(value).padStart(
-    2,
-    '0'
-  );
-}
-
-
 function headlineLines(value, isRTL) {
   const marker = isRTL ? 'رویکردی' : ',';
   const markerIndex = value.indexOf(marker);
@@ -324,12 +316,6 @@ export default function HeroSlider() {
     slides[index];
   const slideKey =
     slide?.id ?? index;
-  const nextIndex =
-    count
-      ? (index + 1) % count
-      : 0;
-  const nextSlide =
-    slides[nextIndex];
 
   const legacyAlt = localized(
     slide,
@@ -351,15 +337,6 @@ export default function HeroSlider() {
   const description = isRTL
     ? 'محیطی پویا، امن و الهام‌بخش برای پرورش دانش، خلاقیت و اعتمادبه‌نفس نسل آینده.'
     : 'A thoughtful, inspiring and safe environment where knowledge, creativity and confidence can grow together.';
-
-  const nextTitle = localized(
-    nextSlide,
-    'alt',
-    isRTL,
-    isRTL
-      ? 'اسلاید بعدی'
-      : 'Next slide'
-  );
 
   const previousLabel =
     isRTL
@@ -608,107 +585,68 @@ export default function HeroSlider() {
                 ))}
               </div>
 
-              <div className="mcoe-fade-controls">
-                <button
-                  type="button"
-                  onClick={() => go(-1)}
-                  aria-label={previousLabel}
-                >
-                  {isRTL ? (
-                    <ChevronRight />
-                  ) : (
-                    <ChevronLeft />
-                  )}
-                </button>
-
-                <span
-                  className="mcoe-fade-counter"
-                  aria-hidden="true"
-                  style={{
-                    '--mcoe-liquid-level':
-                      `${((index + 1) / count) * 100}%`,
-                  }}
-                >
-                  <strong>
-                    {twoDigits(
-                      index + 1
-                    )}
-                  </strong>
-                  <i />
-                  <span>
-                    {twoDigits(count)}
-                  </span>
-                </span>
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    setUserPaused(
-                      (current) =>
-                        !current
-                    )
-                  }
-                  aria-label={
-                    userPaused
-                      ? (
-                          isRTL
-                            ? 'پخش خودکار اسلایدر'
-                            : 'Play carousel'
-                        )
-                      : (
-                          isRTL
-                            ? 'توقف پخش خودکار اسلایدر'
-                            : 'Pause carousel'
-                        )
-                  }
-                >
-                  {userPaused ? (
-                    <Play />
-                  ) : (
-                    <Pause />
-                  )}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => go(1)}
-                  aria-label={nextLabel}
-                >
-                  {isRTL ? (
-                    <ChevronLeft />
-                  ) : (
-                    <ChevronRight />
-                  )}
-                </button>
-              </div>
             </div>
           )}
         </div>
       </div>
 
-      {count > 1 && nextSlide && (
-        <button
-          type="button"
-          data-mcoe-liquid="off"
-          className="mcoe-fade-next-preview"
-          onClick={() => go(1)}
-          aria-label={`${nextLabel}: ${nextTitle}`}
+      {count > 1 && (
+        <div
+          className="mcoe-fade-controls mcoe-fade-floating-controls"
         >
-          <img
-            src={nextSlide.image_url}
-            alt=""
-          />
-          <span>
-            {isRTL
-              ? 'بعدی'
-              : 'Next'}
-          </span>
-          <strong>
-            {twoDigits(
-              nextIndex + 1
+          <button
+            type="button"
+            onClick={() => go(-1)}
+            aria-label={previousLabel}
+          >
+            {isRTL ? (
+              <ChevronRight />
+            ) : (
+              <ChevronLeft />
             )}
-          </strong>
-        </button>
+          </button>
+
+          <button
+            type="button"
+            onClick={() =>
+              setUserPaused(
+                (current) =>
+                  !current
+              )
+            }
+            aria-label={
+              userPaused
+                ? (
+                    isRTL
+                      ? 'پخش خودکار اسلایدر'
+                      : 'Play carousel'
+                  )
+                : (
+                    isRTL
+                      ? 'توقف پخش خودکار اسلایدر'
+                      : 'Pause carousel'
+                  )
+            }
+          >
+            {userPaused ? (
+              <Play />
+            ) : (
+              <Pause />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => go(1)}
+            aria-label={nextLabel}
+          >
+            {isRTL ? (
+              <ChevronLeft />
+            ) : (
+              <ChevronRight />
+            )}
+          </button>
+        </div>
       )}
     </div>
   );

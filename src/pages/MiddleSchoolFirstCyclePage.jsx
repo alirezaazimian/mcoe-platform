@@ -16,6 +16,7 @@ import {
 
 import Reveal from '@/components/ui/Reveal';
 import { useLanguage } from '@/lib/LanguageContext';
+import '@/styles/level-actions.css';
 
 
 const HERO_IMAGE =
@@ -413,33 +414,11 @@ export default function MiddleSchoolFirstCyclePage() {
 
 
               <Reveal delay={0.18}>
-                <div
-                  className="
-                    flex
-                    flex-wrap
-                    gap-4
-                    mt-10
-                  "
-                >
+                <div className="mcoe-level-actions">
 
                   <a
                     href="#middle-research-path"
-                    className="
-                      inline-flex
-                      min-h-14
-                      items-center
-                      justify-center
-                      px-7
-                      rounded-lg
-                      font-black
-                      transition-all
-                      duration-300
-                      hover:-translate-y-1
-                    "
-                    style={{
-                      background: COLORS.navy,
-                      color: '#FFFFFF',
-                    }}
+                    className="mcoe-liquid-button mcoe-level-action mcoe-level-action--primary"
                   >
                     {content.programs}
                   </a>
@@ -447,22 +426,7 @@ export default function MiddleSchoolFirstCyclePage() {
 
                   <a
                     href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
-                    className="
-                      inline-flex
-                      min-h-14
-                      items-center
-                      justify-center
-                      px-7
-                      rounded-lg
-                      font-black
-                      transition-all
-                      duration-300
-                      hover:-translate-y-1
-                    "
-                    style={{
-                      background: COLORS.sunlight,
-                      color: COLORS.navy,
-                    }}
+                    className="mcoe-liquid-button mcoe-level-action mcoe-level-action--secondary"
                   >
                     {content.registration}
                   </a>
@@ -1419,26 +1383,11 @@ export default function MiddleSchoolFirstCyclePage() {
 
             <Reveal delay={0.08}>
 
-              <div className="min-w-[300px]">
+              <div className="mcoe-level-actions mcoe-level-actions--stacked min-w-[300px]">
 
                 <a
                   href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
-                  className="
-                    flex
-                    min-h-14
-                    items-center
-                    justify-center
-                    px-8
-                    rounded-lg
-                    font-black
-                    transition-all
-                    duration-300
-                    hover:-translate-y-1
-                  "
-                  style={{
-                    background: COLORS.navy,
-                    color: '#FFFFFF',
-                  }}
+                  className="mcoe-liquid-button mcoe-level-action mcoe-level-action--primary"
                 >
                   {content.registration}
                 </a>
