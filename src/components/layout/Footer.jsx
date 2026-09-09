@@ -34,7 +34,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-primary text-primary-foreground/90 mt-30">
+    <footer className="mcoe-footer relative bg-primary text-primary-foreground/90 mt-30">
       {/* Top accent rule */}
       <div className="h-1 bg-gradient-to-r from-primary via-secondary to-accent"></div>
 
@@ -56,14 +56,20 @@ export default function Footer() {
               {t('footer.about')}
             </p>
             <div className="flex items-center justify-center sm:justify-start gap-3 mt-6">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mcoe-liquid-button w-9 h-9 rounded-lg flex items-center justify-center bg-[#E1306C] hover:opacity-90 transition-opacity" aria-label="Instagram">
-                <Instagram className="w-4 h-4 text-white" />
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mcoe-theme-toggle mcoe-footer-icon" aria-label="Instagram">
+                <span aria-hidden="true">
+                  <Instagram className="w-4 h-4" />
+                </span>
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="mcoe-liquid-button w-9 h-9 rounded-lg flex items-center justify-center bg-[#0A66C2] hover:opacity-90 transition-opacity" aria-label="LinkedIn">
-                <Linkedin className="w-4 h-4 text-white" />
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="mcoe-theme-toggle mcoe-footer-icon" aria-label="LinkedIn">
+                <span aria-hidden="true">
+                  <Linkedin className="w-4 h-4" />
+                </span>
               </a>
-              <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="mcoe-liquid-button w-9 h-9 rounded-lg flex items-center justify-center bg-[#229ED9] hover:opacity-90 transition-opacity" aria-label="Telegram">
-                <Send className="w-4 h-4 text-white" />
+              <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="mcoe-theme-toggle mcoe-footer-icon" aria-label="Telegram">
+                <span aria-hidden="true">
+                  <Send className="w-4 h-4" />
+                </span>
               </a>
             </div>
           </div>
@@ -87,20 +93,26 @@ export default function Footer() {
             <h4 className="font-semibold text-white text-sm mb-5">{t('footer.contactUs')}</h4>
             <ul className="space-y-3 text-sm text-primary-foreground/70">
               <li className="flex items-start justify-start gap-3">
-                <span className="w-9 h-9 rounded-lg glass neumorphic-inset-dark flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4 text-white" />
+                <span className="mcoe-theme-toggle mcoe-footer-icon mcoe-footer-icon-static" aria-hidden="true">
+                  <span>
+                    <MapPin className="w-4 h-4" />
+                  </span>
                 </span>
                 <span className="pt-2">{t('footer.address')}</span>
               </li>
               <li className="flex items-center justify-start gap-3">
-                <span className="w-9 h-9 rounded-lg glass neumorphic-inset-dark flex items-center justify-center shrink-0">
-                  <Mail className="w-4 h-4 text-white" />
+                <span className="mcoe-theme-toggle mcoe-footer-icon mcoe-footer-icon-static" aria-hidden="true">
+                  <span>
+                    <Mail className="w-4 h-4" />
+                  </span>
                 </span>
                 <a href="mailto:school@mcoe.ir" className="hover:text-white transition-colors">school@mcoe.ir</a>
               </li>
               <li className="flex items-start justify-start gap-3">
-                <span className="w-9 h-9 rounded-lg glass neumorphic-inset-dark flex items-center justify-center shrink-0">
-                  <Phone className="w-4 h-4 text-white" />
+                <span className="mcoe-theme-toggle mcoe-footer-icon mcoe-footer-icon-static" aria-hidden="true">
+                  <span>
+                    <Phone className="w-4 h-4" />
+                  </span>
                 </span>
                 <div className="flex flex-col items-start gap-1 pt-1.5" dir="ltr">
                   {phones.map((p) => (
@@ -124,8 +136,10 @@ export default function Footer() {
                 placeholder={t('footer.emailPlaceholder')}
                 className="w-full bg-white/10 border border-white/15 rounded-lg py-2.5 ps-4 pe-12 text-sm text-white placeholder:text-primary-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent/30 transition-all"
               />
-              <button type="submit" className="glass neumorphic-inset-dark absolute top-1/2 -translate-y-1/2 end-1.5 w-9 h-9 rounded-md text-white flex items-center justify-center transition-colors" aria-label={t('footer.subscribe')}>
-                <Send className={isRTL ? 'w-4 h-4 -scale-x-100' : 'w-4 h-4'} />
+              <button type="submit" data-mcoe-liquid="off" className="mcoe-theme-toggle mcoe-footer-icon absolute top-1/2 -translate-y-1/2 end-1.5" aria-label={t('footer.subscribe')}>
+                <span aria-hidden="true">
+                  <Send className={isRTL ? 'w-4 h-4 -scale-x-100' : 'w-4 h-4'} />
+                </span>
               </button>
             </form>
             {subscribed && (
@@ -151,8 +165,10 @@ export default function Footer() {
         {/* Google Map */}
         <div className="mt-12">
           <h4 className="font-semibold text-white text-sm mb-4 flex items-center justify-center sm:justify-start gap-3">
-            <span className="w-9 h-9 rounded-lg glass neumorphic-inset-dark flex items-center justify-center shrink-0">
-              <MapPin className="w-4 h-4 text-white" />
+            <span className="mcoe-theme-toggle mcoe-footer-icon mcoe-footer-icon-static" aria-hidden="true">
+              <span>
+                <MapPin className="w-4 h-4" />
+              </span>
             </span>
             {t('footer.findUs')}
           </h4>
@@ -174,9 +190,14 @@ export default function Footer() {
           <p className="text-xs text-primary-foreground/60">{t('footer.rightsText')}</p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-2 text-xs text-primary-foreground/60 hover:text-white transition-colors"
+            data-mcoe-liquid="off"
+            className="mcoe-footer-back flex items-center gap-2 text-xs text-primary-foreground/60 hover:text-white transition-colors"
           >
-            <ArrowUp className="w-3.5 h-3.5" />
+            <span className="mcoe-theme-toggle mcoe-footer-icon" aria-hidden="true">
+              <span>
+                <ArrowUp className="w-3.5 h-3.5" />
+              </span>
+            </span>
             {isRTL ? 'بازگشت به بالا' : 'Back to top'}
           </button>
         </div>

@@ -1171,6 +1171,51 @@
   color: #f5a623;
 }
 
+/* Footer icon system — the exact material, color and motion language of the
+   main-header day/night switch on the same royal-blue surface. */
+.mcoe-footer .mcoe-footer-icon {
+  flex: 0 0 auto;
+  border-color: rgba(251, 246, 238, 0.2);
+  background: rgba(0, 24, 88, 0.2);
+  box-shadow:
+    inset 3px 3px 7px rgba(0, 7, 32, 0.34),
+    inset -3px -3px 7px rgba(69, 109, 224, 0.28);
+  color: #fbf6ee;
+}
+
+.mcoe-footer .mcoe-footer-icon:hover,
+.mcoe-footer .mcoe-footer-icon:focus-visible,
+.mcoe-footer .mcoe-footer-back:hover .mcoe-footer-icon,
+.mcoe-footer .mcoe-footer-back:focus-visible .mcoe-footer-icon {
+  border-color: rgba(245, 166, 35, 0.58);
+  background: rgba(0, 24, 88, 0.3);
+  box-shadow:
+    inset 4px 4px 9px rgba(0, 7, 32, 0.4),
+    inset -4px -4px 9px rgba(69, 109, 224, 0.32),
+    0 0 0 3px rgba(245, 166, 35, 0.08);
+  color: #f5a623;
+}
+
+.mcoe-footer .mcoe-footer-back:hover .mcoe-footer-icon > span,
+.mcoe-footer .mcoe-footer-back:focus-visible .mcoe-footer-icon > span {
+  transform: rotate(-10deg) scale(1.04);
+}
+
+.mcoe-footer .mcoe-footer-icon-static {
+  cursor: default;
+}
+
+.mcoe-footer .mcoe-footer-back {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+}
+
+.mcoe-footer .mcoe-footer-back:focus-visible {
+  color: #fbf6ee;
+}
+
 .mcoe-language-toggle-label {
   font-size: 0.7rem;
   font-weight: 800;
