@@ -63,8 +63,8 @@ export default function ComplexHistory() {
             { icon: Award, num: '۱۰', numEn: '10', label: isRTL ? 'کارگروه تخصصی' : 'Working Groups' },
           ].map((stat, i) => (
             <Reveal key={i} delay={i * 0.1}>
-              <div className="text-center glass neumorphic-inset rounded-2xl p-8">
-                <div className="w-14 h-14 rounded-2xl glass neumorphic-inset flex items-center justify-center mx-auto mb-4">
+              <div className="text-center glass association-style-card rounded-2xl p-8">
+                <div className="w-14 h-14 rounded-2xl glass association-style-card flex items-center justify-center mx-auto mb-4">
                   <stat.icon className="w-6 h-6 text-primary" />
                 </div>
                 <div className="text-3xl font-bold text-primary mb-1">{isRTL ? stat.num : stat.numEn}</div>

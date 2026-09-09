@@ -38,8 +38,8 @@ export default function StudentAssociations() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {associations.map((assoc, i) => (
             <Reveal key={i} delay={(i % 3) * 0.08}>
-              <div className="glass neumorphic-inset rounded-2xl p-6 h-full">
-                <div className="w-14 h-14 rounded-2xl glass neumorphic-inset flex items-center justify-center mb-5">
+              <div className="glass association-style-card rounded-2xl p-6 h-full">
+                <div className="w-14 h-14 rounded-2xl glass association-style-card flex items-center justify-center mb-5">
                   <assoc.icon className={`w-6 h-6 ${BLOCK_COLORS[i]}`} />
                 </div>
                 <h3 className="font-bold text-foreground text-lg mb-2">{assoc.name}</h3>

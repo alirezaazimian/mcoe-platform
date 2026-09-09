@@ -182,8 +182,8 @@ export default function EducationalSpace() {
                 delay={(index % 3) * 0.07}
                 className="h-full"
               >
-                <article className="space-clay-panel h-full rounded-2xl p-6">
-                  <div className="space-clay-icon mb-5">
+                <article className="glass association-style-card h-full rounded-2xl p-6">
+                  <div className="glass association-style-card mb-5 flex h-14 w-14 items-center justify-center rounded-2xl text-[#002699]">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h2 className="mb-2 text-lg font-bold text-[#001858]">

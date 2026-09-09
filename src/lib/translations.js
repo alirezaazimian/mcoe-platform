@@ -32,7 +32,7 @@ export const translations = {
       workingGroups: 'کارگروه‌ها',
       collaborate: 'همکاری با ما',
       studentAssociations: 'انجمن‌های دانش‌آموزی',
-      preschool: 'پیش‌دبستانی',
+      preschool: 'کودکستان رویای کودکی',
       contactUs: 'تماس با ما',
     },
     hero: {
@@ -185,7 +185,7 @@ export const translations = {
       workingGroups: 'Working Groups',
       collaborate: 'Collaborate',
       studentAssociations: 'Student Associations',
-      preschool: 'Preschool',
+      preschool: 'Childhood Dream Kindergarten',
       contactUs: 'Contact Us',
     },
     hero: {

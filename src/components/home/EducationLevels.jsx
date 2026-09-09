@@ -130,7 +130,7 @@ export default function EducationLevels() {
               >
                 <Link
                   to={`/levels/${level.slug}`}
-                  className="home-clay-card group flex h-full flex-col rounded-[26px] p-3"
+                  className="glass association-style-card group flex h-full flex-col rounded-2xl p-3"
                 >
                   <div className="home-clay-image relative aspect-[4/3] overflow-hidden rounded-[19px]">
                     {level.image ? (

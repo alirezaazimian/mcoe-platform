@@ -103,7 +103,7 @@ export default function Partners() {
               partner.name_fa;
             const content = (
               <>
-                <div className="home-clay-icon">
+                <div className="glass association-style-card flex h-14 w-14 items-center justify-center rounded-2xl text-[#002699] transition-colors duration-300 group-hover:text-[#F5A623]">
                   {partner.image ? (
                     <img
                       src={partner.image}
@@ -131,12 +131,12 @@ export default function Partners() {
                     href={partner.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="home-clay-card group flex h-full min-h-40 flex-col items-center justify-center gap-4 rounded-[24px] p-6"
+                    className="glass association-style-card group flex h-full min-h-40 flex-col items-center justify-center gap-4 rounded-2xl p-6"
                   >
                     {content}
                   </a>
                 ) : (
-                  <div className="home-clay-card flex h-full min-h-40 flex-col items-center justify-center gap-4 rounded-[24px] p-6">
+                  <div className="glass association-style-card flex h-full min-h-40 flex-col items-center justify-center gap-4 rounded-2xl p-6">
                     {content}
                   </div>
                 )}
