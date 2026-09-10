@@ -18,8 +18,10 @@ export default function AnalogClock() {
   }, []);
 
   const min = now.getMinutes();
+  const sec = now.getSeconds();
   const hr = now.getHours() % 12;
 
+  const secAngle = sec * 6;
   const minAngle = min * 6;
   const hrAngle =
     hr * 30 + min * 0.5;
@@ -46,7 +48,7 @@ export default function AnalogClock() {
       y2:
         cy +
         len * Math.sin(rad),
-      width,
+      strokeWidth: width,
       stroke: color,
       strokeLinecap: 'round',
     };
@@ -54,6 +56,7 @@ export default function AnalogClock() {
 
   return (
     <div
+      className="mcoe-admin-clock-wrap"
       style={{
         display: 'flex',
         justifyContent: 'center',
@@ -61,7 +64,12 @@ export default function AnalogClock() {
       }}
     >
       <div
-        className="neu-inset-sm"
+        className="neu-inset-sm mcoe-admin-clock-face"
+        role="img"
+        tabIndex={0}
+        aria-label={now.toLocaleTimeString(
+          'fa-IR'
+        )}
         style={{
           width: 108,
           height: 108,
@@ -96,6 +104,7 @@ export default function AnalogClock() {
             return (
               <line
                 key={i}
+                className={`mcoe-admin-clock-tick${isMajor ? ' is-major' : ''}`}
                 x1={
                   cx +
                   r1 *
@@ -116,11 +125,7 @@ export default function AnalogClock() {
                   r2 *
                     Math.sin(angle)
                 }
-                stroke={
-                  isMajor
-                    ? '#7a7470'
-                    : '#c4beb7'
-                }
+                stroke="#FBF6EE"
                 strokeWidth={
                   isMajor
                     ? 1.6
@@ -132,28 +137,41 @@ export default function AnalogClock() {
           })}
 
           <line
+            className="mcoe-admin-clock-hand mcoe-admin-clock-hand-hour"
             {...hand(
               hrAngle,
               24,
               3,
-              '#080C66'
+              '#FBF6EE'
             )}
           />
 
           <line
+            className="mcoe-admin-clock-hand mcoe-admin-clock-hand-minute"
             {...hand(
               minAngle,
               33,
               2,
-              '#2e2a26'
+              '#FBF6EE'
+            )}
+          />
+
+          <line
+            className="mcoe-admin-clock-hand mcoe-admin-clock-hand-second"
+            {...hand(
+              secAngle,
+              37,
+              1.1,
+              '#FBF6EE'
             )}
           />
 
           <circle
+            className="mcoe-admin-clock-hub"
             cx={cx}
             cy={cy}
             r="2.4"
-            fill="#2e2a26"
+            fill="#FBF6EE"
           />
         </svg>
       </div>

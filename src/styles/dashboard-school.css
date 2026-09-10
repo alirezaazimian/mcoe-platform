@@ -260,3 +260,1705 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* -------------------------------------------------------------------------
+   MCOE public-design dashboard layer
+
+   The administration surface intentionally uses the same material system as
+   the public site: warm cream canvas, deep navy structure, royal-blue states
+   and a restrained sunlight-orange action colour.  This layer sits after the
+   legacy dashboard rules so existing module markup and behaviour remain
+   unchanged while every surface receives the current visual language.
+   ------------------------------------------------------------------------- */
+
+.mcoe-admin-shell {
+  --admin-cream: #fbf6ee;
+  --admin-cream-deep: #f4ecdf;
+  --admin-cream-soft: #fffaf2;
+  --admin-navy: #001858;
+  --admin-blue: #002699;
+  --admin-orange: #f5a623;
+  --admin-ink: #001858;
+  --admin-muted: rgba(0, 24, 88, 0.62);
+  --admin-muted-soft: rgba(0, 24, 88, 0.46);
+  --admin-border: rgba(0, 24, 88, 0.1);
+  --admin-raised-shadow:
+    12px 14px 30px rgba(0, 24, 88, 0.1),
+    -10px -10px 24px rgba(255, 255, 255, 0.92),
+    0 1px 0 rgba(255, 255, 255, 0.7);
+  --admin-raised-shadow-sm:
+    6px 8px 18px rgba(0, 24, 88, 0.09),
+    -6px -6px 15px rgba(255, 255, 255, 0.9),
+    0 1px 0 rgba(255, 255, 255, 0.64);
+  --admin-inset-shadow:
+    inset 8px 8px 18px rgba(0, 24, 88, 0.08),
+    inset -8px -8px 18px rgba(255, 255, 255, 0.94),
+    0 1px 0 rgba(255, 255, 255, 0.58);
+  --admin-inset-shadow-sm:
+    inset 4px 4px 10px rgba(0, 24, 88, 0.08),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.92);
+
+  min-height: 100dvh;
+  color: var(--admin-ink) !important;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(245, 166, 35, 0.04), transparent 25rem),
+    radial-gradient(circle at 94% 18%, rgba(0, 38, 153, 0.07), transparent 31rem),
+    var(--admin-cream) !important;
+}
+
+.mcoe-admin-shell,
+.mcoe-admin-shell button,
+.mcoe-admin-shell input,
+.mcoe-admin-shell textarea,
+.mcoe-admin-shell select {
+  font-family: 'Vazirmatn', 'Inter', system-ui, sans-serif;
+}
+
+.mcoe-admin-shell[dir='ltr'],
+.mcoe-admin-shell[dir='ltr'] button,
+.mcoe-admin-shell[dir='ltr'] input,
+.mcoe-admin-shell[dir='ltr'] textarea,
+.mcoe-admin-shell[dir='ltr'] select {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.mcoe-admin-desktop-shell {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  padding: clamp(14px, 2.5vw, 28px) !important;
+  gap: clamp(14px, 2.2vw, 26px) !important;
+  background: transparent !important;
+}
+
+.mcoe-admin-mobile-shell {
+  min-height: 100dvh !important;
+  background: transparent !important;
+}
+
+.mcoe-admin-main {
+  scrollbar-color: rgba(0, 38, 153, 0.32) transparent;
+  scrollbar-width: thin;
+}
+
+.mcoe-admin-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.mcoe-admin-main::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(0, 38, 153, 0.28);
+  background-clip: padding-box;
+}
+
+/* Structural surfaces */
+
+.mcoe-admin-shell .neu-raised,
+.mcoe-admin-shell .neu-raised-sm {
+  border: 1px solid var(--admin-border) !important;
+  background: var(--admin-cream) !important;
+  box-shadow: var(--admin-raised-shadow) !important;
+  color: var(--admin-ink) !important;
+}
+
+.mcoe-admin-shell .neu-raised-sm {
+  border-radius: 16px !important;
+  box-shadow: var(--admin-raised-shadow-sm) !important;
+}
+
+.mcoe-admin-shell .neu-inset,
+.mcoe-admin-shell .neu-inset-sm {
+  border: 1px solid rgba(0, 24, 88, 0.07) !important;
+  background: var(--admin-cream-deep) !important;
+  box-shadow: var(--admin-inset-shadow) !important;
+  color: var(--admin-ink) !important;
+}
+
+.mcoe-admin-shell .neu-inset-sm {
+  border-radius: 14px !important;
+  box-shadow: var(--admin-inset-shadow-sm) !important;
+}
+
+.mcoe-admin-shell .neu-raised:hover,
+.mcoe-admin-shell .neu-raised-sm:hover {
+  border-color: rgba(0, 38, 153, 0.16) !important;
+}
+
+/* Sidebar — a light cream surface with restrained navy navigation. */
+
+.mcoe-admin-shell .mcoe-admin-sidebar,
+.mcoe-admin-shell .sidebar-float {
+  width: clamp(220px, 18vw, 264px) !important;
+  overflow: hidden;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: 20px !important;
+  background: var(--admin-cream) !important;
+  box-shadow: var(--admin-raised-shadow) !important;
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-sidebar-header {
+  border-bottom: 1px solid rgba(0, 24, 88, 0.08);
+}
+
+.mcoe-admin-dashboard-logo {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  filter: drop-shadow(0 5px 8px rgba(0, 24, 88, 0.12));
+  transition:
+    filter 240ms ease,
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mcoe-admin-sidebar-header:hover .mcoe-admin-dashboard-logo {
+  filter: drop-shadow(0 7px 11px rgba(0, 38, 153, 0.2));
+  transform: translateY(-1px) scale(1.025);
+}
+
+.mcoe-admin-dashboard-logo-mobile {
+  width: 34px;
+  height: 34px;
+  flex-basis: 34px;
+}
+
+.mcoe-admin-sidebar-copy span:first-child {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-sidebar-copy span:last-child {
+  color: var(--admin-muted-soft) !important;
+}
+
+.mcoe-admin-sidebar-nav {
+  padding-inline: 12px !important;
+}
+
+.mcoe-admin-sidebar-nav a {
+  position: relative;
+  border: 1px solid transparent;
+  color: var(--admin-muted) !important;
+  transition:
+    color 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.mcoe-admin-sidebar-nav a:hover {
+  border-color: rgba(91, 132, 238, 0.7);
+  background:
+    radial-gradient(
+      circle at 24% 18%,
+      rgba(232, 240, 255, 0.82) 0,
+      rgba(198, 216, 255, 0.28) 15%,
+      transparent 34%
+    ),
+    linear-gradient(145deg, #315dd7 0%, #002699 54%, #001858 100%) !important;
+  box-shadow:
+    0 11px 22px rgba(0, 38, 153, 0.2),
+    0 4px 9px rgba(0, 24, 88, 0.13),
+    -3px -3px 9px rgba(255, 255, 255, 0.68),
+    inset 2px 2px 4px rgba(205, 219, 255, 0.62),
+    inset -3px -4px 7px rgba(0, 7, 32, 0.22) !important;
+  color: var(--admin-cream) !important;
+  transform: translateY(-2px) scale(1.008);
+}
+
+.mcoe-admin-sidebar-nav a[aria-current='page'] {
+  border-color: rgba(0, 38, 153, 0.12);
+  background: rgba(0, 38, 153, 0.075) !important;
+  box-shadow:
+    inset 4px 4px 9px rgba(0, 24, 88, 0.09),
+    inset -4px -4px 9px rgba(255, 255, 255, 0.88) !important;
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-sidebar-nav a[aria-current='page'] svg {
+  color: var(--admin-blue) !important;
+}
+
+.mcoe-admin-sidebar-nav a[aria-current='page']::before {
+  position: absolute;
+  inset-inline-start: 5px;
+  width: 3px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--admin-orange);
+  box-shadow: 0 2px 6px rgba(245, 166, 35, 0.2);
+  content: '';
+}
+
+.mcoe-admin-sidebar-nav a[aria-current='page']:hover {
+  color: var(--admin-cream) !important;
+}
+
+.mcoe-admin-sidebar-nav a[aria-current='page']:hover svg {
+  color: var(--admin-cream) !important;
+}
+
+.mcoe-admin-clock-wrap {
+  padding: 18px 12px 24px !important;
+}
+
+.mcoe-admin-clock-face {
+  border: 0 !important;
+  background: var(--bg-canvas) !important;
+  box-shadow: var(--shadow-in-sm) !important;
+}
+
+.mcoe-admin-clock-face line[stroke='#080C66'],
+.mcoe-admin-clock-face line[stroke='#080c66'] {
+  stroke: #080c66 !important;
+}
+
+.mcoe-admin-clock-face line[stroke='#2e2a26'] {
+  stroke: #2e2a26 !important;
+}
+
+.mcoe-admin-clock-face circle[fill='#2e2a26'] {
+  fill: #2e2a26 !important;
+}
+
+/* Topbar and mobile header */
+
+.mcoe-admin-shell .mcoe-admin-topbar {
+  min-height: 72px;
+  margin-bottom: 18px !important;
+  padding: 14px 20px !important;
+  border-radius: 22px !important;
+  background: var(--admin-cream) !important;
+  box-shadow: var(--admin-raised-shadow) !important;
+}
+
+.mcoe-admin-page-title {
+  color: var(--admin-navy) !important;
+  letter-spacing: -0.02em;
+}
+
+.mcoe-admin-clock-meta span:first-child {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-clock-meta span:last-child {
+  color: var(--admin-muted) !important;
+}
+
+.mcoe-admin-lang-switch {
+  border: 1px solid rgba(0, 24, 88, 0.08);
+  border-radius: 14px !important;
+  background: var(--admin-cream-deep) !important;
+  box-shadow: var(--admin-inset-shadow-sm) !important;
+}
+
+.mcoe-admin-lang-button {
+  border: 1px solid transparent !important;
+  color: var(--admin-muted) !important;
+  transition:
+    color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.mcoe-admin-lang-button:hover {
+  color: var(--admin-blue) !important;
+}
+
+.mcoe-admin-lang-button.is-active {
+  border-color: rgba(0, 38, 153, 0.14) !important;
+  background: var(--admin-navy) !important;
+  box-shadow:
+    inset 3px 3px 7px rgba(0, 7, 32, 0.32),
+    inset -3px -3px 7px rgba(69, 109, 224, 0.25) !important;
+  color: var(--admin-cream) !important;
+}
+
+.mcoe-admin-user-trigger {
+  border: 1px solid rgba(0, 24, 88, 0.1) !important;
+  background: var(--admin-cream) !important;
+  box-shadow: var(--admin-raised-shadow-sm) !important;
+}
+
+.mcoe-admin-user-trigger:hover {
+  background: var(--admin-cream-soft) !important;
+}
+
+.mcoe-admin-user-avatar {
+  border: 1px solid rgba(0, 38, 153, 0.18);
+  background: rgba(0, 38, 153, 0.1) !important;
+  box-shadow: var(--admin-inset-shadow-sm);
+}
+
+.mcoe-admin-user-avatar span,
+.mcoe-admin-user-label {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-user-menu {
+  border-radius: 16px !important;
+  background: var(--admin-cream) !important;
+  box-shadow: var(--admin-raised-shadow) !important;
+}
+
+.mcoe-admin-logout-button {
+  color: #b13b32 !important;
+}
+
+.mcoe-admin-logout-button:hover {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-mobile-topbar {
+  border-bottom: 1px solid var(--admin-border);
+  background: var(--admin-cream) !important;
+  box-shadow: var(--admin-raised-shadow-sm) !important;
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-mobile-title {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-mobile-topbar button {
+  color: var(--admin-muted) !important;
+}
+
+/* Page rhythm and type */
+
+.mcoe-admin-shell .mcoe-admin-page,
+.mcoe-admin-shell .mcoe-admin-content-page {
+  width: 100%;
+  max-width: 1240px !important;
+  margin-inline: auto !important;
+  padding: clamp(18px, 3vw, 32px) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-content-page > .mcoe-admin-entity-page {
+  max-width: none !important;
+  padding-inline: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.mcoe-admin-shell h1,
+.mcoe-admin-shell h2,
+.mcoe-admin-shell h3,
+.mcoe-admin-shell h4 {
+  color: var(--admin-navy) !important;
+  letter-spacing: -0.02em;
+}
+
+.mcoe-admin-shell .mcoe-admin-page > div > p,
+.mcoe-admin-shell .mcoe-admin-entity-page p,
+.mcoe-admin-shell .mcoe-admin-placeholder-page p {
+  color: var(--admin-muted) !important;
+}
+
+.mcoe-admin-shell a:not(.mcoe-admin-sidebar-nav a):not(.mcoe-admin-mobile-link) {
+  color: var(--admin-blue);
+}
+
+.mcoe-admin-shell a:not(.mcoe-admin-sidebar-nav a):not(.mcoe-admin-mobile-link):hover {
+  color: var(--admin-blue);
+}
+
+/* Tabs, controls and forms */
+
+.mcoe-admin-shell .mcoe-admin-tabs {
+  margin-inline: auto;
+  border: 1px solid rgba(0, 24, 88, 0.08);
+  border-radius: 18px !important;
+  background: var(--admin-cream-deep) !important;
+  box-shadow: var(--admin-inset-shadow) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-tabs button {
+  border: 1px solid transparent;
+  color: var(--admin-muted) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-tabs button:hover {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-tabs button.is-active {
+  border-color: rgba(0, 38, 153, 0.16) !important;
+  background: var(--admin-navy) !important;
+  box-shadow:
+    inset 4px 4px 9px rgba(0, 7, 32, 0.3),
+    inset -4px -4px 9px rgba(69, 109, 224, 0.24),
+    0 5px 12px rgba(0, 24, 88, 0.12) !important;
+  color: var(--admin-cream) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-badge {
+  border: 1px solid rgba(0, 38, 153, 0.08);
+  background: rgba(0, 38, 153, 0.07) !important;
+  box-shadow: var(--admin-inset-shadow-sm) !important;
+  color: var(--admin-muted) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-badge-on {
+  border-color: rgba(0, 38, 153, 0.18);
+  background: rgba(0, 38, 153, 0.1) !important;
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-shell .btn-neu,
+.mcoe-admin-shell .btn-dark-neu {
+  min-height: 42px;
+  border: 1px solid rgba(0, 24, 88, 0.12) !important;
+  border-radius: 14px !important;
+  background: var(--admin-cream) !important;
+  box-shadow: var(--admin-raised-shadow-sm) !important;
+  color: var(--admin-navy) !important;
+  transition:
+    transform 220ms ease,
+    box-shadow 260ms ease,
+    background 260ms ease,
+    color 220ms ease;
+}
+
+.mcoe-admin-shell .btn-dark-neu {
+  border-color: rgba(251, 246, 238, 0.12) !important;
+  background: linear-gradient(145deg, var(--admin-blue), var(--admin-navy)) !important;
+  box-shadow:
+    0 8px 18px rgba(0, 24, 88, 0.18),
+    inset 3px 3px 7px rgba(69, 109, 224, 0.25),
+    inset -4px -4px 8px rgba(0, 7, 32, 0.22) !important;
+  color: var(--admin-cream) !important;
+}
+
+.mcoe-admin-shell .btn-neu:active,
+.mcoe-admin-shell .btn-dark-neu:active {
+  transform: translateY(1px) scale(0.988);
+}
+
+/* The public orange liquid hover, translated to MCOE blue for dashboard use. */
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):hover,
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):focus-visible {
+  border-color: rgba(91, 132, 238, 0.72) !important;
+  color: var(--admin-cream) !important;
+  background:
+    radial-gradient(
+      circle at 24% 18%,
+      rgba(232, 240, 255, 0.82) 0,
+      rgba(198, 216, 255, 0.28) 15%,
+      transparent 34%
+    ),
+    linear-gradient(145deg, #315dd7 0%, #002699 54%, #001858 100%) !important;
+  background-position: 22% 12%, 72% 50% !important;
+  background-size: 175% 175%, 160% 160% !important;
+  box-shadow:
+    0 12px 24px rgba(0, 38, 153, 0.22),
+    0 4px 9px rgba(0, 24, 88, 0.14),
+    -3px -3px 9px rgba(255, 255, 255, 0.68),
+    inset 2px 2px 4px rgba(205, 219, 255, 0.62),
+    inset -3px -4px 7px rgba(0, 7, 32, 0.22) !important;
+}
+
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):hover svg,
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):focus-visible svg {
+  color: var(--admin-cream) !important;
+}
+
+.mcoe-admin-shell input:not([type='checkbox']):not([type='file']),
+.mcoe-admin-shell textarea,
+.mcoe-admin-shell select {
+  min-height: 44px;
+  border: 1px solid rgba(0, 24, 88, 0.1) !important;
+  border-radius: 14px !important;
+  outline: none !important;
+  background: var(--admin-cream-deep) !important;
+  box-shadow: var(--admin-inset-shadow-sm) !important;
+  color: var(--admin-navy) !important;
+  transition:
+    border-color 200ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+}
+
+.mcoe-admin-shell input:not([type='checkbox']):not([type='file']):focus,
+.mcoe-admin-shell textarea:focus,
+.mcoe-admin-shell select:focus {
+  border-color: rgba(0, 38, 153, 0.34) !important;
+  background: var(--admin-cream-soft) !important;
+  box-shadow:
+    var(--admin-inset-shadow-sm),
+    0 0 0 3px rgba(0, 38, 153, 0.12) !important;
+}
+
+.mcoe-admin-shell input::placeholder,
+.mcoe-admin-shell textarea::placeholder {
+  color: var(--admin-muted-soft) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-entity-page .neu-inset-sm input {
+  min-height: 0;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-checkbox {
+  border: 1px solid rgba(0, 24, 88, 0.08);
+  border-radius: 14px !important;
+  background: var(--admin-cream-deep) !important;
+  box-shadow: var(--admin-inset-shadow-sm) !important;
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-checkbox input {
+  accent-color: var(--admin-orange);
+}
+
+.mcoe-admin-shell label {
+  color: var(--admin-muted) !important;
+}
+
+/* Tables and responsive cards */
+
+.mcoe-admin-shell table {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-shell table thead tr {
+  border-bottom-color: rgba(0, 24, 88, 0.12) !important;
+  background: rgba(0, 38, 153, 0.035);
+}
+
+.mcoe-admin-shell table th {
+  color: var(--admin-muted) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+}
+
+.mcoe-admin-shell table tbody tr {
+  border-bottom-color: rgba(0, 24, 88, 0.07) !important;
+  transition: background 180ms ease;
+}
+
+.mcoe-admin-shell table tbody tr:hover {
+  background: rgba(0, 38, 153, 0.055);
+}
+
+.mcoe-admin-shell table td {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-shell table td span {
+  color: var(--admin-navy);
+}
+
+.mcoe-admin-shell .mcoe-admin-entity-page table td button {
+  border: 1px solid rgba(0, 24, 88, 0.08) !important;
+  border-radius: 10px !important;
+  background: var(--admin-cream-deep) !important;
+  box-shadow: var(--admin-inset-shadow-sm) !important;
+  color: var(--admin-blue) !important;
+  transition:
+    color 200ms ease,
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.mcoe-admin-shell .mcoe-admin-entity-page table td button:hover {
+  color: var(--admin-navy) !important;
+  transform: translateY(-1px);
+}
+
+.mcoe-admin-shell .mcoe-admin-mobile-cards > .neu-raised {
+  border-radius: 20px !important;
+}
+
+/* Overview accents stay within the institutional palette. */
+
+.mcoe-admin-overview .mcoe-admin-stat-icon {
+  border: 1px solid rgba(0, 38, 153, 0.16);
+  border-radius: 14px !important;
+  background: rgba(0, 38, 153, 0.085) !important;
+  box-shadow: var(--admin-inset-shadow-sm);
+}
+
+.mcoe-admin-overview .mcoe-admin-stat-icon svg {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-overview .mcoe-admin-quick-action {
+  border-color: rgba(0, 38, 153, 0.12) !important;
+  background: rgba(0, 38, 153, 0.06) !important;
+  color: var(--admin-navy) !important;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+}
+
+.mcoe-admin-overview .mcoe-admin-quick-action:hover {
+  background: rgba(0, 38, 153, 0.12) !important;
+  box-shadow: var(--admin-inset-shadow-sm), 0 6px 14px rgba(0, 24, 88, 0.08) !important;
+  transform: translateY(-2px);
+}
+
+.mcoe-admin-overview .mcoe-admin-quick-action svg,
+.mcoe-admin-overview .mcoe-admin-quick-action span {
+  color: var(--admin-navy) !important;
+}
+
+/* Modal and access states */
+
+.mcoe-admin-modal-backdrop {
+  background: rgba(0, 24, 88, 0.46) !important;
+  backdrop-filter: none !important;
+}
+
+.mcoe-admin-modal-dialog {
+  border: 1px solid rgba(0, 24, 88, 0.12) !important;
+  border-radius: 24px !important;
+  background: var(--admin-cream) !important;
+  box-shadow:
+    18px 22px 44px rgba(0, 24, 88, 0.2),
+    -10px -10px 26px rgba(255, 255, 255, 0.92) !important;
+}
+
+.mcoe-admin-modal-header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 24, 88, 0.09);
+}
+
+.mcoe-admin-modal-title {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-modal-close {
+  border: 1px solid rgba(0, 24, 88, 0.08) !important;
+  border-radius: 10px !important;
+  background: var(--admin-cream-deep) !important;
+  box-shadow: var(--admin-inset-shadow-sm) !important;
+  color: var(--admin-muted) !important;
+}
+
+.mcoe-admin-modal-close:hover {
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-loading-screen,
+.mcoe-admin-access-screen {
+  background:
+    radial-gradient(circle at 10% 12%, rgba(0, 38, 153, 0.06), transparent 24rem),
+    #fbf6ee !important;
+  color: #001858 !important;
+}
+
+.mcoe-admin-access-card {
+  border: 1px solid rgba(0, 24, 88, 0.1);
+  background: #fbf6ee !important;
+  box-shadow:
+    12px 14px 30px rgba(0, 24, 88, 0.1),
+    -10px -10px 24px rgba(255, 255, 255, 0.92),
+    0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.mcoe-admin-access-card h1 {
+  color: #001858 !important;
+}
+
+.mcoe-admin-access-card p {
+  color: rgba(0, 24, 88, 0.62) !important;
+}
+
+/* Mobile navigation echoes the public liquid-control language. */
+
+.mcoe-admin-mobile-nav {
+  border: 1px solid rgba(0, 24, 88, 0.1);
+  background: var(--admin-cream) !important;
+  box-shadow:
+    0 -10px 24px rgba(0, 24, 88, 0.12),
+    inset 0 4px 10px rgba(255, 255, 255, 0.7) !important;
+}
+
+.mcoe-admin-mobile-link {
+  border: 1px solid transparent;
+  color: var(--admin-muted) !important;
+  transition:
+    color 200ms ease,
+    background 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.mcoe-admin-mobile-link:hover {
+  color: var(--admin-blue) !important;
+}
+
+.mcoe-admin-mobile-link.is-active {
+  border-color: rgba(0, 38, 153, 0.16);
+  background: rgba(0, 38, 153, 0.09) !important;
+  box-shadow: var(--admin-inset-shadow-sm) !important;
+  color: var(--admin-navy) !important;
+}
+
+.mcoe-admin-loader {
+  border-color: rgba(0, 38, 153, 0.14) !important;
+  border-top-color: var(--admin-orange) !important;
+}
+
+/* Keep the palette coherent when the application-level night theme is on. */
+
+.dark .mcoe-admin-shell {
+  --admin-cream: #001858;
+  --admin-cream-deep: #002699;
+  --admin-cream-soft: #0b338c;
+  --admin-navy: #fbf6ee;
+  --admin-blue: #f5a623;
+  --admin-ink: #fbf6ee;
+  --admin-muted: rgba(251, 246, 238, 0.68);
+  --admin-muted-soft: rgba(251, 246, 238, 0.48);
+  --admin-border: rgba(245, 166, 35, 0.14);
+  --admin-raised-shadow:
+    12px 14px 30px rgba(0, 7, 32, 0.36),
+    -8px -8px 20px rgba(0, 38, 153, 0.24);
+  --admin-raised-shadow-sm:
+    6px 8px 18px rgba(0, 7, 32, 0.3),
+    -5px -5px 14px rgba(0, 38, 153, 0.2);
+  --admin-inset-shadow:
+    inset 8px 8px 18px rgba(0, 7, 32, 0.42),
+    inset -8px -8px 18px rgba(0, 38, 153, 0.28);
+  --admin-inset-shadow-sm:
+    inset 4px 4px 10px rgba(0, 7, 32, 0.36),
+    inset -4px -4px 10px rgba(0, 38, 153, 0.24);
+
+  background:
+    radial-gradient(circle at 8% 8%, rgba(245, 166, 35, 0.1), transparent 25rem),
+    radial-gradient(circle at 94% 18%, rgba(69, 109, 224, 0.28), transparent 31rem),
+    #001858 !important;
+}
+
+.dark .mcoe-admin-shell .mcoe-admin-sidebar,
+.dark .mcoe-admin-shell .sidebar-float {
+  background: linear-gradient(155deg, #002699, #001858 72%) !important;
+}
+
+@media (max-width: 900px) {
+  .mcoe-admin-shell .mcoe-admin-page,
+  .mcoe-admin-shell .mcoe-admin-content-page {
+    padding: 18px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .mcoe-admin-shell .mcoe-admin-page,
+  .mcoe-admin-shell .mcoe-admin-content-page {
+    padding: 14px !important;
+  }
+
+  .mcoe-admin-shell .mcoe-admin-topbar {
+    border-radius: 18px !important;
+    padding: 12px 14px !important;
+  }
+
+  .mcoe-admin-shell .mcoe-admin-tabs {
+    margin: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcoe-admin-shell *,
+  .mcoe-admin-shell *::before,
+  .mcoe-admin-shell *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Official institution name beside the dashboard mark. */
+
+.mcoe-admin-sidebar-copy {
+  min-width: 0;
+}
+
+.mcoe-admin-sidebar-copy span:first-child {
+  max-width: 164px;
+  font-size: 12.5px !important;
+  font-weight: 800 !important;
+  line-height: 1.55 !important;
+  text-wrap: balance;
+}
+
+.mcoe-admin-sidebar-copy span:last-child {
+  margin-top: 3px;
+  font-size: 9px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.mcoe-admin-mobile-title {
+  max-width: min(62vw, 260px);
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  line-height: 1.55 !important;
+  text-wrap: balance;
+}
+
+/* -------------------------------------------------------------------------
+   MCOE dashboard blue inner-clay theme
+
+   Normal state: institutional blue surfaces + warm-cream typography.
+   Interaction state: sunlight-orange liquid clay, reserved for hover/focus.
+   ------------------------------------------------------------------------- */
+
+.mcoe-admin-shell {
+  /* MCOE's primary surface is the deep luxury navy, not the secondary blue. */
+  --dashboard-blue: #001858;
+  --dashboard-navy: #001858;
+  --dashboard-cream: #fbf6ee;
+  --dashboard-orange: #f5a623;
+  --dashboard-blue-highlight: #002699;
+  --dashboard-line: rgba(251, 246, 238, 0.13);
+  --dashboard-text-muted: rgba(251, 246, 238, 0.66);
+  --dashboard-inner:
+    inset 9px 9px 20px rgba(0, 7, 32, 0.4),
+    inset -8px -8px 18px rgba(0, 38, 153, 0.28),
+    0 1px 0 rgba(251, 246, 238, 0.07);
+  --dashboard-inner-soft:
+    inset 5px 5px 12px rgba(0, 7, 32, 0.34),
+    inset -5px -5px 12px rgba(0, 38, 153, 0.24),
+    0 1px 0 rgba(251, 246, 238, 0.06);
+  --dashboard-inner-deep:
+    inset 12px 12px 25px rgba(0, 7, 32, 0.5),
+    inset -9px -9px 21px rgba(0, 38, 153, 0.25),
+    0 1px 0 rgba(251, 246, 238, 0.05);
+
+  color: var(--dashboard-cream) !important;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(0, 38, 153, 0.2), transparent 28rem),
+    radial-gradient(circle at 6% 86%, rgba(0, 24, 88, 0.32), transparent 32rem),
+    var(--dashboard-blue) !important;
+}
+
+.mcoe-admin-desktop-shell,
+.mcoe-admin-mobile-shell {
+  background: transparent !important;
+}
+
+/* Every dashboard material remains blue and is carved into the canvas. */
+
+.mcoe-admin-shell .neu-raised,
+.mcoe-admin-shell .neu-raised-sm,
+.mcoe-admin-shell .neu-inset,
+.mcoe-admin-shell .neu-inset-sm,
+.mcoe-admin-shell .mcoe-admin-topbar,
+.mcoe-admin-shell .mcoe-admin-tabs,
+.mcoe-admin-shell .mcoe-admin-user-trigger,
+.mcoe-admin-shell .mcoe-admin-user-menu,
+.mcoe-admin-shell .mcoe-admin-modal-dialog,
+.mcoe-admin-shell .mcoe-admin-mobile-nav,
+.mcoe-admin-shell .mcoe-admin-checkbox {
+  border-color: var(--dashboard-line) !important;
+  background: var(--dashboard-blue) !important;
+  box-shadow: var(--dashboard-inner) !important;
+  color: var(--dashboard-cream) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.mcoe-admin-shell .neu-raised-sm,
+.mcoe-admin-shell .neu-inset-sm,
+.mcoe-admin-shell .mcoe-admin-user-trigger,
+.mcoe-admin-shell .mcoe-admin-checkbox {
+  box-shadow: var(--dashboard-inner-soft) !important;
+}
+
+.mcoe-admin-shell .neu-inset,
+.mcoe-admin-shell .mcoe-admin-modal-dialog {
+  box-shadow: var(--dashboard-inner-deep) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-sidebar,
+.mcoe-admin-shell .sidebar-float {
+  border-color: var(--dashboard-line) !important;
+  background: var(--dashboard-blue) !important;
+  box-shadow: var(--dashboard-inner-deep) !important;
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-sidebar-header,
+.mcoe-admin-modal-header {
+  border-color: var(--dashboard-line) !important;
+}
+
+.mcoe-admin-dashboard-logo {
+  filter:
+    drop-shadow(0 6px 9px rgba(0, 7, 32, 0.3))
+    drop-shadow(0 -1px 2px rgba(251, 246, 238, 0.11));
+}
+
+.mcoe-admin-sidebar-header:hover .mcoe-admin-dashboard-logo {
+  filter:
+    drop-shadow(0 8px 12px rgba(0, 7, 32, 0.38))
+    drop-shadow(0 -1px 3px rgba(251, 246, 238, 0.16));
+}
+
+/* Warm-cream type and icons across all normal states. */
+
+.mcoe-admin-shell h1,
+.mcoe-admin-shell h2,
+.mcoe-admin-shell h3,
+.mcoe-admin-shell h4,
+.mcoe-admin-shell p,
+.mcoe-admin-shell span,
+.mcoe-admin-shell label,
+.mcoe-admin-shell th,
+.mcoe-admin-shell td,
+.mcoe-admin-shell a,
+.mcoe-admin-shell svg {
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-shell p,
+.mcoe-admin-shell label,
+.mcoe-admin-shell th,
+.mcoe-admin-clock-meta span:last-child,
+.mcoe-admin-sidebar-copy span:last-child,
+.mcoe-admin-user-label {
+  color: var(--dashboard-text-muted) !important;
+}
+
+.mcoe-admin-page-title,
+.mcoe-admin-sidebar-copy span:first-child,
+.mcoe-admin-mobile-title,
+.mcoe-admin-clock-meta span:first-child {
+  color: var(--dashboard-cream) !important;
+}
+
+/* Navigation: blue-on-blue at rest, orange liquid only while interacting. */
+
+.mcoe-admin-sidebar-nav a,
+.mcoe-admin-mobile-link {
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--dashboard-text-muted) !important;
+}
+
+.mcoe-admin-sidebar-nav a svg,
+.mcoe-admin-mobile-link svg {
+  color: var(--dashboard-text-muted) !important;
+}
+
+.mcoe-admin-sidebar-nav a[aria-current='page'],
+.mcoe-admin-mobile-link.is-active {
+  border-color: var(--dashboard-line) !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-soft) !important;
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-sidebar-nav a[aria-current='page'] svg,
+.mcoe-admin-mobile-link.is-active svg {
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-sidebar-nav a[aria-current='page']::before {
+  display: none;
+}
+
+.mcoe-admin-sidebar-nav a:hover,
+.mcoe-admin-sidebar-nav a[aria-current='page']:hover,
+.mcoe-admin-mobile-link:hover,
+.mcoe-admin-mobile-link.is-active:hover {
+  border-color: rgba(255, 205, 112, 0.9) !important;
+  background:
+    radial-gradient(
+      circle at 24% 18%,
+      rgba(255, 249, 229, 0.82) 0,
+      rgba(255, 249, 229, 0.3) 14%,
+      transparent 33%
+    ),
+    linear-gradient(145deg, #ffc55b 0%, #f5a623 54%, #df8910 100%) !important;
+  box-shadow:
+    0 12px 24px rgba(0, 7, 32, 0.3),
+    0 5px 12px rgba(245, 166, 35, 0.22),
+    inset 2px 2px 4px rgba(255, 244, 210, 0.72),
+    inset -3px -4px 7px rgba(177, 100, 5, 0.2) !important;
+  color: var(--dashboard-navy) !important;
+  transform: translateY(-2px) scale(1.008);
+}
+
+.mcoe-admin-sidebar-nav a:hover svg,
+.mcoe-admin-sidebar-nav a[aria-current='page']:hover svg,
+.mcoe-admin-mobile-link:hover svg,
+.mcoe-admin-mobile-link.is-active:hover svg {
+  color: var(--dashboard-navy) !important;
+}
+
+/* Controls and form fields. */
+
+.mcoe-admin-shell .mcoe-admin-lang-switch,
+.mcoe-admin-shell input:not([type='checkbox']):not([type='file']),
+.mcoe-admin-shell textarea,
+.mcoe-admin-shell select {
+  border-color: var(--dashboard-line) !important;
+  background: var(--dashboard-blue) !important;
+  box-shadow: var(--dashboard-inner-soft) !important;
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-shell input:not([type='checkbox']):not([type='file']):focus,
+.mcoe-admin-shell textarea:focus,
+.mcoe-admin-shell select:focus {
+  border-color: rgba(251, 246, 238, 0.3) !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow:
+    var(--dashboard-inner-soft),
+    0 0 0 3px rgba(251, 246, 238, 0.08) !important;
+}
+
+.mcoe-admin-shell input::placeholder,
+.mcoe-admin-shell textarea::placeholder {
+  color: rgba(251, 246, 238, 0.44) !important;
+}
+
+.mcoe-admin-shell select option {
+  background: var(--dashboard-navy);
+  color: var(--dashboard-cream);
+}
+
+.mcoe-admin-shell .mcoe-admin-checkbox input {
+  accent-color: var(--dashboard-cream);
+}
+
+.mcoe-admin-lang-button,
+.mcoe-admin-lang-button.is-active,
+.mcoe-admin-shell .btn-neu,
+.mcoe-admin-shell .btn-dark-neu,
+.mcoe-admin-modal-close,
+.mcoe-admin-shell .mcoe-admin-entity-page table td button {
+  border-color: var(--dashboard-line) !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-soft) !important;
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-lang-button:not(.is-active) {
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--dashboard-text-muted) !important;
+}
+
+.mcoe-admin-user-avatar,
+.mcoe-admin-shell .mcoe-admin-badge,
+.mcoe-admin-shell .mcoe-admin-badge-on,
+.mcoe-admin-overview .mcoe-admin-stat-icon,
+.mcoe-admin-overview .mcoe-admin-quick-action {
+  border-color: var(--dashboard-line) !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-soft) !important;
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-user-avatar span,
+.mcoe-admin-shell .mcoe-admin-badge,
+.mcoe-admin-shell .mcoe-admin-badge-on,
+.mcoe-admin-overview .mcoe-admin-stat-icon svg,
+.mcoe-admin-overview .mcoe-admin-quick-action svg,
+.mcoe-admin-overview .mcoe-admin-quick-action span {
+  color: var(--dashboard-cream) !important;
+}
+
+/* Orange liquid interaction, shared by every dashboard button. */
+
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):hover,
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):focus-visible {
+  border-color: rgba(255, 205, 112, 0.94) !important;
+  color: var(--dashboard-navy) !important;
+  background:
+    radial-gradient(
+      circle at 24% 18%,
+      rgba(255, 249, 229, 0.82) 0,
+      rgba(255, 249, 229, 0.3) 14%,
+      transparent 33%
+    ),
+    linear-gradient(145deg, #ffc55b 0%, #f5a623 54%, #df8910 100%) !important;
+  background-position: 22% 12%, 72% 50% !important;
+  background-size: 175% 175%, 160% 160% !important;
+  box-shadow:
+    0 12px 24px rgba(0, 7, 32, 0.3),
+    0 5px 12px rgba(245, 166, 35, 0.22),
+    inset 2px 2px 4px rgba(255, 244, 210, 0.72),
+    inset -3px -4px 7px rgba(177, 100, 5, 0.2) !important;
+}
+
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):hover *,
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):focus-visible *,
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):hover svg,
+.mcoe-admin-shell button:not([data-mcoe-liquid='off']):not(:disabled):focus-visible svg {
+  color: var(--dashboard-navy) !important;
+}
+
+/* Dashboard overview cards use the same orange interaction only on hover. */
+
+.mcoe-admin-overview .mcoe-admin-stat-card,
+.mcoe-admin-overview .mcoe-admin-quick-action {
+  border-color: var(--dashboard-line) !important;
+  background: var(--dashboard-blue) !important;
+  box-shadow: var(--dashboard-inner) !important;
+}
+
+.mcoe-admin-overview a:hover .mcoe-admin-stat-card,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-stat-card,
+.mcoe-admin-overview a:hover .mcoe-admin-quick-action,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-quick-action {
+  border-color: rgba(255, 205, 112, 0.9) !important;
+  background:
+    radial-gradient(circle at 24% 18%, rgba(255, 249, 229, 0.75), transparent 32%),
+    linear-gradient(145deg, #ffc55b 0%, #f5a623 56%, #df8910 100%) !important;
+  box-shadow:
+    0 13px 25px rgba(0, 7, 32, 0.28),
+    inset 2px 2px 4px rgba(255, 244, 210, 0.66),
+    inset -3px -4px 7px rgba(177, 100, 5, 0.2) !important;
+}
+
+.mcoe-admin-overview a:hover .mcoe-admin-stat-card *,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-stat-card *,
+.mcoe-admin-overview a:hover .mcoe-admin-quick-action *,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-quick-action * {
+  color: var(--dashboard-navy) !important;
+}
+
+.mcoe-admin-overview a:hover .mcoe-admin-stat-icon,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-stat-icon {
+  border-color: rgba(0, 24, 88, 0.12) !important;
+  background: rgba(0, 24, 88, 0.1) !important;
+  box-shadow:
+    inset 3px 3px 7px rgba(158, 87, 4, 0.16),
+    inset -3px -3px 7px rgba(255, 235, 186, 0.42) !important;
+}
+
+.mcoe-admin-shell table,
+.mcoe-admin-shell table thead,
+.mcoe-admin-shell table tbody,
+.mcoe-admin-shell table tr,
+.mcoe-admin-shell table th,
+.mcoe-admin-shell table td {
+  border-color: var(--dashboard-line) !important;
+  background-color: transparent;
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-shell table thead tr {
+  background: var(--dashboard-navy) !important;
+}
+
+.mcoe-admin-shell table tbody tr:hover {
+  background: rgba(245, 166, 35, 0.12) !important;
+}
+
+/* Mobile chrome and modal remain part of the same blue material. */
+
+.mcoe-admin-mobile-topbar,
+.mcoe-admin-mobile-nav {
+  border-color: var(--dashboard-line) !important;
+  background: var(--dashboard-blue) !important;
+  box-shadow: var(--dashboard-inner) !important;
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-mobile-topbar button {
+  color: var(--dashboard-text-muted) !important;
+}
+
+.mcoe-admin-modal-backdrop {
+  background: rgba(0, 7, 32, 0.62) !important;
+}
+
+/* The clock is deliberately the sole cream dashboard surface. */
+
+.mcoe-admin-shell .mcoe-admin-clock-face {
+  border: 1px solid rgba(251, 246, 238, 0.48) !important;
+  background: var(--dashboard-cream) !important;
+  box-shadow:
+    inset 6px 6px 13px rgba(0, 24, 88, 0.13),
+    inset -6px -6px 13px rgba(255, 255, 255, 0.94),
+    0 8px 18px rgba(0, 7, 32, 0.2) !important;
+}
+
+.mcoe-admin-clock-face line {
+  stroke: rgba(0, 24, 88, 0.46) !important;
+}
+
+.mcoe-admin-clock-face line[stroke='#080C66'],
+.mcoe-admin-clock-face line[stroke='#080c66'] {
+  stroke: var(--dashboard-navy) !important;
+}
+
+.mcoe-admin-clock-face line[stroke='#2e2a26'] {
+  stroke: var(--dashboard-blue) !important;
+}
+
+.mcoe-admin-clock-face circle[fill='#2e2a26'] {
+  fill: var(--dashboard-navy) !important;
+}
+
+.mcoe-admin-loader {
+  border-color: rgba(251, 246, 238, 0.22) !important;
+  border-top-color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-loading-screen,
+.mcoe-admin-access-screen {
+  background: var(--dashboard-blue, #001858) !important;
+}
+
+.mcoe-admin-access-card {
+  border-color: rgba(251, 246, 238, 0.13) !important;
+  background: #001858 !important;
+  box-shadow:
+    inset 10px 10px 22px rgba(0, 7, 32, 0.42),
+    inset -9px -9px 20px rgba(0, 38, 153, 0.28) !important;
+}
+
+.mcoe-admin-access-card h1,
+.mcoe-admin-access-card p,
+.mcoe-admin-access-card div,
+.mcoe-admin-access-card svg {
+  color: #fbf6ee !important;
+}
+
+/* -------------------------------------------------------------------------
+   Dashboard depth refinement
+
+   Overview and navigation stay monochrome navy. Orange is reserved for the
+   icon itself during interaction, so depth—not colour replacement—communicates
+   the hover state.
+   ------------------------------------------------------------------------- */
+
+.mcoe-admin-shell {
+  --dashboard-inner-nested:
+    inset 7px 7px 16px rgba(0, 7, 32, 0.48),
+    inset -6px -6px 14px rgba(0, 38, 153, 0.24),
+    0 1px 0 rgba(251, 246, 238, 0.035);
+  --dashboard-inner-hover:
+    inset 12px 12px 25px rgba(0, 7, 32, 0.62),
+    inset -8px -8px 20px rgba(0, 38, 153, 0.2),
+    0 1px 0 rgba(251, 246, 238, 0.025);
+  --dashboard-icon-depth:
+    inset 4px 4px 10px rgba(0, 7, 32, 0.5),
+    inset -4px -4px 9px rgba(0, 38, 153, 0.25);
+}
+
+/* The dashboard mark is also the clear route back to the public homepage. */
+
+.mcoe-admin-home-link {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0 !important;
+  border-radius: 13px;
+  outline: none;
+  background: transparent !important;
+  box-shadow: none !important;
+  line-height: 0;
+  transition:
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 240ms ease;
+}
+
+.mcoe-admin-home-link:hover {
+  transform: translateY(-2px) scale(1.035);
+  filter: drop-shadow(0 8px 13px rgba(0, 7, 32, 0.34));
+}
+
+.mcoe-admin-home-link:focus-visible {
+  outline: 2px solid rgba(251, 246, 238, 0.78);
+  outline-offset: 4px;
+}
+
+/* Nested inner-clay navigation: shell → channel → individual carved item. */
+
+.mcoe-admin-sidebar-nav {
+  gap: 8px !important;
+  margin: 2px 10px 10px;
+  padding: 10px !important;
+  border: 0 !important;
+  border-radius: 19px;
+  background: var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-deep) !important;
+}
+
+.mcoe-admin-sidebar-nav a,
+.mcoe-admin-sidebar-nav a[aria-current='page'] {
+  min-height: 43px;
+  border: 0 !important;
+  border-radius: 13px !important;
+  background:
+    radial-gradient(circle at 82% 10%, rgba(0, 38, 153, 0.12), transparent 42%),
+    var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-nested) !important;
+  color: var(--dashboard-text-muted) !important;
+  transform: none;
+  transition:
+    color 220ms ease,
+    box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-position 360ms ease !important;
+}
+
+.mcoe-admin-sidebar-nav a[aria-current='page'] {
+  background:
+    radial-gradient(circle at 82% 12%, rgba(0, 38, 153, 0.24), transparent 45%),
+    var(--dashboard-navy) !important;
+  box-shadow:
+    inset 10px 10px 21px rgba(0, 7, 32, 0.56),
+    inset -7px -7px 17px rgba(0, 38, 153, 0.24) !important;
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-sidebar-nav a svg,
+.mcoe-admin-sidebar-nav a[aria-current='page'] svg {
+  color: var(--dashboard-cream) !important;
+  filter: none;
+  transition:
+    color 220ms ease,
+    filter 260ms ease,
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mcoe-admin-sidebar-nav a:hover,
+.mcoe-admin-sidebar-nav a[aria-current='page']:hover,
+.mcoe-admin-sidebar-nav a:focus-visible,
+.mcoe-admin-sidebar-nav a[aria-current='page']:focus-visible {
+  border: 0 !important;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(0, 38, 153, 0.2), transparent 45%),
+    var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-hover) !important;
+  color: var(--dashboard-cream) !important;
+  transform: translateY(1px) scale(0.992);
+}
+
+.mcoe-admin-sidebar-nav a:hover svg,
+.mcoe-admin-sidebar-nav a[aria-current='page']:hover svg,
+.mcoe-admin-sidebar-nav a:focus-visible svg,
+.mcoe-admin-sidebar-nav a[aria-current='page']:focus-visible svg {
+  color: var(--dashboard-orange) !important;
+  filter: drop-shadow(0 3px 7px rgba(245, 166, 35, 0.34));
+  transform: translateY(-1px) scale(1.08);
+}
+
+/* Overview cards have no bright perimeter; their material is defined by depth. */
+
+.mcoe-admin-overview .neu-raised,
+.mcoe-admin-overview .neu-raised-sm,
+.mcoe-admin-overview .neu-inset,
+.mcoe-admin-overview .neu-inset-sm,
+.mcoe-admin-overview .mcoe-admin-stat-card,
+.mcoe-admin-overview .mcoe-admin-overview-panel,
+.mcoe-admin-overview .mcoe-admin-quick-action,
+.mcoe-admin-overview .mcoe-admin-stat-icon {
+  border: 0 !important;
+}
+
+.mcoe-admin-overview .mcoe-admin-stat-card,
+.mcoe-admin-overview .mcoe-admin-overview-panel {
+  background:
+    radial-gradient(circle at 88% 8%, rgba(0, 38, 153, 0.13), transparent 40%),
+    var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-nested) !important;
+  transition:
+    box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-position 360ms ease !important;
+}
+
+.mcoe-admin-overview .mcoe-admin-overview-panel:hover,
+.mcoe-admin-overview a:hover .mcoe-admin-stat-card,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-stat-card {
+  border: 0 !important;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(0, 38, 153, 0.18), transparent 44%),
+    var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-hover) !important;
+  transform: translateY(1px) scale(0.994);
+}
+
+.mcoe-admin-overview .mcoe-admin-stat-icon,
+.mcoe-admin-overview .mcoe-admin-quick-action {
+  background: var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-icon-depth) !important;
+}
+
+.mcoe-admin-overview a:hover .mcoe-admin-stat-card *,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-stat-card *,
+.mcoe-admin-overview a:hover .mcoe-admin-quick-action *,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-quick-action * {
+  color: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-overview a:hover .mcoe-admin-stat-icon,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-stat-icon,
+.mcoe-admin-overview a:hover .mcoe-admin-quick-action,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-quick-action {
+  border: 0 !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-hover) !important;
+  transform: translateY(1px) scale(0.985);
+}
+
+.mcoe-admin-overview a:hover .mcoe-admin-stat-icon svg,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-stat-icon svg,
+.mcoe-admin-overview a:hover .mcoe-admin-quick-action svg,
+.mcoe-admin-overview a:focus-visible .mcoe-admin-quick-action svg {
+  color: var(--dashboard-orange) !important;
+  filter: drop-shadow(0 3px 7px rgba(245, 166, 35, 0.34));
+  transform: translateY(-1px) scale(1.08);
+}
+
+/* Deep navy clock. All three hands are cream until the clock is engaged. */
+
+.mcoe-admin-shell .mcoe-admin-clock-face {
+  position: relative;
+  isolation: isolate;
+  border: 0 !important;
+  outline: none;
+  background:
+    radial-gradient(circle at 35% 28%, rgba(0, 38, 153, 0.36), transparent 42%),
+    var(--dashboard-navy) !important;
+  box-shadow:
+    inset 12px 12px 25px rgba(0, 7, 32, 0.68),
+    inset -9px -9px 21px rgba(0, 38, 153, 0.27),
+    0 8px 18px rgba(0, 7, 32, 0.2) !important;
+  transition:
+    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-position 420ms ease;
+}
+
+.mcoe-admin-shell .mcoe-admin-clock-face::before {
+  position: absolute;
+  z-index: 0;
+  inset: 10px;
+  border-radius: inherit;
+  box-shadow:
+    inset 3px 3px 8px rgba(0, 7, 32, 0.46),
+    inset -3px -3px 8px rgba(0, 38, 153, 0.2);
+  content: '';
+  pointer-events: none;
+}
+
+.mcoe-admin-clock-face svg {
+  position: relative;
+  z-index: 1;
+}
+
+.mcoe-admin-clock-face .mcoe-admin-clock-tick {
+  stroke: var(--dashboard-cream) !important;
+  opacity: 0.38;
+}
+
+.mcoe-admin-clock-face .mcoe-admin-clock-tick.is-major {
+  opacity: 0.76;
+}
+
+.mcoe-admin-clock-face .mcoe-admin-clock-hand {
+  stroke: var(--dashboard-cream) !important;
+  filter: drop-shadow(0 2px 3px rgba(0, 7, 32, 0.54));
+  transition:
+    stroke 240ms ease,
+    filter 240ms ease;
+}
+
+.mcoe-admin-clock-face .mcoe-admin-clock-hand-second {
+  opacity: 0.84;
+}
+
+.mcoe-admin-clock-face .mcoe-admin-clock-hub {
+  fill: var(--dashboard-cream) !important;
+  transition:
+    fill 240ms ease,
+    filter 240ms ease;
+}
+
+.mcoe-admin-clock-face:hover,
+.mcoe-admin-clock-face:focus-visible {
+  box-shadow:
+    inset 17px 17px 31px rgba(0, 7, 32, 0.76),
+    inset -11px -11px 25px rgba(0, 38, 153, 0.22),
+    0 5px 13px rgba(0, 7, 32, 0.18) !important;
+  transform: translateY(1px) scale(0.985);
+}
+
+.mcoe-admin-clock-face:hover .mcoe-admin-clock-hand,
+.mcoe-admin-clock-face:focus-visible .mcoe-admin-clock-hand {
+  stroke: var(--dashboard-orange) !important;
+  filter: drop-shadow(0 2px 5px rgba(245, 166, 35, 0.42));
+}
+
+.mcoe-admin-clock-face:hover .mcoe-admin-clock-hub,
+.mcoe-admin-clock-face:focus-visible .mcoe-admin-clock-hub {
+  fill: var(--dashboard-orange) !important;
+  filter: drop-shadow(0 2px 5px rgba(245, 166, 35, 0.42));
+}
+
+/* Mobile navigation keeps the same nested material logic. */
+
+.mcoe-admin-mobile-nav {
+  border: 0 !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-deep) !important;
+}
+
+.mcoe-admin-mobile-link,
+.mcoe-admin-mobile-link.is-active {
+  border: 0 !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-nested) !important;
+  color: var(--dashboard-text-muted) !important;
+}
+
+.mcoe-admin-mobile-link:hover,
+.mcoe-admin-mobile-link.is-active:hover,
+.mcoe-admin-mobile-link:focus-visible {
+  border: 0 !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow: var(--dashboard-inner-hover) !important;
+  color: var(--dashboard-cream) !important;
+  transform: translateY(1px) scale(0.985);
+}
+
+.mcoe-admin-mobile-link:hover svg,
+.mcoe-admin-mobile-link.is-active:hover svg,
+.mcoe-admin-mobile-link:focus-visible svg {
+  color: var(--dashboard-orange) !important;
+  filter: drop-shadow(0 3px 7px rgba(245, 166, 35, 0.34));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcoe-admin-home-link,
+  .mcoe-admin-sidebar-nav a,
+  .mcoe-admin-overview .mcoe-admin-stat-card,
+  .mcoe-admin-overview .mcoe-admin-overview-panel,
+  .mcoe-admin-clock-face {
+    transform: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Final surface correction: cream canvas + single-depth navy controls.
+   ------------------------------------------------------------------------- */
+
+.mcoe-admin-shell {
+  background: var(--dashboard-cream) !important;
+}
+
+.mcoe-admin-desktop-shell,
+.mcoe-admin-mobile-shell {
+  background: transparent !important;
+}
+
+/* No visible perimeter around the horizontal topbar or vertical sidebar. */
+
+.mcoe-admin-shell .mcoe-admin-topbar,
+.mcoe-admin-shell .mcoe-admin-sidebar,
+.mcoe-admin-shell .sidebar-float,
+.mcoe-admin-mobile-topbar,
+.mcoe-admin-sidebar-header {
+  border: 0 !important;
+}
+
+/* The list has no carved outer tray; each item owns one inset level. */
+
+.mcoe-admin-sidebar-nav {
+  margin: 2px 10px 10px;
+  padding: 4px 2px 8px !important;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.mcoe-admin-sidebar-nav a,
+.mcoe-admin-sidebar-nav a[aria-current='page'] {
+  border: 0 !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow:
+    inset 7px 7px 15px rgba(0, 7, 32, 0.5),
+    inset -6px -6px 14px rgba(0, 38, 153, 0.24) !important;
+}
+
+.mcoe-admin-sidebar-nav a:hover,
+.mcoe-admin-sidebar-nav a[aria-current='page']:hover,
+.mcoe-admin-sidebar-nav a:focus-visible,
+.mcoe-admin-sidebar-nav a[aria-current='page']:focus-visible {
+  border: 0 !important;
+  background: var(--dashboard-navy) !important;
+  box-shadow:
+    inset 11px 11px 22px rgba(0, 7, 32, 0.64),
+    inset -8px -8px 18px rgba(0, 38, 153, 0.2) !important;
+}
+
+/* One circular indentation only; hover deepens that same indentation. */
+
+.mcoe-admin-shell .mcoe-admin-clock-face {
+  border: 0 !important;
+  background:
+    radial-gradient(circle at 36% 30%, rgba(0, 38, 153, 0.27), transparent 48%),
+    var(--dashboard-navy) !important;
+  box-shadow:
+    inset 10px 10px 22px rgba(0, 7, 32, 0.68),
+    inset -8px -8px 18px rgba(0, 38, 153, 0.27) !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-clock-face::before {
+  display: none !important;
+}
+
+.mcoe-admin-shell .mcoe-admin-clock-face:hover,
+.mcoe-admin-shell .mcoe-admin-clock-face:focus-visible {
+  box-shadow:
+    inset 15px 15px 29px rgba(0, 7, 32, 0.78),
+    inset -10px -10px 23px rgba(0, 38, 153, 0.22) !important;
+}
+
+/* The official institution name is always readable beside the logo. */
+
+.mcoe-admin-sidebar-copy {
+  display: flex !important;
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: center;
+}
+
+.mcoe-admin-sidebar-copy span:first-child,
+.mcoe-admin-sidebar-copy span:first-child:last-child {
+  display: block;
+  margin: 0;
+  max-width: 168px;
+  color: var(--dashboard-cream) !important;
+  font-size: 12.5px !important;
+  font-weight: 800 !important;
+  line-height: 1.55 !important;
+  opacity: 1 !important;
+  text-wrap: balance;
+}
+
+.mcoe-admin-mobile-title {
+  display: block !important;
+  color: var(--dashboard-cream) !important;
+  opacity: 1 !important;
+}
+
+/* Page headings sit directly on the cream canvas. */
+
+.mcoe-admin-overview > div:first-child h1,
+.mcoe-admin-entity-page > div:first-child h1 {
+  color: var(--dashboard-navy) !important;
+}
+
+.mcoe-admin-overview > div:first-child p,
+.mcoe-admin-entity-page > div:first-child p {
+  color: rgba(0, 24, 88, 0.64) !important;
+}

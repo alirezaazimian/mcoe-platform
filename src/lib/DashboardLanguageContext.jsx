@@ -61,6 +61,10 @@ const translations = {
     en: 'School Administration Panel',
     fa: 'پنل مدیریت مدرسه',
   },
+  schoolName: {
+    en: 'Masoumeh Azimian Educational Complex',
+    fa: 'مجتمع آموزشی معصومه عظیمیان',
+  },
   welcome: {
     en: 'Welcome',
     fa: 'خوش آمدید',

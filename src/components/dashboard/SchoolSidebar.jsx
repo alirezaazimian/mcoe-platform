@@ -1,18 +1,26 @@
-import { GraduationCap } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+} from 'react-router-dom';
 
 import AnalogClock from './AnalogClock';
 import { DASHBOARD_NAV_ITEMS } from './nav';
 
 import { useDashboardLanguage } from '@/lib/DashboardLanguageContext';
+import McoeLogo from '@/components/ui/McoeLogo';
 
 export default function SchoolSidebar() {
-  const { t } =
+  const { t, lang } =
     useDashboardLanguage();
+
+  const institutionName =
+    lang === 'fa'
+      ? 'مجتمع آموزشی معصومه عظیمیان'
+      : 'Masoumeh Azimian Educational Complex';
 
   return (
     <aside
-      className="sidebar-float"
+      className="sidebar-float mcoe-admin-sidebar"
       style={{
         width: 232,
         flexShrink: 0,
@@ -22,6 +30,7 @@ export default function SchoolSidebar() {
       }}
     >
       <div
+        className="mcoe-admin-sidebar-header"
         style={{
           padding: '20px 18px 16px',
           display: 'flex',
@@ -29,28 +38,20 @@ export default function SchoolSidebar() {
           gap: 10,
         }}
       >
-        <div
-          style={{
-            width: 38,
-            height: 38,
-            borderRadius: 12,
-            background: '#080C66',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-          }}
+        <Link
+          to="/"
+          className="mcoe-admin-home-link"
+          aria-label={institutionName}
+          title={institutionName}
         >
-          <GraduationCap
-            style={{
-              width: 20,
-              height: 20,
-              color: '#fff',
-            }}
+          <McoeLogo
+            alt={institutionName}
+            className="mcoe-admin-dashboard-logo"
           />
-        </div>
+        </Link>
 
         <div
+          className="mcoe-admin-sidebar-copy"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -64,23 +65,13 @@ export default function SchoolSidebar() {
               lineHeight: 1.2,
             }}
           >
-            {t('schoolAdminPanel')}
-          </span>
-
-          <span
-            style={{
-              fontSize: 10,
-              color: '#9a9a9a',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-            }}
-          >
-            MCOE Admin
+            {institutionName}
           </span>
         </div>
       </div>
 
       <nav
+        className="mcoe-admin-sidebar-nav"
         style={{
           display: 'flex',
           flexDirection: 'column',

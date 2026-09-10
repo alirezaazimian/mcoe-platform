@@ -1,8 +1,6 @@
+import { ChevronLeft } from 'lucide-react';
 import {
-  ChevronLeft,
-  GraduationCap,
-} from 'lucide-react';
-import {
+  Link,
   Outlet,
   useLocation,
   useNavigate,
@@ -17,6 +15,7 @@ import {
   DashboardLanguageProvider,
   useDashboardLanguage,
 } from '@/lib/DashboardLanguageContext';
+import McoeLogo from '@/components/ui/McoeLogo';
 
 import '@/styles/dashboard-school.css';
 
@@ -27,7 +26,13 @@ function DashboardShell() {
   const {
     t,
     dir,
+    lang,
   } = useDashboardLanguage();
+
+  const institutionName =
+    lang === 'fa'
+      ? 'مجتمع آموزشی معصومه عظیمیان'
+      : 'Masoumeh Azimian Educational Complex';
 
   const active =
     DASHBOARD_NAV_ITEMS.find(
@@ -51,7 +56,7 @@ function DashboardShell() {
       dir={dir}
     >
       <div
-        className="hidden md:flex"
+        className="hidden md:flex mcoe-admin-desktop-shell"
         style={{
           height: '100dvh',
           background: '#ebe7e2',
@@ -64,6 +69,7 @@ function DashboardShell() {
         <SchoolSidebar />
 
         <main
+          className="mcoe-admin-main"
           style={{
             flex: 1,
             minWidth: 0,
@@ -86,7 +92,7 @@ function DashboardShell() {
       </div>
 
       <div
-        className="flex md:hidden flex-col"
+        className="flex md:hidden flex-col mcoe-admin-mobile-shell"
         style={{
           minHeight: '100dvh',
           background: '#ebe7e2',
@@ -94,6 +100,7 @@ function DashboardShell() {
         }}
       >
         <header
+          className="mcoe-admin-mobile-topbar"
           style={{
             position: 'sticky',
             top: 0,
@@ -118,37 +125,27 @@ function DashboardShell() {
               gap: 9,
             }}
           >
-            <div
-              style={{
-                width: 30,
-                height: 30,
-                borderRadius: 9,
-                background:
-                  '#080C66',
-                display: 'flex',
-                alignItems:
-                  'center',
-                justifyContent:
-                  'center',
-              }}
+            <Link
+              to="/"
+              className="mcoe-admin-home-link"
+              aria-label={institutionName}
+              title={institutionName}
             >
-              <GraduationCap
-                style={{
-                  width: 17,
-                  height: 17,
-                  color: '#fff',
-                }}
+              <McoeLogo
+                alt={institutionName}
+                className="mcoe-admin-dashboard-logo mcoe-admin-dashboard-logo-mobile"
               />
-            </div>
+            </Link>
 
             <span
+              className="mcoe-admin-mobile-title"
               style={{
                 fontSize: 12,
                 fontWeight: 700,
                 color: '#2e2a26',
               }}
             >
-              {t('schoolAdminPanel')}
+              {institutionName}
             </span>
           </div>
 
@@ -186,6 +183,7 @@ function DashboardShell() {
         </header>
 
         <main
+          className="mcoe-admin-main"
           style={{
             flex: 1,
             overflowY: 'auto',

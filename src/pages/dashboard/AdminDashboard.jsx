@@ -218,6 +218,7 @@ export default function AdminDashboard() {
 
   return (
     <div
+      className="mcoe-admin-page mcoe-admin-overview"
       style={{
         maxWidth: 1200,
         margin: '0 auto',
@@ -282,7 +283,7 @@ export default function AdminDashboard() {
               }}
             >
               <div
-                className="neu-raised"
+                className="neu-raised mcoe-admin-stat-card"
                 style={{
                   padding: 18,
                   display: 'flex',
@@ -291,19 +292,7 @@ export default function AdminDashboard() {
                   gap: 10,
                   height: '100%',
                   transition:
-                    'transform 0.2s ease',
-                }}
-                onMouseEnter={(
-                  event
-                ) => {
-                  event.currentTarget.style.transform =
-                    'translateY(-3px)';
-                }}
-                onMouseLeave={(
-                  event
-                ) => {
-                  event.currentTarget.style.transform =
-                    'none';
+                    'box-shadow 0.28s ease, transform 0.28s ease',
                 }}
               >
                 <div
@@ -316,6 +305,7 @@ export default function AdminDashboard() {
                   }}
                 >
                   <div
+                    className="mcoe-admin-stat-icon"
                     style={{
                       width: 38,
                       height: 38,
@@ -378,7 +368,7 @@ export default function AdminDashboard() {
         className="mcoe-admin-dashboard-grid"
       >
         <div
-          className="neu-raised"
+          className="neu-raised mcoe-admin-overview-panel"
           style={{
             padding: 20,
             display: 'flex',
@@ -477,7 +467,7 @@ export default function AdminDashboard() {
           }}
         >
           <div
-            className="neu-raised"
+            className="neu-raised mcoe-admin-overview-panel"
             style={{
               padding: 20,
               display: 'flex',
@@ -605,7 +595,7 @@ export default function AdminDashboard() {
           </div>
 
           <div
-            className="neu-raised"
+            className="neu-raised mcoe-admin-overview-panel"
             style={{
               padding: 20,
               display: 'flex',
@@ -650,7 +640,7 @@ export default function AdminDashboard() {
                       }}
                     >
                       <div
-                        className="neu-inset-sm"
+                        className="neu-inset-sm mcoe-admin-quick-action"
                         style={{
                           display:
                             'flex',
