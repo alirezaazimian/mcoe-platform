@@ -775,6 +775,7 @@ export default function EntityManager({
 
   return (
     <div
+      className="mcoe-admin-page mcoe-admin-entity-page"
       style={{
         maxWidth: 1200,
         margin: '0 auto',

@@ -62,6 +62,7 @@ export default function Modal({
 
   return (
     <div
+      className="mcoe-admin-modal"
       style={{
         position: 'fixed',
         inset: 0,
@@ -76,6 +77,7 @@ export default function Modal({
       <button
         type="button"
         data-mcoe-liquid="off"
+        className="mcoe-admin-modal-backdrop"
         aria-label="Close"
         onClick={onClose}
         style={{
@@ -93,7 +95,7 @@ export default function Modal({
       />
 
       <div
-        className="neu-raised"
+        className="neu-raised mcoe-admin-modal-dialog"
         style={{
           position: 'relative',
           width: '100%',
@@ -108,6 +110,7 @@ export default function Modal({
         }}
       >
         <div
+          className="mcoe-admin-modal-header"
           style={{
             display: 'flex',
             alignItems:
@@ -118,6 +121,7 @@ export default function Modal({
           }}
         >
           <h3
+            className="mcoe-admin-modal-title"
             style={{
               fontSize: 18,
               fontWeight: 600,
@@ -130,6 +134,7 @@ export default function Modal({
 
           <button
             type="button"
+            className="mcoe-admin-modal-close"
             onClick={onClose}
             style={{
               background: 'none',

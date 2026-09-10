@@ -22,6 +22,9 @@ export default function SchoolMobileNav() {
                 item.path ===
                 '/dashboard'
               }
+              className={({ isActive }) =>
+                `mcoe-admin-mobile-link${isActive ? ' is-active' : ''}`
+              }
               style={({
                 isActive,
               }) => ({

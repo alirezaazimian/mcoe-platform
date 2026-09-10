@@ -18,6 +18,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 function LoadingScreen() {
   return (
     <div
+      className="mcoe-admin-loading-screen"
       style={{
         minHeight: '100dvh',
         display: 'flex',
@@ -50,6 +51,7 @@ function AccessDenied() {
   return (
     <div
       dir={isRTL ? 'rtl' : 'ltr'}
+      className="mcoe-admin-access-screen"
       style={{
         minHeight: '100dvh',
         display: 'flex',
@@ -64,6 +66,7 @@ function AccessDenied() {
       }}
     >
       <div
+        className="mcoe-admin-access-card"
         style={{
           width: 'min(460px, 100%)',
           padding: 32,

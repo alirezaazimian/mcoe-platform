@@ -108,7 +108,7 @@ export default function SchoolTopbar() {
 
   return (
     <header
-      className="neu-raised"
+      className="neu-raised mcoe-admin-topbar"
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -120,6 +120,7 @@ export default function SchoolTopbar() {
       }}
     >
       <h2
+        className="mcoe-admin-page-title"
         style={{
           fontSize: 18,
           fontWeight: 600,
@@ -139,6 +140,7 @@ export default function SchoolTopbar() {
         }}
       >
         <div
+          className="mcoe-admin-clock-meta"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -167,6 +169,7 @@ export default function SchoolTopbar() {
         </div>
 
         <div
+          className="mcoe-admin-lang-switch"
           style={{
             display: 'flex',
             gap: 0,
@@ -181,6 +184,7 @@ export default function SchoolTopbar() {
             (value) => (
               <button
                 key={value}
+                className={`mcoe-admin-lang-button${lang === value ? ' is-active' : ''}`}
                 type="button"
                 onClick={() =>
                   setLang(value)
@@ -228,7 +232,7 @@ export default function SchoolTopbar() {
                 (value) => !value
               )
             }
-            className="btn-neu"
+            className="btn-neu mcoe-admin-user-trigger"
             style={{
               display: 'flex',
               alignItems:
@@ -240,6 +244,7 @@ export default function SchoolTopbar() {
             }}
           >
             <div
+              className="mcoe-admin-user-avatar"
               style={{
                 width: 26,
                 height: 26,
@@ -267,6 +272,7 @@ export default function SchoolTopbar() {
             </div>
 
             <span
+              className="mcoe-admin-user-label"
               style={{
                 fontSize: 12,
                 fontWeight: 500,
@@ -312,7 +318,7 @@ export default function SchoolTopbar() {
               />
 
               <div
-                className="neu-raised"
+                className="neu-raised mcoe-admin-user-menu"
                 style={{
                   position:
                     'absolute',
@@ -327,6 +333,7 @@ export default function SchoolTopbar() {
               >
                 <button
                   type="button"
+                  className="mcoe-admin-logout-button"
                   onClick={() =>
                     logout(true)
                   }
