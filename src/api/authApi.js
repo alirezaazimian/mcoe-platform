@@ -142,10 +142,20 @@ async function authRequest(
 ) {
   const access = getAccessToken();
 
+  const isFormData =
+    typeof FormData !==
+      'undefined' &&
+    options.body instanceof
+      FormData;
+
   const headers = {
-    'Content-Type': 'application/json',
     ...options.headers,
   };
+
+  if (!isFormData) {
+    headers['Content-Type'] =
+      'application/json';
+  }
 
   if (access) {
     headers.Authorization =
@@ -297,6 +307,34 @@ export const authApi = {
   me() {
     return authRequest(
       '/auth/me/'
+    );
+  },
+
+
+  updateAvatar(file) {
+    const body = new FormData();
+
+    body.append(
+      'avatar',
+      file
+    );
+
+    return authRequest(
+      '/auth/me/',
+      {
+        method: 'PATCH',
+        body,
+      }
+    );
+  },
+
+
+  removeAvatar() {
+    return authRequest(
+      '/auth/me/',
+      {
+        method: 'DELETE',
+      }
     );
   },
 

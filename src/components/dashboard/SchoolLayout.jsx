@@ -6,18 +6,25 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
+import DashboardProfileMenu from './DashboardProfileMenu';
+import DashboardThemeToggle from './DashboardThemeToggle';
 import SchoolMobileNav from './SchoolMobileNav';
 import SchoolSidebar from './SchoolSidebar';
 import SchoolTopbar from './SchoolTopbar';
 import { DASHBOARD_NAV_ITEMS } from './nav';
 
+import McoeLogo from '@/components/ui/McoeLogo';
 import {
   DashboardLanguageProvider,
   useDashboardLanguage,
 } from '@/lib/DashboardLanguageContext';
-import McoeLogo from '@/components/ui/McoeLogo';
+import {
+  DashboardThemeProvider,
+  useDashboardTheme,
+} from '@/lib/DashboardThemeContext';
 
 import '@/styles/dashboard-school.css';
+
 
 function DashboardShell() {
   const location = useLocation();
@@ -29,10 +36,18 @@ function DashboardShell() {
     lang,
   } = useDashboardLanguage();
 
+  const { theme } =
+    useDashboardTheme();
+
   const institutionName =
     lang === 'fa'
       ? 'مجتمع آموزشی معصومه عظیمیان'
       : 'Masoumeh Azimian Educational Complex';
+
+  const institutionCaption =
+    lang === 'fa'
+      ? 'آموزش . رشد . آینده'
+      : 'Education · Growth · Future';
 
   const active =
     DASHBOARD_NAV_ITEMS.find(
@@ -52,79 +67,25 @@ function DashboardShell() {
 
   return (
     <div
-      className="mcoe-admin-shell"
+      className={`mcoe-admin-shell is-${theme}`}
+      data-dashboard-theme={theme}
       dir={dir}
     >
-      <div
-        className="hidden md:flex mcoe-admin-desktop-shell"
-        style={{
-          height: '100dvh',
-          background: '#ebe7e2',
-          padding: 20,
-          gap: 20,
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
+      <div className="hidden md:flex mcoe-admin-desktop-shell">
         <SchoolSidebar />
 
-        <main
-          className="mcoe-admin-main"
-          style={{
-            flex: 1,
-            minWidth: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            overflowY: 'auto',
-          }}
-        >
+        <main className="mcoe-admin-main">
           <SchoolTopbar />
 
-          <div
-            style={{
-              flex: 1,
-              minHeight: 0,
-            }}
-          >
+          <div className="mcoe-admin-route-stage">
             <Outlet />
           </div>
         </main>
       </div>
 
-      <div
-        className="flex md:hidden flex-col mcoe-admin-mobile-shell"
-        style={{
-          minHeight: '100dvh',
-          background: '#ebe7e2',
-          position: 'relative',
-        }}
-      >
-        <header
-          className="mcoe-admin-mobile-topbar"
-          style={{
-            position: 'sticky',
-            top: 0,
-            zIndex: 40,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent:
-              'space-between',
-            padding:
-              '12px 16px',
-            background: '#eeeae6',
-            boxShadow:
-              '0 4px 16px rgba(160,143,126,0.18)',
-            borderRadius:
-              '0 0 18px 18px',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 9,
-            }}
-          >
+      <div className="flex md:hidden flex-col mcoe-admin-mobile-shell">
+        <header className="mcoe-admin-mobile-topbar">
+          <div className="mcoe-admin-mobile-brand">
             <Link
               to="/"
               className="mcoe-admin-home-link"
@@ -137,59 +98,39 @@ function DashboardShell() {
               />
             </Link>
 
-            <span
-              className="mcoe-admin-mobile-title"
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                color: '#2e2a26',
-              }}
-            >
-              {institutionName}
+            <span className="mcoe-admin-mobile-brand-copy">
+              <strong>
+                {institutionName}
+              </strong>
+
+              <small>
+                {institutionCaption}
+              </small>
             </span>
           </div>
 
-          {location.pathname !==
-            '/dashboard' && (
-            <button
-              type="button"
-              onClick={() =>
-                navigate(-1)
-              }
-              style={{
-                background: 'none',
-                border: 'none',
-                display: 'flex',
-                alignItems:
-                  'center',
-                gap: 4,
-                color: '#6e6e6e',
-                fontSize: 12,
-                fontFamily:
-                  'inherit',
-                cursor: 'pointer',
-              }}
-            >
-              <ChevronLeft
-                style={{
-                  width: 16,
-                  height: 16,
-                }}
-              />
+          <div className="mcoe-admin-mobile-actions">
+            <DashboardThemeToggle compact />
+            <DashboardProfileMenu compact />
 
-              {pageTitle}
-            </button>
-          )}
+            {location.pathname !==
+              '/dashboard' && (
+              <button
+                type="button"
+                className="mcoe-admin-mobile-back"
+                onClick={() =>
+                  navigate(-1)
+                }
+                aria-label={pageTitle}
+                title={pageTitle}
+              >
+                <ChevronLeft aria-hidden="true" />
+              </button>
+            )}
+          </div>
         </header>
 
-        <main
-          className="mcoe-admin-main"
-          style={{
-            flex: 1,
-            overflowY: 'auto',
-            position: 'relative',
-          }}
-        >
+        <main className="mcoe-admin-main">
           <Outlet />
         </main>
 
@@ -199,10 +140,13 @@ function DashboardShell() {
   );
 }
 
+
 export default function SchoolLayout() {
   return (
     <DashboardLanguageProvider>
-      <DashboardShell />
+      <DashboardThemeProvider>
+        <DashboardShell />
+      </DashboardThemeProvider>
     </DashboardLanguageProvider>
   );
 }

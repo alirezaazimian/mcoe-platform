@@ -156,6 +156,34 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
 
+  const updateAvatar = useCallback(
+    async (file) => {
+      const currentUser =
+        await authApi.updateAvatar(
+          file
+        );
+
+      setUser(currentUser);
+
+      return currentUser;
+    },
+    []
+  );
+
+
+  const removeAvatar = useCallback(
+    async () => {
+      const currentUser =
+        await authApi.removeAvatar();
+
+      setUser(currentUser);
+
+      return currentUser;
+    },
+    []
+  );
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -168,6 +196,8 @@ export const AuthProvider = ({ children }) => {
         logout,
         navigateToLogin,
         checkUserAuth,
+        updateAvatar,
+        removeAvatar,
       }}
     >
       {children}

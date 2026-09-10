@@ -21,6 +21,10 @@ from rest_framework import (
     permissions,
     status,
 )
+from rest_framework.parsers import (
+    FormParser,
+    MultiPartParser,
+)
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -29,12 +33,14 @@ from rest_framework_simplejwt.tokens import (
 )
 
 from .serializers import (
+    AvatarUploadSerializer,
     LoginSerializer,
     PasswordResetConfirmSerializer,
     PasswordResetRequestSerializer,
     RegisterSerializer,
     UserSerializer,
 )
+from .models import UserProfile
 
 
 User = get_user_model()
@@ -69,7 +75,12 @@ class RegisterView(generics.CreateAPIView):
         return Response(
             {
                 "user":
-                    UserSerializer(user).data,
+                    UserSerializer(
+                        user,
+                        context={
+                            "request": request
+                        },
+                    ).data,
                 "access":
                     str(refresh.access_token),
                 "refresh":
@@ -105,7 +116,12 @@ class LoginView(APIView):
         return Response(
             {
                 "user":
-                    UserSerializer(user).data,
+                    UserSerializer(
+                        user,
+                        context={
+                            "request": request
+                        },
+                    ).data,
                 "access":
                     str(refresh.access_token),
                 "refresh":
@@ -119,11 +135,102 @@ class CurrentUserView(APIView):
         permissions.IsAuthenticated
     ]
 
+    parser_classes = [
+        MultiPartParser,
+        FormParser,
+    ]
+
+    def serialized_user(self, request):
+        return UserSerializer(
+            request.user,
+            context={
+                "request": request
+            },
+        ).data
+
     def get(self, request):
         return Response(
-            UserSerializer(
-                request.user
-            ).data
+            self.serialized_user(
+                request
+            )
+        )
+
+    def patch(self, request):
+        serializer = (
+            AvatarUploadSerializer(
+                data=request.data
+            )
+        )
+
+        serializer.is_valid(
+            raise_exception=True
+        )
+
+        profile, _ = (
+            UserProfile.objects
+            .get_or_create(
+                user=request.user
+            )
+        )
+
+        previous_avatar = (
+            profile.avatar
+            if profile.avatar
+            else None
+        )
+
+        profile.avatar = (
+            serializer
+            .validated_data[
+                "avatar"
+            ]
+        )
+
+        profile.save(
+            update_fields=[
+                "avatar",
+                "updated_at",
+            ]
+        )
+
+        if (
+            previous_avatar and
+            previous_avatar.name !=
+            profile.avatar.name
+        ):
+            previous_avatar.storage.delete(
+                previous_avatar.name
+            )
+
+        return Response(
+            self.serialized_user(
+                request
+            )
+        )
+
+    def delete(self, request):
+        profile = (
+            UserProfile.objects
+            .filter(user=request.user)
+            .first()
+        )
+
+        if profile and profile.avatar:
+            profile.avatar.delete(
+                save=False
+            )
+            profile.avatar = None
+            profile.save(
+                update_fields=[
+                    "avatar",
+                    "updated_at",
+                ]
+            )
+
+        return Response(
+            self.serialized_user(
+                request
+            )
         )
 
 

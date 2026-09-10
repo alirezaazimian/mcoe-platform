@@ -4,6 +4,7 @@ import { DASHBOARD_NAV_ITEMS } from './nav';
 
 import { useDashboardLanguage } from '@/lib/DashboardLanguageContext';
 
+
 export default function SchoolMobileNav() {
   const { t } =
     useDashboardLanguage();
@@ -22,60 +23,15 @@ export default function SchoolMobileNav() {
                 item.path ===
                 '/dashboard'
               }
-              className={({ isActive }) =>
+              className={({
+                isActive,
+              }) =>
                 `mcoe-admin-mobile-link${isActive ? ' is-active' : ''}`
               }
-              style={({
-                isActive,
-              }) => ({
-                display: 'flex',
-                flexDirection:
-                  'column',
-                alignItems:
-                  'center',
-                gap: 3,
-                padding:
-                  '6px 4px',
-                borderRadius: 10,
-                textDecoration:
-                  'none',
-                color:
-                  isActive
-                    ? '#2e2a26'
-                    : '#9a9a9a',
-                flex: '0 0 72px',
-                minWidth: 0,
-                background:
-                  isActive
-                    ? '#ebe7e2'
-                    : 'transparent',
-                boxShadow:
-                  isActive
-                    ? 'var(--shadow-in-sm)'
-                    : 'none',
-              })}
             >
-              <Icon
-                style={{
-                  width: 18,
-                  height: 18,
-                }}
-              />
+              <Icon aria-hidden="true" />
 
-              <span
-                style={{
-                  fontSize: 9,
-                  fontWeight: 600,
-                  whiteSpace:
-                    'nowrap',
-                  overflow:
-                    'hidden',
-                  textOverflow:
-                    'ellipsis',
-                  maxWidth:
-                    '100%',
-                }}
-              >
+              <span>
                 {t(item.key)}
               </span>
             </NavLink>

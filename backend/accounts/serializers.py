@@ -2,12 +2,16 @@ from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
+from .models import UserProfile
+
 
 User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
     role = serializers.SerializerMethodField()
+    full_name = serializers.SerializerMethodField()
+    avatar_url = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -16,9 +20,32 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "first_name",
             "last_name",
+            "full_name",
+            "avatar_url",
             "role",
             "is_staff",
         ]
+
+    def get_full_name(self, user):
+        return user.get_full_name().strip()
+
+    def get_avatar_url(self, user):
+        profile = (
+            UserProfile.objects
+            .filter(user_id=user.pk)
+            .first()
+        )
+
+        if not profile or not profile.avatar:
+            return ""
+
+        url = profile.avatar.url
+        request = self.context.get("request")
+
+        if request:
+            return request.build_absolute_uri(url)
+
+        return url
 
     def get_role(self, user):
         if user.is_superuser or user.is_staff:
@@ -124,6 +151,39 @@ class LoginSerializer(serializers.Serializer):
         attrs["user"] = user
 
         return attrs
+
+
+class AvatarUploadSerializer(
+    serializers.Serializer
+):
+    avatar = serializers.ImageField(
+        allow_empty_file=False,
+    )
+
+    def validate_avatar(self, value):
+        if value.size > 5 * 1024 * 1024:
+            raise serializers.ValidationError(
+                "The image must be smaller than 5 MB."
+            )
+
+        allowed_types = {
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+        }
+
+        content_type = getattr(
+            value,
+            "content_type",
+            "",
+        )
+
+        if content_type not in allowed_types:
+            raise serializers.ValidationError(
+                "Use a JPEG, PNG, or WebP image."
+            )
+
+        return value
 
 
 class PasswordResetRequestSerializer(

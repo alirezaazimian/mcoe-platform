@@ -6,8 +6,9 @@ import {
 import AnalogClock from './AnalogClock';
 import { DASHBOARD_NAV_ITEMS } from './nav';
 
-import { useDashboardLanguage } from '@/lib/DashboardLanguageContext';
 import McoeLogo from '@/components/ui/McoeLogo';
+import { useDashboardLanguage } from '@/lib/DashboardLanguageContext';
+
 
 export default function SchoolSidebar() {
   const { t, lang } =
@@ -18,26 +19,14 @@ export default function SchoolSidebar() {
       ? 'مجتمع آموزشی معصومه عظیمیان'
       : 'Masoumeh Azimian Educational Complex';
 
+  const institutionCaption =
+    lang === 'fa'
+      ? 'آموزش . رشد . آینده'
+      : 'Education · Growth · Future';
+
   return (
-    <aside
-      className="sidebar-float mcoe-admin-sidebar"
-      style={{
-        width: 232,
-        flexShrink: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 6,
-      }}
-    >
-      <div
-        className="mcoe-admin-sidebar-header"
-        style={{
-          padding: '20px 18px 16px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 10,
-        }}
-      >
+    <aside className="mcoe-admin-sidebar">
+      <div className="mcoe-admin-sidebar-header">
         <Link
           to="/"
           className="mcoe-admin-home-link"
@@ -50,37 +39,18 @@ export default function SchoolSidebar() {
           />
         </Link>
 
-        <div
-          className="mcoe-admin-sidebar-copy"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <span
-            style={{
-              fontSize: 14,
-              fontWeight: 700,
-              color: '#2e2a26',
-              lineHeight: 1.2,
-            }}
-          >
+        <div className="mcoe-admin-sidebar-copy">
+          <strong>
             {institutionName}
-          </span>
+          </strong>
+
+          <small>
+            {institutionCaption}
+          </small>
         </div>
       </div>
 
-      <nav
-        className="mcoe-admin-sidebar-nav"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 4,
-          padding: '4px 12px 16px',
-          flex: 1,
-          overflowY: 'auto',
-        }}
-      >
+      <nav className="mcoe-admin-sidebar-nav">
         {DASHBOARD_NAV_ITEMS.map(
           (item) => {
             const Icon = item.icon;
@@ -93,42 +63,13 @@ export default function SchoolSidebar() {
                   item.path ===
                   '/dashboard'
                 }
-                style={({
+                className={({
                   isActive,
-                }) => ({
-                  display: 'flex',
-                  alignItems:
-                    'center',
-                  gap: 12,
-                  padding:
-                    '11px 14px',
-                  borderRadius: 10,
-                  textDecoration:
-                    'none',
-                  fontSize: 13,
-                  fontWeight: 500,
-                  color: isActive
-                    ? '#2e2a26'
-                    : '#6e6e6e',
-                  background:
-                    isActive
-                      ? '#ebe7e2'
-                      : 'transparent',
-                  boxShadow:
-                    isActive
-                      ? 'var(--shadow-in-sm)'
-                      : 'none',
-                  transition:
-                    'all 0.15s ease',
-                })}
+                }) =>
+                  `mcoe-admin-sidebar-link${isActive ? ' is-active' : ''}`
+                }
               >
-                <Icon
-                  style={{
-                    width: 17,
-                    height: 17,
-                    flexShrink: 0,
-                  }}
-                />
+                <Icon aria-hidden="true" />
 
                 <span>
                   {t(item.key)}
