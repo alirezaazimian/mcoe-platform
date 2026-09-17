@@ -28,27 +28,6 @@ const AUTOPLAY_MS = 7200;
 const REGISTRATION_URL =
   'https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister';
 
-const SAMPLE_SLIDES = [
-  {
-    id: 'mcoe-sample-building',
-    image_url:
-      '/media/site/7a95f3af1_IMG_7095.jpg',
-    alt_fa:
-      'نمای ورودی مجتمع آموزشی معصومه عظیمیان',
-    alt_en:
-      'Entrance of Masoumeh Azimian Educational Complex',
-  },
-  {
-    id: 'mcoe-sample-playground',
-    image_url:
-      '/media/site/af4db7d64_6.jpg',
-    alt_fa:
-      'محوطه بازی و فعالیت بدنی مجتمع آموزشی',
-    alt_en:
-      'Play and activity space at the educational complex',
-  },
-];
-
 const STATS = [
   {
     valueFa: '۳۰+',
@@ -79,6 +58,7 @@ function localized(
 ) {
   const language =
     isRTL ? 'fa' : 'en';
+
   const alternateLanguage =
     isRTL ? 'en' : 'fa';
 
@@ -96,20 +76,28 @@ function localized(
 
 
 function headlineLines(value, isRTL) {
-  const marker = isRTL ? 'رویکردی' : ',';
-  const markerIndex = value.indexOf(marker);
+  const marker =
+    isRTL ? 'رویکردی' : ',';
+
+  const markerIndex =
+    value.indexOf(marker);
 
   if (markerIndex < 0) {
     return [value];
   }
 
-  const firstLineEnd = isRTL
-    ? markerIndex + marker.length
-    : markerIndex + 1;
+  const firstLineEnd =
+    isRTL
+      ? markerIndex + marker.length
+      : markerIndex + 1;
 
   return [
-    value.slice(0, firstLineEnd).trim(),
-    value.slice(firstLineEnd).trim(),
+    value
+      .slice(0, firstLineEnd)
+      .trim(),
+    value
+      .slice(firstLineEnd)
+      .trim(),
   ];
 }
 
@@ -119,20 +107,31 @@ export default function HeroSlider() {
     isRTL,
     t,
   } = useLanguage();
+
   const reduceMotion =
     useReducedMotion();
 
   const [slides, setSlides] =
     useState([]);
+
   const [loading, setLoading] =
     useState(true);
+
   const [index, setIndex] =
     useState(0);
-  const [interactionPaused, setInteractionPaused] =
-    useState(false);
-  const [userPaused, setUserPaused] =
-    useState(false);
-  const touchStart = useRef(null);
+
+  const [
+    interactionPaused,
+    setInteractionPaused,
+  ] = useState(false);
+
+  const [
+    userPaused,
+    setUserPaused,
+  ] = useState(false);
+
+  const touchStart =
+    useRef(null);
 
 
   useEffect(() => {
@@ -156,11 +155,7 @@ export default function HeroSlider() {
                   : []
               );
 
-        setSlides(
-          records.length
-            ? records
-            : SAMPLE_SLIDES
-        );
+        setSlides(records);
       })
       .catch((error) => {
         console.error(
@@ -169,9 +164,7 @@ export default function HeroSlider() {
         );
 
         if (active) {
-          setSlides(
-            SAMPLE_SLIDES
-          );
+          setSlides([]);
         }
       })
       .finally(() => {
@@ -186,7 +179,9 @@ export default function HeroSlider() {
   }, []);
 
 
-  const count = slides.length;
+  const count =
+    slides.length;
+
   const paused =
     interactionPaused ||
     userPaused;
@@ -260,6 +255,7 @@ export default function HeroSlider() {
   ) => {
     const start =
       touchStart.current;
+
     const end =
       event.changedTouches[0]
         ?.clientX;
@@ -312,10 +308,26 @@ export default function HeroSlider() {
   }
 
 
+  /*
+   * هیچ اسلاید فعالی در API وجود ندارد؛
+   * تصاویر نمونه یا هاردکد نمایش داده نشوند.
+   */
+  if (count === 0) {
+    return null;
+  }
+
+
   const slide =
-    slides[index];
+    slides[index] ??
+    slides[0];
+
   const slideKey =
     slide?.id ?? index;
+
+  const imageUrl =
+    slide?.image_url ||
+    slide?.image ||
+    '';
 
   const legacyAlt = localized(
     slide,
@@ -324,24 +336,30 @@ export default function HeroSlider() {
     ''
   );
 
-  const eyebrow = isRTL
-    ? 'آموزش . رشد . آینده'
-    : 'Education · Growth · Future';
-
-  const title = t('hero.title');
-  const titleLines = headlineLines(
-    title,
+  const eyebrow =
     isRTL
-  );
+      ? 'آموزش . رشد . آینده'
+      : 'Education · Growth · Future';
 
-  const description = isRTL
-    ? 'محیطی پویا، امن و الهام‌بخش برای پرورش دانش، خلاقیت و اعتمادبه‌نفس نسل آینده.'
-    : 'A thoughtful, inspiring and safe environment where knowledge, creativity and confidence can grow together.';
+  const title =
+    t('hero.title');
+
+  const titleLines =
+    headlineLines(
+      title,
+      isRTL
+    );
+
+  const description =
+    isRTL
+      ? 'محیطی پویا، امن و الهام‌بخش برای پرورش دانش، خلاقیت و اعتمادبه‌نفس نسل آینده.'
+      : 'A thoughtful, inspiring and safe environment where knowledge, creativity and confidence can grow together.';
 
   const previousLabel =
     isRTL
       ? 'اسلاید قبلی'
       : 'Previous slide';
+
   const nextLabel =
     isRTL
       ? 'اسلاید بعدی'
@@ -388,7 +406,9 @@ export default function HeroSlider() {
       onTouchStart={
         handleTouchStart
       }
-      onTouchEnd={handleTouchEnd}
+      onTouchEnd={
+        handleTouchEnd
+      }
     >
       <div className="mcoe-fade-visual">
         <AnimatePresence
@@ -397,7 +417,7 @@ export default function HeroSlider() {
         >
           <motion.img
             key={slideKey}
-            src={slide.image_url}
+            src={imageUrl}
             alt={legacyAlt || title}
             initial={{
               opacity: 0,
@@ -485,11 +505,13 @@ export default function HeroSlider() {
               aria-atomic="true"
             >
               <h1>
-                {titleLines.map((line) => (
-                  <span key={line}>
-                    {line}
-                  </span>
-                ))}
+                {titleLines.map(
+                  (line) => (
+                    <span key={line}>
+                      {line}
+                    </span>
+                  )
+                )}
               </h1>
 
               <p className="mcoe-fade-description">
@@ -530,6 +552,7 @@ export default function HeroSlider() {
                     ? stat.valueFa
                     : stat.valueEn}
                 </strong>
+
                 <span>
                   {isRTL
                     ? stat.labelFa
@@ -549,42 +572,46 @@ export default function HeroSlider() {
                     : 'Choose a slide'
                 }
               >
-                {slides.map((item, slideIndex) => (
-                  <button
-                    key={
-                      item.id ??
-                      slideIndex
-                    }
-                    type="button"
-                    data-mcoe-liquid="off"
-                    aria-current={
-                      slideIndex === index
-                        ? 'true'
-                        : undefined
-                    }
-                    aria-label={
-                      isRTL
-                        ? `نمایش اسلاید ${slideIndex + 1}`
-                        : `Show slide ${slideIndex + 1}`
-                    }
-                    className={
-                      slideIndex === index
-                        ? 'is-active'
-                        : ''
-                    }
-                    onClick={() =>
-                      setIndex(
+                {slides.map(
+                  (
+                    item,
+                    slideIndex
+                  ) => (
+                    <button
+                      key={
+                        item.id ??
                         slideIndex
-                      )
-                    }
-                  >
-                    <i>
-                      <span />
-                    </i>
-                  </button>
-                ))}
+                      }
+                      type="button"
+                      data-mcoe-liquid="off"
+                      aria-current={
+                        slideIndex === index
+                          ? 'true'
+                          : undefined
+                      }
+                      aria-label={
+                        isRTL
+                          ? `نمایش اسلاید ${slideIndex + 1}`
+                          : `Show slide ${slideIndex + 1}`
+                      }
+                      className={
+                        slideIndex === index
+                          ? 'is-active'
+                          : ''
+                      }
+                      onClick={() =>
+                        setIndex(
+                          slideIndex
+                        )
+                      }
+                    >
+                      <i>
+                        <span />
+                      </i>
+                    </button>
+                  )
+                )}
               </div>
-
             </div>
           )}
         </div>
