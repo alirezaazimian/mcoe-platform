@@ -250,30 +250,6 @@ export const authApi = {
   },
 
 
-  async register(
-    email,
-    password,
-    confirmPassword
-  ) {
-    const data = await publicRequest(
-      '/auth/register/',
-      {
-        email,
-        password,
-        confirm_password:
-          confirmPassword,
-      }
-    );
-
-    setTokens(
-      data.access,
-      data.refresh
-    );
-
-    return data;
-  },
-
-
   requestPasswordReset(email) {
     return publicRequest(
       '/auth/password-reset/',

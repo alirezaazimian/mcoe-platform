@@ -52,7 +52,6 @@ import Collaborate from '@/pages/Collaborate';
 import Search from '@/pages/Search';
 
 import Login from '@/pages/Login';
-import Register from '@/pages/Register';
 import ForgotPassword from '@/pages/ForgotPassword';
 import ResetPassword from '@/pages/ResetPassword';
 
@@ -60,6 +59,9 @@ import AdminDashboard from '@/pages/dashboard/AdminDashboard';
 import ArticlesAdmin from '@/pages/dashboard/ArticlesAdmin';
 import DashboardModulePlaceholder from '@/pages/dashboard/DashboardModulePlaceholder';
 import EventsAdmin from '@/pages/dashboard/EventsAdmin';
+import EducationLevelSlidesAdmin, {
+  EDUCATION_SLIDER_LEVELS,
+} from '@/pages/dashboard/EducationLevelSlidesAdmin';
 import HeroSlidesAdmin from '@/pages/dashboard/HeroSlidesAdmin';
 import KindergartenSlidesAdmin from '@/pages/dashboard/KindergartenSlidesAdmin';
 import NewsAdmin from '@/pages/dashboard/NewsAdmin';
@@ -73,11 +75,6 @@ function AppRoutes() {
       <Route
         path="/login"
         element={<Login />}
-      />
-
-      <Route
-        path="/register"
-        element={<Register />}
       />
 
       <Route
@@ -148,6 +145,45 @@ function AppRoutes() {
             path="kindergarten-slides"
             element={
               <KindergartenSlidesAdmin />
+            }
+          />
+
+          <Route
+            path="elementary-first-slides"
+            element={
+              <EducationLevelSlidesAdmin
+                level={
+                  EDUCATION_SLIDER_LEVELS.elementaryFirst
+                }
+                titleKey="elementaryFirstSlides"
+                descriptionKey="elementaryFirstSlidesIntro"
+              />
+            }
+          />
+
+          <Route
+            path="elementary-second-slides"
+            element={
+              <EducationLevelSlidesAdmin
+                level={
+                  EDUCATION_SLIDER_LEVELS.elementarySecond
+                }
+                titleKey="elementarySecondSlides"
+                descriptionKey="elementarySecondSlidesIntro"
+              />
+            }
+          />
+
+          <Route
+            path="middle-first-slides"
+            element={
+              <EducationLevelSlidesAdmin
+                level={
+                  EDUCATION_SLIDER_LEVELS.middleFirst
+                }
+                titleKey="middleFirstSlides"
+                descriptionKey="middleFirstSlidesIntro"
+              />
             }
           />
 

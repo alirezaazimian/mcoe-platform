@@ -1,12 +1,14 @@
 from rest_framework import (
     generics,
     parsers,
+    permissions,
     viewsets,
 )
 
 from .models import (
     Article,
     CollaborationRequest,
+    EducationHeroSlide,
     EducationLevel,
     Event,
     Facility,
@@ -25,6 +27,7 @@ from .permissions import (
 from .serializers import (
     ArticleSerializer,
     CollaborationRequestSerializer,
+    EducationHeroSlideSerializer,
     EducationLevelSerializer,
     EventSerializer,
     FacilitySerializer,
@@ -370,6 +373,25 @@ class KindergartenSlideViewSet(
     serializer_class = KindergartenSlideSerializer
 
 
+class EducationHeroSlideViewSet(
+    ActiveContentViewSet
+):
+    queryset = EducationHeroSlide.objects.all()
+    serializer_class = EducationHeroSlideSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        level = self.request.query_params.get("level")
+
+        if level:
+            queryset = queryset.filter(level=level)
+
+        return queryset.order_by(
+            "sort_order",
+            "id",
+        )
+
+
 class CollaborationRequestCreateView(
     generics.CreateAPIView
 ):
@@ -380,6 +402,10 @@ class CollaborationRequestCreateView(
     serializer_class = (
         CollaborationRequestSerializer
     )
+
+    permission_classes = [
+        permissions.AllowAny
+    ]
 
     parser_classes = [
         parsers.MultiPartParser,

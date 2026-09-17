@@ -9,6 +9,10 @@ from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
+from accounts.authentication_rule import (
+    admin_user_authentication_rule,
+)
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -296,10 +300,19 @@ CSRF_TRUSTED_ORIGINS = env_list(
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         (
-            "rest_framework_simplejwt."
-            "authentication.JWTAuthentication"
+            "accounts.authentication."
+            "StaffJWTAuthentication"
         ),
     ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
+    "DEFAULT_THROTTLE_RATES": {
+        "admin_login": "10/minute",
+        "admin_token_refresh": "60/hour",
+        "admin_password_reset": "5/hour",
+        "admin_password_reset_confirm": "10/hour",
+    },
 }
 
 
@@ -314,6 +327,8 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_AUTHENTICATION_RULE":
+        admin_user_authentication_rule,
 }
 
 

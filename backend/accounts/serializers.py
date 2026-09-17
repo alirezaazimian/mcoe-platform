@@ -1,5 +1,4 @@
 from django.contrib.auth import authenticate, get_user_model
-from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from .models import UserProfile
@@ -52,59 +51,6 @@ class UserSerializer(serializers.ModelSerializer):
             return "admin"
 
         return "user"
-
-
-class RegisterSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-
-    password = serializers.CharField(
-        write_only=True,
-        min_length=8,
-    )
-
-    confirm_password = serializers.CharField(
-        write_only=True,
-    )
-
-    def validate_email(self, value):
-        email = value.strip().lower()
-
-        if User.objects.filter(
-            email__iexact=email
-        ).exists():
-            raise serializers.ValidationError(
-                "An account with this email already exists."
-            )
-
-        return email
-
-    def validate(self, attrs):
-        password = attrs["password"]
-        confirm_password = attrs["confirm_password"]
-
-        if password != confirm_password:
-            raise serializers.ValidationError(
-                {
-                    "confirm_password":
-                        "Passwords do not match."
-                }
-            )
-
-        validate_password(password)
-
-        return attrs
-
-    def create(self, validated_data):
-        email = validated_data["email"]
-        password = validated_data["password"]
-
-        user = User.objects.create_user(
-            username=email,
-            email=email,
-            password=password,
-        )
-
-        return user
 
 
 class LoginSerializer(serializers.Serializer):

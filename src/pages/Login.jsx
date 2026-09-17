@@ -83,11 +83,8 @@ export default function Login() {
           submitting:
             "در حال ورود...",
 
-          noAccount:
-            "حساب کاربری ندارید؟",
-
-          createAccount:
-            "ایجاد حساب",
+          staffOnly:
+            "ورود به این بخش فقط برای مدیران مجاز است.",
 
           home:
             "صفحه اصلی",
@@ -135,11 +132,8 @@ export default function Login() {
           submitting:
             "Signing in...",
 
-          noAccount:
-            "Don't have an account?",
-
-          createAccount:
-            "Create account",
+          staffOnly:
+            "Access is limited to authorized administrators.",
 
           home:
             "Home",
@@ -153,16 +147,6 @@ export default function Login() {
           hidePassword:
             "Hide password",
         };
-
-
-  const registerUrl =
-    "/register" +
-    (
-      returnTo !== "/"
-        ? "?returnTo=" +
-          encodeURIComponent(returnTo)
-        : ""
-    );
 
 
   const handleSubmit = async (e) => {
@@ -661,18 +645,7 @@ export default function Login() {
                   text-[#66616A]
                 "
               >
-                {copy.noAccount}{" "}
-
-                <Link
-                  to={registerUrl}
-                  className="
-                    font-bold
-                    text-[#002699]
-                    hover:text-[#001858]
-                  "
-                >
-                  {copy.createAccount}
-                </Link>
+                {copy.staffOnly}
               </div>
             </div>
           </div>

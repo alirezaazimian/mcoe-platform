@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     ArticleViewSet,
     CollaborationRequestCreateView,
+    EducationHeroSlideViewSet,
     EducationLevelViewSet,
     EventViewSet,
     FacilityViewSet,
@@ -91,6 +92,12 @@ router.register(
     "kindergarten-slides",
     KindergartenSlideViewSet,
     basename="kindergarten-slide",
+)
+
+router.register(
+    "education-hero-slides",
+    EducationHeroSlideViewSet,
+    basename="education-hero-slide",
 )
 
 from django.urls import path

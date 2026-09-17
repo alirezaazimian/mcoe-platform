@@ -36,6 +36,18 @@ const translations = {
     en: 'Kindergarten Slides',
     fa: 'اسلایدهای کودکستان',
   },
+  elementaryFirstSlides: {
+    en: 'Elementary First-Cycle Slides',
+    fa: 'اسلایدر دبستان دوره اول',
+  },
+  elementarySecondSlides: {
+    en: 'Elementary Second-Cycle Slides',
+    fa: 'اسلایدر دبستان دوره دوم',
+  },
+  middleFirstSlides: {
+    en: 'Middle School First-Cycle Slides',
+    fa: 'اسلایدر متوسطه دوره اول',
+  },
   teachers: {
     en: 'Teachers',
     fa: 'معلمان',
@@ -439,6 +451,24 @@ const translations = {
       'Manage every image, title, caption, label, display order and publication status in the Childhood Dream slider.',
     fa:
       'تصویر، عنوان، توضیح، برچسب، ترتیب نمایش و وضعیت انتشار اسلایدر کودکستان رویای کودکی را مدیریت کنید.',
+  },
+  elementaryFirstSlidesIntro: {
+    en:
+      'Upload, order and publish the hero images for the elementary first-cycle page.',
+    fa:
+      'تصاویر هیرو صفحه دبستان دوره اول را بارگذاری، مرتب و منتشر کنید.',
+  },
+  elementarySecondSlidesIntro: {
+    en:
+      'Upload, order and publish the hero images for the elementary second-cycle page.',
+    fa:
+      'تصاویر هیرو صفحه دبستان دوره دوم را بارگذاری، مرتب و منتشر کنید.',
+  },
+  middleFirstSlidesIntro: {
+    en:
+      'Upload, order and publish the hero images for the middle school first-cycle page.',
+    fa:
+      'تصاویر هیرو صفحه متوسطه دوره اول را بارگذاری، مرتب و منتشر کنید.',
   },
   kindergartenSlideTitle: {
     en: 'Slide Title',

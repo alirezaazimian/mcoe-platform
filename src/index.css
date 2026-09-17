@@ -1152,7 +1152,7 @@
 }
 
 .mcoe-main-header .mcoe-theme-toggle {
-  border-color: rgba(251, 246, 238, 0.2);
+  border: 0;
   background: rgba(0, 24, 88, 0.2);
   box-shadow:
     inset 3px 3px 7px rgba(0, 7, 32, 0.34),
@@ -1162,7 +1162,7 @@
 
 .mcoe-main-header .mcoe-theme-toggle:hover,
 .mcoe-main-header .mcoe-theme-toggle:focus-visible {
-  border-color: rgba(245, 166, 35, 0.58);
+  border: 0;
   background: rgba(0, 24, 88, 0.3);
   box-shadow:
     inset 4px 4px 9px rgba(0, 7, 32, 0.4),
@@ -1175,7 +1175,7 @@
    main-header day/night switch on the same royal-blue surface. */
 .mcoe-footer .mcoe-footer-icon {
   flex: 0 0 auto;
-  border-color: rgba(251, 246, 238, 0.2);
+  border: 0;
   background: rgba(0, 24, 88, 0.2);
   box-shadow:
     inset 3px 3px 7px rgba(0, 7, 32, 0.34),
@@ -1184,10 +1184,7 @@
 }
 
 .mcoe-footer .mcoe-footer-icon:hover,
-.mcoe-footer .mcoe-footer-icon:focus-visible,
-.mcoe-footer .mcoe-footer-back:hover .mcoe-footer-icon,
-.mcoe-footer .mcoe-footer-back:focus-visible .mcoe-footer-icon {
-  border-color: rgba(245, 166, 35, 0.58);
+.mcoe-footer .mcoe-footer-icon:focus-visible {
   background: rgba(0, 24, 88, 0.3);
   box-shadow:
     inset 4px 4px 9px rgba(0, 7, 32, 0.4),
@@ -1196,8 +1193,8 @@
   color: #f5a623;
 }
 
-.mcoe-footer .mcoe-footer-back:hover .mcoe-footer-icon > span,
-.mcoe-footer .mcoe-footer-back:focus-visible .mcoe-footer-icon > span {
+.mcoe-footer .mcoe-footer-icon:hover > span,
+.mcoe-footer .mcoe-footer-icon:focus-visible > span {
   transform: rotate(-10deg) scale(1.04);
 }
 
@@ -1210,10 +1207,6 @@
   background: transparent;
   box-shadow: none;
   outline: none;
-}
-
-.mcoe-footer .mcoe-footer-back:focus-visible {
-  color: #fbf6ee;
 }
 
 .mcoe-language-toggle-label {
@@ -1288,6 +1281,81 @@ button:not([data-mcoe-liquid='off']):not(:disabled):focus-visible svg,
 button:not([data-mcoe-liquid='off']):not(:disabled):active,
 .mcoe-liquid-button:not(:disabled):not([aria-disabled='true']):active {
   border-color: rgba(223, 137, 16, 0.82) !important;
+  background:
+    linear-gradient(
+      145deg,
+      #e79315 0%,
+      #f5a623 58%,
+      #ffc55b 100%
+    ) !important;
+  box-shadow:
+    inset 4px 5px 9px rgba(158, 87, 4, 0.25),
+    inset -3px -3px 7px rgba(255, 235, 186, 0.48),
+    0 4px 9px rgba(0, 24, 88, 0.1) !important;
+  translate: 0 1px;
+  scale: 0.986;
+  animation: none;
+}
+
+/* Footer icons use the same raised orange liquid material as the header
+   controls. The selector targets the icon itself, so a footer row or the
+   back-to-top label never receives the hover treatment. */
+.mcoe-footer .mcoe-footer-icon {
+  translate: 0 0;
+  scale: 1;
+  transition:
+    color 240ms ease,
+    background 320ms ease,
+    background-position 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    translate 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    scale 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 200ms ease;
+}
+
+.mcoe-footer .mcoe-footer-icon:hover,
+.mcoe-footer .mcoe-footer-icon:focus-visible {
+  border: 0 !important;
+  color: #001858 !important;
+  background:
+    radial-gradient(
+      circle at 24% 18%,
+      rgba(255, 249, 229, 0.82) 0,
+      rgba(255, 249, 229, 0.3) 14%,
+      transparent 33%
+    ),
+    linear-gradient(
+      145deg,
+      #ffc55b 0%,
+      #f5a623 54%,
+      #df8910 100%
+    ) !important;
+  background-position: 22% 12%, 72% 50% !important;
+  background-size: 175% 175%, 160% 160% !important;
+  box-shadow:
+    0 12px 24px rgba(245, 166, 35, 0.25),
+    0 4px 9px rgba(0, 24, 88, 0.14),
+    -3px -3px 9px rgba(255, 255, 255, 0.7),
+    inset 2px 2px 4px rgba(255, 244, 210, 0.72),
+    inset -3px -4px 7px rgba(177, 100, 5, 0.19) !important;
+  translate: 0 -2px;
+  scale: 1.012;
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+  animation: mcoeLiquidButtonSheen 1.8s ease-in-out infinite alternate;
+}
+
+.mcoe-footer .mcoe-footer-icon:hover svg,
+.mcoe-footer .mcoe-footer-icon:focus-visible svg {
+  color: #001858 !important;
+}
+
+.mcoe-footer .mcoe-footer-icon:focus-visible {
+  outline-color: rgba(245, 166, 35, 0.48);
+}
+
+.mcoe-footer .mcoe-footer-icon:active {
+  border: 0 !important;
   background:
     linear-gradient(
       145deg,

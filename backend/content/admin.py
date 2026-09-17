@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import (
     Article,
     CollaborationRequest,
+    EducationHeroSlide,
     EducationLevel,
     Event,
     Facility,
@@ -287,6 +288,37 @@ class KindergartenSlideAdmin(admin.ModelAdmin):
     )
 
     ordering = (
+        "sort_order",
+        "id",
+    )
+
+
+@admin.register(EducationHeroSlide)
+class EducationHeroSlideAdmin(admin.ModelAdmin):
+    list_display = (
+        "level",
+        "is_active",
+        "sort_order",
+        "updated_at",
+    )
+
+    list_filter = (
+        "level",
+        "is_active",
+    )
+
+    search_fields = (
+        "alt_fa",
+        "alt_en",
+    )
+
+    list_editable = (
+        "is_active",
+        "sort_order",
+    )
+
+    ordering = (
+        "level",
         "sort_order",
         "id",
     )

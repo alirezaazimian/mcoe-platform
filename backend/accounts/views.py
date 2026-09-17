@@ -17,7 +17,6 @@ from django.utils.http import (
 )
 
 from rest_framework import (
-    generics,
     permissions,
     status,
 )
@@ -31,63 +30,28 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import (
     RefreshToken,
 )
+from rest_framework_simplejwt.exceptions import (
+    InvalidToken,
+    TokenError,
+)
+from rest_framework_simplejwt.settings import (
+    api_settings as jwt_api_settings,
+)
+from rest_framework_simplejwt.views import (
+    TokenRefreshView,
+)
 
 from .serializers import (
     AvatarUploadSerializer,
     LoginSerializer,
     PasswordResetConfirmSerializer,
     PasswordResetRequestSerializer,
-    RegisterSerializer,
     UserSerializer,
 )
 from .models import UserProfile
 
 
 User = get_user_model()
-
-
-class RegisterView(generics.CreateAPIView):
-    serializer_class = RegisterSerializer
-    permission_classes = [
-        permissions.AllowAny
-    ]
-
-    def create(
-        self,
-        request,
-        *args,
-        **kwargs
-    ):
-        serializer = self.get_serializer(
-            data=request.data
-        )
-
-        serializer.is_valid(
-            raise_exception=True
-        )
-
-        user = serializer.save()
-
-        refresh = RefreshToken.for_user(
-            user
-        )
-
-        return Response(
-            {
-                "user":
-                    UserSerializer(
-                        user,
-                        context={
-                            "request": request
-                        },
-                    ).data,
-                "access":
-                    str(refresh.access_token),
-                "refresh":
-                    str(refresh),
-            },
-            status=status.HTTP_201_CREATED,
-        )
 
 
 class LoginView(APIView):
@@ -108,6 +72,17 @@ class LoginView(APIView):
             serializer
             .validated_data["user"]
         )
+
+        if not user.is_staff:
+            return Response(
+                {
+                    "detail": (
+                        "Administrator access "
+                        "is required."
+                    )
+                },
+                status=status.HTTP_403_FORBIDDEN,
+            )
 
         refresh = RefreshToken.for_user(
             user
@@ -130,9 +105,75 @@ class LoginView(APIView):
         )
 
 
+class StaffTokenRefreshView(TokenRefreshView):
+    """
+    Refresh JWTs only while the account remains active staff.
+
+    Removing staff access therefore invalidates the user's dashboard
+    session as soon as the short-lived access token expires.
+    """
+
+    def post(self, request, *args, **kwargs):
+        raw_refresh = request.data.get(
+            "refresh"
+        )
+
+        if not raw_refresh:
+            return super().post(
+                request,
+                *args,
+                **kwargs
+            )
+
+        try:
+            refresh = RefreshToken(
+                raw_refresh
+            )
+        except TokenError as exc:
+            raise InvalidToken(
+                "Invalid or expired session."
+            ) from exc
+
+        user_id = refresh.get(
+            jwt_api_settings.USER_ID_CLAIM
+        )
+
+        user_lookup = {
+            jwt_api_settings.USER_ID_FIELD:
+                user_id
+        }
+
+        staff_exists = (
+            User.objects
+            .filter(
+                **user_lookup,
+                is_active=True,
+                is_staff=True,
+            )
+            .exists()
+        )
+
+        if not staff_exists:
+            return Response(
+                {
+                    "detail": (
+                        "Administrator access "
+                        "is required."
+                    )
+                },
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        return super().post(
+            request,
+            *args,
+            **kwargs
+        )
+
+
 class CurrentUserView(APIView):
     permission_classes = [
-        permissions.IsAuthenticated
+        permissions.IsAdminUser
     ]
 
     parser_classes = [
@@ -306,6 +347,7 @@ class PasswordResetRequestView(
             .filter(
                 email__iexact=email,
                 is_active=True,
+                is_staff=True,
             )
             .first()
         )

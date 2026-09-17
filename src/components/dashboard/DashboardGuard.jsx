@@ -268,9 +268,7 @@ export default function DashboardGuard() {
     );
   }
 
-  const isAdmin =
-    user?.is_staff === true ||
-    user?.role === 'admin';
+  const isAdmin = user?.is_staff === true;
 
   if (!isAdmin) {
     return <AccessDenied />;

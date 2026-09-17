@@ -49,6 +49,21 @@ export const DASHBOARD_NAV_ITEMS = [
     icon: Images,
   },
   {
+    path: '/dashboard/elementary-first-slides',
+    key: 'elementaryFirstSlides',
+    icon: Images,
+  },
+  {
+    path: '/dashboard/elementary-second-slides',
+    key: 'elementarySecondSlides',
+    icon: Images,
+  },
+  {
+    path: '/dashboard/middle-first-slides',
+    key: 'middleFirstSlides',
+    icon: Images,
+  },
+  {
     path: '/dashboard/teachers',
     key: 'teachers',
     icon: Presentation,

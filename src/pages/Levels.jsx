@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { djangoApi } from '@/api/djangoApi';
 import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
+import { usePublicContent } from '@/hooks/useSiteContent';
 import { GraduationCap, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const IMAGES = {
@@ -14,12 +16,28 @@ const IMAGES = {
 export default function Levels() {
   const { t, isRTL } = useLanguage();
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
+  const { data: configuredLevels } = usePublicContent(
+    'education-levels',
+    djangoApi.educationLevels.list
+  );
+
+  const configuredImageBySlug = new Map(
+    (Array.isArray(configuredLevels)
+      ? configuredLevels
+      : []
+    )
+      .filter((level) => level?.slug)
+      .map((level) => [level.slug, level.image])
+  );
+
+  const imageForLevel = (id) =>
+    configuredImageBySlug.get(id) || IMAGES[id];
 
   const levels = [
-    { id: 'kindergarten', title: t('levels.kindergarten'), desc: t('levels.kindergartenDesc'), img: IMAGES.kindergarten, ages: isRTL ? '۳-۶ سال' : 'Ages 3–6' },
-    { id: 'elementary1', title: t('levels.elementary1'), desc: t('levels.elementary1Desc'), img: IMAGES.elementary1, ages: isRTL ? 'پایه ۱-۳' : 'Grades 1–3' },
-    { id: 'elementary2', title: t('levels.elementary2'), desc: t('levels.elementary2Desc'), img: IMAGES.elementary2, ages: isRTL ? 'پایه ۴-۶' : 'Grades 4–6' },
-    { id: 'middleSchool', title: t('levels.middleSchool'), desc: t('levels.middleSchoolDesc'), img: IMAGES.middleSchool, ages: isRTL ? 'پایه ۷-۹' : 'Grades 7–9' },
+    { id: 'kindergarten', title: t('levels.kindergarten'), desc: t('levels.kindergartenDesc'), img: imageForLevel('kindergarten'), ages: isRTL ? '۳-۶ سال' : 'Ages 3–6' },
+    { id: 'elementary1', title: t('levels.elementary1'), desc: t('levels.elementary1Desc'), img: imageForLevel('elementary1'), ages: isRTL ? 'پایه ۱-۳' : 'Grades 1–3' },
+    { id: 'elementary2', title: t('levels.elementary2'), desc: t('levels.elementary2Desc'), img: imageForLevel('elementary2'), ages: isRTL ? 'پایه ۴-۶' : 'Grades 4–6' },
+    { id: 'middleSchool', title: t('levels.middleSchool'), desc: t('levels.middleSchoolDesc'), img: imageForLevel('middleSchool'), ages: isRTL ? 'پایه ۷-۹' : 'Grades 7–9' },
   ];
 
   return (

@@ -99,28 +99,6 @@ export const AuthProvider = ({ children }) => {
   );
 
 
-  const register = useCallback(
-    async (
-      email,
-      password,
-      confirmPassword
-    ) => {
-      const data = await authApi.register(
-        email,
-        password,
-        confirmPassword
-      );
-
-      setUser(data.user);
-      setIsAuthenticated(true);
-      setAuthChecked(true);
-
-      return data.user;
-    },
-    []
-  );
-
-
   const logout = useCallback(
     async (shouldRedirect = true) => {
       try {
@@ -192,7 +170,6 @@ export const AuthProvider = ({ children }) => {
         isLoadingAuth,
         authChecked,
         login,
-        register,
         logout,
         navigateToLogin,
         checkUserAuth,

@@ -4,6 +4,7 @@ from .models import (
     Article,
     CollaborationRequest,
     EducationLevel,
+    EducationHeroSlide,
     Event,
     Facility,
     HeroSlide,
@@ -337,6 +338,61 @@ class KindergartenSlideSerializer(serializers.ModelSerializer):
             )
 
         return image
+
+
+class EducationHeroSlideSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(
+        write_only=True,
+        required=False,
+        allow_null=True,
+    )
+
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = EducationHeroSlide
+        fields = [
+            "id",
+            "level",
+            "image",
+            "image_url",
+            "alt_fa",
+            "alt_en",
+            "is_active",
+            "sort_order",
+        ]
+
+    def get_image_url(self, obj):
+        if obj.image:
+            try:
+                url = obj.image.url
+            except ValueError:
+                url = ""
+
+            request = self.context.get("request")
+
+            if url and request:
+                return request.build_absolute_uri(url)
+
+            return url
+
+        return obj.source_url
+
+    def validate_image(self, image):
+        if image and image.size > 10 * 1024 * 1024:
+            raise serializers.ValidationError(
+                "Image must be smaller than 10 MB."
+            )
+
+        return image
+
+    def validate(self, attrs):
+        if self.instance is None and not attrs.get("image"):
+            raise serializers.ValidationError({
+                "image": "An image is required."
+            })
+
+        return attrs
 
 
 class CollaborationRequestSerializer(serializers.ModelSerializer):

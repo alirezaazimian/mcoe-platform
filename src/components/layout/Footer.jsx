@@ -92,7 +92,7 @@ export default function Footer() {
           <div className="lg:col-span-3 text-start">
             <h4 className="font-semibold text-white text-sm mb-5">{t('footer.contactUs')}</h4>
             <ul className="space-y-3 text-sm text-primary-foreground/70">
-              <li className="flex items-start justify-start gap-3">
+              <li className="mcoe-footer-icon-trigger flex items-start justify-start gap-3">
                 <span className="mcoe-theme-toggle mcoe-footer-icon mcoe-footer-icon-static" aria-hidden="true">
                   <span>
                     <MapPin className="w-4 h-4" />
@@ -100,7 +100,7 @@ export default function Footer() {
                 </span>
                 <span className="pt-2">{t('footer.address')}</span>
               </li>
-              <li className="flex items-center justify-start gap-3">
+              <li className="mcoe-footer-icon-trigger flex items-center justify-start gap-3">
                 <span className="mcoe-theme-toggle mcoe-footer-icon mcoe-footer-icon-static" aria-hidden="true">
                   <span>
                     <Mail className="w-4 h-4" />
@@ -108,7 +108,7 @@ export default function Footer() {
                 </span>
                 <a href="mailto:school@mcoe.ir" className="hover:text-white transition-colors">school@mcoe.ir</a>
               </li>
-              <li className="flex items-start justify-start gap-3">
+              <li className="mcoe-footer-icon-trigger flex items-start justify-start gap-3">
                 <span className="mcoe-theme-toggle mcoe-footer-icon mcoe-footer-icon-static" aria-hidden="true">
                   <span>
                     <Phone className="w-4 h-4" />
@@ -164,7 +164,7 @@ export default function Footer() {
 
         {/* Google Map */}
         <div className="mt-12">
-          <h4 className="font-semibold text-white text-sm mb-4 flex items-center justify-center sm:justify-start gap-3">
+          <h4 className="mcoe-footer-icon-trigger font-semibold text-white text-sm mb-4 flex items-center justify-center sm:justify-start gap-3">
             <span className="mcoe-theme-toggle mcoe-footer-icon mcoe-footer-icon-static" aria-hidden="true">
               <span>
                 <MapPin className="w-4 h-4" />
@@ -191,7 +191,7 @@ export default function Footer() {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             data-mcoe-liquid="off"
-            className="mcoe-footer-back flex items-center gap-2 text-xs text-primary-foreground/60 hover:text-white transition-colors"
+            className="mcoe-footer-back flex items-center gap-2 text-xs text-primary-foreground/60"
           >
             <span className="mcoe-theme-toggle mcoe-footer-icon" aria-hidden="true">
               <span>

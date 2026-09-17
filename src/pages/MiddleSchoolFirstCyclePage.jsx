@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 
 import Reveal from '@/components/ui/Reveal';
+import LevelHeroSlider from '@/components/education/LevelHeroSlider';
 import { useLanguage } from '@/lib/LanguageContext';
 import '@/styles/level-actions.css';
 
@@ -162,6 +163,7 @@ export default function MiddleSchoolFirstCyclePage() {
         <div
           aria-hidden="true"
           className="
+            mcoe-level-science-axis
             absolute
             -top-8
             end-[3%]
@@ -201,6 +203,7 @@ export default function MiddleSchoolFirstCyclePage() {
 
           <motion.span
             className="
+              mcoe-level-science-axis-dot
               absolute
               top-1/2
               -translate-y-1/2
@@ -482,24 +485,22 @@ export default function MiddleSchoolFirstCyclePage() {
                     relative
                     overflow-hidden
                     rounded-[1.5rem]
+                    aspect-[16/9.5]
+                    lg:aspect-[16/10]
                   "
                   style={{
                     boxShadow: SHADOWS.image,
                   }}
                 >
 
-                  <img
-                    src={HERO_IMAGE}
-                    alt={content.title}
-                    className="
-                      w-full
-                      aspect-[16/9.5]
-                      lg:aspect-[16/10]
-                      object-cover
-                      transition-transform
-                      duration-1000
-                      hover:scale-[1.025]
-                    "
+                  <LevelHeroSlider
+                    level="middle-first"
+                    fallbackImage={HERO_IMAGE}
+                    fallbackAlt={content.title}
+                    isRTL={isRTL}
+                    className="absolute inset-0"
+                    imageClassName="object-cover transition-transform duration-1000 hover:scale-[1.025]"
+                    controlsPosition="top-end"
                   />
 
 
@@ -580,6 +581,7 @@ export default function MiddleSchoolFirstCyclePage() {
                 {/* H2O floating label */}
                 <motion.div
                   className="
+                    mcoe-level-liquid-orange
                     absolute
                     -bottom-7
                     start-[8%]
@@ -1307,133 +1309,6 @@ export default function MiddleSchoolFirstCyclePage() {
         </div>
       </section>
 
-
-      {/* =====================================================
-          REGISTRATION
-      ===================================================== */}
-      <section className="py-24 lg:py-32">
-
-        <div className="container-institutional">
-
-          <div
-            className="
-              border-t
-              pt-14
-              grid
-              lg:grid-cols-[1fr_auto]
-              gap-12
-              items-center
-            "
-            style={{
-              borderColor: COLORS.border,
-            }}
-          >
-
-            <Reveal>
-
-              <div>
-
-                <span
-                  className="
-                    text-sm
-                    font-black
-                  "
-                  style={{
-                    color: COLORS.sunlight,
-                  }}
-                >
-                  05
-                </span>
-
-
-                <h2
-                  className="
-                    mt-5
-                    text-3xl
-                    sm:text-4xl
-                    lg:text-5xl
-                    font-black
-                  "
-                  style={{
-                    color: COLORS.navy,
-                  }}
-                >
-                  {content.registration}
-                </h2>
-
-
-                <p
-                  className="
-                    mt-5
-                    max-w-xl
-                    text-lg
-                    leading-8
-                  "
-                  style={{
-                    color: COLORS.muted,
-                  }}
-                >
-                  {content.registrationText}
-                </p>
-
-              </div>
-
-            </Reveal>
-
-
-            <Reveal delay={0.08}>
-
-              <div className="mcoe-level-actions mcoe-level-actions--stacked min-w-[300px]">
-
-                <a
-                  href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
-                  className="mcoe-liquid-button mcoe-level-action mcoe-level-action--primary"
-                >
-                  {content.registration}
-                </a>
-
-
-                <div
-                  className="
-                    mt-6
-                    text-sm
-                  "
-                >
-
-                  <span
-                    style={{
-                      color: COLORS.muted,
-                    }}
-                  >
-                    {content.counseling}
-                  </span>
-
-
-                  <a
-                    href="mailto:school@mcoe.ir"
-                    className="
-                      block
-                      mt-2
-                      font-black
-                      hover:underline
-                    "
-                    style={{
-                      color: COLORS.blue,
-                    }}
-                  >
-                    school@mcoe.ir
-                  </a>
-
-                </div>
-
-              </div>
-
-            </Reveal>
-
-          </div>
-
-        </div>
-      </section>
 
     </main>
   );

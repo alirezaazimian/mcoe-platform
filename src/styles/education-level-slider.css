@@ -1,0 +1,201 @@
+.mcoe-level-hero-slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.mcoe-level-hero-slide-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mcoe-level-slider-controls {
+  position: absolute;
+  z-index: 20;
+  inset-inline-end: 1rem;
+  inset-block-end: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.38rem;
+  border: 0;
+  border-radius: 999px;
+  background: #001858;
+  box-shadow:
+    0 9px 20px rgba(0, 7, 32, 0.24),
+    inset 4px 4px 9px rgba(0, 7, 32, 0.55),
+    inset -4px -4px 9px rgba(0, 38, 153, 0.55);
+}
+
+.mcoe-level-slider-controls--top-end {
+  inset-block-start: 1rem;
+  inset-block-end: auto;
+}
+
+.mcoe-level-slider-arrow {
+  display: grid;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: #002699;
+  color: #fbf6ee;
+  box-shadow:
+    3px 4px 9px rgba(0, 7, 32, 0.34),
+    inset 2px 2px 4px rgba(88, 127, 237, 0.36),
+    inset -3px -3px 6px rgba(0, 7, 58, 0.4);
+  transition:
+    transform 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.mcoe-level-slider-arrow svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 2.8;
+}
+
+.mcoe-level-slider-arrow:hover,
+.mcoe-level-slider-arrow:focus-visible {
+  background: #f5a623;
+  color: #001858;
+  box-shadow:
+    0 7px 15px rgba(245, 166, 35, 0.28),
+    inset 2px 2px 5px rgba(255, 244, 210, 0.72),
+    inset -3px -4px 7px rgba(177, 100, 5, 0.25);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.mcoe-level-slider-dots {
+  display: flex;
+  min-width: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.mcoe-level-slider-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(251, 246, 238, 0.42);
+  box-shadow:
+    inset 1px 1px 2px rgba(0, 7, 32, 0.42),
+    inset -1px -1px 2px rgba(251, 246, 238, 0.22);
+  transition:
+    width 240ms ease,
+    background-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.mcoe-level-slider-dot[data-active='true'] {
+  width: 1.15rem;
+  background: #f5a623;
+  box-shadow:
+    0 4px 9px rgba(245, 166, 35, 0.28),
+    inset 1px 1px 3px rgba(255, 244, 210, 0.68),
+    inset -2px -2px 4px rgba(177, 100, 5, 0.24);
+}
+
+.mcoe-level-slider-dot:focus-visible {
+  outline: 2px solid #fbf6ee;
+  outline-offset: 2px;
+}
+
+/* Shared raised orange liquid material for the requested education accents. */
+.mcoe-level-liquid-orange {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border: 0 !important;
+  background: #f5a623 !important;
+  color: #001858 !important;
+  box-shadow:
+    0 12px 24px rgba(245, 166, 35, 0.25),
+    0 4px 9px rgba(0, 24, 88, 0.14),
+    -3px -3px 9px rgba(251, 246, 238, 0.72),
+    inset 2px 2px 5px rgba(255, 244, 210, 0.78),
+    inset -3px -4px 7px rgba(177, 100, 5, 0.22) !important;
+}
+
+.mcoe-level-liquid-orange::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      circle at 24% 18%,
+      rgba(255, 249, 229, 0.8),
+      rgba(255, 249, 229, 0.22) 18%,
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 197, 91, 0.18),
+      transparent 55%,
+      rgba(177, 100, 5, 0.14)
+    );
+  content: '';
+  pointer-events: none;
+}
+
+.mcoe-level-liquid-orange > * {
+  position: relative;
+  z-index: 1;
+}
+
+.mcoe-level-science-axis {
+  height: 0.42rem !important;
+  border-radius: 999px;
+  background: #f5a623 !important;
+  box-shadow:
+    inset 2px 2px 4px rgba(177, 100, 5, 0.3),
+    inset -2px -2px 4px rgba(255, 244, 210, 0.7),
+    0 6px 15px rgba(245, 166, 35, 0.2);
+}
+
+.mcoe-level-science-axis-dot {
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  border: 0;
+  background: #f5a623 !important;
+  box-shadow:
+    0 8px 17px rgba(245, 166, 35, 0.3),
+    0 3px 7px rgba(0, 24, 88, 0.17),
+    inset 3px 3px 5px rgba(255, 244, 210, 0.8),
+    inset -3px -4px 7px rgba(177, 100, 5, 0.25) !important;
+}
+
+@media (max-width: 640px) {
+  .mcoe-level-slider-controls {
+    inset-inline-end: 0.7rem;
+    inset-block-end: 0.7rem;
+    padding: 0.3rem;
+  }
+
+  .mcoe-level-slider-controls--top-end {
+    inset-block-start: 0.7rem;
+    inset-block-end: auto;
+  }
+
+  .mcoe-level-slider-arrow {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcoe-level-slider-arrow,
+  .mcoe-level-slider-dot {
+    transition: none;
+  }
+}

@@ -96,7 +96,7 @@ export default function Header({
   return (
     <>
       {/* Top utility bar */}
-      <div className="hidden xl:block bg-primary text-primary-foreground/85 text-xs border-b border-primary-foreground/20 shadow-[0_8px_22px_rgba(0,24,88,0.18),inset_0_-1px_0_rgba(255,255,255,0.12)]">
+      <div className="hidden xl:block bg-primary text-primary-foreground/85 text-xs shadow-[0_8px_22px_rgba(0,24,88,0.18)]">
         <div className="container-institutional flex items-center justify-between h-9">
           <div className="flex items-center gap-5">
             <a href="mailto:school@mcoe.ir" className="hover:text-primary-foreground transition-colors">school@mcoe.ir</a>
@@ -115,7 +115,7 @@ export default function Header({
       {/* Main header */}
       <header
         className={cn(
-          'mcoe-main-header sticky top-0 z-50 border-b border-white/10 bg-primary text-[#FBF6EE] transition-all duration-500',
+          'mcoe-main-header sticky top-0 z-50 bg-primary text-[#FBF6EE] transition-all duration-500',
           scrolled
             ? 'shadow-[0_12px_30px_rgba(0,24,88,0.24)]'
             : 'shadow-[0_5px_18px_rgba(0,24,88,0.14)]'

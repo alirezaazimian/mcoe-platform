@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/AppButton';
+import LevelHeroSlider from '@/components/education/LevelHeroSlider';
 import { useLanguage } from '@/lib/LanguageContext';
 import '@/styles/level-actions.css';
 
@@ -54,7 +54,7 @@ const SHADOWS = {
 
 
 export default function ElementaryFirstCyclePage() {
-  const { isRTL, t } = useLanguage();
+  const { isRTL } = useLanguage();
 
   const BackArrow =
     isRTL ? ArrowRight : ArrowLeft;
@@ -373,6 +373,7 @@ export default function ElementaryFirstCyclePage() {
                     w-16
                     h-28
                     rounded-b-2xl
+                    mcoe-level-liquid-orange
                   "
                   style={{
                     background: COLORS.sunlight,
@@ -410,16 +411,13 @@ export default function ElementaryFirstCyclePage() {
                   {/* left visual page */}
                   <div className="relative min-h-[520px]">
 
-                    <img
-                      src={HERO_IMAGE}
-                      alt={content.title}
-                      className="
-                        absolute
-                        inset-0
-                        w-full
-                        h-full
-                        object-cover
-                      "
+                    <LevelHeroSlider
+                      level="elementary-first"
+                      fallbackImage={HERO_IMAGE}
+                      fallbackAlt={content.title}
+                      isRTL={isRTL}
+                      className="absolute inset-0"
+                      imageClassName="object-cover transition-transform duration-700 hover:scale-[1.025]"
                     />
 
                     <div
@@ -1030,172 +1028,6 @@ export default function ElementaryFirstCyclePage() {
         </div>
       </section>
 
-
-      {/* =========================================
-          REGISTRATION
-      ========================================= */}
-      <section className="relative py-24 lg:py-32">
-
-        <div className="container-institutional">
-
-          <div
-            className="
-              grid
-              lg:grid-cols-[1fr_400px]
-              gap-10
-              lg:gap-16
-              items-center
-            "
-          >
-
-            <Reveal>
-              <div>
-
-                <span
-                  className="
-                    text-sm
-                    font-black
-                  "
-                  style={{
-                    color: COLORS.sunlight,
-                  }}
-                >
-                  05
-                </span>
-
-
-                <h2
-                  className="
-                    mt-4
-                    text-3xl
-                    sm:text-4xl
-                    lg:text-5xl
-                    font-black
-                  "
-                  style={{
-                    color: COLORS.navy,
-                  }}
-                >
-                  {content.registration}
-                </h2>
-
-
-                <p
-                  className="
-                    mt-6
-                    max-w-xl
-                    text-lg
-                    leading-8
-                  "
-                  style={{
-                    color: COLORS.muted,
-                  }}
-                >
-                  {content.registrationText}
-                </p>
-
-              </div>
-            </Reveal>
-
-
-            <Reveal delay={0.08}>
-              <div
-                className="
-                  relative
-                  rounded-[2rem]
-                  border
-                  p-7
-                "
-                style={{
-                  background: COLORS.paper,
-                  borderColor: COLORS.line,
-                  boxShadow: SHADOWS.paper,
-                }}
-              >
-
-                {/* notebook-top strip */}
-                <div
-                  aria-hidden="true"
-                  className="
-                    absolute
-                    top-0
-                    start-8
-                    end-8
-                    h-2
-                    rounded-b-full
-                  "
-                  style={{
-                    background: COLORS.sunlight,
-                  }}
-                />
-
-
-                <div className="mcoe-level-actions mcoe-level-actions--stacked">
-                  <Button
-                    href="https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister"
-                    className="mcoe-level-action mcoe-level-action--primary"
-                  >
-                    {t('hero.register')}
-                  </Button>
-
-
-                  <Button
-                    href="https://survey.porsline.ir/s/qP6AU8hR"
-                    variant="outline"
-                    className="mcoe-level-action mcoe-level-action--secondary"
-                    icon={false}
-                  >
-                    {t('hero.collaborate')}
-                  </Button>
-                </div>
-
-
-                <div
-                  className="
-                    mt-6
-                    pt-5
-                    border-t
-                  "
-                  style={{
-                    borderColor: COLORS.line,
-                  }}
-                >
-
-                  <p
-                    className="
-                      text-xs
-                      mb-2
-                    "
-                    style={{
-                      color: COLORS.muted,
-                    }}
-                  >
-                    {content.counseling}
-                  </p>
-
-
-                  <a
-                    href="mailto:school@mcoe.ir"
-                    className="
-                      text-sm
-                      font-black
-                      hover:underline
-                    "
-                    style={{
-                      color: COLORS.blue,
-                    }}
-                  >
-                    school@mcoe.ir
-                  </a>
-
-                </div>
-
-              </div>
-            </Reveal>
-
-          </div>
-        </div>
-      </section>
 
     </main>
   );

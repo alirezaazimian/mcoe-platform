@@ -797,6 +797,21 @@ const normalizeKindergartenSlide =
   );
 
 
+const normalizeEducationHeroSlide =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'level',
+        'alt_fa',
+        'alt_en',
+      ],
+      numbers: ['sort_order'],
+      booleans: ['is_active'],
+    }
+  );
+
+
 const workingGroupMembersApi =
   makeCrudApi(
     'working-group-members',
@@ -862,6 +877,17 @@ const kindergartenSlidesApi =
       fileKey: 'image',
       normalize:
         normalizeKindergartenSlide,
+    }
+  );
+
+
+const educationHeroSlidesApi =
+  makeCrudApi(
+    'education-hero-slides',
+    {
+      fileKey: 'image',
+      normalize:
+        normalizeEducationHeroSlide,
     }
   );
 
@@ -956,6 +982,22 @@ export const djangoApi = {
 
   kindergartenSlides:
     kindergartenSlidesApi,
+
+  educationHeroSlides: {
+    ...educationHeroSlidesApi,
+
+    listByLevel(level) {
+      return educationHeroSlidesApi.list(
+        `level=${encodeURIComponent(level)}`
+      );
+    },
+
+    adminListByLevel(level) {
+      return educationHeroSlidesApi.adminList(
+        `level=${encodeURIComponent(level)}`
+      );
+    },
+  },
 
   news: {
     list() {

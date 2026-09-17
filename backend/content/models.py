@@ -1073,6 +1073,84 @@ class KindergartenSlide(models.Model):
         return self.title_fa or f"Kindergarten Slide #{self.id or 'new'}"
 
 
+class EducationHeroSlide(models.Model):
+    class Level(models.TextChoices):
+        ELEMENTARY_FIRST = (
+            "elementary-first",
+            "دبستان دوره اول",
+        )
+        ELEMENTARY_SECOND = (
+            "elementary-second",
+            "دبستان دوره دوم",
+        )
+        MIDDLE_FIRST = (
+            "middle-first",
+            "متوسطه دوره اول",
+        )
+
+    level = models.CharField(
+        max_length=32,
+        choices=Level.choices,
+        db_index=True,
+        verbose_name="مقطع تحصیلی",
+    )
+
+    image = models.ImageField(
+        upload_to="education-hero-slides/%Y/%m/",
+        blank=True,
+        null=True,
+        verbose_name="تصویر اسلاید",
+    )
+
+    source_url = models.CharField(
+        max_length=500,
+        blank=True,
+        editable=False,
+        verbose_name="نشانی تصویر اولیه",
+    )
+
+    alt_fa = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="متن جایگزین فارسی",
+    )
+
+    alt_en = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="متن جایگزین انگلیسی",
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="فعال",
+    )
+
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name="ترتیب نمایش",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["level", "sort_order", "id"]
+        verbose_name = "اسلاید هیرو مقطع تحصیلی"
+        verbose_name_plural = "اسلایدهای هیرو مقاطع تحصیلی"
+
+    def __str__(self):
+        return (
+            f"{self.get_level_display()} "
+            f"— Slide #{self.id or 'new'}"
+        )
+
+
 class CollaborationRequest(models.Model):
     class Status(models.TextChoices):
         NEW = "new", "جدید"
