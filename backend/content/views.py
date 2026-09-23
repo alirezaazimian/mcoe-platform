@@ -15,9 +15,11 @@ from .models import (
     HeroSlide,
     KindergartenSlide,
     News,
+    PageHero,
     Partner,
     SiteImage,
     SiteSection,
+    StudentAssociation,
     WorkingGroup,
     WorkingGroupMember,
 )
@@ -34,9 +36,11 @@ from .serializers import (
     HeroSlideSerializer,
     KindergartenSlideSerializer,
     NewsSerializer,
+    PageHeroSerializer,
     PartnerSerializer,
     SiteImageSerializer,
     SiteSectionSerializer,
+    StudentAssociationSerializer,
     WorkingGroupMemberSerializer,
     WorkingGroupSerializer,
 )
@@ -387,6 +391,39 @@ class EducationHeroSlideViewSet(
             queryset = queryset.filter(level=level)
 
         return queryset.order_by(
+            "sort_order",
+            "id",
+        )
+
+
+class PageHeroViewSet(viewsets.ModelViewSet):
+    queryset = PageHero.objects.all()
+    serializer_class = PageHeroSerializer
+    lookup_field = "page"
+    permission_classes = [
+        PublicReadAdminWritePermission
+    ]
+    parser_classes = CONTENT_PARSERS
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        page = self.request.query_params.get("page")
+
+        if page:
+            queryset = queryset.filter(page=page)
+
+        return queryset
+
+
+class StudentAssociationViewSet(
+    ActiveContentViewSet
+):
+    queryset = StudentAssociation.objects.all()
+    serializer_class = StudentAssociationSerializer
+    lookup_field = "slug"
+
+    def get_queryset(self):
+        return super().get_queryset().order_by(
             "sort_order",
             "id",
         )

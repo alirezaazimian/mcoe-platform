@@ -10,9 +10,11 @@ from .views import (
     HeroSlideViewSet,
     KindergartenSlideViewSet,
     NewsViewSet,
+    PageHeroViewSet,
     PartnerViewSet,
     SiteImageViewSet,
     SiteSectionViewSet,
+    StudentAssociationViewSet,
     WorkingGroupMemberViewSet,
     WorkingGroupViewSet,
 )
@@ -98,6 +100,18 @@ router.register(
     "education-hero-slides",
     EducationHeroSlideViewSet,
     basename="education-hero-slide",
+)
+
+router.register(
+    "page-heroes",
+    PageHeroViewSet,
+    basename="page-hero",
+)
+
+router.register(
+    "student-associations",
+    StudentAssociationViewSet,
+    basename="student-association",
 )
 
 from django.urls import path

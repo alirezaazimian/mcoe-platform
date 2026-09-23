@@ -127,13 +127,23 @@ export default function WorkingGroups() {
               const plainDescription = cleanMarkdown(description);
               const Icon = ICON_MAP[group.icon] || Users;
               const accent = CARD_ACCENTS[index % CARD_ACCENTS.length];
+              /**
+               * @type {import('react').CSSProperties & {
+               *   '--wg-accent': string,
+               *   '--wg-accent-soft': string
+               * }}
+               */
+              const accentStyle = {
+                '--wg-accent': accent.color,
+                '--wg-accent-soft': accent.soft,
+              };
 
               return (
                 <Reveal key={group.id} delay={(index % 6) * 0.045} className="h-full">
                   <Link
                     to={`/working-groups/${group.slug}`}
                     className="wg-card group"
-                    style={{ '--wg-accent': accent.color, '--wg-accent-soft': accent.soft }}
+                    style={accentStyle}
                     aria-label={`${t('common.readMore')}: ${name}`}
                   >
                     <div className="wg-card-media">

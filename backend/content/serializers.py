@@ -10,9 +10,11 @@ from .models import (
     HeroSlide,
     KindergartenSlide,
     News,
+    PageHero,
     Partner,
     SiteImage,
     SiteSection,
+    StudentAssociation,
     WorkingGroup,
     WorkingGroupMember,
 )
@@ -393,6 +395,75 @@ class EducationHeroSlideSerializer(serializers.ModelSerializer):
             })
 
         return attrs
+
+
+class PageHeroSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(
+        write_only=True,
+        required=False,
+        allow_null=True,
+    )
+
+    image_url = serializers.ImageField(
+        source="image",
+        read_only=True,
+    )
+
+    class Meta:
+        model = PageHero
+        fields = [
+            "id",
+            "page",
+            "image",
+            "image_url",
+            "alt_fa",
+            "alt_en",
+        ]
+
+    def validate_image(self, image):
+        if image and image.size > 10 * 1024 * 1024:
+            raise serializers.ValidationError(
+                "Image must be smaller than 10 MB."
+            )
+
+        return image
+
+
+class StudentAssociationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentAssociation
+        fields = [
+            "id",
+            "slug",
+            "name_fa",
+            "name_en",
+            "description_fa",
+            "description_en",
+            "icon",
+            "accent_color",
+            "is_active",
+            "sort_order",
+        ]
+
+    def validate_accent_color(self, value):
+        value = value.strip()
+
+        if (
+            len(value) != 7
+            or not value.startswith("#")
+        ):
+            raise serializers.ValidationError(
+                "Use a six-digit hexadecimal color, for example #2E7D32."
+            )
+
+        try:
+            int(value[1:], 16)
+        except ValueError as error:
+            raise serializers.ValidationError(
+                "Use a six-digit hexadecimal color, for example #2E7D32."
+            ) from error
+
+        return value.upper()
 
 
 class CollaborationRequestSerializer(serializers.ModelSerializer):

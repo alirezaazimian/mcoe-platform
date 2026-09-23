@@ -10,9 +10,11 @@ from .models import (
     HeroSlide,
     KindergartenSlide,
     News,
+    PageHero,
     Partner,
     SiteImage,
     SiteSection,
+    StudentAssociation,
     WorkingGroup,
     WorkingGroupMember,
 )
@@ -319,6 +321,60 @@ class EducationHeroSlideAdmin(admin.ModelAdmin):
 
     ordering = (
         "level",
+        "sort_order",
+        "id",
+    )
+
+
+@admin.register(PageHero)
+class PageHeroAdmin(admin.ModelAdmin):
+    list_display = (
+        "page",
+        "updated_at",
+    )
+
+    list_filter = (
+        "page",
+    )
+
+    search_fields = (
+        "alt_fa",
+        "alt_en",
+    )
+
+
+@admin.register(StudentAssociation)
+class StudentAssociationAdmin(admin.ModelAdmin):
+    list_display = (
+        "name_fa",
+        "slug",
+        "is_active",
+        "sort_order",
+        "updated_at",
+    )
+
+    list_filter = (
+        "is_active",
+    )
+
+    search_fields = (
+        "name_fa",
+        "name_en",
+        "slug",
+        "description_fa",
+        "description_en",
+    )
+
+    list_editable = (
+        "is_active",
+        "sort_order",
+    )
+
+    prepopulated_fields = {
+        "slug": ("name_en",),
+    }
+
+    ordering = (
         "sort_order",
         "id",
     )

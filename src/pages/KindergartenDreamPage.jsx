@@ -163,6 +163,9 @@ const floatAnimAlt = {
 export default function KindergartenDreamPage() {
   const { isRTL, t } = useLanguage();
 
+  const [pageHero, setPageHero] =
+    useState(null);
+
   const BackArrow =
     isRTL ? ArrowRight : ArrowLeft;
 
@@ -360,6 +363,25 @@ export default function KindergartenDreamPage() {
   useEffect(() => {
     let cancelled = false;
 
+    djangoApi.pageHeroes
+      .get('kindergarten')
+      .then((record) => {
+        if (!cancelled) {
+          setPageHero(record);
+        }
+      })
+      .catch(() => {
+        // Keep the bundled hero image available during API outages.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
     djangoApi.kindergartenSlides
       .list()
       .then((response) => {
@@ -415,6 +437,17 @@ export default function KindergartenDreamPage() {
   const prevSlide = () => {
     setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
+
+  const heroImage =
+    pageHero?.image_url ||
+    HERO_IMAGE;
+
+  const heroAlt =
+    localizedSlideValue(
+      pageHero || {},
+      'alt',
+      isRTL
+    ) || content.eyebrow;
 
 
   const scrollToStory = () => {
@@ -746,8 +779,8 @@ export default function KindergartenDreamPage() {
                   "
                 >
                     <img
-                      src={HERO_IMAGE}
-                      alt={content.eyebrow}
+                      src={heroImage}
+                      alt={heroAlt}
                       className="
                         w-full
                         h-full

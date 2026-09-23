@@ -1151,6 +1151,127 @@ class EducationHeroSlide(models.Model):
         )
 
 
+class PageHero(models.Model):
+    class Page(models.TextChoices):
+        KINDERGARTEN = (
+            "kindergarten",
+            "کودکستان",
+        )
+        ABOUT = (
+            "about",
+            "درباره ما",
+        )
+
+    page = models.CharField(
+        max_length=32,
+        choices=Page.choices,
+        unique=True,
+        verbose_name="صفحه",
+    )
+
+    image = models.ImageField(
+        upload_to="page-heroes/%Y/%m/",
+        blank=True,
+        null=True,
+        verbose_name="تصویر هیرو",
+    )
+
+    alt_fa = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="متن جایگزین فارسی",
+    )
+
+    alt_en = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="متن جایگزین انگلیسی",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["page"]
+        verbose_name = "تصویر هیروی صفحه"
+        verbose_name_plural = "تصاویر هیروی صفحات"
+
+    def __str__(self):
+        return self.get_page_display()
+
+
+class StudentAssociation(models.Model):
+    slug = models.SlugField(
+        max_length=100,
+        unique=True,
+        verbose_name="Slug",
+    )
+
+    name_fa = models.CharField(
+        max_length=200,
+        verbose_name="نام فارسی",
+    )
+
+    name_en = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name="نام انگلیسی",
+    )
+
+    description_fa = models.TextField(
+        blank=True,
+        verbose_name="توضیحات فارسی",
+    )
+
+    description_en = models.TextField(
+        blank=True,
+        verbose_name="توضیحات انگلیسی",
+    )
+
+    icon = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="نام آیکن Lucide",
+    )
+
+    accent_color = models.CharField(
+        max_length=20,
+        default="#2E7D32",
+        verbose_name="رنگ تأکیدی",
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="فعال",
+    )
+
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name="ترتیب نمایش",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "انجمن دانش‌آموزی"
+        verbose_name_plural = "انجمن‌های دانش‌آموزی"
+
+    def __str__(self):
+        return self.name_fa
+
+
 class CollaborationRequest(models.Model):
     class Status(models.TextChoices):
         NEW = "new", "جدید"

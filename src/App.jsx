@@ -65,7 +65,11 @@ import EducationLevelSlidesAdmin, {
 import HeroSlidesAdmin from '@/pages/dashboard/HeroSlidesAdmin';
 import KindergartenSlidesAdmin from '@/pages/dashboard/KindergartenSlidesAdmin';
 import NewsAdmin from '@/pages/dashboard/NewsAdmin';
+import PageHeroAdmin, {
+  PAGE_HERO_KEYS,
+} from '@/pages/dashboard/PageHeroAdmin';
 import SiteContentAdmin from '@/pages/dashboard/SiteContentAdmin';
+import StudentAssociationsAdmin from '@/pages/dashboard/StudentAssociationsAdmin';
 import WorkgroupsAdmin from '@/pages/dashboard/WorkgroupsAdmin';
 
 
@@ -145,6 +149,39 @@ function AppRoutes() {
             path="kindergarten-slides"
             element={
               <KindergartenSlidesAdmin />
+            }
+          />
+
+          <Route
+            path="kindergarten-hero"
+            element={
+              <PageHeroAdmin
+                page={
+                  PAGE_HERO_KEYS.kindergarten
+                }
+                titleKey="kindergartenHero"
+                descriptionKey="kindergartenHeroIntro"
+              />
+            }
+          />
+
+          <Route
+            path="about-hero"
+            element={
+              <PageHeroAdmin
+                page={
+                  PAGE_HERO_KEYS.about
+                }
+                titleKey="aboutHero"
+                descriptionKey="aboutHeroIntro"
+              />
+            }
+          />
+
+          <Route
+            path="student-associations"
+            element={
+              <StudentAssociationsAdmin />
             }
           />
 

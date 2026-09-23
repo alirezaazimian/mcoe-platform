@@ -24,6 +24,11 @@ export const DASHBOARD_NAV_ITEMS = [
     icon: Users,
   },
   {
+    path: '/dashboard/student-associations',
+    key: 'studentAssociations',
+    icon: Users,
+  },
+  {
     path: '/dashboard/articles',
     key: 'articles',
     icon: FileText,
@@ -46,6 +51,16 @@ export const DASHBOARD_NAV_ITEMS = [
   {
     path: '/dashboard/kindergarten-slides',
     key: 'kindergartenSlides',
+    icon: Images,
+  },
+  {
+    path: '/dashboard/kindergarten-hero',
+    key: 'kindergartenHero',
+    icon: Images,
+  },
+  {
+    path: '/dashboard/about-hero',
+    key: 'aboutHero',
     icon: Images,
   },
   {

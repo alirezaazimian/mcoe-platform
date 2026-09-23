@@ -105,6 +105,9 @@ export default function EntityManager({
   getUpdateKey,
   prepareRecordForForm = null,
   preparePayload = null,
+  allowCreate = true,
+  allowDelete = true,
+  singleRecord = false,
 }) {
   const {
     t,
@@ -820,29 +823,34 @@ export default function EntityManager({
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={openAdd}
-          className="btn-dark-neu"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            padding:
-              '10px 15px',
-            fontSize: 12,
-            fontWeight: 650,
-          }}
-        >
-          <Plus
-            style={{
-              width: 15,
-              height: 15,
-            }}
-          />
+        {allowCreate &&
+          (!singleRecord ||
+            records.length === 0) && (
+            <button
+              type="button"
+              onClick={openAdd}
+              className="btn-dark-neu"
+              style={{
+                display: 'flex',
+                alignItems:
+                  'center',
+                gap: 8,
+                padding:
+                  '10px 15px',
+                fontSize: 12,
+                fontWeight: 650,
+              }}
+            >
+              <Plus
+                style={{
+                  width: 15,
+                  height: 15,
+                }}
+              />
 
-          {t('addNew')}
-        </button>
+              {t('addNew')}
+            </button>
+          )}
       </div>
 
 
@@ -1085,34 +1093,36 @@ export default function EntityManager({
                               />
                             </button>
 
-                            <button
-                              type="button"
-                              disabled={
-                                deleteMutation.isPending
-                              }
-                              onClick={() =>
-                                remove(
-                                  record
-                                )
-                              }
-                              style={{
-                                ...iconActionBtn,
-                                color:
-                                  '#6a514d',
-                              }}
-                              title={t(
-                                'delete'
-                              )}
-                            >
-                              <Trash2
+                            {allowDelete && (
+                              <button
+                                type="button"
+                                disabled={
+                                  deleteMutation.isPending
+                                }
+                                onClick={() =>
+                                  remove(
+                                    record
+                                  )
+                                }
                                 style={{
-                                  width:
-                                    14,
-                                  height:
-                                    14,
+                                  ...iconActionBtn,
+                                  color:
+                                    '#6a514d',
                                 }}
-                              />
-                            </button>
+                                title={t(
+                                  'delete'
+                                )}
+                              >
+                                <Trash2
+                                  style={{
+                                    width:
+                                      14,
+                                    height:
+                                      14,
+                                  }}
+                                />
+                              </button>
+                            )}
                           </div>
                         </td>
                       </tr>
@@ -1219,26 +1229,31 @@ export default function EntityManager({
                       />
                     </button>
 
-                    <button
-                      type="button"
-                      onClick={() =>
-                        remove(
-                          record
-                        )
-                      }
-                      style={{
-                        ...iconActionBtn,
-                        color:
-                          '#6a514d',
-                      }}
-                    >
-                      <Trash2
+                    {allowDelete && (
+                      <button
+                        type="button"
+                        disabled={
+                          deleteMutation.isPending
+                        }
+                        onClick={() =>
+                          remove(
+                            record
+                          )
+                        }
                         style={{
-                          width: 14,
-                          height: 14,
+                          ...iconActionBtn,
+                          color:
+                            '#6a514d',
                         }}
-                      />
-                    </button>
+                      >
+                        <Trash2
+                          style={{
+                            width: 14,
+                            height: 14,
+                          }}
+                        />
+                      </button>
+                    )}
                   </div>
                 </div>
               )

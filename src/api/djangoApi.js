@@ -603,16 +603,30 @@ function makeCrudApi(
 
   return {
     list(query = '') {
+      const queryString =
+        typeof query === 'string'
+          ? query
+          : '';
+
       return request(
         `/${endpoint}/` +
-        (query ? `?${query}` : '')
+        (queryString
+          ? `?${queryString}`
+          : '')
       );
     },
 
     adminList(query = '') {
+      const queryString =
+        typeof query === 'string'
+          ? query
+          : '';
+
       return request(
         `/${endpoint}/` +
-        (query ? `?${query}` : ''),
+        (queryString
+          ? `?${queryString}`
+          : ''),
         { auth: true }
       );
     },
@@ -812,6 +826,38 @@ const normalizeEducationHeroSlide =
   );
 
 
+const normalizePageHero =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'page',
+        'alt_fa',
+        'alt_en',
+      ],
+    }
+  );
+
+
+const normalizeStudentAssociation =
+  (payload) => normalizeFields(
+    payload,
+    {
+      text: [
+        'slug',
+        'name_fa',
+        'name_en',
+        'description_fa',
+        'description_en',
+        'icon',
+        'accent_color',
+      ],
+      numbers: ['sort_order'],
+      booleans: ['is_active'],
+    }
+  );
+
+
 const workingGroupMembersApi =
   makeCrudApi(
     'working-group-members',
@@ -888,6 +934,27 @@ const educationHeroSlidesApi =
       fileKey: 'image',
       normalize:
         normalizeEducationHeroSlide,
+    }
+  );
+
+
+const pageHeroesApi = makeCrudApi(
+  'page-heroes',
+  {
+    fileKey: 'image',
+    normalize: normalizePageHero,
+    lookup: 'page',
+  }
+);
+
+
+const studentAssociationsApi =
+  makeCrudApi(
+    'student-associations',
+    {
+      normalize:
+        normalizeStudentAssociation,
+      lookup: 'slug',
     }
   );
 
@@ -998,6 +1065,19 @@ export const djangoApi = {
       );
     },
   },
+
+  pageHeroes: {
+    ...pageHeroesApi,
+
+    adminListByPage(page) {
+      return pageHeroesApi.adminList(
+        `page=${encodeURIComponent(page)}`
+      );
+    },
+  },
+
+  studentAssociations:
+    studentAssociationsApi,
 
   news: {
     list() {

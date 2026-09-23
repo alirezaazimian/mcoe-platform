@@ -53,7 +53,9 @@ export default function MemberResumeModal({
     if (!member) return undefined;
 
     const previousFocus =
-      document.activeElement;
+      /** @type {HTMLElement | null} */ (
+        document.activeElement
+      );
     const previousOverflow =
       document.body.style.overflow;
     document.body.style.overflow =
@@ -78,7 +80,7 @@ export default function MemberResumeModal({
       );
       document.body.style.overflow =
         previousOverflow;
-      previousFocus?.focus?.();
+      previousFocus?.focus();
     };
   }, [member, onClose]);
 

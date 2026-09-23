@@ -365,6 +365,16 @@ export default function HeroSlider() {
       ? 'اسلاید بعدی'
       : 'Next slide';
 
+  /**
+   * @type {import('react').CSSProperties & {
+   *   '--hero-duration': string
+   * }}
+   */
+  const heroDurationStyle = {
+    '--hero-duration':
+      `${AUTOPLAY_MS}ms`,
+  };
+
 
   return (
     <div
@@ -373,10 +383,7 @@ export default function HeroSlider() {
           ? ' is-paused'
           : ''
       }`}
-      style={{
-        '--hero-duration':
-          `${AUTOPLAY_MS}ms`,
-      }}
+      style={heroDurationStyle}
       role="region"
       aria-roledescription="carousel"
       aria-label={

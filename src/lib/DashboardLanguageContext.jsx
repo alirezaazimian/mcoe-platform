@@ -16,6 +16,10 @@ const translations = {
     en: 'Workgroups',
     fa: 'گروه‌های کاری',
   },
+  studentAssociations: {
+    en: 'Student Associations',
+    fa: 'انجمن‌های دانش‌آموزی',
+  },
   articles: {
     en: 'Articles',
     fa: 'مقالات',
@@ -35,6 +39,14 @@ const translations = {
   kindergartenSlides: {
     en: 'Kindergarten Slides',
     fa: 'اسلایدهای کودکستان',
+  },
+  kindergartenHero: {
+    en: 'Kindergarten Hero Image',
+    fa: 'تصویر هیروی کودکستان',
+  },
+  aboutHero: {
+    en: 'About Hero Image',
+    fa: 'تصویر هیروی درباره ما',
   },
   elementaryFirstSlides: {
     en: 'Elementary First-Cycle Slides',
@@ -451,6 +463,28 @@ const translations = {
       'Manage every image, title, caption, label, display order and publication status in the Childhood Dream slider.',
     fa:
       'تصویر، عنوان، توضیح، برچسب، ترتیب نمایش و وضعیت انتشار اسلایدر کودکستان رویای کودکی را مدیریت کنید.',
+  },
+  kindergartenHeroIntro: {
+    en:
+      'Replace the standalone hero photo without changing its public frame or styling.',
+    fa:
+      'تصویر هیروی مستقل کودکستان را بدون تغییر قاب و استایل سایت جایگزین کنید.',
+  },
+  aboutHeroIntro: {
+    en:
+      'Replace the About page photo without changing its public frame or styling.',
+    fa:
+      'تصویر صفحه درباره ما را بدون تغییر قاب و استایل سایت جایگزین کنید.',
+  },
+  studentAssociationsIntro: {
+    en:
+      'Add, edit, order, publish or remove the association cards shown on the public site.',
+    fa:
+      'کارت‌های انجمن در سایت را اضافه، ویرایش، مرتب، فعال یا حذف کنید.',
+  },
+  accentColor: {
+    en: 'Accent Color (hex)',
+    fa: 'رنگ تأکیدی (HEX)',
   },
   elementaryFirstSlidesIntro: {
     en:

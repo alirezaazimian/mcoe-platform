@@ -1,4 +1,9 @@
-import React from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
+
+import { djangoApi } from '@/api/djangoApi';
 import { useLanguage } from '@/lib/LanguageContext';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/AppButton';
@@ -8,6 +13,41 @@ const ABOUT_IMG = '/media/site/d641eceeb_generated_8663238f.jpg';
 
 export default function About() {
   const { t, isRTL } = useLanguage();
+
+  const [pageHero, setPageHero] =
+    useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    djangoApi.pageHeroes
+      .get('about')
+      .then((record) => {
+        if (!cancelled) {
+          setPageHero(record);
+        }
+      })
+      .catch(() => {
+        // Keep the bundled image available during API outages.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const heroImage =
+    pageHero?.image_url ||
+    ABOUT_IMG;
+
+  const heroAlt =
+    pageHero?.[
+      `alt_${isRTL ? 'fa' : 'en'}`
+    ] ||
+    pageHero?.[
+      `alt_${isRTL ? 'en' : 'fa'}`
+    ] ||
+    t('about.title');
 
   const pillars = [
     { icon: Target, title: t('about.mission'), text: t('about.missionText') },
@@ -31,7 +71,7 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
           <Reveal>
             <div className="aspect-[4/3] rounded-2xl overflow-hidden glass neumorphic-inset">
-              <img src={ABOUT_IMG} alt={t('about.title')} className="w-full h-full object-cover" />
+              <img src={heroImage} alt={heroAlt} className="w-full h-full object-cover" />
             </div>
           </Reveal>
           <div>
