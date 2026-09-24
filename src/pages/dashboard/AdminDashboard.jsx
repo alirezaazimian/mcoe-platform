@@ -103,6 +103,18 @@ export default function AdminDashboard() {
         .adminList(),
   });
 
+  const {
+    data: onlineSessions = [],
+  } = useQuery({
+    queryKey: [
+      'dashboard',
+      'online-sessions',
+    ],
+    queryFn: () =>
+      djangoApi.onlineSessions
+        .adminList(),
+  });
+
   const activeWorkgroups =
     workgroups.filter(
       (item) =>
@@ -127,6 +139,14 @@ export default function AdminDashboard() {
     classrooms.filter(
       (item) =>
         item.is_active !== false
+    ).length;
+
+  const upcomingOnlineSessions =
+    onlineSessions.filter(
+      (item) =>
+        item.status ===
+          'scheduled' ||
+        item.status === 'live'
     ).length;
 
   const recentStudents =
@@ -203,6 +223,15 @@ export default function AdminDashboard() {
       color: '#FFCBDE',
       to:
         '/dashboard/students',
+    },
+    {
+      key: 'upcomingClasses',
+      value:
+        upcomingOnlineSessions,
+      icon: Video,
+      color: '#C9B3F5',
+      to:
+        '/dashboard/online-classes',
     },
   ];
 

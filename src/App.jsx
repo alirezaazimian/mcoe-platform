@@ -66,12 +66,14 @@ import EducationLevelSlidesAdmin, {
 import HeroSlidesAdmin from '@/pages/dashboard/HeroSlidesAdmin';
 import KindergartenSlidesAdmin from '@/pages/dashboard/KindergartenSlidesAdmin';
 import NewsAdmin from '@/pages/dashboard/NewsAdmin';
+import OnlineClassesAdmin from '@/pages/dashboard/OnlineClassesAdmin';
 import PageHeroAdmin, {
   PAGE_HERO_KEYS,
 } from '@/pages/dashboard/PageHeroAdmin';
 import SiteContentAdmin from '@/pages/dashboard/SiteContentAdmin';
 import StudentAssociationsAdmin from '@/pages/dashboard/StudentAssociationsAdmin';
 import StudentsAdmin from '@/pages/dashboard/StudentsAdmin';
+import TeachersAdmin from '@/pages/dashboard/TeachersAdmin';
 import WorkgroupsAdmin from '@/pages/dashboard/WorkgroupsAdmin';
 
 
@@ -229,7 +231,7 @@ function AppRoutes() {
           <Route
             path="teachers"
             element={
-              <DashboardModulePlaceholder />
+              <TeachersAdmin />
             }
           />
 
@@ -243,7 +245,7 @@ function AppRoutes() {
           <Route
             path="online-classes"
             element={
-              <DashboardModulePlaceholder />
+              <OnlineClassesAdmin />
             }
           />
 

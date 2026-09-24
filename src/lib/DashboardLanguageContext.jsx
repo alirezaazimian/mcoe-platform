@@ -72,6 +72,22 @@ const translations = {
     en: 'Online Classes',
     fa: 'کلاس‌های آنلاین',
   },
+  subjects: {
+    en: 'Subjects',
+    fa: 'درس‌ها',
+  },
+  teachingAssignments: {
+    en: 'Teaching Assignments',
+    fa: 'تخصیص تدریس',
+  },
+  onlineSessions: {
+    en: 'Online Sessions',
+    fa: 'جلسات آنلاین',
+  },
+  sessionAttendance: {
+    en: 'Session Attendance',
+    fa: 'حضور و غیاب',
+  },
   smsPanel: {
     en: 'SMS Panel',
     fa: 'پنل پیامک',
@@ -115,8 +131,8 @@ const translations = {
     fa: 'مقالات منتشر شده',
   },
   upcomingClasses: {
-    en: 'Upcoming Classes',
-    fa: 'کلاس‌های پیش رو',
+    en: 'Upcoming Online Sessions',
+    fa: 'جلسات آنلاین پیش رو',
   },
   activeClasses: {
     en: 'Active Classes',
@@ -147,6 +163,10 @@ const translations = {
       'This module will be connected to the Django API in the next backend expansion.',
     fa:
       'این بخش در توسعه بعدی بک‌اند به API جنگو متصل می‌شود.',
+  },
+  loading: {
+    en: 'Loading…',
+    fa: 'در حال بارگذاری…',
   },
 
   addNew: {
@@ -507,6 +527,139 @@ const translations = {
       'Upload, order and publish the hero images for the middle school first-cycle page.',
     fa:
       'تصاویر هیرو صفحه متوسطه دوره اول را بارگذاری، مرتب و منتشر کنید.',
+  },
+
+  teachersIntro: {
+    en: 'Manage teacher profiles used in teaching assignments and online sessions.',
+    fa: 'پروفایل معلمانی را که در تخصیص تدریس و جلسات آنلاین استفاده می‌شوند مدیریت کنید.',
+  },
+  subjectsIntro: {
+    en: 'Define the school subjects used in class schedules.',
+    fa: 'درس‌های مورد استفاده در برنامه کلاس‌ها را تعریف و مدیریت کنید.',
+  },
+  teachingAssignmentsIntro: {
+    en: 'Connect each teacher and subject to a school class for an academic year.',
+    fa: 'هر معلم و درس را برای یک سال تحصیلی به کلاس مدرسه متصل کنید.',
+  },
+  onlineClassesIntro: {
+    en: 'Schedule sessions now; secure meeting links will activate after a video provider is connected.',
+    fa: 'جلسات را اکنون زمان‌بندی کنید؛ لینک امن ورود پس از اتصال سرویس ویدئویی فعال می‌شود.',
+  },
+  sessionAttendanceIntro: {
+    en: 'Review each session roster and update attendance manually until provider reports are connected.',
+    fa: 'فهرست هر جلسه را بررسی کنید و تا زمان اتصال گزارش سرویس، حضور را دستی ثبت کنید.',
+  },
+  providerPendingNotice: {
+    en: 'The scheduling foundation is active. No video provider is connected yet, so join links remain safely disabled.',
+    fa: 'زیرساخت زمان‌بندی فعال است؛ هنوز سرویس ویدئویی متصل نیست و لینک ورود عمداً غیرفعال می‌ماند.',
+  },
+  teacherName: {
+    en: 'Teacher',
+    fa: 'معلم',
+  },
+  personnelCode: {
+    en: 'Personnel Code',
+    fa: 'کد پرسنلی',
+  },
+  teacherBio: {
+    en: 'Teacher Biography',
+    fa: 'معرفی معلم',
+  },
+  subject: {
+    en: 'Subject',
+    fa: 'درس',
+  },
+  subjectCode: {
+    en: 'Subject Code',
+    fa: 'کد درس',
+  },
+  teachingAssignment: {
+    en: 'Class, Subject and Teacher',
+    fa: 'کلاس، درس و معلم',
+  },
+  sessionTitle: {
+    en: 'Session Title',
+    fa: 'عنوان جلسه',
+  },
+  startsAt: {
+    en: 'Start Date and Time (Tehran)',
+    fa: 'تاریخ و ساعت شروع (به وقت تهران)',
+  },
+  durationMinutes: {
+    en: 'Duration (minutes)',
+    fa: 'مدت جلسه (دقیقه)',
+  },
+  joinWindowMinutes: {
+    en: 'Early Join Window (minutes)',
+    fa: 'زمان مجاز ورود پیش از شروع (دقیقه)',
+  },
+  rosterCount: {
+    en: 'Roster',
+    fa: 'تعداد فهرست',
+  },
+  meetingProvider: {
+    en: 'Meeting Provider',
+    fa: 'سرویس برگزاری',
+  },
+  notConnected: {
+    en: 'Not connected',
+    fa: 'متصل نشده',
+  },
+  allowRecording: {
+    en: 'Allow Recording',
+    fa: 'ضبط جلسه',
+  },
+  recordingUrl: {
+    en: 'Recording URL',
+    fa: 'لینک ضبط',
+  },
+  notes: {
+    en: 'Notes',
+    fa: 'یادداشت',
+  },
+  draft: {
+    en: 'Draft',
+    fa: 'پیش‌نویس',
+  },
+  scheduled: {
+    en: 'Scheduled',
+    fa: 'برنامه‌ریزی‌شده',
+  },
+  live: {
+    en: 'Live',
+    fa: 'در حال برگزاری',
+  },
+  ended: {
+    en: 'Ended',
+    fa: 'پایان‌یافته',
+  },
+  cancelled: {
+    en: 'Cancelled',
+    fa: 'لغوشده',
+  },
+  expected: {
+    en: 'Expected',
+    fa: 'در فهرست',
+  },
+  present: {
+    en: 'Present',
+    fa: 'حاضر',
+  },
+  absent: {
+    en: 'Absent',
+    fa: 'غایب',
+  },
+  excused: {
+    en: 'Excused',
+    fa: 'غیبت موجه',
+  },
+  attendanceStatus: {
+    en: 'Attendance Status',
+    fa: 'وضعیت حضور',
+  },
+  attendedMinutes: {
+    en: 'Attendance (minutes)',
+    fa: 'مدت حضور (دقیقه)',
   },
 
   classes: {

@@ -457,6 +457,59 @@ export default function EntityManager({
     }
 
     if (
+      column.type ===
+      'datetime'
+    ) {
+      if (!value) {
+        return (
+          <span
+            style={{
+              color:
+                '#b3b3b3',
+            }}
+          >
+            —
+          </span>
+        );
+      }
+
+      const date =
+        new Date(value);
+
+      return (
+        <span
+          style={{
+            fontSize: 12,
+            color: '#3a3a3a',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {Number.isNaN(
+            date.getTime()
+          )
+            ? String(value)
+            : date.toLocaleString(
+                lang === 'fa'
+                  ? 'fa-IR'
+                  : 'en-US',
+                {
+                  dateStyle:
+                    'short',
+                  timeStyle:
+                    'short',
+                  ...(column.timeZone
+                    ? {
+                        timeZone:
+                          column.timeZone,
+                      }
+                    : {}),
+                }
+              )}
+        </span>
+      );
+    }
+
+    if (
       column.options
     ) {
       const option =

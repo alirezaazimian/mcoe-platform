@@ -985,6 +985,34 @@ const enrollmentsApi = makeCrudApi(
 );
 
 
+const teachersApi = makeCrudApi(
+  'learning/teachers'
+);
+
+
+const subjectsApi = makeCrudApi(
+  'learning/subjects'
+);
+
+
+const teachingAssignmentsApi =
+  makeCrudApi(
+    'learning/assignments'
+  );
+
+
+const onlineSessionsApi =
+  makeCrudApi(
+    'learning/sessions'
+  );
+
+
+const sessionAttendanceApi =
+  makeCrudApi(
+    'learning/attendance'
+  );
+
+
 export const djangoApi = {
   workingGroups: {
     list() {
@@ -1117,6 +1145,33 @@ export const djangoApi = {
 
   enrollments:
     enrollmentsApi,
+
+  teachers: teachersApi,
+
+  subjects: subjectsApi,
+
+  teachingAssignments:
+    teachingAssignmentsApi,
+
+  onlineSessions: {
+    ...onlineSessionsApi,
+
+    syncRoster(id) {
+      return request(
+        `/learning/sessions/` +
+        `${encodeURIComponent(id)}/` +
+        `sync-roster/`,
+        {
+          method: 'POST',
+          body: JSON.stringify({}),
+          auth: true,
+        }
+      );
+    },
+  },
+
+  sessionAttendance:
+    sessionAttendanceApi,
 
   studentImport: {
     submit({

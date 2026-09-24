@@ -85,6 +85,7 @@ INSTALLED_APPS = [
     "accounts",
     "content",
     "students",
+    "learning",
 ]
 
 
@@ -384,6 +385,16 @@ STUDENT_OTP_COOLDOWN_SECONDS = int(
 
 STUDENT_OTP_MAX_ATTEMPTS = int(
     os.getenv("STUDENT_OTP_MAX_ATTEMPTS", "5")
+)
+
+
+# ---------------------------------------------------------------------
+# Online classes
+# ---------------------------------------------------------------------
+
+ONLINE_CLASS_PROVIDER_BACKEND = os.getenv(
+    "ONLINE_CLASS_PROVIDER_BACKEND",
+    "learning.providers.disabled.DisabledOnlineClassProvider",
 )
 
 
