@@ -84,6 +84,7 @@ INSTALLED_APPS = [
 
     "accounts",
     "content",
+    "students",
 ]
 
 
@@ -312,6 +313,9 @@ REST_FRAMEWORK = {
         "admin_token_refresh": "60/hour",
         "admin_password_reset": "5/hour",
         "admin_password_reset_confirm": "10/hour",
+        "student_otp_request": "5/minute",
+        "student_otp_verify": "10/minute",
+        "student_token_refresh": "60/hour",
     },
 }
 
@@ -358,6 +362,28 @@ EMAIL_BACKEND = os.getenv(
 DEFAULT_FROM_EMAIL = os.getenv(
     "DEFAULT_FROM_EMAIL",
     "noreply@mcoe.ir",
+)
+
+
+# ---------------------------------------------------------------------
+# Student portal / SMS
+# ---------------------------------------------------------------------
+
+STUDENT_SMS_BACKEND = os.getenv(
+    "STUDENT_SMS_BACKEND",
+    "students.sms.ConsoleSmsBackend",
+)
+
+STUDENT_OTP_TTL_SECONDS = int(
+    os.getenv("STUDENT_OTP_TTL_SECONDS", "120")
+)
+
+STUDENT_OTP_COOLDOWN_SECONDS = int(
+    os.getenv("STUDENT_OTP_COOLDOWN_SECONDS", "60")
+)
+
+STUDENT_OTP_MAX_ATTEMPTS = int(
+    os.getenv("STUDENT_OTP_MAX_ATTEMPTS", "5")
 )
 
 

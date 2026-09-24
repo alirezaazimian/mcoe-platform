@@ -959,6 +959,32 @@ const studentAssociationsApi =
   );
 
 
+const academicYearsApi =
+  makeCrudApi(
+    'school/academic-years'
+  );
+
+
+const gradesApi = makeCrudApi(
+  'school/grades'
+);
+
+
+const classroomsApi = makeCrudApi(
+  'school/classrooms'
+);
+
+
+const studentsApi = makeCrudApi(
+  'school/students'
+);
+
+
+const enrollmentsApi = makeCrudApi(
+  'school/enrollments'
+);
+
+
 export const djangoApi = {
   workingGroups: {
     list() {
@@ -1078,6 +1104,55 @@ export const djangoApi = {
 
   studentAssociations:
     studentAssociationsApi,
+
+  academicYears:
+    academicYearsApi,
+
+  grades: gradesApi,
+
+  classrooms:
+    classroomsApi,
+
+  students: studentsApi,
+
+  enrollments:
+    enrollmentsApi,
+
+  studentImport: {
+    submit({
+      files,
+      academicYear,
+      commit = false,
+    }) {
+      const formData =
+        new FormData();
+
+      files.forEach((file) => {
+        formData.append(
+          'files',
+          file
+        );
+      });
+
+      formData.append(
+        'academic_year',
+        String(academicYear)
+      );
+      formData.append(
+        'commit',
+        commit ? 'true' : 'false'
+      );
+
+      return request(
+        '/school/student-import/',
+        {
+          method: 'POST',
+          body: formData,
+          auth: true,
+        }
+      );
+    },
+  },
 
   news: {
     list() {

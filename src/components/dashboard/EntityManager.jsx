@@ -470,9 +470,12 @@ export default function EntityManager({
           <span
             className="mcoe-admin-badge"
           >
-            {t(
-              option.labelKey
-            )}
+            {
+              option.label ??
+              t(
+                option.labelKey
+              )
+            }
           </span>
         );
       }
@@ -588,9 +591,12 @@ export default function EntityManager({
                     option.value
                   }
                 >
-                  {t(
-                    option.labelKey
-                  )}
+                  {
+                    option.label ??
+                    t(
+                      option.labelKey
+                    )
+                  }
                 </option>
               )
             )}

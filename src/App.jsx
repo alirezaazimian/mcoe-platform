@@ -71,6 +71,7 @@ import PageHeroAdmin, {
 } from '@/pages/dashboard/PageHeroAdmin';
 import SiteContentAdmin from '@/pages/dashboard/SiteContentAdmin';
 import StudentAssociationsAdmin from '@/pages/dashboard/StudentAssociationsAdmin';
+import StudentsAdmin from '@/pages/dashboard/StudentsAdmin';
 import WorkgroupsAdmin from '@/pages/dashboard/WorkgroupsAdmin';
 
 
@@ -235,7 +236,7 @@ function AppRoutes() {
           <Route
             path="students"
             element={
-              <DashboardModulePlaceholder />
+              <StudentsAdmin />
             }
           />
 

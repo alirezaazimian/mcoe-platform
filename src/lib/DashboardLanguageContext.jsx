@@ -103,8 +103,8 @@ const translations = {
     fa: 'گروه‌های فعال',
   },
   totalStudents: {
-    en: 'Pre-registered Students',
-    fa: 'دانش‌آموزان پیش‌ثبت‌نام',
+    en: 'Students',
+    fa: 'دانش‌آموزان',
   },
   upcomingEvents: {
     en: 'Upcoming Events',
@@ -117,6 +117,10 @@ const translations = {
   upcomingClasses: {
     en: 'Upcoming Classes',
     fa: 'کلاس‌های پیش رو',
+  },
+  activeClasses: {
+    en: 'Active Classes',
+    fa: 'کلاس‌های فعال',
   },
   recentRegistrations: {
     en: 'Recent Registrations',
@@ -503,6 +507,209 @@ const translations = {
       'Upload, order and publish the hero images for the middle school first-cycle page.',
     fa:
       'تصاویر هیرو صفحه متوسطه دوره اول را بارگذاری، مرتب و منتشر کنید.',
+  },
+
+  classes: {
+    en: 'Classes',
+    fa: 'کلاس‌ها',
+  },
+  enrollments: {
+    en: 'Enrollments',
+    fa: 'ثبت‌نام‌ها',
+  },
+  studentImport: {
+    en: 'Excel Import',
+    fa: 'واردسازی اکسل',
+  },
+  studentsIntro: {
+    en: 'Manage student profiles, contact details and portal access.',
+    fa: 'پروفایل، اطلاعات تماس و دسترسی پرتال دانش‌آموزان را مدیریت کنید.',
+  },
+  classesIntro: {
+    en: 'Create and manage classes for each grade and academic year.',
+    fa: 'کلاس‌های هر پایه و سال تحصیلی را ایجاد و مدیریت کنید.',
+  },
+  enrollmentsIntro: {
+    en: 'Assign every student to a grade and class for the selected year.',
+    fa: 'هر دانش‌آموز را در پایه و کلاس سال تحصیلی موردنظر ثبت‌نام کنید.',
+  },
+  studentImportIntro: {
+    en:
+      'Preview XLSX files first. Duplicate national codes are merged and no account is activated automatically.',
+    fa:
+      'ابتدا فایل‌های XLSX را پیش‌نمایش کنید؛ کدهای ملی تکراری ادغام می‌شوند و هیچ حسابی خودکار فعال نمی‌شود.',
+  },
+  academicYear: {
+    en: 'Academic Year',
+    fa: 'سال تحصیلی',
+  },
+  excelFiles: {
+    en: 'Excel Files',
+    fa: 'فایل‌های اکسل',
+  },
+  selectedFiles: {
+    en: 'files selected',
+    fa: 'فایل انتخاب شده',
+  },
+  chooseExcelFiles: {
+    en: 'Choose XLSX files',
+    fa: 'انتخاب فایل‌های XLSX',
+  },
+  previewImport: {
+    en: 'Preview Import',
+    fa: 'پیش‌نمایش واردسازی',
+  },
+  commitImport: {
+    en: 'Confirm and Import',
+    fa: 'تأیید و ثبت اطلاعات',
+  },
+  importReady: {
+    en: 'The files are ready to import.',
+    fa: 'فایل‌ها برای ثبت آماده‌اند.',
+  },
+  importCompleted: {
+    en: 'Student import completed.',
+    fa: 'واردسازی دانش‌آموزان کامل شد.',
+  },
+  importHasErrors: {
+    en: 'Resolve the reported errors before importing.',
+    fa: 'پیش از ثبت، خطاهای گزارش‌شده را برطرف کنید.',
+  },
+  sourceRows: {
+    en: 'Source Rows',
+    fa: 'ردیف‌های ورودی',
+  },
+  uniqueStudents: {
+    en: 'Unique Students',
+    fa: 'دانش‌آموز یکتا',
+  },
+  duplicateRows: {
+    en: 'Duplicate Rows',
+    fa: 'ردیف تکراری',
+  },
+  missingClass: {
+    en: 'Missing Class',
+    fa: 'فاقد کلاس',
+  },
+  missingSms: {
+    en: 'Missing SMS Number',
+    fa: 'فاقد شماره پیامک',
+  },
+  errors: {
+    en: 'Errors',
+    fa: 'خطاها',
+  },
+  warnings: {
+    en: 'Warnings',
+    fa: 'هشدارها',
+  },
+  row: {
+    en: 'row',
+    fa: 'ردیف',
+  },
+  createdStudents: {
+    en: 'Students created',
+    fa: 'دانش‌آموز ایجادشده',
+  },
+  updatedStudents: {
+    en: 'Students updated',
+    fa: 'دانش‌آموز به‌روزشده',
+  },
+  createdEnrollments: {
+    en: 'Enrollments created',
+    fa: 'ثبت‌نام ایجادشده',
+  },
+  studentName: {
+    en: 'Student',
+    fa: 'دانش‌آموز',
+  },
+  nationalCode: {
+    en: 'National Code',
+    fa: 'کد ملی',
+  },
+  grade: {
+    en: 'Grade',
+    fa: 'پایه',
+  },
+  classroom: {
+    en: 'Class',
+    fa: 'کلاس',
+  },
+  smsMobile: {
+    en: 'SMS Mobile',
+    fa: 'شماره پیامک',
+  },
+  portalAccess: {
+    en: 'Portal Access',
+    fa: 'دسترسی پرتال',
+  },
+  birthDateJalali: {
+    en: 'Birth Date (Jalali)',
+    fa: 'تاریخ تولد شمسی',
+  },
+  firstName: {
+    en: 'First Name',
+    fa: 'نام',
+  },
+  lastName: {
+    en: 'Last Name',
+    fa: 'نام خانوادگی',
+  },
+  fatherName: {
+    en: 'Father Name',
+    fa: 'نام پدر',
+  },
+  gender: {
+    en: 'Gender',
+    fa: 'جنسیت',
+  },
+  female: {
+    en: 'Female',
+    fa: 'دختر',
+  },
+  male: {
+    en: 'Male',
+    fa: 'پسر',
+  },
+  unspecified: {
+    en: 'Not specified',
+    fa: 'ثبت نشده',
+  },
+  primaryMobile: {
+    en: 'Primary Mobile',
+    fa: 'موبایل اصلی',
+  },
+  homePhone: {
+    en: 'Home Phone',
+    fa: 'تلفن منزل',
+  },
+  postalCode: {
+    en: 'Postal Code',
+    fa: 'کد پستی',
+  },
+  address: {
+    en: 'Address',
+    fa: 'نشانی',
+  },
+  studentCount: {
+    en: 'Students',
+    fa: 'تعداد دانش‌آموز',
+  },
+  unassigned: {
+    en: 'Unassigned',
+    fa: 'بدون کلاس',
+  },
+  inactive: {
+    en: 'Inactive',
+    fa: 'غیرفعال',
+  },
+  transferred: {
+    en: 'Transferred',
+    fa: 'انتقالی',
+  },
+  graduated: {
+    en: 'Graduated',
+    fa: 'فارغ‌التحصیل',
   },
   kindergartenSlideTitle: {
     en: 'Slide Title',

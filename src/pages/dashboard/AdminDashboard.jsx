@@ -6,6 +6,7 @@ import {
   GraduationCap,
   MessageSquare,
   Newspaper,
+  School,
   Users,
   Video,
 } from 'lucide-react';
@@ -78,8 +79,29 @@ export default function AdminDashboard() {
       djangoApi.news.list(),
   });
 
-  const students = [];
-  const classes = [];
+  const {
+    data: students = [],
+  } = useQuery({
+    queryKey: [
+      'dashboard',
+      'students',
+    ],
+    queryFn: () =>
+      djangoApi.students
+        .adminList(),
+  });
+
+  const {
+    data: classrooms = [],
+  } = useQuery({
+    queryKey: [
+      'dashboard',
+      'classrooms',
+    ],
+    queryFn: () =>
+      djangoApi.classrooms
+        .adminList(),
+  });
 
   const activeWorkgroups =
     workgroups.filter(
@@ -101,15 +123,25 @@ export default function AdminDashboard() {
         false
     ).length;
 
-  const upcomingClasses =
-    classes.filter(
+  const activeClasses =
+    classrooms.filter(
       (item) =>
-        item.status ===
-        'scheduled'
+        item.is_active !== false
     ).length;
 
   const recentStudents =
-    students.slice(0, 5);
+    students
+      .slice()
+      .sort(
+        (a, b) =>
+          new Date(
+            b.created_at
+          ).getTime() -
+          new Date(
+            a.created_at
+          ).getTime()
+      )
+      .slice(0, 5);
 
   const nextEvent =
     upcomingEvents
@@ -164,13 +196,13 @@ export default function AdminDashboard() {
         '/dashboard/articles',
     },
     {
-      key: 'upcomingClasses',
+      key: 'activeClasses',
       value:
-        upcomingClasses,
-      icon: Video,
+        activeClasses,
+      icon: School,
       color: '#FFCBDE',
       to:
-        '/dashboard/online-classes',
+        '/dashboard/students',
     },
   ];
 
@@ -442,20 +474,85 @@ export default function AdminDashboard() {
               >
                 {t('noRecords')}
               </p>
-
-              <p
-                style={{
-                  margin:
-                    '6px 0 0',
-                  fontSize: 10,
-                  color:
-                    '#aaa39d',
-                }}
-              >
-                {t('modulePending')}
-              </p>
             </div>
-          ) : null}
+          ) : (
+            <div
+              style={{
+                display: 'grid',
+                gap: 8,
+              }}
+            >
+              {recentStudents.map(
+                (student) => (
+                  <div
+                    key={student.id}
+                    className="neu-inset-sm"
+                    style={{
+                      display: 'flex',
+                      alignItems:
+                        'center',
+                      justifyContent:
+                        'space-between',
+                      gap: 12,
+                      padding:
+                        '11px 13px',
+                    }}
+                  >
+                    <div
+                      style={{
+                        minWidth: 0,
+                      }}
+                    >
+                      <strong
+                        style={{
+                          display:
+                            'block',
+                          color:
+                            '#3a3a3a',
+                          fontSize: 13,
+                          fontWeight: 600,
+                          overflow:
+                            'hidden',
+                          textOverflow:
+                            'ellipsis',
+                          whiteSpace:
+                            'nowrap',
+                        }}
+                      >
+                        {student.full_name}
+                      </strong>
+
+                      <span
+                        style={{
+                          display:
+                            'block',
+                          color:
+                            '#8a837d',
+                          fontSize: 10,
+                          marginTop: 3,
+                        }}
+                      >
+                        {student.current_grade ||
+                          t('unassigned')}
+                      </span>
+                    </div>
+
+                    <span
+                      style={{
+                        flex: '0 0 auto',
+                        color:
+                          '#6e6e6e',
+                        fontSize: 10,
+                      }}
+                    >
+                      {student.current_classroom ||
+                        t('unassigned')}
+                    </span>
+                  </div>
+                )
+              )}
+            </div>
+          )}
         </div>
 
         <div
