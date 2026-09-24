@@ -42,29 +42,29 @@
 }
 
 .mcoe-admin-shell.is-dark {
-  --bg-canvas: #0b1020;
-  --bg-surface: #11182a;
-  --bg-surface-alt: #171f33;
-  --text-main: #f4f0e9;
-  --text-body: #e6e1d9;
-  --text-muted: #b7bdca;
-  --text-faint: #818a9d;
-  --line-soft: #283148;
-  --primary: #aab6ff;
-  --primary-contrast: #0b1020;
+  --bg-canvas: #001858;
+  --bg-surface: #001858;
+  --bg-surface-alt: #001b63;
+  --text-main: #fffaf2;
+  --text-body: #f2eee7;
+  --text-muted: #c8cede;
+  --text-faint: #929dbb;
+  --line-soft: #193575;
+  --primary: #d8e0ff;
+  --primary-contrast: #001858;
   --danger: #ff9c94;
   --shadow-out:
-    -8px -8px 16px rgba(31, 42, 67, 0.42),
-    8px 8px 18px rgba(0, 0, 0, 0.5);
+    -8px -8px 16px rgba(31, 64, 137, 0.42),
+    8px 8px 18px rgba(0, 7, 43, 0.62);
   --shadow-out-sm:
-    -5px -5px 10px rgba(31, 42, 67, 0.38),
-    5px 5px 12px rgba(0, 0, 0, 0.46);
+    -5px -5px 10px rgba(31, 64, 137, 0.36),
+    5px 5px 12px rgba(0, 7, 43, 0.58);
   --shadow-in:
-    inset -4px -4px 8px rgba(31, 42, 67, 0.32),
-    inset 4px 4px 8px rgba(0, 0, 0, 0.48);
+    inset -4px -4px 8px rgba(31, 64, 137, 0.32),
+    inset 4px 4px 8px rgba(0, 7, 43, 0.6);
   --shadow-in-sm:
-    inset -3px -3px 6px rgba(31, 42, 67, 0.3),
-    inset 3px 3px 6px rgba(0, 0, 0, 0.44);
+    inset -3px -3px 6px rgba(31, 64, 137, 0.3),
+    inset 3px 3px 6px rgba(0, 7, 43, 0.56);
 }
 
 .mcoe-admin-shell[dir='ltr'] {
@@ -1013,22 +1013,22 @@
 
 .mcoe-admin-shell.is-dark .mcoe-admin-user-avatar,
 .mcoe-admin-shell.is-dark .mcoe-admin-profile-menu-avatar {
-  background: #303957;
-  color: #f4f0e9;
+  background: #001b63;
+  color: #fffaf2;
 }
 
 .mcoe-admin-shell.is-dark .mcoe-admin-clock-face line {
-  stroke: #aab1c0;
+  stroke: #aab4cf;
 }
 
 .mcoe-admin-shell.is-dark .mcoe-admin-clock-face .mcoe-admin-clock-hand-hour {
-  stroke: #aab6ff;
+  stroke: #d8e0ff;
 }
 
 .mcoe-admin-shell.is-dark .mcoe-admin-clock-face .mcoe-admin-clock-hand-minute,
 .mcoe-admin-shell.is-dark .mcoe-admin-clock-face .mcoe-admin-clock-hub {
-  stroke: #f4f0e9;
-  fill: #f4f0e9;
+  stroke: #fffaf2;
+  fill: #fffaf2;
 }
 
 .mcoe-admin-shell.is-dark .mcoe-admin-modal-backdrop {
