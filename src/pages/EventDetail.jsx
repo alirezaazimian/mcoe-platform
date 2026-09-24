@@ -6,6 +6,11 @@ import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/AppButton';
 import ReactMarkdown from 'react-markdown';
 import remarkAutoLinkLiterals from '@/lib/remarkAutoLinkLiterals';
+import { PageSeo } from '@/components/seo/SeoManager';
+import {
+  SITE_URL,
+  createDynamicSeo,
+} from '@/seo/siteMetadata';
 import { Calendar, MapPin, Users, Clock, ArrowRight, ArrowLeft, ExternalLink } from 'lucide-react';
 
 export default function EventDetail() {
@@ -86,11 +91,57 @@ export default function EventDetail() {
   const heroImage = item.hero_image;
   const mainImage = item.banner_image;
 
+  const seoEntry = createDynamicSeo({
+    path: `/events/${item.id}`,
+    title,
+    description: desc,
+    image:
+      heroImage ||
+      mainImage ||
+      item.thumbnail_image,
+    sectionTitle: 'رویدادها',
+    sectionPath: '/events',
+    type: 'article',
+    publishedTime:
+      item.created_at || item.created_date,
+    modifiedTime:
+      item.updated_at ||
+      item.modified_at ||
+      item.created_at ||
+      item.created_date,
+  });
+
+  seoEntry.schema = {
+    '@type': 'Event',
+    name: title,
+    description: seoEntry.description,
+    url: `${SITE_URL}${seoEntry.path}`,
+    image: [seoEntry.image],
+    ...(item.event_date
+      ? { startDate: item.event_date }
+      : {}),
+    ...(venue
+      ? {
+          location: {
+            '@type': 'Place',
+            name: venue,
+            address:
+              'سعادت‌آباد، تهران، ایران',
+          },
+        }
+      : {}),
+    organizer: {
+      '@id': `${SITE_URL}/#school`,
+    },
+  };
+
   const fmtDate = (d) => d ? d.toLocaleDateString(language === 'fa' ? 'fa-IR' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
   const fmtTime = (d) => d ? d.toLocaleTimeString(language === 'fa' ? 'fa-IR' : 'en-US', { hour: '2-digit', minute: '2-digit' }) : '';
 
   return (
     <>
+      <PageSeo entry={seoEntry} />
+
       {/* Banner */}
       {heroImage && (
         <div className="relative h-[40vh] min-h-[280px] overflow-hidden">

@@ -18,6 +18,7 @@ from .views import (
     WorkingGroupMemberViewSet,
     WorkingGroupViewSet,
 )
+from .seo import PublicSitemapView
 
 
 router = DefaultRouter()
@@ -117,6 +118,11 @@ router.register(
 from django.urls import path
 
 urlpatterns = [
+    path(
+        "sitemap.xml",
+        PublicSitemapView.as_view(),
+        name="public-sitemap",
+    ),
     path(
         "collaboration-requests/",
         CollaborationRequestCreateView.as_view(),

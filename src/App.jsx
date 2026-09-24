@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/toaster';
 import Layout from '@/components/layout/Layout';
 import ScrollToTop from '@/components/ScrollToTop';
+import SeoManager from '@/components/seo/SeoManager';
 
 import DashboardGuard from '@/components/dashboard/DashboardGuard';
 import SchoolLayout from '@/components/dashboard/SchoolLayout';
@@ -409,6 +410,7 @@ function App() {
         >
           <Router>
             <ScrollToTop />
+            <SeoManager />
             <AppRoutes />
           </Router>
 

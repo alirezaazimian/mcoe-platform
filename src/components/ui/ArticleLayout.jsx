@@ -4,6 +4,11 @@ import { useLanguage } from '@/lib/LanguageContext';
 import ReactMarkdown from 'react-markdown';
 import Reveal from '@/components/ui/Reveal';
 import remarkAutoLinkLiterals from '@/lib/remarkAutoLinkLiterals';
+import { PageSeo } from '@/components/seo/SeoManager';
+import {
+  SITE_URL,
+  createDynamicSeo,
+} from '@/seo/siteMetadata';
 import { Calendar, Clock, User, Tag, ArrowRight, ArrowLeft, Share2, BookOpen } from 'lucide-react';
 
 export default function ArticleLayout({ item, type, related = [], loading }) {
@@ -50,6 +55,53 @@ export default function ArticleLayout({ item, type, related = [], loading }) {
   const listPath = type === 'news' ? '/news' : '/articles';
   const detailPath = type === 'news' ? '/news' : '/articles';
 
+  const seoEntry = createDynamicSeo({
+    path: `${detailPath}/${item.id}`,
+    title,
+    description: summary || body,
+    image:
+      heroImage ||
+      mainImage ||
+      item.thumbnail_image,
+    sectionTitle:
+      type === 'news' ? 'اخبار' : 'مقالات',
+    sectionPath: listPath,
+    type: 'article',
+    publishedTime: date,
+    modifiedTime:
+      item.updated_at ||
+      item.modified_at ||
+      date,
+  });
+
+  seoEntry.schema = {
+    '@type':
+      type === 'news'
+        ? 'NewsArticle'
+        : 'Article',
+    headline: title,
+    description: seoEntry.description,
+    mainEntityOfPage: `${SITE_URL}${seoEntry.path}`,
+    image: [seoEntry.image],
+    ...(date
+      ? { datePublished: date }
+      : {}),
+    ...(seoEntry.modifiedTime
+      ? { dateModified: seoEntry.modifiedTime }
+      : {}),
+    author: item.author_name
+      ? {
+          '@type': 'Person',
+          name: item.author_name,
+        }
+      : {
+          '@id': `${SITE_URL}/#school`,
+        },
+    publisher: {
+      '@id': `${SITE_URL}/#school`,
+    },
+  };
+
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
   const handleShare = () => {
     if (navigator.share) {
@@ -61,6 +113,8 @@ export default function ArticleLayout({ item, type, related = [], loading }) {
 
   return (
     <>
+      <PageSeo entry={seoEntry} />
+
       {/* Hero banner */}
       {heroImage && (
         <div className="relative h-[40vh] min-h-[300px] overflow-hidden">

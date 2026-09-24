@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-seo.mjs",
+    "seo:generate": "node scripts/generate-seo.mjs",
+    "seo:verify": "node scripts/verify-seo.mjs",
     "lint": "eslint src --quiet",
     "lint:fix": "eslint src --fix",
     "typecheck": "tsc -p ./jsconfig.json",

@@ -43,7 +43,7 @@ export const translations = {
     },
     about: {
       title: 'درباره موسسه',
-      body: 'موسسه آموزشی معصومه عظیمیان با هدف ارائه آموزشی کیفی و انسان‌گرا، فضایی برای رشد همه‌جانه دانش‌آموزان فراهم آورده است. ما با الگوبرداری از رویکردهای نوین آموزشی، تجربه‌ای غنی و متنوع را برای کودکان و نوجوانان رقم می‌زنیم.',
+      body: 'مجتمع آموزشی دخترانه معصومه عظیمیان در سعادت‌آباد با هدف ارائه آموزشی کیفی و انسان‌گرا، فضایی برای رشد همه‌جانبه دانش‌آموزان فراهم آورده است. ما با الگوبرداری از رویکردهای نوین آموزشی، تجربه‌ای غنی و متنوع را برای کودکان و نوجوانان رقم می‌زنیم.',
       mission: 'رسالت ما',
       missionText: 'فراهم کردن محیطی امن، سالم و غنی برای رشد همه جانبه کودکان و نوجوانان.',
       vision: 'چشم‌انداز',
@@ -196,7 +196,7 @@ export const translations = {
     },
     about: {
       title: 'About the Institute',
-      body: 'The Masoumeh Azimian Educational Institute aims to provide quality, humanistic education, creating an environment for the holistic growth of students. Inspired by modern educational approaches, we craft a rich and diverse experience for children and adolescents.',
+      body: 'The Masoumeh Azimian Girls’ Educational Complex in Saadat Abad provides quality, humanistic education and an environment for students’ holistic growth. Inspired by modern educational approaches, we craft a rich and diverse experience for children and adolescents.',
       mission: 'Our Mission',
       missionText: 'Providing a healthy environment for growth, with healthy and diverse relationships, focusing on how to learn.',
       vision: 'Our Vision',

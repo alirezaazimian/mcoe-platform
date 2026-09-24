@@ -25,7 +25,9 @@ import { djangoApi } from '@/api/djangoApi';
 import TeamSection from '@/components/workinggroups/TeamSection';
 import Reveal from '@/components/ui/Reveal';
 import { Image } from '@/components/ui/image';
+import { PageSeo } from '@/components/seo/SeoManager';
 import { useLanguage } from '@/lib/LanguageContext';
+import { createDynamicSeo } from '@/seo/siteMetadata';
 import '@/styles/working-groups-clay.css';
 
 
@@ -176,6 +178,17 @@ export default function WorkingGroupDetail() {
   const Icon =
     ICON_MAP[group.icon] ||
     Users;
+  const seoEntry = createDynamicSeo({
+    path: `/working-groups/${group.slug}`,
+    title: name,
+    description: summary || description,
+    image: group.image,
+    sectionTitle: 'کارگروه‌ها',
+    sectionPath: '/working-groups',
+    type: 'website',
+    modifiedTime:
+      group.updated_at || group.modified_at,
+  });
 
   const contentLinks = [
     description && {
@@ -198,6 +211,8 @@ export default function WorkingGroupDetail() {
 
   return (
     <main className="wg-clay-page">
+      <PageSeo entry={seoEntry} />
+
       <section className="container-institutional py-7 lg:py-12">
         <Reveal>
           <Link to="/working-groups" className="mcoe-liquid-button wg-back-link mb-5">

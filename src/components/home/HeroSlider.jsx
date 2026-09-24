@@ -352,8 +352,8 @@ export default function HeroSlider() {
 
   const description =
     isRTL
-      ? 'محیطی پویا، امن و الهام‌بخش برای پرورش دانش، خلاقیت و اعتمادبه‌نفس نسل آینده.'
-      : 'A thoughtful, inspiring and safe environment where knowledge, creativity and confidence can grow together.';
+      ? 'مجتمع آموزشی دخترانه در سعادت‌آباد؛ محیطی پویا، امن و الهام‌بخش برای پرورش دانش، خلاقیت و اعتمادبه‌نفس نسل آینده.'
+      : 'A girls’ educational complex in Saadat Abad; a thoughtful, inspiring and safe environment where knowledge, creativity and confidence can grow together.';
 
   const previousLabel =
     isRTL
