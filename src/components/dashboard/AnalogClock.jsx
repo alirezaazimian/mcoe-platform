@@ -18,10 +18,8 @@ export default function AnalogClock() {
   }, []);
 
   const min = now.getMinutes();
-  const sec = now.getSeconds();
   const hr = now.getHours() % 12;
 
-  const secAngle = sec * 6;
   const minAngle = min * 6;
   const hrAngle =
     hr * 30 + min * 0.5;
@@ -125,7 +123,11 @@ export default function AnalogClock() {
                   r2 *
                     Math.sin(angle)
                 }
-                stroke="#FBF6EE"
+                stroke={
+                  isMajor
+                    ? '#7a7470'
+                    : '#c4beb7'
+                }
                 strokeWidth={
                   isMajor
                     ? 1.6
@@ -142,7 +144,7 @@ export default function AnalogClock() {
               hrAngle,
               24,
               3,
-              '#FBF6EE'
+              '#080C66'
             )}
           />
 
@@ -152,17 +154,7 @@ export default function AnalogClock() {
               minAngle,
               33,
               2,
-              '#FBF6EE'
-            )}
-          />
-
-          <line
-            className="mcoe-admin-clock-hand mcoe-admin-clock-hand-second"
-            {...hand(
-              secAngle,
-              37,
-              1.1,
-              '#FBF6EE'
+              '#2e2a26'
             )}
           />
 
@@ -171,7 +163,7 @@ export default function AnalogClock() {
             cx={cx}
             cy={cy}
             r="2.4"
-            fill="#FBF6EE"
+            fill="#2e2a26"
           />
         </svg>
       </div>

@@ -125,6 +125,10 @@ function DashboardShell() {
                 title={pageTitle}
               >
                 <ChevronLeft aria-hidden="true" />
+
+                <span className="mcoe-admin-mobile-back-label">
+                  {pageTitle}
+                </span>
               </button>
             )}
           </div>

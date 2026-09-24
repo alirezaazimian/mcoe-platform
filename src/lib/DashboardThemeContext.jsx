@@ -28,9 +28,9 @@ function getInitialTheme() {
       STORAGE_KEY
     );
 
-  return saved === 'light'
-    ? 'light'
-    : 'dark';
+  return saved === 'dark'
+    ? 'dark'
+    : 'light';
 }
 
 
