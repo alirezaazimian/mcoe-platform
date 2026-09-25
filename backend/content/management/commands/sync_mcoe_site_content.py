@@ -151,14 +151,6 @@ SECTIONS = {
         'body_fa': '',
         'body_en': '',
     },
-    'home-gallery': {
-        'title_fa': 'نگاهی به مجتمع',
-        'title_en': 'A Glimpse of Our Campus',
-        'subtitle_fa': 'گالری',
-        'subtitle_en': 'Gallery',
-        'body_fa': '',
-        'body_en': '',
-    },
     'educational-space': {
         'title_fa': 'فضای آموزشی',
         'title_en': 'Educational Space',
@@ -269,28 +261,6 @@ class Command(BaseCommand):
 
     def sync_school_images(self, force=False):
         saved = 0
-
-        for index, item in enumerate(SCHOOL_IMAGES, 1):
-            gallery_image, _ = SiteImage.objects.get_or_create(
-                section=SiteImage.Section.HOME_GALLERY,
-                sort_order=index,
-                defaults={
-                    'alt_fa': item['alt_fa'],
-                    'alt_en': item['alt_en'],
-                    'is_active': True,
-                },
-            )
-            gallery_image.alt_fa = item['alt_fa']
-            gallery_image.alt_en = item['alt_en']
-            gallery_image.is_active = True
-            gallery_image.save(update_fields=['alt_fa', 'alt_en', 'is_active', 'updated_at'])
-            saved += int(self.store_remote_image(
-                gallery_image,
-                'image',
-                item,
-                f'home-gallery-{index:02d}',
-                force,
-            ))
 
         for index, item in enumerate(SCHOOL_IMAGES[:5], 1):
             space_image, _ = SiteImage.objects.get_or_create(

@@ -10,10 +10,10 @@ import {
 } from '@/lib/DashboardLanguageContext';
 
 
-function withAdminList(api) {
+function withAdminList(api, query = '') {
   return {
     ...api,
-    list: () => api.adminList(),
+    list: () => api.adminList(query),
   };
 }
 
@@ -25,7 +25,8 @@ export default function SiteContentAdmin() {
   const apis = useMemo(
     () => ({
       images: withAdminList(
-        djangoApi.siteImages
+        djangoApi.siteImages,
+        'section=educational_space'
       ),
       levels: withAdminList(
         djangoApi.educationLevels
@@ -36,9 +37,20 @@ export default function SiteContentAdmin() {
       facilities: withAdminList(
         djangoApi.facilities
       ),
-      sections: withAdminList(
-        djangoApi.siteSections
-      ),
+      sections: {
+        ...djangoApi.siteSections,
+        list: async () => {
+          const records =
+            await djangoApi.siteSections
+              .adminList();
+
+          return records.filter(
+            (record) =>
+              record.key !==
+              'home-gallery'
+          );
+        },
+      },
     }),
     []
   );
@@ -80,20 +92,6 @@ export default function SiteContentAdmin() {
               type: 'image',
             },
             {
-              key: 'section',
-              labelKey: 'siteSection',
-              options: [
-                {
-                  value: 'home_gallery',
-                  labelKey: 'homeGallery',
-                },
-                {
-                  value: 'educational_space',
-                  labelKey: 'educationalSpace',
-                },
-              ],
-            },
-            {
               key: 'alt',
               labelKey: 'alternativeText',
               faKey: 'alt_fa',
@@ -110,22 +108,6 @@ export default function SiteContentAdmin() {
             },
           ]}
           formFields={[
-            {
-              key: 'section',
-              labelKey: 'siteSection',
-              type: 'select',
-              required: true,
-              options: [
-                {
-                  value: 'home_gallery',
-                  labelKey: 'homeGallery',
-                },
-                {
-                  value: 'educational_space',
-                  labelKey: 'educationalSpace',
-                },
-              ],
-            },
             {
               key: 'sort_order',
               labelKey: 'sortOrder',
@@ -166,14 +148,13 @@ export default function SiteContentAdmin() {
             },
           ]}
           searchFields={[
-            'section',
             'alt_fa',
             'alt_en',
             'caption_fa',
             'caption_en',
           ]}
           defaultValues={{
-            section: 'home_gallery',
+            section: 'educational_space',
             image: '',
             alt_fa: '',
             alt_en: '',

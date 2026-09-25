@@ -349,14 +349,14 @@ const translations = {
       'عکس، سمت و اطلاعات کامل رزومه‌ای نمایش‌داده‌شده در پروفایل اعضا را مدیریت کنید.',
   },
   siteImages: {
-    en: 'Gallery & Space Images',
-    fa: 'تصاویر گالری و فضای آموزشی',
+    en: 'Educational Space Images',
+    fa: 'تصاویر فضای آموزشی',
   },
   siteImagesIntro: {
     en:
-      'Upload and order authentic school photos for the home gallery and educational space page.',
+      'Upload and order authentic school photos for the educational space page.',
     fa:
-      'عکس‌های واقعی مدرسه را برای گالری صفحه اصلی و صفحه فضای آموزشی بارگذاری و مرتب کنید.',
+      'عکس‌های واقعی مدرسه را برای صفحه فضای آموزشی بارگذاری و مرتب کنید.',
   },
   educationLevels: {
     en: 'Education Levels',
@@ -397,10 +397,6 @@ const translations = {
   sectionKey: {
     en: 'Section Key',
     fa: 'کلید بخش',
-  },
-  homeGallery: {
-    en: 'Home Gallery',
-    fa: 'گالری صفحه اصلی',
   },
   educationalSpace: {
     en: 'Educational Space',
