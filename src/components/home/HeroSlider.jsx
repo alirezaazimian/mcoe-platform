@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 
 import { djangoApi } from '@/api/djangoApi';
+import LmsAppDownload from '@/components/home/LmsAppDownload';
 import Button from '@/components/ui/AppButton';
 import { useLanguage } from '@/lib/LanguageContext';
 
@@ -27,28 +28,6 @@ const AUTOPLAY_MS = 7200;
 
 const REGISTRATION_URL =
   'https://lms.mcoe.ir/new/frontend/web/registerstudent/fullregister';
-
-const STATS = [
-  {
-    valueFa: '۳۰+',
-    valueEn: '30+',
-    labelFa: 'سال تجربه',
-    labelEn: 'Years of experience',
-  },
-  {
-    valueFa: '۸۰۰۰+',
-    valueEn: '8000+',
-    labelFa: 'دانش‌آموز',
-    labelEn: 'Students',
-  },
-  {
-    valueFa: '۴',
-    valueEn: '4',
-    labelFa: 'مقطع آموزشی',
-    labelEn: 'Education levels',
-  },
-];
-
 
 function localized(
   slide,
@@ -548,26 +527,7 @@ export default function HeroSlider() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="mcoe-fade-stats">
-            {STATS.map((stat) => (
-              <div
-                key={stat.labelEn}
-                className="mcoe-fade-stat"
-              >
-                <strong>
-                  {isRTL
-                    ? stat.valueFa
-                    : stat.valueEn}
-                </strong>
-
-                <span>
-                  {isRTL
-                    ? stat.labelFa
-                    : stat.labelEn}
-                </span>
-              </div>
-            ))}
-          </div>
+          <LmsAppDownload />
 
           {count > 1 && (
             <div className="mcoe-fade-nav-row">

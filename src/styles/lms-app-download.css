@@ -1,347 +1,124 @@
-.lms-download-section {
-  position: relative;
-  overflow: clip;
-}
-
-.lms-download-panel {
-  position: relative;
-  isolation: isolate;
+.mcoe-hero-app-links {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(250px, 0.65fr);
-  align-items: center;
-  min-height: 440px;
-  overflow: visible;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: #001858;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  margin-block-start: clamp(1.45rem, 3vh, 2rem);
 }
 
-.lms-download-panel::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: none;
-  content: '';
-  pointer-events: none;
-}
-
-.lms-download-copy {
-  position: relative;
-  z-index: 2;
-  max-width: 710px;
-  padding: clamp(2rem, 5vw, 4.5rem);
-}
-
-.lms-download-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2rem;
-  margin-block-end: 1.2rem;
-  padding: 0.35rem 0.9rem;
-  border: 1px solid rgba(245, 166, 35, 0.24);
-  border-radius: 999px;
-  background: rgba(245, 166, 35, 0.1);
-  box-shadow:
-    inset 3px 3px 7px rgba(80, 65, 45, 0.09),
-    inset -3px -3px 7px rgba(255, 255, 255, 0.86);
-  color: #002699;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-
-.lms-download-copy h2 {
-  max-width: 600px;
-  margin: 0;
-  color: #001858;
-  font-size: clamp(2rem, 4.4vw, 3.85rem);
-  font-weight: 850;
-  line-height: 1.24;
-  text-wrap: balance;
-}
-
-.lms-download-copy > p {
-  max-width: 650px;
-  margin: 1.15rem 0 0;
-  color: rgba(0, 24, 88, 0.62);
-  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
-  line-height: 2;
-}
-
-.lms-download-actions {
+.mcoe-hero-app-link {
   display: flex;
-  flex-wrap: wrap;
+  min-width: 0;
+  min-height: 4.65rem;
   align-items: center;
-  gap: 0.8rem;
-  margin-block-start: 2rem;
-}
-
-.lms-download-action {
-  display: inline-flex;
-  min-width: 220px;
-  min-height: 67px;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 0.68rem 1rem;
-  border: 1px solid transparent;
-  border-radius: 1.1rem;
+  gap: 0.65rem;
+  padding: 0.68rem 0.72rem;
+  border: 1px solid rgba(0, 24, 88, 0.06);
+  border-radius: 1.15rem;
+  appearance: none;
+  background: rgba(251, 246, 238, 0.26);
+  box-shadow:
+    inset 4px 4px 10px rgba(0, 24, 88, 0.07),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.74);
+  color: #001858;
+  cursor: pointer;
   font: inherit;
   text-align: start;
   text-decoration: none;
   transition:
-    transform 220ms ease,
     border-color 220ms ease,
-    box-shadow 220ms ease;
+    box-shadow 220ms ease,
+    translate 220ms ease;
 }
 
-.lms-download-action:hover,
-.lms-download-action:focus-visible {
-  transform: translateY(-2px);
+.mcoe-hero-app-link:hover,
+.mcoe-hero-app-link:focus-visible {
+  border-color: rgba(245, 166, 35, 0.4);
+  box-shadow:
+    inset 5px 5px 12px rgba(0, 24, 88, 0.085),
+    inset -5px -5px 12px rgba(255, 255, 255, 0.78),
+    0 7px 16px rgba(0, 24, 88, 0.06);
+  translate: 0 -2px;
+  outline: none;
 }
 
-.lms-download-action:focus-visible,
-.lms-download-web-link:focus-visible,
-.lms-ios-guide-open:focus-visible,
-.lms-ios-guide-close:focus-visible {
-  outline: 3px solid rgba(255, 197, 91, 0.52);
+.mcoe-hero-app-link:focus-visible {
+  outline: 2px solid rgba(245, 166, 35, 0.75);
   outline-offset: 3px;
 }
 
-.lms-download-action--android {
-  background:
-    radial-gradient(
-      circle at 22% 14%,
-      rgba(255, 252, 236, 0.88),
-      transparent 30%
-    ),
-    linear-gradient(145deg, #ffc55b, #f5a623 58%, #df8910);
-  box-shadow:
-    0 13px 26px rgba(245, 166, 35, 0.2),
-    inset 3px 3px 6px rgba(255, 244, 210, 0.58),
-    inset -4px -5px 9px rgba(159, 86, 4, 0.25);
-  color: #001858;
+.mcoe-hero-app-link--android {
+  border-color: rgba(245, 166, 35, 0.2);
 }
 
-.lms-download-action--android:hover,
-.lms-download-action--android:focus-visible {
-  box-shadow:
-    0 17px 32px rgba(245, 166, 35, 0.28),
-    inset 3px 3px 6px rgba(255, 244, 210, 0.68),
-    inset -4px -5px 9px rgba(159, 86, 4, 0.28);
-}
-
-.lms-download-action--ios {
-  border-color: rgba(0, 24, 88, 0.07);
-  background: #f7f0e6;
-  box-shadow:
-    inset 6px 6px 14px rgba(80, 65, 45, 0.1),
-    inset -5px -5px 13px rgba(255, 255, 255, 0.9);
-  color: #001858;
-  cursor: pointer;
-}
-
-.lms-download-action--ios:hover,
-.lms-download-action--ios:focus-visible {
-  border-color: rgba(245, 166, 35, 0.3);
-  box-shadow:
-    inset 8px 8px 17px rgba(80, 65, 45, 0.12),
-    inset -6px -6px 15px rgba(255, 255, 255, 0.84);
-}
-
-.lms-download-action--ios .lms-download-action-icon {
-  background: #fbf6ee;
-  box-shadow:
-    inset 3px 3px 7px rgba(80, 65, 45, 0.09),
-    inset -3px -3px 7px rgba(255, 255, 255, 0.9);
-  color: #002699;
-}
-
-.lms-download-action-icon {
+.mcoe-hero-app-link__icon {
   display: grid;
-  width: 2.75rem;
-  height: 2.75rem;
-  flex: 0 0 2.75rem;
+  width: 2.65rem;
+  height: 2.65rem;
+  flex: 0 0 2.65rem;
   place-items: center;
-  border-radius: 0.9rem;
-  background: rgba(255, 255, 255, 0.12);
+  border-radius: 0.86rem;
+}
+
+.mcoe-hero-app-link__icon svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke-width: 1.9;
+}
+
+.mcoe-hero-app-link--android .mcoe-hero-app-link__icon {
+  background: #001858;
   box-shadow:
-    inset 3px 3px 7px rgba(0, 7, 32, 0.18),
-    inset -3px -3px 7px rgba(255, 255, 255, 0.16);
-}
-
-.lms-download-action-icon svg {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.lms-download-action strong,
-.lms-download-action small {
-  display: block;
-}
-
-.lms-download-action strong {
-  font-size: 0.94rem;
-  font-weight: 850;
-  line-height: 1.5;
-}
-
-.lms-download-action small {
-  margin-block-start: 0.08rem;
-  color: currentColor;
-  font-size: 0.7rem;
-  font-weight: 600;
-  opacity: 0.68;
-}
-
-.lms-download-web-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 0.35rem;
-  color: rgba(0, 24, 88, 0.74);
-  font-size: 0.82rem;
-  font-weight: 750;
-  text-decoration: none;
-  transition: color 180ms ease;
-}
-
-.lms-download-web-link:hover {
-  color: #002699;
-}
-
-.lms-download-web-link svg {
-  width: 0.95rem;
-  height: 0.95rem;
-}
-
-.lms-download-trust {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-block-start: 1.15rem;
-  color: rgba(0, 24, 88, 0.52);
-  font-size: 0.72rem;
-}
-
-.lms-download-trust svg {
-  width: 1rem;
-  height: 1rem;
+    inset 3px 3px 7px rgba(0, 7, 32, 0.36),
+    inset -3px -3px 7px rgba(0, 38, 153, 0.4);
   color: #f5a623;
 }
 
-.lms-download-device {
-  position: relative;
-  z-index: 2;
-  justify-self: center;
-  width: min(250px, 80%);
-  aspect-ratio: 0.56;
-  margin: 2.8rem 3.8rem 2.8rem 1.5rem;
-  padding: 0.72rem;
-  border: 1px solid rgba(251, 246, 238, 0.15);
-  border-radius: 2.7rem;
-  background: linear-gradient(145deg, #001e69, #000b2c);
+.mcoe-hero-app-link--ios .mcoe-hero-app-link__icon {
+  background: linear-gradient(145deg, #ffc55b, #f5a623);
   box-shadow:
-    24px 26px 55px rgba(0, 4, 22, 0.48),
-    -8px -8px 24px rgba(55, 93, 200, 0.16),
-    inset 4px 4px 9px rgba(74, 111, 211, 0.2),
-    inset -5px -6px 11px rgba(0, 4, 22, 0.55);
-  transform: rotate(5deg);
-}
-
-[dir='ltr'] .lms-download-device {
-  margin: 2.8rem 1.5rem 2.8rem 3.8rem;
-  transform: rotate(-5deg);
-}
-
-.lms-download-device::before {
-  position: absolute;
-  top: 1.15rem;
-  left: 50%;
-  z-index: 2;
-  width: 34%;
-  height: 0.38rem;
-  border-radius: 999px;
-  background: #00091f;
-  content: '';
-  transform: translateX(-50%);
-}
-
-.lms-download-device-screen {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  border: 1px solid rgba(245, 166, 35, 0.11);
-  border-radius: 2.12rem;
-  background:
-    radial-gradient(
-      circle at 50% 25%,
-      rgba(0, 38, 153, 0.58),
-      transparent 48%
-    ),
-    #001858;
-  box-shadow:
-    inset 11px 11px 24px rgba(0, 7, 32, 0.55),
-    inset -9px -9px 22px rgba(0, 38, 153, 0.28);
-  text-align: center;
-}
-
-.lms-download-device-mark {
-  display: grid;
-  width: 5.5rem;
-  height: 5.5rem;
-  margin-block-end: 1.5rem;
-  place-items: center;
-  border-radius: 1.8rem;
-  background: linear-gradient(145deg, #ffc55b, #e99418);
-  box-shadow:
-    0 18px 35px rgba(245, 166, 35, 0.18),
-    inset 5px 5px 11px rgba(255, 244, 210, 0.56),
-    inset -6px -7px 13px rgba(166, 91, 5, 0.26);
+    inset 3px 3px 7px rgba(255, 244, 210, 0.58),
+    inset -3px -3px 7px rgba(164, 103, 12, 0.22);
   color: #001858;
 }
 
-.lms-download-device-mark svg {
-  width: 2.2rem;
-  height: 2.2rem;
-}
-
-.lms-download-device-screen strong {
-  color: #fbf6ee;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.lms-download-device-screen small {
-  margin-block-start: 0.3rem;
-  color: rgba(251, 246, 238, 0.54);
-  font-size: 0.68rem;
-  line-height: 1.6;
-}
-
-.lms-download-device-line {
-  width: 72%;
-  height: 0.65rem;
-  margin-block-start: 2rem;
-  border-radius: 999px;
-  background: rgba(251, 246, 238, 0.08);
+.mcoe-hero-app-link--web .mcoe-hero-app-link__icon {
+  background: #f7f0e6;
   box-shadow:
-    inset 2px 2px 5px rgba(0, 7, 32, 0.45),
-    inset -2px -2px 5px rgba(66, 103, 208, 0.14);
+    inset 3px 3px 7px rgba(80, 65, 45, 0.1),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.88);
+  color: #002699;
 }
 
-.lms-download-device-line--short {
-  width: 48%;
-  margin-block-start: 0.65rem;
+.mcoe-hero-app-link__copy {
+  min-width: 0;
+}
+
+.mcoe-hero-app-link__copy strong,
+.mcoe-hero-app-link__copy small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mcoe-hero-app-link__copy strong {
+  color: inherit;
+  font-size: clamp(0.7rem, 0.9vw, 0.82rem);
+  font-weight: 820;
+  line-height: 1.55;
+}
+
+.mcoe-hero-app-link__copy small {
+  margin-block-start: 0.12rem;
+  color: rgba(0, 24, 88, 0.52);
+  font-size: clamp(0.58rem, 0.7vw, 0.68rem);
+  font-weight: 560;
+  line-height: 1.45;
 }
 
 .lms-ios-guide-backdrop {
   position: fixed;
-  z-index: 120;
+  z-index: 1000;
   inset: 0;
   display: grid;
   place-items: center;
@@ -506,72 +283,34 @@
   height: 1rem;
 }
 
-.dark .lms-download-panel {
-  border-color: transparent;
-  background: transparent;
-  box-shadow: none;
+.dark .mcoe-hero-app-link {
+  border-color: rgba(245, 166, 35, 0.1);
+  background: rgba(0, 24, 88, 0.2);
+  box-shadow:
+    inset 5px 5px 11px rgba(0, 7, 32, 0.52),
+    inset -5px -5px 11px rgba(0, 38, 153, 0.3);
   color: #fbf6ee;
 }
 
-.dark .lms-download-panel::before {
-  background: none;
-}
-
-.dark .lms-download-eyebrow {
-  background: rgba(245, 166, 35, 0.1);
+.dark .mcoe-hero-app-link:hover,
+.dark .mcoe-hero-app-link:focus-visible {
+  border-color: rgba(245, 166, 35, 0.34);
   box-shadow:
-    inset 3px 3px 7px rgba(0, 7, 32, 0.28),
-    inset -3px -3px 7px rgba(255, 217, 139, 0.08);
-  color: #ffc55b;
+    inset 6px 6px 13px rgba(0, 7, 32, 0.58),
+    inset -6px -6px 13px rgba(0, 38, 153, 0.34),
+    0 7px 18px rgba(0, 7, 32, 0.18);
 }
 
-.dark .lms-download-copy h2 {
-  color: #fffaf0;
+.dark .mcoe-hero-app-link__copy small {
+  color: rgba(251, 246, 238, 0.58);
 }
 
-.dark .lms-download-copy > p {
-  color: rgba(251, 246, 238, 0.72);
-}
-
-.dark .lms-download-action--ios {
-  border-color: rgba(251, 246, 238, 0.14);
-  background: rgba(251, 246, 238, 0.07);
+.dark .mcoe-hero-app-link--web .mcoe-hero-app-link__icon {
+  background: #001858;
   box-shadow:
-    inset 6px 6px 14px rgba(0, 7, 32, 0.42),
-    inset -5px -5px 13px rgba(65, 103, 208, 0.2);
-  color: #fbf6ee;
-}
-
-.dark .lms-download-action--ios:hover,
-.dark .lms-download-action--ios:focus-visible {
-  border-color: rgba(245, 166, 35, 0.3);
-  box-shadow:
-    inset 8px 8px 17px rgba(0, 7, 32, 0.5),
-    inset -6px -6px 15px rgba(65, 103, 208, 0.25);
-}
-
-.dark .lms-download-action--ios .lms-download-action-icon {
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow:
-    inset 3px 3px 7px rgba(0, 7, 32, 0.18),
-    inset -3px -3px 7px rgba(255, 255, 255, 0.16);
-  color: #fbf6ee;
-}
-
-.dark .lms-download-web-link {
-  color: rgba(251, 246, 238, 0.82);
-}
-
-.dark .lms-download-web-link:hover {
-  color: #ffc55b;
-}
-
-.dark .lms-download-trust {
-  color: rgba(251, 246, 238, 0.52);
-}
-
-.dark .lms-download-trust svg {
-  color: #ffc55b;
+    inset 3px 3px 7px rgba(0, 7, 32, 0.48),
+    inset -3px -3px 7px rgba(0, 38, 153, 0.3);
+  color: #f5a623;
 }
 
 .dark .lms-ios-guide {
@@ -612,52 +351,40 @@
   color: #f5a623;
 }
 
-@media (max-width: 900px) {
-  .lms-download-panel {
-    grid-template-columns: minmax(0, 1fr) 220px;
+@media (max-width: 580px) {
+  .mcoe-hero-app-links {
+    gap: 0.42rem;
+    margin-block-start: 1.1rem;
   }
 
-  .lms-download-device {
-    width: 205px;
-    margin-inline: 1.25rem 2rem;
-  }
-
-  [dir='ltr'] .lms-download-device {
-    margin-inline: 2rem 1.25rem;
-  }
-}
-
-@media (max-width: 720px) {
-  .lms-download-panel {
-    display: block;
-    min-height: 0;
-  }
-
-  .lms-download-copy {
-    padding: 2rem 1.25rem 2.25rem;
-  }
-
-  .lms-download-device {
-    display: none;
-  }
-
-  .lms-download-actions {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .lms-download-action {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .lms-download-web-link {
+  .mcoe-hero-app-link {
+    min-height: 4rem;
+    flex-direction: column;
     justify-content: center;
-  }
-
-  .lms-download-trust {
-    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.48rem 0.28rem;
+    border-radius: 0.95rem;
     text-align: center;
+  }
+
+  .mcoe-hero-app-link__icon {
+    width: 2rem;
+    height: 2rem;
+    flex-basis: 2rem;
+    border-radius: 0.68rem;
+  }
+
+  .mcoe-hero-app-link__icon svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .mcoe-hero-app-link__copy strong {
+    font-size: 0.62rem;
+  }
+
+  .mcoe-hero-app-link__copy small {
+    display: none;
   }
 
   .lms-ios-guide {
@@ -667,8 +394,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lms-download-action,
-  .lms-download-web-link {
+  .mcoe-hero-app-link {
     transition: none;
   }
 }

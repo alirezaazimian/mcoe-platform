@@ -183,6 +183,12 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .mcoe-fade-content-shell {
+    padding-block-end: clamp(7.5rem, 11vh, 9rem);
+  }
+}
+
 .mcoe-fade-actions {
   display: flex;
   flex-wrap: wrap;
@@ -259,47 +265,6 @@
   translate: 0 -2px;
   scale: 1.012;
   outline: none;
-}
-
-.mcoe-fade-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.5rem, 1vw, 0.75rem);
-  margin-block-start: clamp(1.45rem, 3vh, 2rem);
-}
-
-.mcoe-fade-stat {
-  min-width: 0;
-  padding: clamp(0.78rem, 1.3vw, 1rem) clamp(0.7rem, 1.25vw, 1rem);
-  border: 1px solid rgba(0, 24, 88, 0.055);
-  border-radius: 1.15rem;
-  background: transparent;
-  box-shadow:
-    inset 4px 4px 10px rgba(0, 24, 88, 0.07),
-    inset -4px -4px 10px rgba(255, 255, 255, 0.72);
-}
-
-.mcoe-fade-stat strong,
-.mcoe-fade-stat span {
-  display: block;
-}
-
-.mcoe-fade-stat strong {
-  color: #002699;
-  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-  font-weight: 820;
-  line-height: 1.1;
-}
-
-.mcoe-fade-stat span {
-  margin-block-start: 0.35rem;
-  overflow: hidden;
-  color: rgba(0, 24, 88, 0.57);
-  font-size: clamp(0.68rem, 0.82vw, 0.77rem);
-  font-weight: 560;
-  line-height: 1.5;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .mcoe-fade-nav-row {
@@ -504,6 +469,12 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .mcoe-fade-floating-controls {
+    inset-block-end: 5.25rem;
+  }
+}
+
 @media (max-width: 1100px) {
   .mcoe-fade-content {
     width: min(38rem, 49vw);
@@ -677,24 +648,6 @@
     font-size: 0.72rem;
   }
 
-  .mcoe-fade-stats {
-    gap: 0.4rem;
-    margin-block-start: 1.15rem;
-  }
-
-  .mcoe-fade-stat {
-    padding: 0.7rem 0.42rem;
-    border-radius: 0.95rem;
-  }
-
-  .mcoe-fade-stat strong {
-    font-size: 1rem;
-  }
-
-  .mcoe-fade-stat span {
-    font-size: 0.58rem;
-  }
-
   .mcoe-fade-nav-row {
     gap: 0.55rem;
     margin-block-start: 0.9rem;
@@ -742,8 +695,7 @@
 /* MCOE night palette */
 
 .dark .mcoe-fade-brandline p,
-.dark .mcoe-fade-description,
-.dark .mcoe-fade-stat span {
+.dark .mcoe-fade-description {
   color: rgba(251, 246, 238, 0.68);
 }
 
@@ -751,7 +703,6 @@
   color: #fbf6ee;
 }
 
-.dark .mcoe-fade-stat,
 .dark .mcoe-fade-controls {
   border-color: rgba(245, 166, 35, 0.1);
   box-shadow:
@@ -759,7 +710,6 @@
     inset -5px -5px 11px rgba(0, 38, 153, 0.32);
 }
 
-.dark .mcoe-fade-stat strong,
 .dark .mcoe-fade-controls button {
   color: #f5a623;
 }

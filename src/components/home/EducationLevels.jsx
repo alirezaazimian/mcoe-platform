@@ -13,6 +13,7 @@ import {
   usePublicContent,
   useSiteSection,
 } from '@/hooks/useSiteContent';
+import '@/styles/education-levels-bridge.css';
 
 
 const FALLBACK_LEVELS = [
@@ -94,15 +95,17 @@ export default function EducationLevels() {
     t('levels.subtitle');
 
   return (
-    <section className="home-clay-section py-20 lg:py-28">
-      <div className="container-institutional">
-        <Reveal className="text-center max-w-2xl mx-auto mb-14">
-          <span className="home-clay-eyebrow">
-            {subtitle}
-          </span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#001858] mb-4 text-balance">
-            {title}
-          </h2>
+    <section className="home-clay-section education-levels-bridge">
+      <div className="container-institutional education-levels-bridge__inner">
+        <Reveal className="education-levels-bridge__heading">
+          <div className="education-levels-bridge__heading-title">
+            <span className="home-clay-eyebrow">
+              {subtitle}
+            </span>
+            <h2 className="text-balance text-3xl font-bold text-[#001858] lg:text-4xl">
+              {title}
+            </h2>
+          </div>
           {body && (
             <p className="text-[#001858]/60 leading-8">
               {body}
@@ -110,7 +113,7 @@ export default function EducationLevels() {
           )}
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div className="education-levels-bridge__grid grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {levels.map((level, index) => {
             const levelTitle =
               level[`title_${locale}`] ||
@@ -126,11 +129,11 @@ export default function EducationLevels() {
               <Reveal
                 key={level.slug}
                 delay={index * 0.07}
-                className="h-full"
+                className="education-levels-bridge__item h-full"
               >
                 <Link
                   to={`/levels/${level.slug}`}
-                  className="glass association-style-card group flex h-full flex-col rounded-2xl p-3"
+                  className="education-levels-bridge__card glass association-style-card group flex h-full flex-col rounded-2xl p-3"
                 >
                   <div className="home-clay-image relative aspect-[4/3] overflow-hidden rounded-[19px]">
                     {level.image ? (
