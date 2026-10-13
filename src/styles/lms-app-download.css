@@ -10,35 +10,19 @@
   grid-template-columns: minmax(0, 1.35fr) minmax(250px, 0.65fr);
   align-items: center;
   min-height: 440px;
-  overflow: hidden;
-  border: 1px solid rgba(245, 166, 35, 0.16);
-  border-radius: 2rem;
-  background:
-    radial-gradient(
-      circle at 14% 2%,
-      rgba(67, 105, 214, 0.32),
-      transparent 34%
-    ),
-    linear-gradient(138deg, #001858 0%, #001348 52%, #000b30 100%);
-  box-shadow:
-    inset 10px 10px 24px rgba(0, 7, 32, 0.52),
-    inset -9px -9px 22px rgba(0, 38, 153, 0.28),
-    0 24px 52px rgba(0, 24, 88, 0.16);
-  color: #fbf6ee;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #001858;
 }
 
 .lms-download-panel::before {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background:
-    linear-gradient(
-      105deg,
-      rgba(255, 255, 255, 0.07),
-      transparent 28%,
-      transparent 70%,
-      rgba(245, 166, 35, 0.04)
-    );
+  background: none;
   content: '';
   pointer-events: none;
 }
@@ -60,9 +44,9 @@
   border-radius: 999px;
   background: rgba(245, 166, 35, 0.1);
   box-shadow:
-    inset 3px 3px 7px rgba(0, 7, 32, 0.28),
-    inset -3px -3px 7px rgba(255, 217, 139, 0.08);
-  color: #ffc55b;
+    inset 3px 3px 7px rgba(80, 65, 45, 0.09),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.86);
+  color: #002699;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -71,7 +55,7 @@
 .lms-download-copy h2 {
   max-width: 600px;
   margin: 0;
-  color: #fffaf0;
+  color: #001858;
   font-size: clamp(2rem, 4.4vw, 3.85rem);
   font-weight: 850;
   line-height: 1.24;
@@ -81,7 +65,7 @@
 .lms-download-copy > p {
   max-width: 650px;
   margin: 1.15rem 0 0;
-  color: rgba(251, 246, 238, 0.72);
+  color: rgba(0, 24, 88, 0.62);
   font-size: clamp(0.95rem, 1.4vw, 1.08rem);
   line-height: 2;
 }
@@ -149,12 +133,12 @@
 }
 
 .lms-download-action--ios {
-  border-color: rgba(251, 246, 238, 0.14);
-  background: rgba(251, 246, 238, 0.07);
+  border-color: rgba(0, 24, 88, 0.07);
+  background: #f7f0e6;
   box-shadow:
-    inset 6px 6px 14px rgba(0, 7, 32, 0.42),
-    inset -5px -5px 13px rgba(65, 103, 208, 0.2);
-  color: #fbf6ee;
+    inset 6px 6px 14px rgba(80, 65, 45, 0.1),
+    inset -5px -5px 13px rgba(255, 255, 255, 0.9);
+  color: #001858;
   cursor: pointer;
 }
 
@@ -162,8 +146,16 @@
 .lms-download-action--ios:focus-visible {
   border-color: rgba(245, 166, 35, 0.3);
   box-shadow:
-    inset 8px 8px 17px rgba(0, 7, 32, 0.5),
-    inset -6px -6px 15px rgba(65, 103, 208, 0.25);
+    inset 8px 8px 17px rgba(80, 65, 45, 0.12),
+    inset -6px -6px 15px rgba(255, 255, 255, 0.84);
+}
+
+.lms-download-action--ios .lms-download-action-icon {
+  background: #fbf6ee;
+  box-shadow:
+    inset 3px 3px 7px rgba(80, 65, 45, 0.09),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.9);
+  color: #002699;
 }
 
 .lms-download-action-icon {
@@ -208,7 +200,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 0.35rem;
-  color: rgba(251, 246, 238, 0.82);
+  color: rgba(0, 24, 88, 0.74);
   font-size: 0.82rem;
   font-weight: 750;
   text-decoration: none;
@@ -216,7 +208,7 @@
 }
 
 .lms-download-web-link:hover {
-  color: #ffc55b;
+  color: #002699;
 }
 
 .lms-download-web-link svg {
@@ -229,14 +221,14 @@
   align-items: center;
   gap: 0.55rem;
   margin-block-start: 1.15rem;
-  color: rgba(251, 246, 238, 0.52);
+  color: rgba(0, 24, 88, 0.52);
   font-size: 0.72rem;
 }
 
 .lms-download-trust svg {
   width: 1rem;
   height: 1rem;
-  color: #ffc55b;
+  color: #f5a623;
 }
 
 .lms-download-device {
@@ -345,36 +337,6 @@
 .lms-download-device-line--short {
   width: 48%;
   margin-block-start: 0.65rem;
-}
-
-.lms-download-orb {
-  position: absolute;
-  z-index: 1;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.lms-download-orb--one {
-  top: -4.5rem;
-  right: -3.5rem;
-  width: 14rem;
-  height: 14rem;
-  background: rgba(245, 166, 35, 0.16);
-  box-shadow:
-    inset 20px 20px 40px rgba(133, 72, 0, 0.18),
-    inset -18px -18px 38px rgba(255, 221, 151, 0.14),
-    0 25px 60px rgba(0, 7, 32, 0.28);
-}
-
-.lms-download-orb--two {
-  bottom: -6.5rem;
-  left: 36%;
-  width: 12rem;
-  height: 12rem;
-  background: rgba(0, 38, 153, 0.28);
-  box-shadow:
-    inset 18px 18px 38px rgba(0, 7, 32, 0.35),
-    inset -16px -16px 34px rgba(91, 126, 222, 0.16);
 }
 
 .lms-ios-guide-backdrop {
@@ -545,18 +507,71 @@
 }
 
 .dark .lms-download-panel {
-  border-color: rgba(245, 166, 35, 0.18);
-  background:
-    radial-gradient(
-      circle at 14% 2%,
-      rgba(0, 38, 153, 0.3),
-      transparent 34%
-    ),
-    linear-gradient(138deg, #001858 0%, #001348 52%, #000b30 100%);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: #fbf6ee;
+}
+
+.dark .lms-download-panel::before {
+  background: none;
+}
+
+.dark .lms-download-eyebrow {
+  background: rgba(245, 166, 35, 0.1);
   box-shadow:
-    inset 11px 11px 25px rgba(0, 7, 32, 0.6),
-    inset -9px -9px 22px rgba(0, 38, 153, 0.3),
-    0 24px 52px rgba(0, 4, 22, 0.34);
+    inset 3px 3px 7px rgba(0, 7, 32, 0.28),
+    inset -3px -3px 7px rgba(255, 217, 139, 0.08);
+  color: #ffc55b;
+}
+
+.dark .lms-download-copy h2 {
+  color: #fffaf0;
+}
+
+.dark .lms-download-copy > p {
+  color: rgba(251, 246, 238, 0.72);
+}
+
+.dark .lms-download-action--ios {
+  border-color: rgba(251, 246, 238, 0.14);
+  background: rgba(251, 246, 238, 0.07);
+  box-shadow:
+    inset 6px 6px 14px rgba(0, 7, 32, 0.42),
+    inset -5px -5px 13px rgba(65, 103, 208, 0.2);
+  color: #fbf6ee;
+}
+
+.dark .lms-download-action--ios:hover,
+.dark .lms-download-action--ios:focus-visible {
+  border-color: rgba(245, 166, 35, 0.3);
+  box-shadow:
+    inset 8px 8px 17px rgba(0, 7, 32, 0.5),
+    inset -6px -6px 15px rgba(65, 103, 208, 0.25);
+}
+
+.dark .lms-download-action--ios .lms-download-action-icon {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 3px 3px 7px rgba(0, 7, 32, 0.18),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.16);
+  color: #fbf6ee;
+}
+
+.dark .lms-download-web-link {
+  color: rgba(251, 246, 238, 0.82);
+}
+
+.dark .lms-download-web-link:hover {
+  color: #ffc55b;
+}
+
+.dark .lms-download-trust {
+  color: rgba(251, 246, 238, 0.52);
+}
+
+.dark .lms-download-trust svg {
+  color: #ffc55b;
 }
 
 .dark .lms-ios-guide {
@@ -616,7 +631,6 @@
   .lms-download-panel {
     display: block;
     min-height: 0;
-    border-radius: 1.65rem;
   }
 
   .lms-download-copy {
@@ -644,17 +658,6 @@
   .lms-download-trust {
     justify-content: center;
     text-align: center;
-  }
-
-  .lms-download-orb--one {
-    width: 10rem;
-    height: 10rem;
-  }
-
-  .lms-download-orb--two {
-    left: -4rem;
-    width: 9rem;
-    height: 9rem;
   }
 
   .lms-ios-guide {

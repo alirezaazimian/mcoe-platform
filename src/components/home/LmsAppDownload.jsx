@@ -148,15 +148,6 @@ export default function LmsAppDownload() {
       <div className="container-institutional">
         <Reveal>
           <div className="lms-download-panel">
-            <div
-              className="lms-download-orb lms-download-orb--one"
-              aria-hidden="true"
-            />
-            <div
-              className="lms-download-orb lms-download-orb--two"
-              aria-hidden="true"
-            />
-
             <div className="lms-download-copy">
               <span className="lms-download-eyebrow">
                 {copy.eyebrow}
